@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './App.css';
+import './asset/scss/common.scss';
 
 function App() {
   return (
@@ -18,6 +18,10 @@ function App() {
           Learn React
         </a>
       </header>
+      <main>
+      어쩌구 저쩌구
+      </main>
+      <footer></footer>
     </div>
   );
 }
