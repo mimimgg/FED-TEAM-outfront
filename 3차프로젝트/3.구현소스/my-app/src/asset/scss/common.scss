@@ -1,6 +1,4 @@
 //** root **//
-// 폰트
-$pretendard: 'Pretendard', sans-serif;
 // 색상
 $body-color: #2c2e33;
 $primary-color: #00c471;
@@ -12,29 +10,6 @@ $point-color: #fe5b16;
 $footer-bg: #2f3740;
 // 단위값 (마진, 패딩 등)
 $wrap-margin: 32px;
-
-
-// pretendard font //
-@font-face {
-  font-family: "Pretendard";
-  src: url(../font/Pretendard-Regular.woff) format("woff");
-  font-weight: 400;
-}
-@font-face {
-  font-family: "Pretendard";
-  src: url(../font/Pretendard-Medium.woff) format("woff");
-  font-weight: 500;
-}
-@font-face {
-  font-family: "Pretendard";
-  src: url(../font/Pretendard-Bold.woff) format("woff");
-  font-weight: 700;
-}
-@font-face {
-  font-family: "Tamburins";
-  src: url(../font/Tamburins-Regular.woff) format("woff");
-  font-weight: 500;
-}
 
 //** reset **//
 html {font-size: 62.5%;}
