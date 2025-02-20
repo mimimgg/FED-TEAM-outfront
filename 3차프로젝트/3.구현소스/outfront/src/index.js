@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route } from'react-router-dom';
 import Layout from './components/layout/Layout';
 import Main from './components/pages/Main';
 
+import "./scss/common.scss";
+
 /********************************************* 
     [ 리액트 라우터 ]
     -> 컴포넌트를 연결하여 특정 이벤트에 모듈을

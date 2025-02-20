@@ -1,5 +1,8 @@
 /// 메인페이지 컴포넌트 : Main.jsx ///
 
+// 메인 페이지용 CSS
+import '../../scss/main.scss';
+
 export default function Main(){
   // 리턴 코드구역 ////
   return (
