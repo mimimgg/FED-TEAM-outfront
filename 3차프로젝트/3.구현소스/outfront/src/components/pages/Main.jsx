@@ -10,8 +10,8 @@ export default function Main(){
         <div className="edu-wrap">
           <ul className="edu-list">
             <li>
-              
-
+              <img src="" />
+              <h2></h2>
             </li>
           </ul>
         </div>
