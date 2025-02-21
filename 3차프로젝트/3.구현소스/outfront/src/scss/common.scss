@@ -1,2 +1,27 @@
 @import './reset';
 
+/***************************
+    [ color 변수 ]
+***************************/
+$color-text: #2C2E33;
+$color-primary: #00C471;
+$color-secondary: #FE5B16;
+$color-white: #FFFFFF;
+$color-lightegray: #D4D4D4;
+$color-midgray: #6E7479;
+
+/***************************
+    [ background 변수 ]
+***************************/
+$bg-footer: #2F3740;
+
+/***************************
+    [ size 변수 ]
+***************************/
+
+.wrap {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
