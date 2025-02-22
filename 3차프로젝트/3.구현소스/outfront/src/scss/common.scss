@@ -1,4 +1,5 @@
 @import './reset';
+@import './core';
 
 /***************************
     [ color 변수 ]
@@ -15,11 +16,12 @@ $color-midgray: #6E7479;
 ***************************/
 $bg-footer: #2F3740;
 
-/***************************
-    [ size 변수 ]
-***************************/
+html, body {
+    font-family: "Pretendard Variable", "Pretendard" sans-serif;
+    font-size: 10px;
+}
 
-.wrap {
+main {
     max-width: 1440px;
     margin: 0 auto;
     padding: 0 32px;
