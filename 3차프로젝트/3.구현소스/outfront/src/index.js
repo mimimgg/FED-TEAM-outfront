@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from'react-router-dom';
 import Layout from './components/layout/Layout';
 import Main from './components/pages/Main';
-import './scss/common.scss';
 
-import "./scss/common.scss";
 
 /********************************************* 
     [ 리액트 라우터 ]
