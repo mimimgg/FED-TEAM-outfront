@@ -28,15 +28,7 @@ export default function TopArea() {
               {menu.map((v, i) => (
                 <li key={i}>
                   {
-                    // 하위메뉴가 있는 상위메뉴는 일반링크로!
-                    // 없으면 라우터 이동 메뉴로 만들기!
-                    v.sub ? (
-                      <a href="#" onClick={(e) => e.preventDefault()}>
-                        {v.txt}
-                      </a>
-                    ) : (
                       <Link to={v.link}>{v.txt}</Link>
-                    )
                   }
                   {
                     // 서브메뉴가 있는 경우 출력하기

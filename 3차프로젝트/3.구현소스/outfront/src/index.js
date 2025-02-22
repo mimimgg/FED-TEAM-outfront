@@ -4,6 +4,9 @@ import { BrowserRouter, Routes, Route } from'react-router-dom';
 import Layout from './components/layout/Layout';
 import Main from './components/pages/Main';
 
+import Education from './components/pages/Education.jsx';
+import Community from './components/pages/Community.jsx';
+
 
 /********************************************* 
     [ 리액트 라우터 ]
@@ -51,6 +54,8 @@ export default function MainComponent(){
       <Route path="/" element={<Layout />}>
       {/* 하위중 첫페이지는 index라고 속성씀! */}
         <Route index element={<Main />} />
+        <Route path="education" element={<Education />} />
+        <Route path="community" element={<Community />} />
       </Route>
     </Routes>
   </BrowserRouter>
