@@ -1,22 +1,27 @@
 // 아웃프런 top_area.scss //
 
-@import './common.scss';
+@import "./common.scss";
 
 header.top-area {
-  max-width: 1440px;
-  margin: 0 auto;
-
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  padding: 0 3.2rem;
+  gap: 3.2rem;
+  height: 7rem;
 
-  .brand_logo {
+  .navbar-left {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3.2rem;
 
-    a {
-      display: block;
+    .brand_logo {
+      a {
+        display: block;
 
-      img {
-        width: 10rem;
+        img {
+          width: 10rem;
+        }
       }
     }
   }
@@ -27,18 +32,109 @@ nav.gnb {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1.6rem;
+    gap: 2.4rem;
 
-    ol {
+    li {
+      position: relative;
+      color: $color-text;
+
+      a {
+        font-size: 1.6rem;
+        font-weight: 600;
+        transition: 0.2s;
+        line-height: 4;
+      }
+      &:hover {
+        color: $color-primary;
+        .smenu {
+          display: block;
+        }
+      }
+    }
+
+    .smenu {
       display: none;
+      position: absolute;
+      top: 6rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #fff;
+      padding: 1.6rem 2.4rem;
+      border-radius: 1rem;
+      border: 1px solid $color-lightegray;
+      filter: drop-shadow(.4rem .4rem 1rem rgba(176, 176, 176, 0.503));
+      white-space: nowrap;
+      line-height: 2.2;
+      z-index: 2;
+      color: #6E7479;
+
+      ol {
+        
+        li {
+          color: $color-midgray;
+
+          a {
+            font-size: 1.4rem;
+            font-weight: normal;
+            line-height: 2.2;
+          }
+          &:hover {
+            font-weight: 600;
+            color: $color-text;
+          }
+        }
+      }
     }
   }
 }
 
-.search-bar {
+.navbar-right {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  border: 1px solid $color-lightegray;
+  gap: 3.2rem;
+  flex: 0 0 60%;
+
+  .search-bar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid $color-lightegray;
+    border-radius: 1rem;
+    width: 100%;
+
+    input {
+      padding: 1.2rem 1.4rem;
+      height: 3.6rem;
+      border: none;
+      width: inherit;
+      background: rgb(246, 246, 246);
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 10px 15px -5px;
+    }
+    button {
+      position: absolute;
+      right: 1rem;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+
+      img {
+        width: 2rem;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  ul {
+    display: flex;
+    gap: 0.8rem;
+
+    li {
+      img {
+        width: 2.5rem;
+        border-radius: 50%;
+      }
+    }
+  }
 }
-
-

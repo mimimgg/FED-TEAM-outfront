@@ -14,63 +14,66 @@ export default function TopArea() {
     <>
       {/* 로고 */}
       <header className="top-area">
-        <h1 className="brand_logo">
-          <a href="#">
-            <img src="../../images/header/brand_logo.png" alt="아웃프런 브랜드 로고" />
-          </a>
-        </h1>
+        <div className="navbar-left">
+          <h1 className="brand_logo">
+            <a href="#">
+              <img src="../../images/header/brand_logo.png" alt="아웃프런 브랜드 로고" />
+            </a>
+          </h1>
 
-        {/* 네비게이션 */}
-        <nav className="gnb">
-          <ul>
-            {/* gnb 메뉴 맵 바인딩 */}
-            {menu.map((v, i) => (
-              <li key={i}>
-                {
-                  // 하위메뉴가 있는 상위메뉴는 일반링크로!
-                  // 없으면 라우터 이동 메뉴로 만들기!
-                  v.sub ? (
-                    <a href="#" onClick={(e) => e.preventDefault()}>
-                      {v.txt}
-                    </a>
-                  ) : (
-                    <Link to={v.link}>{v.txt}</Link>
-                  )
-                }
-                {
-                  // 서브메뉴가 있는 경우 출력하기
-                  v.sub && (
-                    <div className="smenu">
-                      <ol>
-                        {v.sub.map((v, i) => (
-                          <li key={i}>
-                            <Link to={v.link}>{v.txt}</Link>
-                          </li>
-                        ))}
-                      </ol>
-                    </div>
-                  )
-                }
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        {/* 검색바 */}
-        <div className="search-bar">
-          <input
-            type="search"
-            id="user-search"
-            name="query"
-            placeholder="나의 진짜 성장을 도와줄 실무 강의를 찾아보세요"
-          />
-          <button type="submit">
-            <img src="../../images/header/icon-search.png" alt="검색" />
-          </button>
+          {/* 네비게이션 */}
+          <nav className="gnb">
+            <ul>
+              {/* gnb 메뉴 맵 바인딩 */}
+              {menu.map((v, i) => (
+                <li key={i}>
+                  {
+                    // 하위메뉴가 있는 상위메뉴는 일반링크로!
+                    // 없으면 라우터 이동 메뉴로 만들기!
+                    v.sub ? (
+                      <a href="#" onClick={(e) => e.preventDefault()}>
+                        {v.txt}
+                      </a>
+                    ) : (
+                      <Link to={v.link}>{v.txt}</Link>
+                    )
+                  }
+                  {
+                    // 서브메뉴가 있는 경우 출력하기
+                    v.sub && (
+                      <div className="smenu">
+                        <ol>
+                          {v.sub.map((v, i) => (
+                            <li key={i}>
+                              <Link to={v.link}>{v.txt}</Link>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                    )
+                  }
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
 
-        {/* 로그인 / 회원가입 */}
+        {/* 검색바 */}
         <div className="navbar-right">
+          <div className="search-bar">
+            <input
+              type="search"
+              id="user-search"
+              name="query"
+              placeholder="나의 진짜 성장을 도와줄 실무 강의를 찾아보세요"
+            />
+            <button type="submit">
+              <img src="../../images/header/icon-search.png" alt="검색" />
+            </button>
+          </div>
+
+          {/* 로그인 / 회원가입 */}
+
           <ul>
             <li>
               <a href="#">
@@ -89,7 +92,6 @@ export default function TopArea() {
             </li>
           </ul>
         </div>
-
       </header>
     </>
   );
