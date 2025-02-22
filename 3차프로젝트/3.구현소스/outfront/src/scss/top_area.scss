@@ -1,0 +1,44 @@
+// 아웃프런 top_area.scss //
+
+@import './common.scss';
+
+header.top-area {
+  max-width: 1440px;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .brand_logo {
+
+    a {
+      display: block;
+
+      img {
+        width: 10rem;
+      }
+    }
+  }
+}
+
+nav.gnb {
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.6rem;
+
+    ol {
+      display: none;
+    }
+  }
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  border: 1px solid $color-lightegray;
+}
+
+
