@@ -7,9 +7,10 @@ const myArr = [];
             myArr.push({
               idx: ++num,
               gName: el.querySelector(".mantine-Text-root").innerText,
-	gLevel: el.querySelector(".mantine-Text-root span").innerText,
-gInfo: el.querySelector(".css-1aozfzu .css-17cnqmk p").innerText,
-gCate: el.querySelector(".css-ugmdna").innerText,
+              gLevel: el.querySelector(".mantine-Text-root span").innerText,
+              gInfo: el.querySelector(".css-1aozfzu .css-17cnqmk p").innerText,
+              gCate: el.querySelector(".css-ugmdna").innerText,
+              gimg: el.querySelector("picture img").src,
               gPrice: el
                 .querySelector(".css-uzjboo")
                 .innerText.replace(/,/g, ""),
