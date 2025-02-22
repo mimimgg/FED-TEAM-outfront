@@ -13,8 +13,8 @@ const Main = () => {
   }, []);
 
   return (
-    <main className="main">
-      <h1>🎓 교육 강의 목록</h1>
+    <div className="main">
+      <h2>🎓 교육 강의 목록</h2>
       <ul className="list-wrap">
         {eduList.map((edu) => (
           <li key={edu.idx} className="edu-list">
@@ -36,7 +36,7 @@ const Main = () => {
           </li>
         ))}
       </ul>
-    </main>
+    </div>
   );
 };
 

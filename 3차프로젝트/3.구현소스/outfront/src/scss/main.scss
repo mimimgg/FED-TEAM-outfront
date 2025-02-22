@@ -1,5 +1,6 @@
 @import "./common.scss";
 .main {
+  h2 {display: none;}
   .list-wrap {
     display: flex;
     flex-wrap: wrap;
