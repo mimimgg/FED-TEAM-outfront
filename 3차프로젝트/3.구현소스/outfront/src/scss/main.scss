@@ -1,11 +1,13 @@
+/* src/scss/main.scss */
+
 @import "./common.scss";
-.main {
-  h2 {display: none;}
+
+.main-wrap {
   .list-wrap {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 20px;
     font-size: 1.4rem;
     line-height: 1.2;
     li {
