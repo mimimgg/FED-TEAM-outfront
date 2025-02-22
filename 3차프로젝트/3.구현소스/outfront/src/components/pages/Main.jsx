@@ -6,7 +6,16 @@ export default function Main(){
   // 리턴 코드구역 ////
   return (
     <>
-      <h1>메인페이지 컴포넌트</h1>
+      <main>
+        <div className="edu-wrap">
+          <ul className="edu-list">
+            <li>
+              <img src="" />
+              <h2></h2>
+            </li>
+          </ul>
+        </div>
+      </main>
     </>
   );
 } //// Main 컴포넌트 ////
