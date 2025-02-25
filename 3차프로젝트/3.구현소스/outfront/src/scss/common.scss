@@ -2,29 +2,8 @@
 // ./bublic/index.html 파일에서 웹폰트 불러옴!
 // @import './core'; 필요없음!!
 
-/***************************
-    [ color 변수 ]
-***************************/
-$color-text: #2C2E33;
-$color-primary: #00C471;
-$color-secondary: #FE5B16;
-$color-white: #FFFFFF;
-$color-lightegray: #D4D4D4;
-$color-midgray: #6E7479;
-$color-board: #ddd;
-
-/***************************
-    [ background 변수 ]
-***************************/
-$bg-footer: #2F3740;
-
 html, body {
     font-family: "Pretendard Variable", Pretendard, sans-serif;
     font-size: 10px;
-}
-
-#root {
-  max-width: 1440px;
-  margin: 0 auto;
 }
 
