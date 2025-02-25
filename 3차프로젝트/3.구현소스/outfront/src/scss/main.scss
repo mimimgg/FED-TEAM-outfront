@@ -4,17 +4,43 @@
 
 .main-wrap {
   max-width: 1440px;
-  margin: 0 auto;
+  margin: 100px auto;
+  .edu-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 24px 0;
+    li {
+      border: 1px solid $color-board;
+      border-right: 0;
+      button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        background: transparent;
+        padding: 12px 24px;
+        cursor: pointer;
+        img {
+          height: 20px;
+          margin-right: 8px;
+        }
+      }
+      &:last-child {
+        border-right: 1px solid $color-board;
+      }
+    }
+  }
   .list-wrap {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+    justify-content: flex-start;
+    gap: 24px;
     font-size: 1.4rem;
     line-height: 1.2;
     li {
       position: relative;
-      width: 20%;
+      width: calc(20% - 24px);
       color: $color-text;
       h3 {
         font-size: 1.6rem;

@@ -4,6 +4,8 @@ import "../../scss/main.scss";
 
 const Main = () => {
   const [eduList, setEduList] = useState([]);
+  const categories = ["전체", "개발프로그래밍", "게임개발", "데이터사이언스", "인공지능", "보안네트워크", "기타"];
+  const [selCate, setSelCate] = useState("전체");
 
   useEffect(() => {
     fetch("/data/edu_data.json")
@@ -12,6 +14,10 @@ const Main = () => {
       .catch(console.error);
   }, []);
 
+  const filterList = selCate === "전체" 
+    ? eduList 
+    : eduList.filter(({ gCate }) => gCate === selCate);
+
   const cartBtnFn = () => {
     console.log("장바구니 버튼 클릭!");
   };
@@ -19,30 +25,20 @@ const Main = () => {
   return (
     <div className="main-wrap">
       <ul className="edu-menu">
-        <li>
-          <a href="#none">전체</a>
-        </li>
-        <li>
-          <a href="#none">개발프로그래밍</a>
-        </li>
-        <li>
-          <a href="#none">게임개발</a>
-        </li>
-        <li>
-          <a href="#none">데이터사이언스</a>
-        </li>
-        <li>
-          <a href="#none">인공지능</a>
-        </li>
-        <li>
-          <a href="#none">보안네트워크</a>
-        </li>
-        <li>
-          <a href="#none">기타</a>
-        </li>
+      {categories.map((category, i) => (
+          <li key={category}>
+            <button 
+              onClick={() => setSelCate(category)} 
+              className={selCate === category ? "active" : ""}
+            >
+              <img src={`./images/main/icon${i}.svg`} />
+              {category}
+            </button>
+          </li>
+        ))}
       </ul>
       <ul className="list-wrap">
-        {eduList.map((edu) => (
+        {filterList.map((edu) => (
           <li key={edu.idx} className="edu-list">
             <article>
               <picture>
