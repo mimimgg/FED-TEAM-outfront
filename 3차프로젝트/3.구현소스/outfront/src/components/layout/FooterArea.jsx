@@ -33,7 +33,7 @@ export default function FooterArea() {
             <span>(주)아웃프런 | </span>
             <span>대표자: 이민경, 이민지 | </span>
             <span>사업자번호: 2025-02-220407 
-            <a class="mantine-Text-root mantine-Anchor-root mantine-1ecarpi" href="http://www.ftc.go.kr/bizCommPop.do?wrkr_no=4998100612" target="_blank" rel="noreferrer"> 사업자 정보 확인</a>
+            <a className="mantine-Text-root mantine-Anchor-root mantine-1ecarpi" href="http://www.ftc.go.kr/bizCommPop.do?wrkr_no=4998100612" target="_blank" rel="noreferrer"> 사업자 정보 확인</a>
             </span> <br/>
             <span>통신판매업: 2024-서울강남-1010 | </span>
             <span>개인정보보호책임자: 아웃프런 | </span>
