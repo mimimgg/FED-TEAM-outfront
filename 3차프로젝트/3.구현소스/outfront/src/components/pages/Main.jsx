@@ -12,6 +12,10 @@ const Main = () => {
       .catch(console.error);
   }, []);
 
+  const cartBtnFn = () => {
+    console.log("장바구니 버튼 클릭!");
+  };
+
   return (
     <div className="main-wrap">
       <ul className="edu-menu">
@@ -40,9 +44,7 @@ const Main = () => {
             <span className="hover-txt">
               <p className="ginfo">설명: {edu.gInfo}</p>
               <p>분류: {edu.gSkill}</p>
-              <buttom className="cart-btn">
-                <a href="#none"><i className="fa-solid fa-cart-shopping"></i></a>
-              </buttom>
+              <a className="cart-btn" onClick={cartBtnFn} href="#none"><i className="fa-solid fa-cart-shopping"></i></a>
             </span>
           </li>
         ))}
