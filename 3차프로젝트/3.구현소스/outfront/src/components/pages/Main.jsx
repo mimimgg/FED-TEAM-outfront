@@ -38,8 +38,11 @@ const Main = () => {
             <p>레벨: {edu.gLevel}</p>
             <p>가격: {edu.gPrice}</p>
             <span className="hover-txt">
-              <p>설명: {edu.gInfo}</p>
+              <p className="ginfo">설명: {edu.gInfo}</p>
               <p>분류: {edu.gSkill}</p>
+              <buttom className="cart-btn">
+                <a href="#none"><i className="fa-solid fa-cart-shopping"></i></a>
+              </buttom>
             </span>
           </li>
         ))}

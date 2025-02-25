@@ -3,6 +3,8 @@
 @import "./variables";
 
 .main-wrap {
+  max-width: 1440px;
+  margin: 0 auto;
   .list-wrap {
     display: flex;
     flex-wrap: wrap;
@@ -11,6 +13,7 @@
     font-size: 1.4rem;
     line-height: 1.2;
     li {
+      position: relative;
       width: 20%;
       color: $color-text;
       h3 {
@@ -19,7 +22,24 @@
         padding: 12px 0;
       }
       p {
-        padding-bottom: 8px;
+        margin-bottom: 8px;
+      }
+      .hover-txt {
+        .ginfo {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+      }
+      .cart-btn {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        i {
+          font-size: 20px;
+        }
       }
       picture {
         position: relative;
