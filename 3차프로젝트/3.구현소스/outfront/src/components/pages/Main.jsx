@@ -21,9 +21,11 @@ const Main = () => {
     ? eduList 
     : eduList.filter(({ gCate }) => gCate === selCate);
 
-  const cartBtnFn = () => {
-    console.log("장바구니 버튼 클릭!");
-  };
+    const cartBtnFn = (e) => {
+      const el = e.currentTarget; // 수정된 부분
+      // console.log("장바구니 버튼 클릭!", el);
+      // el.classList.add("active");
+    };
 
   return (
     <div className="main-wrap">
