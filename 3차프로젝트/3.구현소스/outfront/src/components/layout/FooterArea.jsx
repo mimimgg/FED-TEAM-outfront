@@ -46,17 +46,17 @@ export default function FooterArea() {
           </div>
         </div>
         <div className="footer-sns">
-          <a href="#">
-            <img src="../../images/footer/icon-facebook.png" alt="페이스북" />
+          <a className="sns-facebook sns-icon" href="#">
+            <i className="fa-brands fa-facebook-f"></i>
           </a>
-          <a href="#">
-            <img src="../../images/footer/icon-insta.png" alt="인스타그램" />
+          <a className="sns-insta sns-icon" href="#">
+            <i className="fa-brands fa-instagram"></i>
           </a>
-          <a href="#">
-            <img src="../../images/footer/icon-youtube.png" alt="유튜브" />
+          <a className="sns-youtube sns-icon" href="#">
+            <i className="fa-brands fa-youtube"></i>
           </a>
-          <a href="#">
-            <img src="../../images/footer/icon-x.png" alt="엑스" />
+          <a className="sns-x sns-icon" href="#">
+            <i className="fa-brands fa-x-twitter"></i>
           </a>
         </div>
       </footer>
