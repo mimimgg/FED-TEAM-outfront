@@ -14,6 +14,9 @@ const Main = () => {
       .catch(console.error);
   }, []);
 
+  const formatPrice = (price) => 
+    price.includes("₩") ? `₩${parseInt(price.replace("₩", ""), 10).toLocaleString()}` : price;
+
   const filterList = selCate === "전체" 
     ? eduList 
     : eduList.filter(({ gCate }) => gCate === selCate);
@@ -47,7 +50,7 @@ const Main = () => {
             </article>
             <h3>{edu.gName}</h3>
             <p>레벨: {edu.gLevel}</p>
-            <p>가격: {edu.gPrice}</p>
+            <p>가격: {formatPrice(edu.gPrice)}</p>
             <span className="hover-txt">
               <p className="ginfo">설명: {edu.gInfo}</p>
               <p>분류: {edu.gSkill}</p>
