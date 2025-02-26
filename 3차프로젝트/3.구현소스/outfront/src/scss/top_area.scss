@@ -129,6 +129,11 @@ nav.gnb {
       .top-btn {
         font-size: 1.6rem;
         color: $color-text;
+        opacity: .9;
+        transition: 0.3s;
+      }
+      &:hover .top-btn {
+        opacity: 1;
       }
     }
   }

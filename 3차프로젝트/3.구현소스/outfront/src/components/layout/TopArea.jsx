@@ -19,7 +19,7 @@ export default function TopArea() {
         <div className="navbar-left">
           <h1 className="brand_logo">
             <a href="#">
-              <img src="../../images/header/brand_logo.png" alt="아웃프런 브랜드 로고" />
+              <img src="../../images/common/brand_logo.png" alt="아웃프런 브랜드 로고" />
             </a>
           </h1>
 
