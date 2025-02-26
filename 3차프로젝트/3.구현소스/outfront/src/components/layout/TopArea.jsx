@@ -8,6 +8,8 @@ import "../../scss/top_area.scss";
 // GNB 데이터 불러오기 ////////
 import { menu } from "../../js/data/gnb";
 
+import "../../js/top_area.js";
+
 export default function TopArea() {
   // 리턴 코드구역 ////
   return (
@@ -17,7 +19,7 @@ export default function TopArea() {
         <div className="navbar-left">
           <h1 className="brand_logo">
             <a href="#">
-              <img src="../../images/header/brand_logo.png" alt="아웃프런 브랜드 로고" />
+              <img src="../../images/common/brand_logo.png" alt="아웃프런 브랜드 로고" />
             </a>
           </h1>
 
@@ -27,9 +29,7 @@ export default function TopArea() {
               {/* gnb 메뉴 맵 바인딩 */}
               {menu.map((v, i) => (
                 <li key={i}>
-                  {
-                      <Link to={v.link}>{v.txt}</Link>
-                  }
+                  {<Link to={v.link}>{v.txt}</Link>}
                   {
                     // 서브메뉴가 있는 경우 출력하기
                     v.sub && (
@@ -59,27 +59,27 @@ export default function TopArea() {
               name="query"
               placeholder="나의 진짜 성장을 도와줄 실무 강의를 찾아보세요"
             />
-            <button type="submit">
-              <img src="../../images/header/icon-search.png" alt="검색" />
+            <button className="search-icon" type="submit">
+              <i className="fa-solid fa-magnifying-glass"></i>
             </button>
           </div>
 
           {/* 로그인 / 회원가입 */}
 
-          <ul>
+          <ul className="right-icon">
             <li>
-              <a href="#">
-                <img src="../../images/header/icon-login.png" alt="로그인" />
+              <a className="login-btn top-btn" href="#">
+                <i className="fa-solid fa-right-to-bracket"></i>
               </a>
             </li>
             <li>
-              <a href="#">
-                <img src="../../images/header/icon-cart.png" alt="수강바구니" />
+              <a className="cart-btn top-btn" href="#">
+                <i className="fa-solid fa-cart-shopping"></i>
               </a>
             </li>
             <li>
-              <a href="#">
-                <img src="../../images/header/icon-user.png" alt="로그인 전 마이페이지" />
+              <a className="user-btn top-btn" href="#">
+                <i className="fa-regular fa-user"></i>
               </a>
             </li>
           </ul>
