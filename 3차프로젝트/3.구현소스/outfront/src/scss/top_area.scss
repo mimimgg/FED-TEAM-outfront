@@ -3,6 +3,7 @@
 @import "./variables";
 
 header.top-area {
+  position: relative;
   display: flex;
   justify-content: space-between;
   padding: 0 3.2rem;
@@ -18,16 +19,41 @@ header.top-area {
     .brand_logo {
       a {
         display: block;
-
         img {
           width: 10rem;
         }
+        @include tablet-medium {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+    @include tablet-medium {
+      flex-direction: row-reverse;
+      flex: 1;
+    }
+
+    .top-menu-btn {
+      display: none;
+      font-size: 2rem;
+      color: $color-text;
+      opacity: 0.9;
+      transition: 0.3s;
+
+      @include tablet-medium {
+        display: block;
       }
     }
   }
 }
 
 nav.gnb {
+  @include tablet-medium {
+    display: none;
+  }
+
   ul {
     display: flex;
     justify-content: space-between;
@@ -62,14 +88,13 @@ nav.gnb {
       padding: 1.6rem 2.4rem;
       border-radius: 1rem;
       border: 1px solid $color-lightegray;
-      filter: drop-shadow(.4rem .4rem 1rem rgba(176, 176, 176, 0.503));
+      filter: drop-shadow(0.4rem 0.4rem 1rem rgba(176, 176, 176, 0.503));
       white-space: nowrap;
       line-height: 2.2;
       z-index: 2;
-      color: #6E7479;
+      color: #6e7479;
 
       ol {
-        
         li {
           color: $color-midgray;
 
@@ -95,6 +120,10 @@ nav.gnb {
   gap: 3.2rem;
   flex: 0 0 60%;
 
+  @include tablet-medium {
+    flex: 0;
+  }
+
   .search-bar {
     position: relative;
     display: flex;
@@ -103,6 +132,10 @@ nav.gnb {
     border: 1px solid $color-lightegray;
     border-radius: 1rem;
     width: 100%;
+
+    @include tablet-medium {
+      display: none;
+    }
 
     input {
       padding: 1.2rem 1.4rem;
@@ -129,7 +162,7 @@ nav.gnb {
       .top-btn {
         font-size: 1.6rem;
         color: $color-text;
-        opacity: .9;
+        opacity: 0.9;
         transition: 0.3s;
       }
       &:hover .top-btn {

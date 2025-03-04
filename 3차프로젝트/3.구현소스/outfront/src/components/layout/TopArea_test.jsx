@@ -10,6 +10,25 @@ import "../../js/top_area.js";
 export default function TopArea() {
   return (
     <>
+
+
+    <header className="top-area">
+      <h1 className="brand_logo">
+        <a href="#">
+          <img src="../../images/common/brand_logo.png" alt="아웃프런 브랜드 로고" />
+        </a>
+      </h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="#">강의</a>
+          </li>
+          <li>
+            <a href="#">커뮤니티</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
       {/* 로고 */}
       <header className="top-area">
         <div className="navbar-left">
@@ -19,7 +38,7 @@ export default function TopArea() {
             </a>
           </h1>
           <a href="#" className="top-menu-btn">
-            <i className="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-bars"></i>
           </a>
 
           {/* 네비게이션 */}
