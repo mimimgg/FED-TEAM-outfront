@@ -9,6 +9,10 @@ header.top-area {
   padding: 0 3.2rem;
   gap: 3.2rem;
   height: 7rem;
+  
+  @include mobile {
+    padding: 0 1.6rem;
+  }
 
   .navbar-left {
     display: flex;
