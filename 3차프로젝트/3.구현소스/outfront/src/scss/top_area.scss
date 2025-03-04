@@ -4,14 +4,18 @@
 
 header.top-area {
   position: relative;
-  display: flex;
-  justify-content: space-between;
   padding: 0 3.2rem;
-  gap: 3.2rem;
-  height: 7rem;
   
-  @include mobile {
-    padding: 0 1.6rem;
+  .top-wrap {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    height: 7rem;
+
+    @include mobile {
+      padding: 0 1.6rem;
+    }
   }
 
   .navbar-left {
