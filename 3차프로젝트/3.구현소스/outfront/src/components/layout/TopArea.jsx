@@ -16,7 +16,7 @@ export default function TopArea() {
         <div className="top-wrap">
           <div className="navbar-left">
             <h1 className="brand_logo">
-              <Link to={MainArea}>
+              <Link to="/">
                 <img src="../../images/common/brand_logo.png" alt="아웃프런 브랜드 로고" />
               </Link>
             </h1>
