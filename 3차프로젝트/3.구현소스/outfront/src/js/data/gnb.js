@@ -47,5 +47,9 @@ export const menu = [
         link: "/projects"
       },
     ]
+  },
+  {
+    txt: "탐쌤페이지",
+    link: "/tompage"
   }
 ];
