@@ -32,6 +32,7 @@ footer.footer-area {
       
       @include mobile {
         justify-content: center;
+        gap: .8rem;
       }
 
       ul {
