@@ -8,6 +8,7 @@ import './scss/common.scss';
 import Education from './components/pages/Education.jsx';
 import Community from './components/pages/Community.jsx';
 import TomPage from './components/pages/TomPage.jsx';
+import DetailView from './components/pages/DetailView.jsx';
 
 
 /********************************************* 
@@ -56,6 +57,7 @@ export default function MainComponent(){
       <Route path="/" element={<Layout />}>
       {/* 하위중 첫페이지는 index라고 속성씀! */}
         <Route index element={<Main />} />
+        <Route path="/detail/:id" element={<DetailView />} />
         <Route path="education" element={<Education />} />
         <Route path="community" element={<Community />} />
         <Route path="tompage" element={<TomPage />} />

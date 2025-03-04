@@ -1,11 +1,13 @@
-/// 메인페이지 컴포넌트 : Main.jsx ///
+/// 메인페이지 컴포넌트 : ./src/components/pages/Main.jsx ////
 import React, {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import "../../scss/main.scss";
 
 const Main = () => {
   const [eduList, setEduList] = useState([]);
   const categories = ["전체", "개발프로그래밍", "게임개발", "데이터사이언스", "인공지능", "보안네트워크", "기타"];
   const [selCate, setSelCate] = useState("전체");
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("/data/edu_data.json")
@@ -22,9 +24,8 @@ const Main = () => {
     : eduList.filter(({ gCate }) => gCate === selCate);
 
     const cartBtnFn = (e) => {
-      const el = e.currentTarget; // 수정된 부분
+      const el = e.currentTarget;
       // console.log("장바구니 버튼 클릭!", el);
-      // el.classList.add("active");
     };
 
   return (
@@ -44,7 +45,7 @@ const Main = () => {
       </ul>
       <ul className="list-wrap">
         {filterList.map((edu) => (
-          <li key={edu.idx} className="edu-list">
+          <li key={edu.idx} className="edu-list" onClick={() => navigate(`/detail/${edu.idx}`)}>
             <article>
               <picture>
                 <img src={`/images/edu_thumb/${edu.idx}.png`} alt={`교육 이미지 ${edu.idx}`} />
