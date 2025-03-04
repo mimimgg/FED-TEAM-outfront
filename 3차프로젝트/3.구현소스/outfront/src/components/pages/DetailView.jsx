@@ -23,13 +23,13 @@ const DetailView = () => {
   return (
     <div className="detail-wrap">
       <button onClick={() => navigate(-1)}>← 뒤로 가기</button>
+      <p>{edu.gCate}</p>
       <h1>{edu.gName}</h1>
-      <p><strong>설명:</strong> {edu.gInfo}</p>
+      <p>{edu.gInfo}</p>
       <img src={`/images/edu_thumb/${edu.idx}.png`} alt={`교육 이미지 ${edu.idx}`} />
       <p><strong>레벨:</strong> {edu.gLevel}</p>
       <p><strong>가격:</strong> {edu.gPrice}</p>
       <p><strong>관련 기술:</strong> {edu.gSkill}</p>
-      <p><strong>카테고리:</strong> {edu.gCate}</p>
     </div>
   );
 };

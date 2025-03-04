@@ -25,7 +25,7 @@ const Main = () => {
 
     const cartBtnFn = (e) => {
       const el = e.currentTarget;
-      // console.log("장바구니 버튼 클릭!", el);
+      console.log("장바구니 버튼 클릭!", el);
     };
 
   return (
