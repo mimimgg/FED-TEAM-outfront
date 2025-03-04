@@ -4,8 +4,6 @@
 // ❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓  //
 // 1. 테블릿 버전에서 nav 으띃게 햐요?
 //    구성) 드롭다운 시 search랑 gnb > sub 나와야 함
-// 2. 파비콘 넣구싶어유..
-//    <link rel="shortcut icon" href="https://cdn.inflearn.com/dist/favicon.ico">
 ////////////////////////////////////////////////////////////////
 
 import { Link } from "react-router-dom";
