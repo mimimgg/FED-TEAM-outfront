@@ -18,7 +18,7 @@ const DetailView = () => {
       .catch(console.error);
   }, [id]);
 
-  if (!edu) return <p>강의 정보를 불러오는 중...</p>;
+  if (!edu) return <p>강의 정보가 없습니다... ㅠㅠ</p>;
 
   return (
     <div className="detail-wrap">
