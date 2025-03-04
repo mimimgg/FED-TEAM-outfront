@@ -7,6 +7,20 @@ footer.footer-area {
   justify-content: space-between;
   background-color: $bg-footer;
   padding: 3.2rem;
+  gap: 16rem;
+
+  @include tablet-medium {
+    gap: 8rem;
+  }
+
+  @include tablet-small {
+    padding: 3.2rem 1.6rem;
+    flex-direction: column;
+    gap: 2.8rem;
+  }
+  @include mobile {
+    display: block;
+  }
 
   .footer-info {
     color: $color-lightegray;
@@ -15,6 +29,11 @@ footer.footer-area {
       display: flex;
       align-items: center;
       gap: 1.6rem;
+      
+      @include mobile {
+        justify-content: center;
+      }
+
       ul {
         display: flex;
         align-items: center;
@@ -22,12 +41,31 @@ footer.footer-area {
       }
       li {
         font-weight: 600;
+        transition: 0.2s;
       }
-      li::before {
+      li:hover {
+        color: $color-primary
+      }
+      li:nth-child(1) ::before {
+        content: "";
+        border-left: 1px solid $color-lightegray;
+        padding: 0 0.6rem;
+
+        @include mobile {
+          border-left: none;
+        }
+      }
+      li:nth-child(2) ::before {
         content: "";
         border-left: 1px solid $color-lightegray;
         padding: 0 0.6rem;
       }
+      li:nth-child(3) ::before {
+        content: "";
+        border-left: 1px solid $color-lightegray;
+        padding: 0 0.6rem;
+      }
+    
       .brand_logo {
         a {
           display: block;
@@ -36,15 +74,28 @@ footer.footer-area {
             width: 8rem;
           }
         }
+        @include mobile {
+          display: none;
+        }      
       }
     }
 
     .company-info {
       padding: 1.6rem 0;
+      
+      @include mobile {
+        text-align: center;
+        padding: 2.4rem 0;
+      }
 
       span {
         line-height: 1.5;
         padding-left: 0.2rem;
+      }
+    }
+    .copyright {
+      @include mobile {
+        text-align: center;
       }
     }
   }
@@ -52,6 +103,13 @@ footer.footer-area {
     display: flex;
     gap: 1.6rem;
     align-items: flex-end;
+
+    @include tablet-small {
+      gap: .8rem;
+    }
+    @include mobile {
+      display: none;
+    }
 
     .sns-icon {
       font-size: 2rem;
@@ -67,7 +125,6 @@ footer.footer-area {
         align-items: center;
       }
     }
-
-
   }
 }
+
