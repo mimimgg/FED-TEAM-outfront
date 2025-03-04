@@ -1,17 +1,12 @@
 // 상단영역 컴포넌트 : TopArea.jsx //
 
-////////////////////////////////////////////////////////////////
-// ❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓  //
-// 1. 테블릿 버전에서 nav 으띃게 햐요?
-//    구성) 드롭다운 시 search랑 gnb > sub 나와야 함
-////////////////////////////////////////////////////////////////
-
 import { Link } from "react-router-dom";
 import "../../scss/top_area.scss";
 
 // GNB 데이터
 import { menu } from "../../js/data/gnb";
 import "../../js/top_area.js";
+import MainArea from "./MainArea.jsx";
 
 export default function TopArea() {
   return (
@@ -21,9 +16,9 @@ export default function TopArea() {
         <div className="top-wrap">
           <div className="navbar-left">
             <h1 className="brand_logo">
-              <a href="#">
+              <Link to={MainArea}>
                 <img src="../../images/common/brand_logo.png" alt="아웃프런 브랜드 로고" />
-              </a>
+              </Link>
             </h1>
             <a href="#" className="top-menu-btn">
               <i className="fa-solid fa-bars"></i>
