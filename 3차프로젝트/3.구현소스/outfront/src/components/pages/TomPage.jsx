@@ -6,7 +6,7 @@ import React from 'react';
 function TomPage() {
   return (
     <div>
-      <h2>탐쌤페이지다아!!!!!!!!</h2>
+      <h2 style={{fontSize:"40px"}}>탐쌤페이지다아!!!!!!!!</h2>
     </div>
   );
 }
