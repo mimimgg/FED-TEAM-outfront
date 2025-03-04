@@ -7,6 +7,7 @@ import './scss/common.scss';
 
 import Education from './components/pages/Education.jsx';
 import Community from './components/pages/Community.jsx';
+import TomPage from './components/pages/TomPage.jsx';
 
 
 /********************************************* 
@@ -57,6 +58,7 @@ export default function MainComponent(){
         <Route index element={<Main />} />
         <Route path="education" element={<Education />} />
         <Route path="community" element={<Community />} />
+        <Route path="tompage" element={<TomPage />} />
       </Route>
     </Routes>
   </BrowserRouter>
