@@ -56,16 +56,16 @@ export default function FooterArea() {
             <div className="copyright">©OUTFRONT. ALL RIGHTS RESERVED</div>
           </div>
           <div className="footer-sns">
-            <a className="sns-facebook sns-icon" href="#">
+            <a className="sns-facebook sns-icon" href="https://www.facebook.com/inflearn">
               <i className="fa-brands fa-facebook-f"></i>
             </a>
-            <a className="sns-insta sns-icon" href="#">
+            <a className="sns-insta sns-icon" href="https://www.instagram.com/inflearn__official/#">
               <i className="fa-brands fa-instagram"></i>
             </a>
-            <a className="sns-youtube sns-icon" href="#">
+            <a className="sns-youtube sns-icon" href="https://www.youtube.com/channel/UC0Y0T9JpgIBbyGDjvy9PbOg">
               <i className="fa-brands fa-youtube"></i>
             </a>
-            <a className="sns-x sns-icon" href="#">
+            <a className="sns-x sns-icon" href="https://x.com/inflearn">
               <i className="fa-brands fa-x-twitter"></i>
             </a>
           </div>
