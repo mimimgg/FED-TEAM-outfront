@@ -7,7 +7,7 @@
       display: flex;
       justify-content: space-between;
       position: relative;
-      max-width: 1440px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 40px 0;
       clear: both;
@@ -57,7 +57,7 @@
     }
   }
   .detail-content {
-    max-width: 1440px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -196,7 +196,7 @@
               border-radius: 8px;
               border: 1px solid #e9ecef;
               background-color: #ffffff;
-              p{
+              p {
                 line-height: 1.6;
               }
               b {
