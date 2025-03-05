@@ -29,7 +29,9 @@ const DetailView = () => {
             <button onClick={() => navigate(-1)}>
               <i className="fa-solid fa-arrow-left"></i>뒤로가기
             </button>
-            <p><b>{edu.gCate}</b></p>
+            <p>
+              <b>{edu.gCate}</b>
+            </p>
             <h2>{edu.gName}</h2>
             <p>{edu.gInfo}</p>
           </div>
@@ -106,14 +108,16 @@ const DetailView = () => {
               <div className="card-wrapper">
                 <div className="card-el">
                   <div>
-                    <p>🥺</p>
+                    <p>
+                      <span>🥺</span>
+                    </p>
                     <p>코딩 강의가 너무 비싼데, 강의 내용이 좋을지 모르겠어요. 한두 번 듣고 안 들을까 봐 걱정돼요.</p>
                   </div>
                 </div>
                 <div className="card-el">
                   <div>
                     <p>
-                      <span>🥺</span>
+                      <span>😗</span>
                     </p>
                     <p>
                       <span>혼자 코딩 공부 중인데, 제가 하는 게 맞는지 모르겠어요. 모르는 건 누구한테 질문해야 하나요?</span>
@@ -167,8 +171,8 @@ const DetailView = () => {
                 <strong>왜 파이썬을 배워야 할까요?</strong>
               </h3>
               <p>
-                파이썬은 문법 구조가 쉽기 때문에 프로그래밍을 처음 접하는 초보자도 쉽게 이해할 수 있어요. 파이썬은 그 어떤 프로그래밍 언어보다 <span>확장성이 월등히 높은 언어</span>예요. 데이터 분석가도, 웹 개발자도, 머신러닝 연구자도, 대학원생도 파이썬을 사용하죠. 당신이 어떤 업무를 맡더라도 파이썬만
-                알아두면 척척 대응하기 쉬워집니다.
+                파이썬은 문법 구조가 쉽기 때문에 프로그래밍을 처음 접하는 초보자도 쉽게 이해할 수 있어요. 파이썬은 그 어떤 프로그래밍 언어보다 <span>확장성이 월등히 높은 언어</span>예요. 데이터 분석가도, 웹 개발자도, 머신러닝 연구자도, 대학원생도 파이썬을 사용하죠. 당신이 어떤 업무를 맡더라도
+                파이썬만 알아두면 척척 대응하기 쉬워집니다.
               </p>
               <p>당연히 비전공자도 다룰 수 있습니다. 프로그래밍 언어는 만국 공통어에요. 만약 C, Java 등의 언어를 접해봤다면 더욱 쉽게 파이썬을 익힐 수 있겠죠.</p>
             </div>
