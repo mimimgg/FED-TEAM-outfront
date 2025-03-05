@@ -17,7 +17,10 @@ export default function TopArea() {
           <div className="navbar-left">
             <h1 className="brand_logo">
               <Link to="/">
-                <img src="../../images/common/brand_logo.png" alt="아웃프런 브랜드 로고" />
+                <img
+                  src="../../images/common/brand_logo.png"
+                  alt="아웃프런 브랜드 로고"
+                />
               </Link>
             </h1>
             <a href="#" className="top-menu-btn">
@@ -48,6 +51,9 @@ export default function TopArea() {
                   </li>
                 ))}
               </ul>
+
+              {/* 배경요소 */}
+              <div className="out-bg"></div>
             </nav>
             {/* 모바일 네비게이션 */}
           </div>
