@@ -13,7 +13,7 @@ const DetailView = () => {
     fetch("/data/edu_data.json")
       .then((res) => res.json())
       .then((data) => {
-        const selectedEdu = data.find((item) => item.idx === parseInt(id, 10));
+        const selectedEdu = data.find((item) => item.idx === Number(id));
         setEdu(selectedEdu);
       })
       .catch(console.error);

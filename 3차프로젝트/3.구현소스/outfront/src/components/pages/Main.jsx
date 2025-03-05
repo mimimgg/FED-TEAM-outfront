@@ -17,7 +17,7 @@ const Main = () => {
   }, []);
 
   const formatPrice = (price) => 
-    price.includes("₩") ? `₩${parseInt(price.replace("₩", ""), 10).toLocaleString()}` : price;
+    price.includes("₩") ? `₩${Number(price.replace("₩", "")).toLocaleString()}` : price;
 
   const filterList = selCate === "전체" 
     ? eduList 
