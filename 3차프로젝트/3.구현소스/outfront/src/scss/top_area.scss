@@ -4,11 +4,23 @@
 
 header.top-area {
   position: relative;
-  display: flex;
-  justify-content: space-between;
   padding: 0 3.2rem;
-  gap: 3.2rem;
-  height: 7rem;
+
+  @include tablet-medium {
+    padding: 0 1.6rem;
+  }
+  
+  @include mobile {
+    padding: 0 .8rem;
+  }
+  
+  .top-wrap {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    height: 7rem;
+  }
 
   .navbar-left {
     display: flex;
@@ -88,7 +100,7 @@ nav.gnb {
       padding: 1.6rem 2.4rem;
       border-radius: 1rem;
       border: 1px solid $color-lightegray;
-      filter: drop-shadow(0.4rem 0.4rem 1rem rgba(176, 176, 176, 0.503));
+      // filter: drop-shadow(0.4rem 0.4rem 1rem rgba(176, 176, 176, 0.503));
       white-space: nowrap;
       line-height: 2.2;
       z-index: 2;
