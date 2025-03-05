@@ -4,22 +4,41 @@
     background: #000;
     color: #fff;
     .inner {
+      display: flex;
+      justify-content: space-between;
       position: relative;
       max-width: 1440px;
       margin: 0 auto;
+      padding: 40px 0;
       clear: both;
       overflow: hidden;
-      h2 {
-        font-size: 1.8rem;
-      }
-      h3 {
-        font-size: 2.8rem;
-      }
-      span {
-        font-size: 1.4rem;
+      .info-txt {
+        width: 50%;
+        line-height: 1.4;
+        h2 {
+          font-size: 1.4rem;
+          font-weight: 700;
+          opacity: .6;
+        }
+        h3 {
+          font-size: 2.8rem;
+          font-weight: 700;
+        }
+        span {
+          font-size: 1.8rem;
+          opacity: .6;
+        }
       }
       .edu-thumb {
-        float: right;
+        position: relative;
+        width: 26%;
+        border-radius: 1.4rem;
+        overflow: hidden;
+        img {
+          width: 100%;
+          object-fit: cover;
+          vertical-align: top;
+        }
       }
     }
   }

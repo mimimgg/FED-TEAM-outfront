@@ -26,9 +26,11 @@ const DetailView = () => {
       <button onClick={() => navigate(-1)}>← 뒤로 가기</button>
       <div className="detail-header">
         <div className="inner">
-          <h2>{edu.gCate}</h2>
-          <h3>{edu.gName}</h3>
-          <span>{edu.gInfo}</span>
+          <div className="info-txt">
+            <h2>{edu.gCate}</h2>
+            <h3>{edu.gName}</h3>
+            <span>{edu.gInfo}</span>
+          </div>
           <div className="edu-thumb">
             <img src={`/images/edu_thumb/${edu.idx}.png`} alt={`교육 이미지 ${edu.idx}`} />
           </div>
