@@ -23,10 +23,12 @@ const DetailView = () => {
 
   return (
     <div className="detail-wrap">
-      <button onClick={() => navigate(-1)}>← 뒤로 가기</button>
       <div className="detail-header">
         <div className="inner">
           <div className="info-txt">
+            <button onClick={() => navigate(-1)}>
+              <i class="fa-solid fa-arrow-left"></i>뒤로가기
+            </button>
             <h2>{edu.gCate}</h2>
             <h3>{edu.gName}</h3>
             <span>{edu.gInfo}</span>

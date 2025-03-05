@@ -13,15 +13,30 @@
       clear: both;
       overflow: hidden;
       .info-txt {
-        width: 50%;
+        width: 60%;
         line-height: 1.4;
+        button {
+          border: none;
+          background: #fff;
+          opacity: .6;
+          font-weight: 700;
+          font-size: 1.2rem;
+          padding: 0.8rem 1.4rem;
+          border-radius: 1rem;
+          vertical-align: middle;
+          cursor: pointer;
+          .fa-arrow-left {
+            padding-right: 1rem;
+          }
+        }
         h2 {
-          font-size: 1.4rem;
+          padding-top: 1.4rem;
+          font-size: 1.6rem;
           font-weight: 700;
           opacity: .6;
         }
         h3 {
-          font-size: 2.8rem;
+          font-size: 3.4rem;
           font-weight: 700;
         }
         span {
@@ -32,7 +47,7 @@
       .edu-thumb {
         position: relative;
         width: 26%;
-        border-radius: 1.4rem;
+        border-radius: 1.2rem;
         overflow: hidden;
         img {
           width: 100%;
