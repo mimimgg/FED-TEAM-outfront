@@ -1,0 +1,29 @@
+.detail-wrap {
+  margin: 0 auto;
+  .detail-header {
+    background: #000;
+    color: #fff;
+    .inner {
+      position: relative;
+      max-width: 1440px;
+      margin: 0 auto;
+      clear: both;
+      overflow: hidden;
+      h2 {
+        font-size: 1.8rem;
+      }
+      h3 {
+        font-size: 2.8rem;
+      }
+      span {
+        font-size: 1.4rem;
+      }
+      .edu-thumb {
+        float: right;
+      }
+    }
+  }
+  .detail-info {
+    font-size: 2rem;
+  }
+}

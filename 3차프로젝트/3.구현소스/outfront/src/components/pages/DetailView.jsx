@@ -1,10 +1,11 @@
 // 강의 상세페이지 컴포넌트 : ./src/components/pages/DetailView.jsx ////
 
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {useParams, useNavigate} from "react-router-dom";
+import "../../scss/detail_view.scss";
 
 const DetailView = () => {
-  const { id } = useParams();
+  const {id} = useParams();
   const [edu, setEdu] = useState(null);
   const navigate = useNavigate();
 
@@ -23,13 +24,21 @@ const DetailView = () => {
   return (
     <div className="detail-wrap">
       <button onClick={() => navigate(-1)}>← 뒤로 가기</button>
-      <p>{edu.gCate}</p>
-      <h1>{edu.gName}</h1>
-      <p>{edu.gInfo}</p>
-      <img src={`/images/edu_thumb/${edu.idx}.png`} alt={`교육 이미지 ${edu.idx}`} />
-      <p><strong>레벨:</strong> {edu.gLevel}</p>
-      <p><strong>가격:</strong> {edu.gPrice}</p>
-      <p><strong>관련 기술:</strong> {edu.gSkill}</p>
+      <div className="detail-header">
+        <div className="inner">
+          <h2>{edu.gCate}</h2>
+          <h3>{edu.gName}</h3>
+          <span>{edu.gInfo}</span>
+          <div className="edu-thumb">
+            <img src={`/images/edu_thumb/${edu.idx}.png`} alt={`교육 이미지 ${edu.idx}`} />
+          </div>
+        </div>
+      </div>
+      <div className="detail-info">
+        <p>{edu.gPrice}</p>
+        <p>{edu.gLevel}</p>
+        <p>{edu.gSkill}</p>
+      </div>
     </div>
   );
 };
