@@ -1,7 +1,7 @@
 .detail-wrap {
   margin: 0 auto;
   .detail-header {
-    background: #000;
+    background: #101113;
     color: #fff;
     .inner {
       display: flex;
@@ -13,7 +13,7 @@
       clear: both;
       overflow: hidden;
       .info-txt {
-        width: 60%;
+        width: 65%;
         line-height: 1.4;
         button {
           border: none;
@@ -22,6 +22,7 @@
           font-weight: 700;
           font-size: 1.2rem;
           padding: 0.8rem 1.4rem;
+          margin-bottom: 2rem;
           border-radius: 1rem;
           vertical-align: middle;
           cursor: pointer;
@@ -36,6 +37,10 @@
         p {
           font-size: 2rem;
           opacity: 0.6;
+          b {
+            font-weight: 700;
+            font-size: 1.6rem;
+          }
         }
       }
       .edu-thumb {
@@ -44,7 +49,7 @@
         border-radius: 1.2rem;
         overflow: hidden;
         img {
-          width: 100%;
+          max-width: 100%;
           object-fit: cover;
           vertical-align: top;
         }
@@ -63,26 +68,143 @@
       width: 65%;
       overflow: hidden;
       img {
-        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
       }
       .box {
         h3 {
-          font-size: 2rem;
+          font-size: 2.4rem;
+          font-weight: 600;
+          margin: 24px 0;
+          line-height: 1.4;
         }
-        svg {
-          width: 20px;
+        p {
+          font-size: 1.6rem;
+          line-height: 1.4;
+        }
+        .box-list1 {
+          border: 1px solid #ddd;
+          border-radius: 1.2rem;
+          padding: 2rem;
+          margin: 24px 0;
+          ul li {
+            display: flex;
+            align-items: center;
+            font-size: 1.4rem;
+            line-height: 2;
+            gap: 1rem;
+            svg {
+              height: 16px;
+              color: #228be6;
+            }
+          }
         }
       }
-      .tit1 {
+      .box-list2 {
+        font-size: 1.6rem;
+        line-height: 1.6;
+        .tit {
+          margin: 24px 0;
+          padding: 16px;
+          border-radius: 1.2rem;
+          background: #343a40;
+          line-height: 1.69;
+          color: #fff;
+          font-size: 16px;
+          font-weight: bold;
+          text-align: center;
+        }
+        h3 {
+          margin: 14px 0;
+        }
+        ul {
+          padding-bottom: 24px;
+          list-style: disc;
+        }
+      }
+      .box-list3 {
+        margin-top: 16px;
         margin-bottom: 16px;
-        padding: 16px;
-        border-radius: 4px;
-        background: #343a40;
-        line-height: 1.69;
-        color: #fff;
-        font-size: 16px;
-        font-weight: bold;
-        text-align: center;
+        padding: 24px;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+        background-color: #f8f9fa;
+        h3 {
+          margin: 0px;
+          text-align: center;
+        }
+        .card-wrapper {
+          display: flex;
+          width: 100%;
+          .card-el {
+            flex: 1 0 auto;
+            margin-bottom: 16px;
+            padding: 0 8px;
+            width: 50%;
+            div {
+              margin-top: 16px;
+              margin-bottom: 0px;
+              padding: 24px;
+              border-radius: 8px;
+              border: 1px solid #e9ecef;
+              background-color: #ffffff;
+              p {
+                line-height: 1.6;
+                &:first-child {
+                  margin: 0px;
+                  text-align: center;
+                  font-size: 30px;
+                }
+                &:last-child {
+                  margin: 0px;
+                  text-align: center;
+                  font-size: 15px;
+                }
+              }
+            }
+          }
+        }
+      }
+      .box-list4 {
+        img {
+          width: 100%;
+        }
+      }
+      .box-list5 {
+        margin-top: 16px;
+        margin-bottom: 16px;
+        padding: 24px;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+        background-color: #f8f9fa;
+        h3 {
+          margin: 14px 0;
+        }
+        .card-wrapper {
+          display: flex;
+          letter-spacing: -0.3px;
+          word-break: break-word;
+          .card-el {
+            width: 33.33%;
+            margin-bottom: 16px;
+            padding: 0 8px;
+            text-align: center;
+            div {
+              margin-top: 16px;
+              margin-bottom: 0px;
+              padding: 24px;
+              border-radius: 8px;
+              border: 1px solid #e9ecef;
+              background-color: #ffffff;
+              p{
+                line-height: 1.6;
+              }
+              b {
+                font-weight: 700;
+              }
+            }
+          }
+        }
       }
     }
     aside {
