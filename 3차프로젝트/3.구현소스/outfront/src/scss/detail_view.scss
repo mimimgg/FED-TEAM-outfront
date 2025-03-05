@@ -35,11 +35,21 @@
           font-weight: 700;
         }
         p {
-          font-size: 2rem;
+          font-size: 1.6rem;
           opacity: 0.6;
           b {
-            font-weight: 700;
-            font-size: 1.6rem;
+            font-weight: 600;
+            font-size: 1.4rem;
+          }
+        }
+        span {
+          font-size: 1.6rem;
+          display: flex;
+          svg {
+            stroke: #fab005;
+            fill: #fab005;
+            width: 2rem;
+            height: 2rem;
           }
         }
       }
