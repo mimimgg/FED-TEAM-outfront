@@ -17,10 +17,7 @@ export default function TopArea() {
           <div className="navbar-left">
             <h1 className="brand_logo">
               <Link to="/">
-                <img
-                  src="../../images/common/brand_logo.png"
-                  alt="아웃프런 브랜드 로고"
-                />
+                <img src="../../images/common/brand_logo.png" alt="아웃프런 브랜드 로고" />
               </Link>
             </h1>
             <a href="#" className="top-menu-btn">
@@ -33,7 +30,13 @@ export default function TopArea() {
                 {/* gnb 메뉴 맵 바인딩 */}
                 {menu.map((v, i) => (
                   <li key={i}>
-                    {<Link to={v.link}>{v.txt}</Link>}
+                    {v.sub ? (
+                      <a href="#" onClick={(e) => e.preventDefault()}>
+                        {v.txt}
+                      </a>
+                    ) : (
+                      <Link to={v.link}>{v.txt}</Link>
+                    )}
                     {
                       // 서브메뉴가 있는 경우 출력하기
                       v.sub && (
