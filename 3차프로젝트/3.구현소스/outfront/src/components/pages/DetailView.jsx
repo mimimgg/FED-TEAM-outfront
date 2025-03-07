@@ -43,6 +43,35 @@ const DetailView = () => {
       </div>
       <div className="detail-content">
         <section>
+          <div className="detail-review-wrap">
+            <h3>OO자를 위한 [OOOO] 강의입니다.</h3>
+            <ul className="detail-review-list">
+              <li>
+                <span>
+                  <b>이름</b> 수강평 평점4.0
+                </span>
+                <p>어쩌구 저쩌구...</p>
+              </li>
+              <li>
+                <span>
+                  <b>이름</b> 수강평 평점4.0
+                </span>
+                <p>어쩌구 저쩌구...</p>
+              </li>
+              <li>
+                <span>
+                  <b>이름</b> 수강평 평점4.0
+                </span>
+                <p>어쩌구 저쩌구...</p>
+              </li>
+              <li>
+                <span>
+                  <b>이름</b> 수강평 평점4.0
+                </span>
+                <p>어쩌구 저쩌구...</p>
+              </li>
+            </ul>
+          </div>
           <div className="box">
             <h3> 이런 걸 배울 수 있어요 </h3>
             <div className="box-list1">

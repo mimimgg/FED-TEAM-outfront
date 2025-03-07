@@ -72,7 +72,6 @@
     display: flex;
     justify-content: space-between;
     gap: 16px;
-
     section {
       position: relative;
       width: 65%;
@@ -80,6 +79,29 @@
       img {
         max-width: 100%;
         margin: 0 auto;
+      }
+      .detail-review-wrap {
+        h3 {
+          font-size: 2.4rem;
+          font-weight: 600;
+          padding: 2.4rem 0;
+        }
+        .detail-review-list {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          gap: 12px;
+          li {
+            font-size: 1.2rem;
+            width: 49%;
+            min-height: 140px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            border-radius: 1rem;
+          }
+        }
+
       }
       .box {
         h3 {
