@@ -88,9 +88,9 @@ export default function TopArea() {
                 </a>
               </li>
               <li>
-                <a className="user-btn top-btn" href="#">
+                <Link to={"/mypage"}>
                   <i className="fa-regular fa-user"></i>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
