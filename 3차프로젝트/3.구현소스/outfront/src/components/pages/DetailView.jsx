@@ -55,25 +55,25 @@ const DetailView = () => {
             <ul className="detail-review-list">
               <li>
                 <span>
-                  <b>이름</b> 수강평 평점4.0
+                  <b>OOO님</b> 수강평 평점4.0
                 </span>
                 <p>어쩌구 저쩌구...</p>
               </li>
               <li>
                 <span>
-                  <b>이름</b> 수강평 평점4.0
+                  <b>OOO님</b> 수강평 평점4.0
                 </span>
                 <p>어쩌구 저쩌구...</p>
               </li>
               <li>
                 <span>
-                  <b>이름</b> 수강평 평점4.0
+                  <b>OOO님</b> 수강평 평점4.0
                 </span>
                 <p>어쩌구 저쩌구...</p>
               </li>
               <li>
                 <span>
-                  <b>이름</b> 수강평 평점4.0
+                  <b>OOO님</b> 수강평 평점4.0
                 </span>
                 <p>어쩌구 저쩌구...</p>
               </li>
