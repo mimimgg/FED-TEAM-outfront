@@ -7,6 +7,7 @@ import "../../scss/detail_view.scss";
 const DetailView = () => {
   const {id} = useParams();
   const [edu, setEdu] = useState(null);
+  const [review, setReview] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,6 +16,16 @@ const DetailView = () => {
       .then((data) => {
         const selectedEdu = data.find((item) => item.idx === Number(id));
         setEdu(selectedEdu);
+      })
+      .catch(console.error);
+  }, [id]);
+
+  useEffect(() => {
+    fetch("/data/review_data.json")
+      .then((res) => res.json())
+      .then((data) => {
+        const selectedReview = data.find((item) => item.idx === Number(id));
+        setReview(selectedReview);
       })
       .catch(console.error);
   }, [id]);
@@ -56,18 +67,7 @@ const DetailView = () => {
               <b>{edu.gLevel}자</b>를 위한 <b>[{edu.gCate}]</b> 강의입니다.
             </h3>
             <ul className="detail-review-list">
-              <li>
-                <span>
-                  <b>OOO님</b> 수강평 평점4.0
-                </span>
-                <p>어쩌구 저쩌구...</p>
-              </li>
-              <li>
-                <span>
-                  <b>OOO님</b> 수강평 평점4.0
-                </span>
-                <p>어쩌구 저쩌구...</p>
-              </li>
+              {/* 수강평 리스트 영역 */}
               <li>
                 <span>
                   <b>OOO님</b> 수강평 평점4.0
