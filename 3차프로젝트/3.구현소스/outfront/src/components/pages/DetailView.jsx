@@ -34,7 +34,12 @@ const DetailView = () => {
             </p>
             <h2>{edu.gName}</h2>
             <p>{edu.gInfo}</p>
-            <span><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" fill="none" xmlns="http://www.w3.org/2000/svg" class="mantine-3wncv1 mantine-Rating-icon"><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path></svg>(4.7) 수강평 986개 수강생 31,831명</span>
+            <span>
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" fill="none" xmlns="http://www.w3.org/2000/svg" class="mantine-3wncv1 mantine-Rating-icon">
+                <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
+              </svg>
+              (4.7) 수강평 986개 수강생 31,831명
+            </span>
           </div>
           <div className="edu-thumb">
             <img src={`/images/edu_thumb/${edu.idx}.png`} alt={`교육 이미지 ${edu.idx}`} />
@@ -43,6 +48,37 @@ const DetailView = () => {
       </div>
       <div className="detail-content">
         <section>
+          <div className="detail-review-wrap">
+            <h3>
+              {edu.gLevel}자를 위한 [{edu.gCate}] 강의입니다.
+            </h3>
+            <ul className="detail-review-list">
+              <li>
+                <span>
+                  <b>이름</b> 수강평 평점4.0
+                </span>
+                <p>어쩌구 저쩌구...</p>
+              </li>
+              <li>
+                <span>
+                  <b>이름</b> 수강평 평점4.0
+                </span>
+                <p>어쩌구 저쩌구...</p>
+              </li>
+              <li>
+                <span>
+                  <b>이름</b> 수강평 평점4.0
+                </span>
+                <p>어쩌구 저쩌구...</p>
+              </li>
+              <li>
+                <span>
+                  <b>이름</b> 수강평 평점4.0
+                </span>
+                <p>어쩌구 저쩌구...</p>
+              </li>
+            </ul>
+          </div>
           <div className="box">
             <h3> 이런 걸 배울 수 있어요 </h3>
             <div className="box-list1">
@@ -276,10 +312,21 @@ const DetailView = () => {
           </div>
         </section>
         <aside>
-          <div className="detail-info">
-            <p>{edu.gPrice}</p>
-            <p>{edu.gLevel}</p>
-            <p>{edu.gSkill}</p>
+          <div className="detail-aside-wrap">
+            <div className="sale-msg">OOO님 첫 구매 할인 중...</div>
+            <div className="inner">
+              <p className="price"><b>{edu.gPrice}</b></p>
+              <button className="add-edu-btn">수강 신청하기</button>
+              <button className="add-cart-btn">바구니에 담기</button>
+            </div>
+            <div className="aside-info">
+              <p><em>지식공유자</em> 인프런 </p>
+              <p><em>수업 수</em> 총 58개 (14시간 17분) </p>
+              <p><em>수강기한</em> 무제한 </p>
+              <p><em>수료증</em> 제공 </p>
+              <p><em>난이도</em> {edu.gLevel}</p>
+            </div>
+            {/* <p>{edu.gSkill}</p> */}
           </div>
         </aside>
       </div>
