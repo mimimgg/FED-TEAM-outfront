@@ -83,6 +83,11 @@ export default function TopArea() {
                 </Link>
               </li>
               <li>
+                <Link to={"/join"}>
+                  <i class="top-btn fa-solid fa-person-walking-arrow-right"></i>
+                </Link>
+              </li>
+              <li>
                 <a className="cart-btn top-btn" href="#">
                   <i className="fa-solid fa-cart-shopping"></i>
                 </a>

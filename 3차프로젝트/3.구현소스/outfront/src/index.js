@@ -11,6 +11,7 @@ import TomPage from './components/pages/TomPage.jsx';
 import DetailView from './components/pages/DetailView.jsx';
 import Mypage from './components/pages/Mypage.jsx';
 import Login from './components/pages/Login.jsx';
+import Join from './components/pages/Join.jsx';
 
 
 /********************************************* 
@@ -65,6 +66,7 @@ export default function MainComponent(){
         <Route path="tompage" element={<TomPage />} />
         <Route path="mypage" element={<Mypage />} />
         <Route path="login" element={<Login />} />
+        <Route path="join" element={<Join />} />
       </Route>
     </Routes>
   </BrowserRouter>

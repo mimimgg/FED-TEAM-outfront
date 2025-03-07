@@ -1,0 +1,22 @@
+// 회원가입 scss : join.scss
+
+.join-page {
+  margin: 0 auto;
+  width: 24rem;
+
+  .join-top {
+    text-align: center;
+
+    .join-title {
+      font-size: 2.4rem;
+    }
+
+    .join-maquee-wrap {
+      width: 100%;
+      .join-maquee {
+        display: flex;
+      }
+    }
+  }
+}
+
