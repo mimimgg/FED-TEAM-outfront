@@ -78,9 +78,9 @@ export default function TopArea() {
             {/* 로그인 / 회원가입 */}
             <ul className="right-icon">
               <li>
-                <a className="login-btn top-btn" href="#">
-                  <i className="fa-solid fa-right-to-bracket"></i>
-                </a>
+                <Link to={"/login"}>
+                  <i className="top-btn fa-solid fa-right-to-bracket"></i>
+                </Link>
               </li>
               <li>
                 <a className="cart-btn top-btn" href="#">

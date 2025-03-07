@@ -10,6 +10,7 @@ import Community from './components/pages/Community.jsx';
 import TomPage from './components/pages/TomPage.jsx';
 import DetailView from './components/pages/DetailView.jsx';
 import Mypage from './components/pages/Mypage.jsx';
+import Login from './components/pages/Login.jsx';
 
 
 /********************************************* 
@@ -63,6 +64,7 @@ export default function MainComponent(){
         <Route path="community" element={<Community />} />
         <Route path="tompage" element={<TomPage />} />
         <Route path="mypage" element={<Mypage />} />
+        <Route path="login" element={<Login />} />
       </Route>
     </Routes>
   </BrowserRouter>
