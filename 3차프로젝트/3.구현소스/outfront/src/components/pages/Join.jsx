@@ -6,20 +6,19 @@ import React from "react";
 import "../../scss/pages/join.scss";
 import { Link } from "react-router-dom";
 
-function Join(props) {
+function Join() {
+  // 코드리턴
   return (
     <>
       <div className="join-page">
         <div className="join-top">
           <h2 className="join-title">회원가입</h2>
-          <div className="join-maquee-wrap">
-            <ul className="join-maquee">
-              <li className="text-root">아웃프런에서 학습한 역량을 펼쳐보세요</li>
-              <li className="text-root">나의 온라인 사수, 아웃프런</li>
-              <li className="text-root">아웃프런에서 다양한 학습의 기회를 얻으세요</li>
-              <li className="text-root">나의 커리어 메이트, 아웃프런</li>
-            </ul>
-          </div>
+          {/* <ul className="maquee">
+            <li>아웃프런에서 학습한 역량을 펼쳐보세요</li>
+            <li>나의 온라인 사수, 아웃프런</li>
+            <li>아웃프런에서 다양한 학습의 기회를 얻으세요</li>
+            <li>나의 커리어 메이트, 아웃프런</li>
+          </ul> */}
         </div>
 
         <form action="process.php" mathod="post" className="join-form">
@@ -34,7 +33,7 @@ function Join(props) {
             </li>
             <li className="join-pass-confirm">
               <label>비밀번호 확인</label>
-              <input type="password" maxLength="20" placeholder="비밀번호를 다시 한 번 입력하세요" />
+              <input type="password" maxLength="20" placeholder="비밀번호를 다시 입력하세요" />
             </li>
             <li className="join-name">
               <label>이름</label>
@@ -47,10 +46,10 @@ function Join(props) {
             <li>
               <button className="submit">가입하기</button>
             </li>
-            <li>
-              이미 회원이신가요?
-              <Link to="/login">로그인하러 가기</Link>
-            </li>
+            <ul className="join-already">
+              <li>이미 회원이신가요?</li>
+              <li><Link to="/login">로그인하기</Link></li>
+            </ul>
           </ul>
         </form>
       </div>
