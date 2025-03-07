@@ -17,7 +17,7 @@ const Main = () => {
   }, []);
 
   const formatPrice = (price) => 
-    price.includes("₩") ? `₩${parseInt(price.replace("₩", ""), 10).toLocaleString()}` : price;
+    price.includes("₩") ? `₩${Number(price.replace("₩", "")).toLocaleString()}` : price;
 
   const filterList = selCate === "전체" 
     ? eduList 
@@ -25,7 +25,7 @@ const Main = () => {
 
     const cartBtnFn = (e) => {
       const el = e.currentTarget;
-      // console.log("장바구니 버튼 클릭!", el);
+      console.log("장바구니 버튼 클릭!", el);
     };
 
   return (

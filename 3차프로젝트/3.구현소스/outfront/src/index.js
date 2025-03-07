@@ -9,6 +9,7 @@ import Education from './components/pages/Education.jsx';
 import Community from './components/pages/Community.jsx';
 import TomPage from './components/pages/TomPage.jsx';
 import DetailView from './components/pages/DetailView.jsx';
+import Mypage from './components/pages/Mypage.jsx';
 
 
 /********************************************* 
@@ -61,6 +62,7 @@ export default function MainComponent(){
         <Route path="education" element={<Education />} />
         <Route path="community" element={<Community />} />
         <Route path="tompage" element={<TomPage />} />
+        <Route path="mypage" element={<Mypage />} />
       </Route>
     </Routes>
   </BrowserRouter>
