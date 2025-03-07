@@ -7,16 +7,31 @@
     h2 {
       font-weight: 700;
       font-size: 3.8rem;
+      margin-bottom: 24px;
+    }
+    picture img {
+      max-width: 200px;
+      box-sizing: border-box;
+      border-radius: 50%;
+      overflow: hidden;
     }
     span {
       font-weight: 600;
-      font-size: 2rem;
+      font-size: 1.8rem;
       margin: 24px 0;
       display: block;
     }
     p {
-      font-size: 2rem;
+      font-size: 3.8rem;
+      font-weight: 300;
       line-height: 1.4;
+      b {
+        font-weight: 600;
+      }
     }
+  }
+  hr {
+    border: none;
+    border-top: 1px solid #ccc;
   }
 }
