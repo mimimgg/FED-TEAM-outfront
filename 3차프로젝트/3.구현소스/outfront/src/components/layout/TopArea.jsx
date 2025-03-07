@@ -89,7 +89,7 @@ export default function TopArea() {
               </li>
               <li>
                 <Link to={"/mypage"}>
-                  <i className="fa-regular fa-user"></i>
+                  <i className="top-btn fa-regular fa-user"></i>
                 </Link>
               </li>
             </ul>
