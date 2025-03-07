@@ -30,7 +30,13 @@ export default function TopArea() {
                 {/* gnb 메뉴 맵 바인딩 */}
                 {menu.map((v, i) => (
                   <li key={i}>
-                    {<Link to={v.link}>{v.txt}</Link>}
+                    {v.sub ? (
+                      <a href="#" onClick={(e) => e.preventDefault()}>
+                        {v.txt}
+                      </a>
+                    ) : (
+                      <Link to={v.link}>{v.txt}</Link>
+                    )}
                     {
                       // 서브메뉴가 있는 경우 출력하기
                       v.sub && (
@@ -48,6 +54,9 @@ export default function TopArea() {
                   </li>
                 ))}
               </ul>
+
+              {/* 배경요소 */}
+              <div className="out-bg"></div>
             </nav>
             {/* 모바일 네비게이션 */}
           </div>
@@ -79,9 +88,9 @@ export default function TopArea() {
                 </a>
               </li>
               <li>
-                <a className="user-btn top-btn" href="#">
+                <Link to={"/mypage"}>
                   <i className="fa-regular fa-user"></i>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
