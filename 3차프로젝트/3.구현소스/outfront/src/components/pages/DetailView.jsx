@@ -21,6 +21,9 @@ const DetailView = () => {
 
   if (!edu) return <p>강의 정보가 없습니다... ㅠㅠ</p>;
 
+  const formatPrice = (price) => 
+    price.includes("₩") ? `₩${Number(price.replace("₩", "")).toLocaleString()}` : price;
+
   return (
     <div className="detail-wrap">
       <div className="detail-header">
@@ -50,7 +53,7 @@ const DetailView = () => {
         <section>
           <div className="detail-review-wrap">
             <h3>
-              {edu.gLevel}자를 위한 [{edu.gCate}] 강의입니다.
+              <b>{edu.gLevel}자</b>를 위한 <b>[{edu.gCate}]</b> 강의입니다.
             </h3>
             <ul className="detail-review-list">
               <li>
@@ -315,7 +318,7 @@ const DetailView = () => {
           <div className="detail-aside-wrap">
             <div className="sale-msg">OOO님 첫 구매 할인 중...</div>
             <div className="inner">
-              <p className="price"><b>{edu.gPrice}</b></p>
+              <p className="price"><b>{formatPrice(edu.gPrice)}</b></p>
               <button className="add-edu-btn">수강 신청하기</button>
               <button className="add-cart-btn">바구니에 담기</button>
             </div>
