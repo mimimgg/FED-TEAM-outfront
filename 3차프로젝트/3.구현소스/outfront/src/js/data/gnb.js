@@ -1,55 +1,55 @@
 // 아웃프런 GNB메뉴 데이터
-export const menu = [
+const gnbMenu = [
   {
-      txt:"강의",
-      link:"/education",
-      sub:[
-        {
-          txt: "개발,프로그래밍",
-          link: "/it-programming",
-        },
-        {
-          txt: "인공지능",
-          link: "/artificial-intelligence",
-        },
-        {
-          txt: "게임 개발",
-          link: "/game-dev-all",
-        },
-        {
-          txt: "데이터 사이언스",
-          link: "/data-science",
-        },
-        {
-          txt: "보안, 네트워크",
-          link: "/it",
-        },
-      ]
+    txt: "강의",
+    sub: [
+      {
+        txt: "개발,프로그래밍",
+        link: "/education/it-programming",
+      },
+      {
+        txt: "인공지능",
+        link: "/education/artificial-intelligence",
+      },
+      {
+        txt: "게임 개발",
+        link: "/education/game-dev-all",
+      },
+      {
+        txt: "데이터 사이언스",
+        link: "/education/data-science",
+      },
+      {
+        txt: "보안, 네트워크",
+        link: "/education/it",
+      },
+    ],
   },
   {
     txt: "커뮤니티",
-    link: "/community",
     sub: [
       {
         txt: "질문&답변",
-        link: "/questions"
+        link: "/community/questions",
       },
       {
         txt: "고민있어요",
-        link: "/chats"
+        link: "/community/chats",
       },
       {
         txt: "스터디",
-        link: "/studies"
+        link: "/community/studies",
       },
       {
         txt: "팀프로젝트",
-        link: "/projects"
+        link: "/community/projects",
       },
-    ]
+    ],
   },
   {
     txt: "탐쌤페이지",
-    link: "/tompage"
-  }
+    link: "/tompage",
+  },
 ];
+
+export default gnbMenu;

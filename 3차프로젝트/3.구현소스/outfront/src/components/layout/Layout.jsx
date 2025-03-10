@@ -1,14 +1,14 @@
 /// 레이아웃영역 컴포넌트 : Layout.jsx ///
 
 import FooterArea from "./FooterArea";
+import Header from "./Header";
 import MainArea from "./MainArea";
-import TopArea from "./TopArea";
 
-export default function Layout(){
+export default function Layout() {
   // 리턴 코드구역 ////
   return (
     <>
-      <TopArea />
+      <Header />
       <MainArea />
       <FooterArea />
     </>
