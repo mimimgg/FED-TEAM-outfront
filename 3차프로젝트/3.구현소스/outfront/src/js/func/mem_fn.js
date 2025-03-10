@@ -39,10 +39,10 @@ const initData = () => {
           },
           {
               "idx": 3,
-              "uid": "mountainhiker",
+              "uid": "min",
               "pwd": "1111",
-              "unm": "Alice Johnson",
-              "eml": "mountainhiker@example.com"
+              "unm": "이민경",
+              "eml": "min@example.com"
           }
       ]
     `
