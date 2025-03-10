@@ -7,8 +7,10 @@ import "../../scss/detail_view.scss";
 const DetailView = () => {
   const {id} = useParams();
   const [edu, setEdu] = useState(null);
+  const [reviews, setReviews] = useState([]); // 리뷰를 배열로 저장
   const navigate = useNavigate();
 
+  // 강의 데이터 가져오기
   useEffect(() => {
     fetch("/data/edu_data.json")
       .then((res) => res.json())
@@ -19,7 +21,20 @@ const DetailView = () => {
       .catch(console.error);
   }, [id]);
 
+  // 리뷰 데이터 가져오기
+  useEffect(() => {
+    fetch("/data/review_data.json")
+      .then((res) => res.json())
+      .then((data) => {
+        const filteredReviews = data.filter((item) => item.eduId === Number(id));
+        setReviews(filteredReviews);
+      })
+      .catch(console.error);
+  }, [id]);
+
   if (!edu) return <p>강의 정보가 없습니다... ㅠㅠ</p>;
+
+  const formatPrice = (price) => (price.includes("₩") ? `₩${Number(price.replace("₩", "")).toLocaleString()}` : price);
 
   return (
     <div className="detail-wrap">
@@ -50,33 +65,21 @@ const DetailView = () => {
         <section>
           <div className="detail-review-wrap">
             <h3>
-              {edu.gLevel}자를 위한 [{edu.gCate}] 강의입니다.
+              <b>{edu.gLevel}자</b>를 위한 <b>[{edu.gCate}]</b> 강의입니다.
             </h3>
             <ul className="detail-review-list">
-              <li>
-                <span>
-                  <b>이름</b> 수강평 평점4.0
-                </span>
-                <p>어쩌구 저쩌구...</p>
-              </li>
-              <li>
-                <span>
-                  <b>이름</b> 수강평 평점4.0
-                </span>
-                <p>어쩌구 저쩌구...</p>
-              </li>
-              <li>
-                <span>
-                  <b>이름</b> 수강평 평점4.0
-                </span>
-                <p>어쩌구 저쩌구...</p>
-              </li>
-              <li>
-                <span>
-                  <b>이름</b> 수강평 평점4.0
-                </span>
-                <p>어쩌구 저쩌구...</p>
-              </li>
+              {reviews.length > 0 ? (
+                reviews.map((review, index) => (
+                  <li key={index}>
+                    <span>
+                      <b>{review.name}님</b> 수강평 평점 {review.grade}
+                    </span>
+                    <p>{review.text}</p>
+                  </li>
+                ))
+              ) : (
+                <p>리뷰가 없습니다... ㅠㅠ</p>
+              )}
             </ul>
           </div>
           <div className="box">
@@ -313,18 +316,30 @@ const DetailView = () => {
         </section>
         <aside>
           <div className="detail-aside-wrap">
-            <div className="sale-msg">OOO님 첫 구매 할인 중...</div>
+            <div className="sale-msg">OOO님 첫 구매 할인 중 (1일 남음)</div>
             <div className="inner">
-              <p className="price"><b>{edu.gPrice}</b></p>
+              <p className="price">
+                <b>{formatPrice(edu.gPrice)}</b>
+              </p>
               <button className="add-edu-btn">수강 신청하기</button>
               <button className="add-cart-btn">바구니에 담기</button>
             </div>
             <div className="aside-info">
-              <p><em>지식공유자</em> 인프런 </p>
-              <p><em>수업 수</em> 총 58개 (14시간 17분) </p>
-              <p><em>수강기한</em> 무제한 </p>
-              <p><em>수료증</em> 제공 </p>
-              <p><em>난이도</em> {edu.gLevel}</p>
+              <p>
+                <em>지식공유자</em> 인프런{" "}
+              </p>
+              <p>
+                <em>수업 수</em> 총 58개 (14시간 17분){" "}
+              </p>
+              <p>
+                <em>수강기한</em> 무제한{" "}
+              </p>
+              <p>
+                <em>수료증</em> 제공{" "}
+              </p>
+              <p>
+                <em>난이도</em> {edu.gLevel}
+              </p>
             </div>
             {/* <p>{edu.gSkill}</p> */}
           </div>
