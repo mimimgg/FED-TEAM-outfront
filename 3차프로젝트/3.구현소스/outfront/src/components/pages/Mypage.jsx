@@ -28,13 +28,13 @@ function Mypage() {
       <hr />
       <div className="mypage-contents">
         <div className="box my-edu">
-          <h3>내 학습</h3>
+          <h3><a href="/myedu">내 학습</a><a href="/myedu"><span>more</span></a></h3>
           <ul>
             <li></li>
           </ul>
         </div>
         <div className="box my-community">
-          <h3>내 커뮤니티 게시글</h3>
+          <h3><a href="#none">내 커뮤니티 게시글</a><a href="#none"><span>more</span></a></h3>
           <ul>
             <li></li>
           </ul>

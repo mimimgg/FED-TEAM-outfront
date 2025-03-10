@@ -85,7 +85,7 @@
           font-size: 2.4rem;
           padding: 2.4rem 0;
           font-weight: 400;
-          b{
+          b {
             font-weight: 700;
           }
         }
@@ -104,6 +104,13 @@
             border-radius: 1rem;
             line-height: 1.4;
             color: #212529;
+            p {
+              text-overflow: ellipsis;
+              overflow: hidden;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 4;
+            }
             span {
               font-size: 1.6rem;
               line-height: 2;
@@ -115,7 +122,6 @@
             }
           }
         }
-
       }
       .box {
         h3 {
@@ -276,7 +282,7 @@
           margin: 0 2rem;
         }
         p {
-          font-size: 1.4rem;          
+          font-size: 1.4rem;
         }
         p.price {
           font-size: 1.4rem;

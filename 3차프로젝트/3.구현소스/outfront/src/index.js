@@ -12,6 +12,7 @@ import DetailView from './components/pages/DetailView.jsx';
 import Mypage from './components/pages/Mypage.jsx';
 import Login from './components/pages/Login.jsx';
 import Join from './components/pages/Join.jsx';
+import MyEdu from './components/pages/MyEdu.jsx';
 
 
 /********************************************* 
@@ -65,6 +66,7 @@ export default function MainComponent(){
         <Route path="community" element={<Community />} />
         <Route path="tompage" element={<TomPage />} />
         <Route path="mypage" element={<Mypage />} />
+        <Route path="myedu" element={<MyEdu />} />
         <Route path="login" element={<Login />} />
         <Route path="join" element={<Join />} />
       </Route>
