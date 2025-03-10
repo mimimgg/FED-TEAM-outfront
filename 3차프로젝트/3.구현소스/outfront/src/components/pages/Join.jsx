@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../scss/pages/join.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { initData } from "../../js/func/mem_fn";
-import $ from "jquery";
 
 function Join() {
   const goPage = useNavigate();
@@ -21,6 +20,9 @@ function Join() {
   const [userNameError, setUserNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
 
+  // 버튼 유효성 상태 변수
+  const [isValid, setIsValid] = useState(false);
+
   // 메시지 정의
   const msgId = [
     "영문 5글자 이상으로 입력해주세요.",
@@ -38,10 +40,33 @@ function Join() {
   // 아이디 메시지 상태 변수
   const [idMsg, setIdMsg] = useState(msgId[0]);
 
+  // 슬라이드 메시지 상태 변수
+  const messages = [
+    "아웃프런에서 학습한 역량을 펼쳐보세요 😎",
+    "나의 온라인 사수, 아웃프런 👍",
+    "아웃프런에서 다양한 학습의 기회를 얻으세요 💖",
+    "나의 커리어 메이트, 아웃프런 🤝",
+    "함께 성장하는 아웃프런의 일원이 되어보세요 👏",
+  ];
+
+  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+  const [transformValue, setTransformValue] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTransformValue((prev) => prev - 100); // 왼쪽으로 이동
+      setCurrentMessageIndex((prevIndex) => (prevIndex + 1) % messages.length);
+    }, 2000); // 2초마다 메시지 변경
+
+    return () => clearInterval(interval); // 컴포넌트 언마운트 시 클리어
+  }, []);
+
   // 아이디 유효성 검사
   const changeUserId = (e) => {
     const val = e.target.value;
     const valid = /^[A-Za-z0-9+]{5,}$/;
+    setUserId(val);
+    validateFields();
 
     if (valid.test(val)) {
       initData();
@@ -61,6 +86,7 @@ function Join() {
     }
 
     setUserId(val);
+    validateFields(); 
   };
 
   // 비밀번호 유효성 검사
@@ -70,6 +96,7 @@ function Join() {
 
     setPwdError(!valid.test(val));
     setPwd(val);
+    validateFields();
   };
 
   // 비밀번호 확인 유효성 검사
@@ -77,6 +104,7 @@ function Join() {
     const val = e.target.value;
     setChkPwdError(pwd !== val);
     setChkPwd(val);
+    validateFields();
   };
 
   // 사용자 이름 유효성 검사
@@ -84,6 +112,7 @@ function Join() {
     const val = e.target.value;
     setUserNameError(val === "");
     setUserName(val);
+    validateFields();
   };
 
   // 이메일 유효성 검사
@@ -92,11 +121,12 @@ function Join() {
     const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setEmailError(!valid.test(val));
     setEmail(val);
+    validateFields();
   };
 
   // 전체 유효성 검사
-  const totalValid = () => {
-    return (
+  const validateFields = () => {
+    const valid =
       userId &&
       pwd &&
       chkPwd &&
@@ -106,28 +136,29 @@ function Join() {
       !pwdError &&
       !chkPwdError &&
       !userNameError &&
-      !emailError
-    );
+      !emailError;
+  
+    setIsValid(valid); // 유효성 상태 업데이트
+    console.log("Is valid:", valid); // 유효성 상태 로그 출력
   };
 
   // 서브밋 기능
   const onSubmit = (e) => {
     e.preventDefault();
-
-    if (totalValid()) {
+    if (isValid) { // isValid를 함수처럼 호출하지 않고, 상태 변수로 사용합니다.
       initData();
       let memData = JSON.parse(localStorage.getItem("mem-data") || "[]");
       let newData = {
-        idx: (memData.length > 0 ? Math.max(...memData.map(v => v.idx)) : 0) + 1,
+        idx: (memData.length > 0 ? Math.max(...memData.map((v) => v.idx)) : 0) + 1,
         uid: userId,
         pwd: pwd,
         unm: userName,
         eml: email,
       };
-
+  
       memData.push(newData);
       localStorage.setItem("mem-data", JSON.stringify(memData));
-
+  
       document.querySelector(".submit").innerText = "아웃프런과 함께해요 👏";
       setTimeout(() => {
         goPage("/login");
@@ -135,12 +166,21 @@ function Join() {
     } else {
       alert("🚨필수 입력사항을 확인해주세요🚨");
     }
-  };
+  };  
 
   return (
     <div className="join-page">
       <div className="join-top">
         <h2 className="join-title">회원가입</h2>
+      </div>
+      <div className="slide-text">
+        <div className="slide" style={{ transform: `translateX(${transformValue}%)` }}>
+          {messages.map((message, index) => (
+            <div key={index} className={`message ${currentMessageIndex === index ? "active" : ""}`}>
+              {message}
+            </div>
+          ))}
+        </div>
       </div>
 
       <form onSubmit={onSubmit} className="join-form">
@@ -154,8 +194,16 @@ function Join() {
               value={userId}
               onChange={changeUserId}
             />
-            {userIdError && <div className="msg" style={{ color: "red" }}>{idMsg}</div>}
-            {!userIdError && userId && <div className="msg" style={{ color: "green" }}>{msgId[2]}</div>}
+            {userIdError && (
+              <div className="msg" style={{ color: "#fe5b16" }}>
+                {idMsg}
+              </div>
+            )}
+            {!userIdError && userId && (
+              <div className="msg" style={{ color: "#00c471" }}>
+                {msgId[2]}
+              </div>
+            )}
           </li>
           <li className="join-pass">
             <label>비밀번호</label>
@@ -166,7 +214,11 @@ function Join() {
               value={pwd}
               onChange={changePwd}
             />
-            {pwdError && <div className="msg" style={{ color: "red" }}>{msgEtc.pwd}</div>}
+            {pwdError && (
+              <div className="msg" style={{ color: "#fe5b16" }}>
+                {msgEtc.pwd}
+              </div>
+            )}
           </li>
           <li className="join-pass-confirm">
             <label>비밀번호 확인</label>
@@ -177,7 +229,11 @@ function Join() {
               value={chkPwd}
               onChange={changeChkPwd}
             />
-            {chkPwdError && <div className="msg" style={{ color: "red" }}>{msgEtc.confPwd}</div>}
+            {chkPwdError && (
+              <div className="msg" style={{ color: "#fe5b16" }}>
+                {msgEtc.confPwd}
+              </div>
+            )}
           </li>
           <li className="join-name">
             <label>이름</label>
@@ -188,25 +244,31 @@ function Join() {
               value={userName}
               onChange={changeUserName}
             />
-            {userNameError && <div className="msg" style={{ color: "red" }}>{msgEtc.req}</div>}
+            {userNameError && (
+              <div className="msg" style={{ color: "#fe5b16" }}>
+                {msgEtc.req}
+              </div>
+            )}
           </li>
           <li className="join-name">
             <label>이메일</label>
-            <input
-              type="text"
-              maxLength="50"
-              placeholder="이메일을 입력하세요"
-              value={email}
-              onChange={changeEmail}
-            />
-            {emailError && <div className="msg" style={{ color: "red" }}>{msgEtc.email}</div>}
+            <input type="text" maxLength="50" placeholder="이메일을 입력하세요" value={email} onChange={changeEmail} />
+            {emailError && (
+              <div className="msg" style={{ color: "#fe5b16" }}>
+                {msgEtc.email}
+              </div>
+            )}
           </li>
           <li>
-            <button type="submit" className="submit">가입하기</button>
+          <button type="submit" className={`submit ${isValid ? 'valid' : ''}`}>
+              가입하기
+            </button>
           </li>
           <ul className="join-already">
             <li>이미 회원이신가요?</li>
-            <li><Link to="/login">로그인하기</Link></li>
+            <li>
+              <Link to="/login">로그인하기</Link>
+            </li>
           </ul>
         </ul>
       </form>
