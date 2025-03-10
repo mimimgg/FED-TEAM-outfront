@@ -95,13 +95,24 @@
           justify-content: space-between;
           gap: 12px;
           li {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             width: 49%;
             min-height: 140px;
-            padding: 12px;
+            padding: 12px 16px;
             border: 1px solid #ddd;
             box-sizing: border-box;
             border-radius: 1rem;
+            line-height: 1.4;
+            color: #212529;
+            span {
+              font-size: 1.6rem;
+              line-height: 2;
+              color: #868e96;
+              b {
+                font-weight: 600;
+                color: #212529;
+              }
+            }
           }
         }
 
