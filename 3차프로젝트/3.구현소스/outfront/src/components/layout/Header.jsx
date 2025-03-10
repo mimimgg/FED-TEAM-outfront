@@ -12,7 +12,7 @@ const Header = () => {
   const [logged, setLogged] = useState(true);
   const [isOpenGnb, setIsOpenGnb] = useState(false);
   const [openSnb, setOpenSnb] = useState(null);
-  const asideKey = logged ? "user" : "guest";
+  const asideKey = logged ? "guest" : "user";
 
   const handleClickGnb = (txt) => setOpenSnb(txt);
 
