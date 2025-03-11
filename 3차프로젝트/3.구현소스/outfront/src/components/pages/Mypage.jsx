@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function Mypage() {
   const navigate = useNavigate();
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState(null); // 사용자 정보 DB
   const [userEduList, setUserEduList] = useState([]); // 로그인한 사용자의 학습 목록
 
   useEffect(() => {
