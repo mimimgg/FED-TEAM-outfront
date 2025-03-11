@@ -1,8 +1,18 @@
-import React, { useEffect, useState } from 'react';
+// Mypage.jsx
+
+import React, {useEffect, useState} from "react";
 import "../../scss/mypage.scss";
 
 function Mypage() {
+  const [eduList, setEduList] = useState([]);
   const [userInfo, setUserInfo] = useState(null);
+
+  useEffect(() => {
+    fetch("/data/edu_data.json")
+      .then((res) => res.json())
+      .then(setEduList)
+      .catch(console.error);
+  }, []);
 
   useEffect(() => {
     // 세션 스토리지에서 로그인한 사용자 정보 가져오기
@@ -28,13 +38,23 @@ function Mypage() {
       <hr />
       <div className="mypage-contents">
         <div className="box my-edu">
-          <h3><a href="/myedu">내 학습</a><a href="/myedu"><span>more</span></a></h3>
+          <h3>
+            <a href="/myedu">내 학습</a>
+            <a href="/myedu">
+              <span>more</span>
+            </a>
+          </h3>
           <ul>
             <li></li>
           </ul>
         </div>
         <div className="box my-community">
-          <h3><a href="#none">내 커뮤니티 게시글</a><a href="#none"><span>more</span></a></h3>
+          <h3>
+            <a href="#none">내 커뮤니티 게시글</a>
+            <a href="#none">
+              <span>more</span>
+            </a>
+          </h3>
           <ul>
             <li></li>
           </ul>

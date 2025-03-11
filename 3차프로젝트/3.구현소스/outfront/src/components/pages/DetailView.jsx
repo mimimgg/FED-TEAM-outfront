@@ -69,8 +69,8 @@ const DetailView = () => {
             </h3>
             <ul className="detail-review-list">
               {reviews.length > 0 ? (
-                reviews.map((review, index) => (
-                  <li key={index}>
+                reviews.map((review, i) => (
+                  <li key={i}>
                     <span>
                       <b>{review.name}님</b> 수강평 평점 {review.grade}
                     </span>

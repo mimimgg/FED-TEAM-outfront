@@ -1,6 +1,6 @@
 /// 메인페이지 컴포넌트 : ./src/components/pages/Main.jsx ////
 import React, {useState, useEffect} from "react";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import "../../scss/main.scss";
 
 const Main = () => {
@@ -16,27 +16,21 @@ const Main = () => {
       .catch(console.error);
   }, []);
 
-  const formatPrice = (price) => 
-    price.includes("₩") ? `₩${Number(price.replace("₩", "")).toLocaleString()}` : price;
+  const formatPrice = (price) => (price.includes("₩") ? `₩${Number(price.replace("₩", "")).toLocaleString()}` : price);
 
-  const filterList = selCate === "전체" 
-    ? eduList 
-    : eduList.filter(({ gCate }) => gCate === selCate);
+  const filterList = selCate === "전체" ? eduList : eduList.filter(({gCate}) => gCate === selCate);
 
-    const cartBtnFn = (e) => {
-      const el = e.currentTarget;
-      console.log("장바구니 버튼 클릭!", el);
-    };
+  const cartBtnFn = (e) => {
+    const el = e.currentTarget;
+    console.log("장바구니 버튼 클릭!", el);
+  };
 
   return (
     <div className="main-wrap">
       <ul className="edu-menu">
-      {categories.map((category, i) => (
+        {categories.map((category, i) => (
           <li key={category}>
-            <button 
-              onClick={() => setSelCate(category)} 
-              className={selCate === category ? "active" : ""}
-            >
+            <button onClick={() => setSelCate(category)} className={selCate === category ? "active" : ""}>
               <img src={`./images/main/icon${i}.svg`} />
               {category}
             </button>
@@ -48,7 +42,7 @@ const Main = () => {
           <li key={edu.idx} className="edu-list" onClick={() => navigate(`/detail/${edu.idx}`)}>
             <article>
               <picture>
-                <img src={`/images/edu_thumb/${edu.idx}.png`} alt={`교육 이미지 ${edu.idx}`} />
+                <img src={`/images/edu_thumb/${edu.idx}.png`} alt={`강의 이미지 ${edu.idx}`} />
               </picture>
             </article>
             <h3>{edu.gName}</h3>

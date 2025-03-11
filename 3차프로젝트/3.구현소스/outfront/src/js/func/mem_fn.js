@@ -28,24 +28,21 @@ const initData = () => {
               "uid": "admin",
               "pwd": "1111",
               "unm": "Administrator",
-              "eml": "admin@dc.com",
-              "eduCode" : ""
+              "eml": "admin@dc.com"
           },
           {
               "idx": 2,
               "uid": "tomtom",
               "pwd": "1111",
               "unm": "Tom",
-              "eml": "tom@gmail.com",
-              "eduCode" : ""
+              "eml": "tom@gmail.com"
           },
           {
               "idx": 3,
               "uid": "min",
               "pwd": "1111",
               "unm": "이민경",
-              "eml": "min@example.com",
-              "eduCode" : ["1","2"]
+              "eml": "min@example.com"
           }
       ]
     `
