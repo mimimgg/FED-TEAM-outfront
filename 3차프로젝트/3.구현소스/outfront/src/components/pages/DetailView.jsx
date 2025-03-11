@@ -9,6 +9,15 @@ const DetailView = () => {
   const [edu, setEdu] = useState(null);
   const [reviews, setReviews] = useState([]); // 리뷰를 배열로 저장
   const navigate = useNavigate();
+  const [userInfo, setUserInfo] = useState(null);
+
+  useEffect(() => {
+    // 세션 스토리지에서 로그인한 사용자 정보 가져오기
+    const storedUser = sessionStorage.getItem("minfo");
+    if (storedUser) {
+      setUserInfo(JSON.parse(storedUser));
+    }
+  }, []);
 
   // 강의 데이터 가져오기
   useEffect(() => {
@@ -316,7 +325,7 @@ const DetailView = () => {
         </section>
         <aside>
           <div className="detail-aside-wrap">
-            <div className="sale-msg">OOO님 첫 구매 할인 중 (1일 남음)</div>
+            <div className="sale-msg">{userInfo ? `${userInfo.unm}님` : "회원 가입하면"} 첫 구매 할인 중 (1일 남음)</div>
             <div className="inner">
               <p className="price">
                 <b>{formatPrice(edu.gPrice)}</b>
