@@ -1,273 +1,183 @@
 // ./src/components/pages/Login.jsx
 
 import React, { useContext, useEffect, useState } from "react";
-
-
-// 모듈 CSS 불러오기 : member.scss와 동일
+import "../../scss/pages/join.scss";
 import "../../scss/pages/member.scss";
-
-// 로컬스토리지 생성 JS ////
 import { initData } from "../../js/func/mem_fn";
 import { dCon } from "../modules/dCon";
 
 function Login() {
-  // 컨텍스트 API 사용하기 /////
   const myCon = useContext(dCon);
-  console.log('로그인페이지 dCon:',myCon);
+  // console.log("로그인페이지 dCon:", myCon);
 
-  // [ 상태관리변수 ] /////////////
-  // [1] 입력요소 상태변수
-  // 1. 아이디변수
+  // 상태관리 변수
   const [userId, setUserId] = useState("");
-  // 2. 비밀번호변수
   const [pwd, setPwd] = useState("");
-
-  // [2] 에러상태관리 변수
-  // -> 에러상태값 초기값은 에러아님(false)
-  // 1. 아이디변수
   const [userIdError, setUserIdError] = useState(false);
-  // 2. 비밀번호변수
   const [pwdError, setPwdError] = useState(false);
 
-  // [ 아이디관련 메시지 프리셋 ] ////
-  const msgId = [
-    "This is a required entry", //필수입력
-    "ID does not exist", //아이디가 존재하지 않습니다
-  ];
-  // [ 비밀번호관련 메시지 프리셋 ] ////
-  const msgPwd = [
-    // 비밀번호
-    "This is a required entry", //필수입력
-    "Password doesn't match", //비밀번호가 일치하지 않습니다
-  ];
+  // 메시지 프리셋
+  const msgId = ["아이디를 입력해주세요.", "존재하지 않는 아이디입니다."];
 
-  // [3] 에러메시지 상태변수 : 초기값 msgId[0]
-  // -> 기본 메시지가 출력됨
+  const msgPwd = ["비밀번호를 입력해주세요.", "비밀번호가 일치하지 않습니다."];
+
+  // 슬라이드 메시지 상태 변수
+  const messages = [
+    "아웃프런과 함께 달릴 준비 되셨나요? 😎",
+    "아웃프런이 다 알려드릴게요. 따라오세요👍",
+    "다양한 학습의 기회를 얻으세요 💖",
+    "나의 커리어 메이트, 아웃프런 🤝",
+    "함께 성장하는 아웃프런의 일원이 되어보세요 👏",
+  ];
+  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+  const [transformValue, setTransformValue] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTransformValue((prev) => prev - 100); // 왼쪽으로 이동
+      setCurrentMessageIndex((prevIndex) => (prevIndex + 1) % messages.length);
+    }, 2000); // 2초마다 메시지 변경
+
+    return () => clearInterval(interval); // 컴포넌트 언마운트 시 클리어
+  }, []);
+
+  // 에러 메시지 상태 변수
   const [idMsg, setIdMsg] = useState(msgId[0]);
   const [pwdMsg, setPwdMsg] = useState(msgPwd[0]);
 
-  // [ 유효성 검사 함수 ] ///////
-  // 1. 아이디 유효성 검사 ////////////
+  // 아이디 유효성 검사
   const changeUserId = (e) => {
-    // 입력된 값읽기
-    let val = e.target.value;
-
-    // 1. 빈값 체크 :
-    // 1-1.빈값아니면 에러아님(false)
-    if (val !== "") setUserIdError(false);
-    // 1-2.빈값이면 에러임(true)
-    else {
-      // (1) 메시지 띄우기(필수입력메시지)
-      setIdMsg(msgId[0]);
-      // (2) 에러상태값 변경하기
-      setUserIdError(true);
-    } /////// else ///////////
-
-    // 실제 userId 상태변수값이 업데이트 돼야만
-    // 화면에 출력된다!
+    const val = e.target.value;
     setUserId(val);
-  }; ////////// changeUserId 함수 ////////////
 
-  // 2. 비밀번호 유효성 검사 ///////////
+    if (val) {
+      setUserIdError(false);
+      // setIdMsg(msgId[2]); // 아이디 확인 메시지
+    } else {
+      setIdMsg(msgId[0]);
+      setUserIdError(true);
+    }
+  };
+
+  // 비밀번호 유효성 검사
   const changePwd = (e) => {
-    // 입력된 값읽기
-    let val = e.target.value;
-
-    // 1. 빈값 체크 :
-    // 1-1.빈값아니면 에러아님(false)
-    if (val !== "") setPwdError(false);
-    // 1-2.빈값이면 에러임(true)
-    else {
-      // (1) 메시지 띄우기(필수입력메시지)
-      setPwdMsg(msgPwd[0]);
-      // (2) 에러상태값 변경하기
-      setPwdError(true);
-    } /////// else ///////////
-
-    // 4. 기존입력값 반영하기
+    const val = e.target.value;
     setPwd(val);
-  }; ///////// changePwd 함수 //////////
 
-  // [ 전체 유효성검사 체크함수 ] ///////////
+    if (val) {
+      setPwdError(false);
+    } else {
+      setPwdMsg(msgPwd[0]);
+      setPwdError(true);
+    }
+  };
+
+  // 전체 유효성 검사
   const totalValid = () => {
-    // 1. 모든 상태변수에 빈값일때 에러상태값 업데이트!
     if (!userId) setUserIdError(true);
     if (!pwd) setPwdError(true);
+    return userId && pwd && !userIdError && !pwdError;
+  };
 
-    // 2. 통과시 true, 불통과시 false 리턴처리
-    // 통과조건 : 빈값아님 + 에러후크변수가 모두 false
-    if (userId && pwd && !userIdError && !pwdError) return true;
-    // 하나라도 false이면 false를 리턴함!
-    else return false;
-  }; /////////// totalValid 함수 ///////////
-
-  // [ 서브밋 기능함수 ] ////////////////
+  // 서브밋 기능
   const onSubmit = (e) => {
-    // 1. 기본서브밋 막기
     e.preventDefault();
-
     console.log("최종검사:", totalValid());
 
-    // 2. 유효성검사 전체 통과시
     if (totalValid()) {
-      console.log("모두통과! 데이터조회!");
-
-      // [회원정보를 로컬스토리지에 저장하기]
-
-      // 1. 로컬스 체크함수호출(없으면 생성!)
+      console.log("아이디/패스워드 부합");
       initData();
 
-      // 2. 로컬스 변수할당
-      let memData = localStorage.getItem("mem-data");
-
-      // 3. 로컬스 객체변환
-      memData = JSON.parse(memData);
+      let memData = JSON.parse(localStorage.getItem("mem-data"));
       console.log(memData);
 
-      // 4. 아이디 존재 여부 검사하기
-      let result = memData.find((v) => {
-        if (v.uid === userId) return true;
-      }); /////// find ///////
-      console.log("결과:", result);
+      const result = memData.find((v) => v.uid === userId);
+      console.log("로그인 정보", result);
 
-      // 4-1. 결과값이 없으면 메시지 보이기
       if (!result) {
-        // (1) 에러메시지 선택하기
         setIdMsg(msgId[1]);
-
-        // (2) 에러메시지 보이기
         setUserIdError(true);
-      } ////////// if ////////
-      // 4-2. 결과값이 있으면 비밀번호검사
-      else {
-        // (1) 아이디 에러메시지 숨기기
+      } else {
         setUserIdError(false);
-        // (2) 비밀번호 검사 : 입력비번 == 결과비번
         if (pwd === result.pwd) {
-          // 같을 경우 로그인 성공처리
-          // alert("Login Success!");
-
-          // ****** [ 로그인 후 셋팅작업 ] ****** //
-          // 1. 로그인한 회원정보를 세션스에 셋팅!
-          // -> 서버 세션을 대신하여 사용함!
-          // -> 결과가 result에 배열로 담김
-          // -> 넣을때는 JSON.stringify()
-          sessionStorage.setItem("minfo", 
-            JSON.stringify(result));
-
-          // 2. 컨텍스트 API의 로그인상태 업데이트
-          myCon.setLoginSts(
-            sessionStorage.getItem("minfo"));
-          // -> 업데이트된 minfo 세션스값을 넣음!
-
-          // 3. 로그인 환영메시지 셋팅함수 호출
+          sessionStorage.setItem("minfo", JSON.stringify(result));
+          myCon.setLoginSts(sessionStorage.getItem("minfo"));
           myCon.makeMsg(result.unm);
+          document.querySelector(".log-submit").innerText = "아웃프런에 오신 것을 환영합니다 🎉";
 
-          // 4. 로그인 성공 메시지 버튼에 출력하기
-          document.querySelector(".sbtn").innerText = 
-          "넌 로그인 된거야~!";
-
-          // 5. 라우팅 페이지 이동
-          // 1초후 메인 페이지로 이동
           setTimeout(() => {
             myCon.goPage("/");
           }, 1000);
-        } //// if /////
-        // 로그인 실패시 메시지 출력!
-        else {
-          // (1) 비밀번호 에러메시지 선택하기
+        } else {
           setPwdMsg(msgPwd[1]);
-          // (2) 비밀번호 에러메시지 보이기
           setPwdError(true);
-        } ////// else //////
-
-        // -> 원래 비밀번호는 암호화 되어 있으므로
-        // 백엔드 비밀번호 검사 모듈로 대부분 검사한다!
-      } ////// else //////
-
-      // 배열.find() -> 있을 경우 레코드 저장
-      // find는 filter와 달리 배열로 저장하지 않고
-      // 값만 저장함. 그래서 결과값이 없으면
-      // undefined 를 리턴함!
-    } ///////// if /////////
-    // 3. 불통과시 /////
-    else {
+        }
+      }
+    } else {
       alert("Change your input!");
-    } //// else ///////////
-  }; /////////// onSubmit 함수 //////////
+    }
+  };
 
-  // 화면랜더링 구역 /////////
+  // 컴포넌트가 마운트될 때 아이디 입력창 포커스
   useEffect(() => {
-    // 아이디입력창 포커스
     document.querySelector("#user-id").focus();
   }, []);
 
-  // 코드 리턴구역 //////////////////////
+  // 렌더링
   return (
-    <div className="outbx">
-      <section className="membx" style={{ minHeight: "300px" }}>
-        <h2>LOG IN</h2>
-        <form method="post" action="process.php">
-          <ul>
-            <li>
-              <label>ID : </label>
-              <input
-                id="user-id"
-                type="text"
-                maxLength="20"
-                placeholder="Please enter your ID"
-                value={userId}
-                onChange={changeUserId}
-              />
-              {
-                // 에러일 경우 메시지 출력
-                // 조건문 && 출력요소
-                userIdError && 
-                <div className="msg">
-                  <small
-                    style={{
-                      color: "red",
-                      fontSize: "10px",
-                    }}
-                  >
-                    {idMsg}
-                  </small>
-                </div>
-              }
-            </li>
-            <li>
-              <label>Password : </label>
-              <input
-                type="password"
-                maxLength="20"
-                placeholder="Please enter your Password"
-                value={pwd}
-                onChange={changePwd}
-              />
-              {
-                // 에러일 경우 메시지 출력
-                // 조건문 && 출력요소
-                pwdError && 
-                <div className="msg">
-                  <small
-                    style={{
-                      color: "red",
-                      fontSize: "10px",
-                    }}
-                  >
-                    {pwdMsg}
-                  </small>
-                </div>
-              }
-            </li>
-            <li style={{ overflow: "hidden" }}>
-              <button className="sbtn" onClick={onSubmit}>
-                Submit
-                </button>
-            </li>
-          </ul>
-        </form>
-      </section>
+    <div className="join-page login-wrap">
+      <div className="join-top">
+        <h2 className="join-title">로그인</h2>
+      </div>
+      <div className="slide-text">
+        <div className="slide" style={{ transform: `translateX(${transformValue}%)` }}>
+          {messages.map((message, index) => (
+            <div key={index} className={`message ${currentMessageIndex === index ? "active" : ""}`}>
+              {message}
+            </div>
+          ))}
+        </div>
+      </div>
+      <form className="join-form" onSubmit={onSubmit}>
+        <ul>
+          <li className="join-id">
+            <label>아이디</label>
+            <input
+              id="user-id"
+              type="text"
+              maxLength="15"
+              placeholder="아이디를 입력하세요."
+              value={userId}
+              onChange={changeUserId}
+            />
+            {userIdError && (
+              <div className="msg">
+                <small style={{ color: "#fe5b16" }}>{idMsg}</small>
+              </div>
+            )}
+          </li>
+          <li>
+            <label>비밀번호</label>
+            <input
+              type="password"
+              maxLength="20"
+              placeholder="비밀번호를 입력하세요."
+              value={pwd}
+              onChange={changePwd}
+            />
+            {pwdError && (
+              <div className="msg">
+                <small style={{ color: "#fe5b16" }}>{pwdMsg}</small>
+              </div>
+            )}
+          </li>
+          <li style={{ overflow: "hidden" }}>
+            <button className="log-submit" type="submit">
+              로그인하기
+            </button>
+          </li>
+        </ul>
+      </form>
     </div>
   );
 }
