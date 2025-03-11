@@ -57,5 +57,31 @@
         }
       }
     }
+    .myedu-list {
+      margin: 24px auto;
+      display: flex;
+      gap: 1%;
+      li {
+        position: relative;
+        width: 25%;
+        font-size: 1.4rem;
+        img {
+          width: 100%;
+          margin: 8px 0;
+        }
+        h4 {
+          font-weight: 600;
+        }
+        p {
+          margin: 8px 0;
+        }
+        button {
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          padding: 8px 24px;
+          width: 100%;
+        }
+      }
+    }
   }
 }

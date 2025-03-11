@@ -1,18 +1,9 @@
-// Mypage.jsx
-
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "../../scss/mypage.scss";
 
 function Mypage() {
-  const [eduList, setEduList] = useState([]);
   const [userInfo, setUserInfo] = useState(null);
-
-  useEffect(() => {
-    fetch("/data/edu_data.json")
-      .then((res) => res.json())
-      .then(setEduList)
-      .catch(console.error);
-  }, []);
+  const [userEduList, setUserEduList] = useState([]); // 로그인한 사용자의 학습 목록
 
   useEffect(() => {
     // 세션 스토리지에서 로그인한 사용자 정보 가져오기
@@ -21,6 +12,22 @@ function Mypage() {
       setUserInfo(JSON.parse(storedUser));
     }
   }, []);
+
+  useEffect(() => {
+    // 로그인한 사용자의 학습 정보 가져오기
+    if (userInfo) {
+      fetch("/data/user_data.json")
+        .then((res) => res.json())
+        .then((data) => {
+          // 현재 로그인한 사용자의 데이터 찾기
+          const currentUser = data.find(user => user.uid === userInfo.uid);
+          if (currentUser) {
+            setUserEduList(currentUser.eduIng); // 학습 목록 저장
+          }
+        })
+        .catch(console.error);
+    }
+  }, [userInfo]); // userInfo가 설정된 후 실행
 
   return (
     <div className="mypage-wrap">
@@ -37,6 +44,7 @@ function Mypage() {
       </div>
       <hr />
       <div className="mypage-contents">
+        {/* 내 학습 */}
         <div className="box my-edu">
           <h3>
             <a href="/myedu">내 학습</a>
@@ -44,10 +52,29 @@ function Mypage() {
               <span>more</span>
             </a>
           </h3>
-          <ul>
-            <li></li>
+          <ul className="myedu-list">
+            {/* 학습 목록 출력 */}
+            {userEduList.length > 0 ? (
+              userEduList.map((edu) => (
+                <li key={edu.eduId}>
+                  <picture>
+                    <img src={`/images/edu_thumb/${edu.eduId}.png`} alt={`강의 이미지 ${edu.eduId}`} />
+                  </picture>
+                  <h4>{edu.eduName}</h4>
+                  <p>{edu.eduType} ({edu.eduRate}%)</p>
+                  {/* 진행률 60% 이상일 때만 버튼 표시 */}
+                  {parseInt(edu.eduRate) >= 60 && (
+                    <button className="my-review-btn">수강평 작성</button>
+                  )}
+                </li>
+              ))
+            ) : (
+              <li>학습중인 강의가 없습니다.</li>
+            )}
           </ul>
         </div>
+
+        {/* 내 커뮤니티 게시글 */}
         <div className="box my-community">
           <h3>
             <a href="#none">내 커뮤니티 게시글</a>
@@ -56,7 +83,7 @@ function Mypage() {
             </a>
           </h3>
           <ul>
-            <li></li>
+            <li>작성한 게시글이 없습니다.</li>
           </ul>
         </div>
       </div>
