@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "../../scss/header.scss";
 import gnbMenu from "../../js/data/gnb";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import asideMenu from "../../js/data/aside";
 
 let logged = false;
@@ -9,10 +9,13 @@ logged = true;
 
 const Header = () => {
   // TODO: logged useState로 로그인 상태 임시 분기 처리. 추후 수정 필요
-  const [logged, setLogged] = useState(true);
+  const [logged, setLogged] = useState(false);
   const [isOpenGnb, setIsOpenGnb] = useState(false);
   const [openSnb, setOpenSnb] = useState(null);
   const asideKey = logged ? "guest" : "user";
+
+  // TODO: 메모이제이션
+  console.log('상단영역렌더링');
 
   const handleClickGnb = (txt) => setOpenSnb(txt);
 
@@ -30,8 +33,6 @@ const Header = () => {
   const handleCloseGnb = (e) => {
     if (e.currentTarget === e.target) closeGnb();
   };
-
-  useEffect(() => window.addEventListener("resize", closeGnb), []);
 
   return (
     <header className="header">

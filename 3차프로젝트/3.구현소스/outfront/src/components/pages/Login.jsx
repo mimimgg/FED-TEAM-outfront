@@ -6,7 +6,7 @@ import "../../scss/pages/member.scss";
 import { initData } from "../../js/func/mem_fn";
 import { dCon } from "../modules/dCon";
 
-function Login() {
+function Login( setLogged ) {
   const myCon = useContext(dCon);
   // console.log("로그인페이지 dCon:", myCon);
 
@@ -79,7 +79,7 @@ function Login() {
     return userId && pwd && !userIdError && !pwdError;
   };
 
-  // 서브밋 기능
+  // 서밋 기능
   const onSubmit = (e) => {
     e.preventDefault();
     console.log("최종검사:", totalValid());
