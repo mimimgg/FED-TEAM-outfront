@@ -3,6 +3,7 @@ import "../../scss/header.scss";
 import gnbMenu from "../../js/data/gnb";
 import { useContext, useEffect, useState } from "react";
 import asideMenu from "../../js/data/aside";
+import { dCon } from "../modules/dCon";
 
 let logged = false;
 logged = true;
@@ -12,10 +13,10 @@ const Header = () => {
   const [logged, setLogged] = useState(false);
   const [isOpenGnb, setIsOpenGnb] = useState(false);
   const [openSnb, setOpenSnb] = useState(null);
-  const asideKey = logged ? "guest" : "user";
+  const asideKey = logged ? "user" : "guest";
 
   // TODO: 메모이제이션
-  console.log('상단영역렌더링');
+  console.log("상단영역렌더링");
 
   const handleClickGnb = (txt) => setOpenSnb(txt);
 
