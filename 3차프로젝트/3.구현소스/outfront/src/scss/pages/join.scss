@@ -13,6 +13,7 @@
     .join-title {
       font-size: 2.4rem;
       font-weight: 700;
+
     }
   }
 
@@ -50,15 +51,23 @@
       .submit {
         margin-top: 1.6rem;
         padding: 1.2rem 1.4rem;
-        border: none;
+        border: .2rem solid $color-primary;
         width: 100%;
         box-sizing: border-box;
         border-radius: 1rem;
         text-overflow: ellipsis;
-        background-color: $color-primary;
-        color: $color-white;
+        background-color: $color-white;
+        color: $color-primary;
         font-size: 1.6rem;
         font-weight: 500;
+        transition: .3s ease-out;
+
+        &.valid {
+          // 모든 조건이 충족되었을 때의 배경색
+          color: $color-white;
+          border: none;
+          background-color: $color-primary; 
+        }
       }
 
       .join-already {
@@ -75,6 +84,35 @@
             font-weight: 500;
           }
         }
+      }
+    }
+  }
+
+  .msg {
+    font-size: 1.2rem;
+    padding: .4rem .6rem 0;
+  }
+
+  .slide-text {
+    position: relative;
+    overflow: hidden; // 넘치는 내용 숨기기
+    font-size: 1.2rem;
+    text-align: center;
+    color: $color-midgray;
+    padding-top: 2rem;
+  
+    .slide {
+      display: flex; // Flexbox를 사용하여 메시지를 나란히 배치
+      transition: transform 0.5s ease-in-out; // 슬라이드 애니메이션 효과
+    }
+  
+    .message {
+      min-width: 100%; // 각 메시지가 슬라이드 영역의 전체 너비를 차지하도록 설정
+      opacity: 0; // 기본적으로 투명하게 설정
+      transition: opacity 0.5s ease-in-out; // 부드러운 전환 효과
+  
+      &.active {
+        opacity: 1; // 활성화된 메시지는 보이게 설정
       }
     }
   }
