@@ -96,7 +96,7 @@ function Mypage() {
 
                 return (
                   <li key={edu.eduId}>
-                    <picture>
+                    <picture onClick={() => navigate(`/detail/${edu.eduId}`)}>
                       <img src={`/images/edu_thumb/${edu.eduId}.png`} alt={`강의 이미지 ${edu.eduId}`} />
                     </picture>
                     <h4>{edu.eduName}</h4>
