@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "../../scss/mypage.scss";
+import { useNavigate } from "react-router-dom";
 
 function Mypage() {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState(null);
   const [userEduList, setUserEduList] = useState([]); // 로그인한 사용자의 학습 목록
 
@@ -57,7 +59,7 @@ function Mypage() {
             {userEduList.length > 0 ? (
               userEduList.map((edu) => (
                 <li key={edu.eduId}>
-                  <picture>
+                  <picture onClick={() => navigate(`/detail/${edu.eduId}`)}>
                     <img src={`/images/edu_thumb/${edu.eduId}.png`} alt={`강의 이미지 ${edu.eduId}`} />
                   </picture>
                   <h4>{edu.eduName}</h4>
@@ -69,7 +71,7 @@ function Mypage() {
                 </li>
               ))
             ) : (
-              <li>학습중인 강의가 없습니다.</li>
+              <li className="empty-msg"><p>학습중인 강의가 없습니다.</p></li>
             )}
           </ul>
         </div>
@@ -82,8 +84,8 @@ function Mypage() {
               <span>more</span>
             </a>
           </h3>
-          <ul>
-            <li>작성한 게시글이 없습니다.</li>
+          <ul className="myboard-list">
+            <li className="empty-msg"><p>작성한 게시글이 없습니다.</p></li>
           </ul>
         </div>
       </div>
