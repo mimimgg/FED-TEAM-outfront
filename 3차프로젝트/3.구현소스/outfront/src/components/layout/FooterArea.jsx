@@ -6,6 +6,8 @@
 import "../../scss/footer_area.scss";
 
 export default function FooterArea() {
+  // TODO: 하단 링크 e.preventdefalt()하기
+
   // 리턴 코드구역 ////
   return (
     <>
