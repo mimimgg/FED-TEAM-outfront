@@ -3,7 +3,6 @@ import "../../scss/header.scss";
 import gnbMenu from "../../js/data/gnb";
 import { useContext, useEffect, useState } from "react";
 import asideMenu from "../../js/data/aside";
-import { dCon } from "../modules/dCon";
 
 let logged = false;
 logged = true;
