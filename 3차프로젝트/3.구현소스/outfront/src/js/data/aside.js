@@ -13,6 +13,10 @@ const asideMenu = {
       txt: "수강바구니",
       link: "/cart",
     },
+    {
+      txt: "마이페이지",
+      link: "/mypage",
+    },
   ],
   user: [
     {
