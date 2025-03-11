@@ -10,12 +10,8 @@ const asideMenu = {
       link: "/join",
     },
     {
-      txt: "카트",
+      txt: "수강바구니",
       link: "/cart",
-    },
-    {
-      txt: "마이페이지",
-      link: "/mypage",
     },
   ],
   user: [
@@ -24,7 +20,7 @@ const asideMenu = {
       link: "/logout",
     },
     {
-      txt: "카트",
+      txt: "수강바구니",
       link: "/cart",
     },
     {
