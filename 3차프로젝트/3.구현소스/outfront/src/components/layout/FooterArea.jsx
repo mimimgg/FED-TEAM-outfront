@@ -7,6 +7,9 @@ import "../../scss/footer_area.scss";
 
 export default function FooterArea() {
   // TODO: 하단 링크 e.preventdefalt()하기
+  const handleLinkClick = (e) => {
+    e.preventDefault();
+  };
 
   // 리턴 코드구역 ////
   return (
@@ -22,13 +25,13 @@ export default function FooterArea() {
               </span>
               <ul>
                 <li>
-                  <a href="#">개인정보처리방침</a>
+                  <a href="#" onClick={handleLinkClick}>개인정보처리방침</a>
                 </li>
                 <li>
-                  <a href="#">이용약관</a>
+                  <a href="#" onClick={handleLinkClick}>이용약관</a>
                 </li>
                 <li>
-                  <a href="#">We Are Hiring</a>
+                  <a href="#" onClick={handleLinkClick}>We Are Hiring</a>
                 </li>
               </ul>
             </div>
