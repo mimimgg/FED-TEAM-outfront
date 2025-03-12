@@ -54,12 +54,20 @@ function Join() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTransformValue((prev) => prev - 100); // 왼쪽으로 이동
-      setCurrentMessageIndex((prevIndex) => (prevIndex + 1) % messages.length);
-    }, 2000); // 2초마다 메시지 변경
-
+      // 다음 메시지로 이동
+      setTransformValue((prev) => {
+        if (currentMessageIndex === messages.length - 1) {
+          setCurrentMessageIndex(0); // 인덱스를 초기화
+          return -100; // 다음 슬라이드에서 첫 번째 메시지가 보이도록 설정
+        } else {
+          setCurrentMessageIndex((prevIndex) => prevIndex + 1);
+          return prev - 100; // 왼쪽으로 이동
+        }
+      });
+    }, 3000); // 2초마다 메시지 변경
+  
     return () => clearInterval(interval);
-  }, []);
+  }, [currentMessageIndex, messages.length]);
 
   // 슬라이드 메세지 무한반복
   useEffect(() => {
@@ -67,7 +75,7 @@ function Join() {
       setTimeout(() => {
         setTransformValue(0); // 처음 위치로 되돌리기
         setCurrentMessageIndex(0); // 인덱스 초기화
-      }, 2000); // 마지막 메시지 후 2초 대기
+      }, 3000); // 마지막 메시지 후 2초 대기
     }
   }, [currentMessageIndex]);
 
@@ -185,13 +193,15 @@ function Join() {
         <h2 className="join-title">회원가입</h2>
       </div>
       <div className="slide-text">
-        <div className="slide" style={{ transform: `translateX(${transformValue}%)` }}>
-          {messages.map((message, index) => (
-            <div key={index} className={`message ${currentMessageIndex === index ? "active" : ""}`}>
-              {message}
-            </div>
-          ))}
-        </div>
+      <div className="slide" style={{ transform: `translateX(${transformValue}%)` }}>
+  {messages.map((message, index) => (
+    <div key={index} className={`message ${currentMessageIndex === index ? "active" : ""}`}>
+      {message}
+    </div>
+  ))}
+  {/* 첫 번째 메시지를 다시 추가하여 무한 슬라이드 효과 구현 */}
+  <div className="message">{messages[0]}</div>
+</div>
       </div>
 
       <form onSubmit={onSubmit} className="join-form">
