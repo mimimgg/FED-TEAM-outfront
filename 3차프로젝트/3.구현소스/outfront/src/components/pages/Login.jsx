@@ -101,7 +101,8 @@ function Login( setLogged ) {
         setUserIdError(false);
         if (pwd === result.pwd) {
           sessionStorage.setItem("minfo", JSON.stringify(result));
-          myCon.setLoginSts(sessionStorage.getItem("minfo"));
+          // myCon.setLoginSts(sessionStorage.getItem("minfo"));
+          myCon.setLoginSts(result);
           myCon.makeMsg(result.unm);
           document.querySelector(".log-submit").innerText = "아웃프런에 오신 것을 환영합니다 🎉";
 
