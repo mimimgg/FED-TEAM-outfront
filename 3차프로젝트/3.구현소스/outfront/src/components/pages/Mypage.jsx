@@ -4,8 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 function Mypage() {
   const navigate = useNavigate();
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState(null); // 로그인한 사용자 정보
   const [userEduList, setUserEduList] = useState([]); // 로그인한 사용자의 학습 목록
+  const [reviewList, setReviewList] = useState([]); // 리뷰 데이터
+  const [selectedReview, setSelectedReview] = useState(null); // 선택된 리뷰 정보 (팝업)
+  const [showPopup, setShowPopup] = useState(false); // 팝업 표시 여부
 
   useEffect(() => {
     // 세션 스토리지에서 로그인한 사용자 정보 가져오기
@@ -30,6 +33,35 @@ function Mypage() {
         .catch(console.error);
     }
   }, [userInfo]); // userInfo가 설정된 후 실행
+
+  useEffect(() => {
+    // 리뷰 데이터 불러오기
+    fetch("/data/review_data.json")
+      .then((res) => res.json())
+      .then(setReviewList)
+      .catch(console.error);
+  }, []);
+
+  // 리뷰 팝업 열기 함수
+  const openReviewPopup = (eduId) => {
+    // 로그인한 사용자가 작성한 해당 강의의 리뷰 찾기
+    const userReview = reviewList.find(
+      (review) => review.uid === userInfo.uid && review.eduId === eduId
+    );
+
+    if (userReview) {
+      setSelectedReview(userReview); // 리뷰 정보 저장
+      setShowPopup(true); // 팝업 열기
+    } else {
+      alert("작성된 수강평이 없습니다.");
+    }
+  };
+
+  // 팝업 닫기 함수
+  const closePopup = () => {
+    setShowPopup(false);
+    setSelectedReview(null);
+  };
 
   return (
     <div className="mypage-wrap">
@@ -57,21 +89,28 @@ function Mypage() {
           <ul className="myedu-list">
             {/* 학습 목록 출력 */}
             {userEduList.length > 0 ? (
-              userEduList.map((edu) => (
-                <li key={edu.eduId}>
-                  <picture onClick={() => navigate(`/detail/${edu.eduId}`)}>
-                    <img src={`/images/edu_thumb/${edu.eduId}.png`} alt={`강의 이미지 ${edu.eduId}`} />
-                  </picture>
-                  <h4>{edu.eduName}</h4>
-                  <p>{edu.eduType} ({edu.eduRate}%)</p>
-                  {/* 진행률 60% 이상일 때만 버튼 표시 */}
-                  {parseInt(edu.eduRate) >= 60 && (
-                    <button className="my-review-btn">수강평 작성</button>
-                  )}
-                </li>
-              ))
+              userEduList.map((edu) => {
+                const userReview = reviewList.find(
+                  (review) => review.uid === userInfo.uid && review.eduId === edu.eduId
+                );
+
+                return (
+                  <li key={edu.eduId}>
+                    <picture onClick={() => navigate(`/detail/${edu.eduId}`)}>
+                      <img src={`/images/edu_thumb/${edu.eduId}.png`} alt={`강의 이미지 ${edu.eduId}`} />
+                    </picture>
+                    <h4>{edu.eduName}</h4>
+                    <p>{edu.eduType} ({edu.eduRate}%)</p>
+                    {parseInt(edu.eduRate) >= 60 && (
+                      <button className="my-review-btn" onClick={() => openReviewPopup(edu.eduId)}>
+                        {userReview ? `평점 (⭐${userReview.grade})` : "수강평 작성"}
+                      </button>
+                    )}
+                  </li>
+                );
+              })
             ) : (
-              <li className="empty-msg"><p>학습중인 강의가 없습니다.</p></li>
+              <li>학습중인 강의가 없습니다.</li>
             )}
           </ul>
         </div>
@@ -89,6 +128,17 @@ function Mypage() {
           </ul>
         </div>
       </div>
+      {/* 리뷰 팝업 */}
+      {showPopup && selectedReview && (
+        <div className="review-popup">
+          <div className="popup-content">
+            <h3>수강평</h3>
+            <p><b>평점:</b> ⭐ {selectedReview.grade}/5</p>
+            <p>{selectedReview.text}</p>
+            <button className="close-btn" onClick={closePopup}>닫기</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

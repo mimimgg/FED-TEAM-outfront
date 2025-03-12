@@ -111,7 +111,8 @@ function Login(setLogged) {
         setUserIdError(false);
         if (pwd === result.pwd) {
           sessionStorage.setItem("minfo", JSON.stringify(result));
-          myCon.setLoginSts(sessionStorage.getItem("minfo"));
+          // myCon.setLoginSts(sessionStorage.getItem("minfo"));
+          myCon.setLoginSts(result);
           myCon.makeMsg(result.unm);
           /////////// 추가 코드 //////////// 
           setLogged(true);
