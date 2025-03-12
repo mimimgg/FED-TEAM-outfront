@@ -67,6 +67,36 @@ const DetailView = () => {
         </div>
       </div>
       <div className="detail-content">
+      <aside>
+          <div className="detail-aside-wrap">
+            <div className="sale-msg">{userInfo ? `${userInfo.unm}님` : "회원 가입하면"} 첫 구매 할인 중 (1일 남음)</div>
+            <div className="inner">
+              <p className="price">
+                <b>{formatPrice(edu.gPrice)}</b>
+              </p>
+              <button className="add-edu-btn">수강 신청하기</button>
+              <button className="add-cart-btn">바구니에 담기</button>
+            </div>
+            <div className="aside-info">
+              <p>
+                <em>지식공유자</em> 인프런{" "}
+              </p>
+              <p>
+                <em>수업 수</em> 총 58개 (14시간 17분){" "}
+              </p>
+              <p>
+                <em>수강기한</em> 무제한{" "}
+              </p>
+              <p>
+                <em>수료증</em> 제공{" "}
+              </p>
+              <p>
+                <em>난이도</em> {edu.gLevel}
+              </p>
+            </div>
+            {/* <p>{edu.gSkill}</p> */}
+          </div>
+        </aside>
         <section>
           <div className="detail-review-wrap">
             <h3>
@@ -318,37 +348,7 @@ const DetailView = () => {
             </div>
             <hr />
           </div>
-        </section>
-        <aside>
-          <div className="detail-aside-wrap">
-            <div className="sale-msg">{userInfo ? `${userInfo.unm}님` : "회원 가입하면"} 첫 구매 할인 중 (1일 남음)</div>
-            <div className="inner">
-              <p className="price">
-                <b>{formatPrice(edu.gPrice)}</b>
-              </p>
-              <button className="add-edu-btn">수강 신청하기</button>
-              <button className="add-cart-btn">바구니에 담기</button>
-            </div>
-            <div className="aside-info">
-              <p>
-                <em>지식공유자</em> 인프런{" "}
-              </p>
-              <p>
-                <em>수업 수</em> 총 58개 (14시간 17분){" "}
-              </p>
-              <p>
-                <em>수강기한</em> 무제한{" "}
-              </p>
-              <p>
-                <em>수료증</em> 제공{" "}
-              </p>
-              <p>
-                <em>난이도</em> {edu.gLevel}
-              </p>
-            </div>
-            {/* <p>{edu.gSkill}</p> */}
-          </div>
-        </aside>
+        </section>        
       </div>
     </div>
   );
