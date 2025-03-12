@@ -36,7 +36,7 @@ function Login(setLogged) {
     const interval = setInterval(() => {
       setTransformValue((prev) => prev - 100); // 왼쪽으로 이동
       setCurrentMessageIndex((prevIndex) => (prevIndex + 1) % messages.length);
-    }, 2000); // 2초마다 메시지 변경
+    }, 3000); // 3초마다 메시지 변경
 
     return () => clearInterval(interval); 
   }, []);
@@ -47,7 +47,7 @@ function Login(setLogged) {
       setTimeout(() => {
         setTransformValue(0); // 처음 위치로 되돌리기
         setCurrentMessageIndex(0); // 인덱스 초기화
-      }, 2000); // 마지막 메시지 후 2초 대기
+      }, 3000); // 마지막 메시지 후 3초 대기
     }
   }, [currentMessageIndex]);
 

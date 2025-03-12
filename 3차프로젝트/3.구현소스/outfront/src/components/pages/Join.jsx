@@ -180,7 +180,7 @@ function Join() {
 
       document.querySelector(".submit").innerText = "아웃프런과 함께해요 👏";
       setTimeout(() => {
-        goPage("/login");
+        goPage("/");
       }, 1000);
     } else {
       alert("🚨필수 입력사항을 확인해주세요🚨");

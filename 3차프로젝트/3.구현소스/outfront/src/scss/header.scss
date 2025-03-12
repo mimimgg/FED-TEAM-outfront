@@ -19,6 +19,13 @@ button {
     padding-inline: 3.2rem;
     margin-inline: auto;
 
+    @include tablet-small {
+      padding-inline: 1.6rem; 
+    }
+    @include mobile {
+      padding-inline: .8rem;
+    }
+
     .header-content {
       height: 100%;
       display: flex;
