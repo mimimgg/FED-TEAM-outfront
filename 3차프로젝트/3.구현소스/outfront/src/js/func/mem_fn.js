@@ -43,6 +43,12 @@ const initData = () => {
               "pwd": "1111",
               "unm": "이민경",
               "eml": "min@example.com"
+          },{
+              "idx": 4,
+              "uid": "outfront",
+              "pwd": "1111",
+              "unm": "아웃프런",
+              "eml": "outfront@outfront.com"
           }
       ]
     `
