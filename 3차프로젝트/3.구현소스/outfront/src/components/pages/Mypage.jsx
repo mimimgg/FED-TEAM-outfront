@@ -100,7 +100,7 @@ function Mypage() {
                       <img src={`/images/edu_thumb/${edu.eduId}.png`} alt={`강의 이미지 ${edu.eduId}`} />
                     </picture>
                     <h4>{edu.eduName}</h4>
-                    <p>{edu.eduType} ({edu.eduRate}%)</p>
+                    <p>{edu.eduState} ({edu.eduRate}%)</p>
                     {parseInt(edu.eduRate) >= 60 && (
                       <button className="my-review-btn" onClick={() => openReviewPopup(edu.eduId)}>
                         {userReview ? `평점 (⭐${userReview.grade})` : "수강평 작성"}
