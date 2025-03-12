@@ -23,6 +23,7 @@ footer.footer-area {
       gap: 2.8rem;
     }
     @include mobile {
+      padding-inline: .8rem;
       display: block;
     }
   }

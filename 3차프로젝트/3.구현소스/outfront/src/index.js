@@ -13,6 +13,8 @@ import Mypage from './components/pages/Mypage.jsx';
 import Login from './components/pages/Login.jsx';
 import Join from './components/pages/Join.jsx';
 import MyEdu from './components/pages/MyEdu.jsx';
+import SearchPage from './components/pages/SearchPage.jsx';
+// import SearchPage from './components/pages/SearchPage.jsx';
 
 
 /********************************************* 
@@ -69,6 +71,7 @@ export default function MainComponent(){
         <Route path="myedu" element={<MyEdu />} />
         <Route path="login" element={<Login />} />
         <Route path="join" element={<Join />} />
+        <Route path="search" element={<SearchPage />} />
       </Route>
     </Routes>
   </BrowserRouter>

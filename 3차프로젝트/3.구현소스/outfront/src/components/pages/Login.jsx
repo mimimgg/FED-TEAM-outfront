@@ -1,14 +1,14 @@
 // ./src/components/pages/Login.jsx
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "../../scss/pages/join.scss";
 import "../../scss/pages/member.scss";
 import { initData } from "../../js/func/mem_fn";
 import { dCon } from "../modules/dCon";
 
-function Login( setLogged ) {
+function Login() {
   const myCon = useContext(dCon);
-  // console.log("로그인페이지 dCon:", myCon);
+  console.log("로그인페이지 dCon:", myCon);
 
   // 상태관리 변수
   const [userId, setUserId] = useState("");
@@ -29,17 +29,29 @@ function Login( setLogged ) {
     "나의 커리어 메이트, 아웃프런 🤝",
     "함께 성장하는 아웃프런의 일원이 되어보세요 👏",
   ];
-  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
-  const [transformValue, setTransformValue] = useState(0);
+  // const currentMessageIndex = useRef(0);
+  // const transformValue = useRef(0);
+  // const prevIndex = useRef(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTransformValue((prev) => prev - 100); // 왼쪽으로 이동
-      setCurrentMessageIndex((prevIndex) => (prevIndex + 1) % messages.length);
-    }, 2000); // 2초마다 메시지 변경
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     let prev = transformValue.current;
+  //     transformValue.current = prev - 100; // 왼쪽으로 이동
+  //     currentMessageIndex.current = (prevIndex + 1) % messages.length;
+  //   }, 3000); // 3초마다 메시지 변경
 
-    return () => clearInterval(interval); // 컴포넌트 언마운트 시 클리어
-  }, []);
+  //   // return () => clearInterval(interval); 
+  // }, []);
+
+  // 슬라이드 메세지 무한반복 
+  // useEffect(() => {
+  //   if (currentMessageIndex === messages.length - 1) {
+  //     setTimeout(() => {
+  //       transformValue.current=0; // 처음 위치로 되돌리기
+  //       currentMessageIndex.current =0; // 인덱스 초기화
+  //     }, 3000); // 마지막 메시지 후 3초 대기
+  //   }
+  // }, [currentMessageIndex]);
 
   // 에러 메시지 상태 변수
   const [idMsg, setIdMsg] = useState(msgId[0]);
@@ -104,6 +116,8 @@ function Login( setLogged ) {
           // myCon.setLoginSts(sessionStorage.getItem("minfo"));
           myCon.setLoginSts(result);
           myCon.makeMsg(result.unm);
+          /////////// 추가 코드 //////////// 
+          console.log(myCon.loginSts);
           document.querySelector(".log-submit").innerText = "아웃프런에 오신 것을 환영합니다 🎉";
 
           setTimeout(() => {
@@ -130,7 +144,7 @@ function Login( setLogged ) {
       <div className="join-top">
         <h2 className="join-title">로그인</h2>
       </div>
-      <div className="slide-text">
+      {/* <div className="slide-text">
         <div className="slide" style={{ transform: `translateX(${transformValue}%)` }}>
           {messages.map((message, index) => (
             <div key={index} className={`message ${currentMessageIndex === index ? "active" : ""}`}>
@@ -138,7 +152,7 @@ function Login( setLogged ) {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
       <form className="join-form" onSubmit={onSubmit}>
         <ul>
           <li className="join-id">
@@ -173,7 +187,7 @@ function Login( setLogged ) {
             )}
           </li>
           <li style={{ overflow: "hidden" }}>
-            <button className="log-submit" type="submit">
+            <button className="log-submit" type="submit" onClick={onSubmit}>
               로그인하기
             </button>
           </li>
