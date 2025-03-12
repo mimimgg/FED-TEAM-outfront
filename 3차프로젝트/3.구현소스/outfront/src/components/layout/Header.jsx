@@ -3,16 +3,19 @@ import "../../scss/header.scss";
 import gnbMenu from "../../js/data/gnb";
 import { useContext, useEffect, useState } from "react";
 import asideMenu from "../../js/data/aside";
+import { dCon } from "../modules/dCon";
 
 let logged = false;
 logged = true;
 
 const Header = () => {
   // TODO: logged useState로 로그인 상태 임시 분기 처리. 추후 수정 필요
-  const [logged, setLogged] = useState(false);
+  // const [logged, setLogged] = useState(false);
   const [isOpenGnb, setIsOpenGnb] = useState(false);
   const [openSnb, setOpenSnb] = useState(null);
   const asideKey = logged ? "user" : "guest";
+
+  const myCon = useContext(dCon);
 
   // TODO: 메모이제이션
   console.log("상단영역렌더링");
@@ -41,11 +44,22 @@ const Header = () => {
           <div className="header-content-box">
             <h1 className="logo">
               <Link to="/">
-                <img src="../../images/common/brand_logo.png" alt="아웃프런 브랜드 로고" className="logo-img" />
+                <img
+                  src="../../images/common/brand_logo.png"
+                  alt="아웃프런 브랜드 로고"
+                  className="logo-img"
+                />
               </Link>
             </h1>
-            <div className={`gnb-container ${isOpenGnb ? "open" : "close"}`} onClick={handleCloseGnb}>
-              <button type="button" className="mobile-gnb-button" onClick={handleOpenGnb}>
+            <div
+              className={`gnb-container ${isOpenGnb ? "open" : "close"}`}
+              onClick={handleCloseGnb}
+            >
+              <button
+                type="button"
+                className="mobile-gnb-button"
+                onClick={handleOpenGnb}
+              >
                 <i className="fa-solid fa-bars"></i>
               </button>
               <div className="gnb-content">
@@ -55,13 +69,24 @@ const Header = () => {
                       <li key={`gnb-menu-${gnb.txt}`} className="gnb-item">
                         {gnb.sub ? (
                           <>
-                            <button type="button" className="gnb-button" onClick={() => handleClickGnb(gnb.txt)}>
+                            <button
+                              type="button"
+                              className="gnb-button"
+                              onClick={() => handleClickGnb(gnb.txt)}
+                            >
                               {gnb.txt}
                             </button>
-                            <nav className={`snb ${openSnb === gnb.txt ? "open" : ""}`}>
+                            <nav
+                              className={`snb ${
+                                openSnb === gnb.txt ? "open" : ""
+                              }`}
+                            >
                               <ul className="snb-list">
                                 {gnb.sub.map((snb) => (
-                                  <li key={`snb-menu-${snb.txt}`} className="sub-item">
+                                  <li
+                                    key={`snb-menu-${snb.txt}`}
+                                    className="sub-item"
+                                  >
                                     <Link to={snb.link} className="snb-button">
                                       {snb.txt}
                                     </Link>
@@ -79,31 +104,82 @@ const Header = () => {
                     ))}
                   </ul>
                 </nav>
-                <form className="search-form">
+                <section className="search-form">
                   <input
                     id="search"
                     name="search"
                     type="search"
                     className="search-input"
                     placeholder="나의 진짜 성장을 도와줄 실무 강의를 찾아보세요"
+                    onKeyUp={e=>{
+                      e.preventDefault();
+                      if(e.key === 'Enter'){
+                        console.log(e.target.value);
+                        myCon.goPage('search',{state:{keyword: e.target.value}});
+                      }
+                    }}
                   />
                   <button type="submit" className="search-submit">
                     <i className="fa-solid fa-magnifying-glass"></i>
                   </button>
-                </form>
+                </section>
               </div>
             </div>
           </div>
           <aside className="aside">
-            <ul className="aside-list">
-              {asideMenu[asideKey].map((aside) => (
-                <li key={`aside-menu-${aside.txt}`} className="aside-item">
-                  <Link to={aside.link} className="aside-button">
-                    {aside.txt}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            {
+              // 로그인이 아닌 상태
+              !myCon.loginSts && (
+                <ul className="aside-list">
+                  <li className="aside-item">
+                    <Link to="/login" className="aside-button">
+                      로그인
+                    </Link>
+                  </li>
+                  <li className="aside-item">
+                    <Link to="/join" className="aside-button">
+                      회원가입
+                    </Link>
+                  </li>
+                  <li className="aside-item">
+                    <Link to="/cart" className="aside-button">
+                      수강바구니
+                    </Link>
+                  </li>
+                </ul>
+              )
+            }
+            {
+              // 로그인 상태
+              myCon.loginSts && (
+                <ul className="aside-list">
+                  <li className="aside-item">
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        myCon.setLoginSts(null);
+                        sessionStorage.removeItem("minfo");
+                        myCon.goPage("/");
+                      }}
+                      className="aside-button"
+                    >
+                      로그아웃
+                    </a>
+                  </li>
+                  <li className="aside-item">
+                    <Link to="/cart" className="aside-button">
+                      수강바구니
+                    </Link>
+                  </li>
+                  <li className="aside-item">
+                    <Link to="/mypage" className="aside-button">
+                      마이페이지
+                    </Link>
+                  </li>
+                </ul>
+              )
+            }
           </aside>
         </div>
       </div>

@@ -13,7 +13,6 @@ export default function Layout() {
   // [ 전역 상태관리 변수 설정하기 ] ////
   // [1] 로그인 상태관리변수
   const [loginSts, setLoginSts] = useState(sessionStorage.getItem("minfo"));
-  // -> 초기값으로 세션스토리지 'minfo'를 할당함!
 
   // [2] 로그인 환영 메시지 상태변수 ////
   const [loginMsg, setLoginMsg] = useState(null);
