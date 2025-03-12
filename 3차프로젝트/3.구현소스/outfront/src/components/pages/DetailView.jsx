@@ -297,8 +297,6 @@ const DetailView = () => {
                     </p>
                   </div>
                 </div>
-              </div>
-              <div className="card-wrapper card-wrapper-3">
                 <div className="card-el">
                   <div>
                     <p>
@@ -344,9 +342,8 @@ const DetailView = () => {
                     </p>
                   </div>
                 </div>
-              </div>
+              </div>              
             </div>
-            <hr />
           </div>
         </section>        
       </div>

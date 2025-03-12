@@ -323,12 +323,15 @@
         }
         .card-wrapper {
           display: flex;
-          letter-spacing: -0.3px;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          gap: 1%;
           word-break: break-word;
           .card-el {
-            width: 33.33%;
-            margin-bottom: 16px;
-            padding: 0 8px;
+            width: 32%;
+            @include tablet-medium {
+              width: 48%;
+            }
             text-align: center;
             div {
               margin-top: 16px;
