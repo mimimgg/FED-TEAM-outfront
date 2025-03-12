@@ -6,7 +6,7 @@ import "../../scss/pages/member.scss";
 import { initData } from "../../js/func/mem_fn";
 import { dCon } from "../modules/dCon";
 
-function Login( setLogged ) {
+function Login(setLogged) {
   const myCon = useContext(dCon);
   // console.log("로그인페이지 dCon:", myCon);
 
@@ -38,8 +38,18 @@ function Login( setLogged ) {
       setCurrentMessageIndex((prevIndex) => (prevIndex + 1) % messages.length);
     }, 2000); // 2초마다 메시지 변경
 
-    return () => clearInterval(interval); // 컴포넌트 언마운트 시 클리어
+    return () => clearInterval(interval); 
   }, []);
+
+  // 슬라이드 메세지 무한반복 
+  useEffect(() => {
+    if (currentMessageIndex === messages.length - 1) {
+      setTimeout(() => {
+        setTransformValue(0); // 처음 위치로 되돌리기
+        setCurrentMessageIndex(0); // 인덱스 초기화
+      }, 2000); // 마지막 메시지 후 2초 대기
+    }
+  }, [currentMessageIndex]);
 
   // 에러 메시지 상태 변수
   const [idMsg, setIdMsg] = useState(msgId[0]);
@@ -103,6 +113,8 @@ function Login( setLogged ) {
           sessionStorage.setItem("minfo", JSON.stringify(result));
           myCon.setLoginSts(sessionStorage.getItem("minfo"));
           myCon.makeMsg(result.unm);
+          /////////// 추가 코드 //////////// 
+          setLogged(true);
           document.querySelector(".log-submit").innerText = "아웃프런에 오신 것을 환영합니다 🎉";
 
           setTimeout(() => {
@@ -172,7 +184,7 @@ function Login( setLogged ) {
             )}
           </li>
           <li style={{ overflow: "hidden" }}>
-            <button className="log-submit" type="submit">
+            <button className="log-submit" type="submit" onClick={onSubmit}>
               로그인하기
             </button>
           </li>

@@ -58,8 +58,18 @@ function Join() {
       setCurrentMessageIndex((prevIndex) => (prevIndex + 1) % messages.length);
     }, 2000); // 2초마다 메시지 변경
 
-    return () => clearInterval(interval); // 컴포넌트 언마운트 시 클리어
+    return () => clearInterval(interval);
   }, []);
+
+  // 슬라이드 메세지 무한반복
+  useEffect(() => {
+    if (currentMessageIndex === messages.length - 1) {
+      setTimeout(() => {
+        setTransformValue(0); // 처음 위치로 되돌리기
+        setCurrentMessageIndex(0); // 인덱스 초기화
+      }, 2000); // 마지막 메시지 후 2초 대기
+    }
+  }, [currentMessageIndex]);
 
   // 아이디 유효성 검사
   const changeUserId = (e) => {
@@ -86,7 +96,7 @@ function Join() {
     }
 
     setUserId(val);
-    validateFields(); 
+    validateFields();
   };
 
   // 비밀번호 유효성 검사
@@ -137,7 +147,7 @@ function Join() {
       !chkPwdError &&
       !userNameError &&
       !emailError;
-  
+
     setIsValid(valid); // 유효성 상태 업데이트
     console.log("Is valid:", valid); // 유효성 상태 로그 출력
   };
@@ -145,7 +155,8 @@ function Join() {
   // 서브밋 기능
   const onSubmit = (e) => {
     e.preventDefault();
-    if (isValid) { // isValid를 함수처럼 호출하지 않고, 상태 변수로 사용합니다.
+    if (isValid) {
+      // isValid를 함수처럼 호출하지 않고, 상태 변수로 사용합니다.
       initData();
       let memData = JSON.parse(localStorage.getItem("mem-data") || "[]");
       let newData = {
@@ -155,10 +166,10 @@ function Join() {
         unm: userName,
         eml: email,
       };
-  
+
       memData.push(newData);
       localStorage.setItem("mem-data", JSON.stringify(memData));
-  
+
       document.querySelector(".submit").innerText = "아웃프런과 함께해요 👏";
       setTimeout(() => {
         goPage("/login");
@@ -166,7 +177,7 @@ function Join() {
     } else {
       alert("🚨필수 입력사항을 확인해주세요🚨");
     }
-  };  
+  };
 
   return (
     <div className="join-page">
@@ -260,7 +271,7 @@ function Join() {
             )}
           </li>
           <li>
-          <button type="submit" className={`submit ${isValid ? 'valid' : ''}`}>
+            <button type="submit" className={`submit ${isValid ? "valid" : ""}`}>
               가입하기
             </button>
           </li>
