@@ -5,6 +5,7 @@
 .search-result {
   max-width: 1440px;
   margin-inline: auto;
+  color: $color-text;
 
   .search-title {
     text-align: center;
@@ -13,11 +14,68 @@
 
     span {
       font-weight: 600;
+      // border-bottom: .4rem solid $color-primary;
+    }
+    @include tablet-medium {
+      font-size: 2.4rem;
+    }
+    @include mobile {
+      font-size: 2rem;
+    }
+  }
+  .message-container {
+    text-align: center;
+    color: $color-text;
+    padding: 10vh 0;
+    .img-box {
+      width: 40vh;
+      height: 25vh;
+      background-image: linear-gradient(
+        140deg,
+        #e81010 0%,
+        #f5fd00 20%,
+        #00ff00 40%,
+        #00a2ff 60%,
+        #1e00ff 80%,
+        #fb00ff 100%,
+        #ddd 20%
+      );
+      margin-inline: auto;
+      box-shadow: inset 0px -1px 1rem 1rem #fff;
+      img {
+        height: 95%;
+      }
+    }
+    .none-title {
+      padding-top: 1rem;
+      text-align: center;
+      font-size: 1.6rem;
+      line-height: 1.5;
+    }
+    .none-desc {
+      font-size: 1.4rem;
+      color: $color-midgray;
+      line-height: 1.5;
+    }
+    .research {
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+      border: 0.1rem solid #6e7479;
+      border-radius: 0.8rem;
+      margin: 2rem;
+      cursor: pointer;
     }
 
-  }
-  @include mobile {
-    font-size: 2rem;
+    span {
+      font-weight: 600;
+      // border-bottom: .4rem solid $color-primary;
+    }
+    @include tablet-medium {
+      font-size: 2.4rem;
+    }
+    @include mobile {
+      font-size: 2rem;
+    }
   }
 }
 
@@ -28,7 +86,7 @@
   gap: 3rem;
   font-size: 1.4rem;
   line-height: 1.2;
-  @include tablet-medium {      
+  @include tablet-medium {
     gap: 1%;
   }
 

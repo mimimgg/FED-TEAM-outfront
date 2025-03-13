@@ -14,6 +14,15 @@ import Login from './components/pages/Login.jsx';
 import Join from './components/pages/Join.jsx';
 import MyEdu from './components/pages/MyEdu.jsx';
 import SearchPage from './components/pages/SearchPage.jsx';
+import Programming from './components/pages/Programming.jsx';
+import Game from './components/pages/Game.jsx';
+import Science from './components/pages/Science.jsx';
+import It from './components/pages/It.jsx';
+import Artificial from './components/pages/Artificial.jsx';
+import Questions from './components/pages/Questions.jsx';
+import Chats from './components/pages/Chats.jsx';
+import Studies from './components/pages/Studies.jsx';
+import Projects from './components/pages/Projects.jsx';
 // import SearchPage from './components/pages/SearchPage.jsx';
 
 
@@ -65,13 +74,27 @@ export default function MainComponent(){
         <Route index element={<Main />} />
         <Route path="/detail/:id" element={<DetailView />} />
         <Route path="education" element={<Education />} />
+          {/* education categories */}
+          <Route path="/education/it-programming" element={<Programming />} />
+          <Route path="/education/artificial-intelligence" element={<Artificial />} />
+          <Route path="/education/game-dev-all" element={<Game />} />
+          <Route path="/education/data-science" element={<Science />} />
+          <Route path="/education/it" element={<It />} />
         <Route path="community" element={<Community />} />
+          {/* community categories */}
+          <Route path="/community/questions" element={<Questions />} />
+          <Route path="/community/chats" element={<Chats />} />
+          <Route path="/community/studies" element={<Studies />} />
+          <Route path="/community/projects" element={<Projects />} />
         <Route path="tompage" element={<TomPage />} />
         <Route path="mypage" element={<Mypage />} />
         <Route path="myedu" element={<MyEdu />} />
         <Route path="login" element={<Login />} />
         <Route path="join" element={<Join />} />
         <Route path="search" element={<SearchPage />} />
+
+
+
       </Route>
     </Routes>
   </BrowserRouter>
