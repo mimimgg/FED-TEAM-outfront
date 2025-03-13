@@ -131,6 +131,20 @@ const Header = () => {
                 <ul className="aside-list">
                   <div>
                     <li className="aside-item">
+                      <a
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          myCon.setLoginSts(null);
+                          sessionStorage.removeItem("minfo");
+                          myCon.goPage("/");
+                        }}
+                        className="logout"
+                      >
+                        로그아웃
+                      </a>
+                    </li>
+                    <li className="aside-item">
                       <Link to="/cart" className="aside-button icon">
                         <i class="fa-solid fa-cart-shopping"></i>
                       </Link>
@@ -142,20 +156,6 @@ const Header = () => {
                           alt="아웃프런마이페이지"
                         />
                       </Link>
-                    </li>
-                    <li className="aside-item">
-                      <a
-                        href="#"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          myCon.setLoginSts(null);
-                          sessionStorage.removeItem("minfo");
-                          myCon.goPage("/");
-                        }}
-                        className="aside-button"
-                      >
-                        로그아웃
-                      </a>
                     </li>
                   </div>
                 </ul>
