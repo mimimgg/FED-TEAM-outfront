@@ -1,0 +1,24 @@
+// 검색 scss : search.scss
+
+@import "../variables";
+
+.search-result {
+  width: 100%;
+  padding-inline: 3.2rem;
+  margin: 0 auto;
+  text-align: center;
+  
+  .search-title {
+    font-size: 3rem;
+    padding-block: 2rem;
+    
+    span {
+      font-weight: 600;
+    }
+  }
+}
+
+.search-wrap {
+  display: flex;
+  flex-wrap: nowrap;
+}
