@@ -28,6 +28,7 @@
     color: $color-text;
     padding: 10vh 0;
     .img-box {
+      position: relative;
       width: 40vh;
       height: 25vh;
       background-image: linear-gradient(
@@ -39,11 +40,27 @@
         #1e00ff 80%,
         #fb00ff 100%,
         #ddd 20%
-      );
-      margin-inline: auto;
-      box-shadow: inset 0px -1px 1rem 1rem #fff;
+        );
+        margin-inline: auto;
+        box-shadow: inset 0px -1px 1rem 1rem #fff;
+        background-size: 400% 400%;
+        animation: colorChange 3s ease infinite;
+        @keyframes colorChange{
+          0%{
+              background-position: 0% 50%;
+          }
+          50%{
+              background-position: 100% 50%;
+          }
+          100%{
+              background-position: 0% 50%;
+          }
+      }
       img {
-        height: 95%;
+        height: 65%;
+        position: absolute;
+        bottom: 12px;
+        left: 70px;
       }
     }
     .none-title {
