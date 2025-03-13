@@ -43,8 +43,8 @@
         );
         margin-inline: auto;
         box-shadow: inset 0px -1px 1rem 1rem #fff;
-        background-size: 400% 400%;
-        animation: colorChange 3s ease infinite;
+        background-size: 130%;
+        animation: colorChange 5s ease infinite;
         @keyframes colorChange{
           0%{
               background-position: 0% 50%;
