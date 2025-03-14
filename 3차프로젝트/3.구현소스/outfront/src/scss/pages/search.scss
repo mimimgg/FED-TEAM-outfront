@@ -77,7 +77,8 @@
     .research {
       font-size: 1.2rem;
       padding: 0.5rem 1rem;
-      border: 0.1rem solid #6e7479;
+      color: $color-white;
+      background: $color-text;
       border-radius: 0.8rem;
       margin: 2rem;
       cursor: pointer;
@@ -104,7 +105,7 @@
   font-size: 1.4rem;
   line-height: 1.2;
   @include tablet-medium {
-    gap: 1%;
+    gap: 4%;
   }
 
   .search-edu {

@@ -30,19 +30,19 @@ const gnbMenu = [
     sub: [
       {
         txt: "질문&답변",
-        link: "/board",
+        link: "/community/questions",
       },
       {
         txt: "고민있어요",
-        link: "/board",
+        link: "/community/chats",
       },
       {
         txt: "스터디",
-        link: "/board",
+        link: "/community/studies",
       },
       {
         txt: "팀프로젝트",
-        link: "/board",
+        link: "/community/projects",
       },
     ],
   },
