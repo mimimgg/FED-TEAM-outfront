@@ -1,13 +1,16 @@
+@import "./variables";
+
 .mypage-wrap {
   margin: 40px auto 80px;
-  max-width: 1440px;
+  max-width: 1440px;  
   .mypage-top {
     text-align: center;
     padding: 40px 0;
     background: #f1f1f1;
+    padding: 50px 24px;
     h2 {
       font-weight: 700;
-      font-size: 3.8rem;
+      font-size: min(8vw, 3.8rem);
       margin-bottom: 24px;
     }
     picture img {
@@ -18,14 +21,19 @@
     }
     span {
       font-weight: 600;
-      font-size: 1.8rem;
+      font-size: min(10vw, 1.8rem);
       margin: 24px 0;
       display: block;
     }
     p {
-      font-size: 3.8rem;
+      font-size: min(6vw, 3.8rem);
       font-weight: 300;
       line-height: 1.4;
+      br {
+        @include tablet-medium {
+          display: none;
+        }
+      }
       b {
         font-weight: 600;
       }
@@ -40,8 +48,16 @@
   .mypage-contents {
     display: flex;
     gap: 5%;
+    @include tablet-medium {
+      display: block;
+      gap:0;
+      padding: 24px;
+    }
     .box {
       width: 50%;
+      @include tablet-medium {
+        width: 100%;
+      }
       margin-top: 40px;
       h3 {
         font-size: 1.6rem;
@@ -60,10 +76,15 @@
     .myedu-list {
       margin: 24px auto;
       display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
       gap: 1%;
       li {
         position: relative;
-        width: 25%;
+        width: 24%;
+        @include tablet-medium {
+          width: 49%;
+        }
         font-size: 1.4rem;
         picture {
           cursor: pointer;

@@ -9,6 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     margin: 24px 0;
     li {
       border: 1px solid $color-board;
@@ -22,8 +23,16 @@
         background: transparent;
         padding: 12px 24px;
         cursor: pointer;
+        font-size: min(5vw, 1.4rem);
+        @include tablet-medium {
+          padding: 12px 1vw;
+          background: #f1f1f1;
+        }
         img {
-          height: 20px;                  
+          height: 20px;
+          @include tablet-medium {
+            display: none;
+          }
         }
         @include desktop {
           flex-direction: column;
@@ -32,6 +41,12 @@
       }
       &:last-child {
         border-right: 1px solid $color-board;
+        @include tablet-medium {
+          border:none;
+        }
+      }
+      @include tablet-medium {
+        border:none;
       }
     }
   }
@@ -55,7 +70,7 @@
         width: 48%;
       }
       h3 {
-        font-size: 1.6rem;
+        font-size: min(8vw, 1.6rem);
         font-weight: 600;
         padding: 12px 0;
       }
