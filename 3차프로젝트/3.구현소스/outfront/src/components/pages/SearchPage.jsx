@@ -44,7 +44,12 @@ const SearchPage = () => {
             <img src="../../images/common/bono.png" alt="에러메세지" />
           </div>
           <h4 className="none-title">검색어를 확인해주세요.</h4>
-          <button className="research">다시 찾아보기</button>
+          <button className="research"
+          onClick={()=>{
+            document.querySelector('.mobile-gnb-button').click();
+            document.querySelector('.search-input').focus();
+          }}
+          >다시 찾아보기</button>
         </div>
       ) : selData.length === 0 ? ( // 검색 결과가 없을 경우
         <div className="message-container">

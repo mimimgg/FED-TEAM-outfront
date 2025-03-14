@@ -41,6 +41,13 @@ const Header = () => {
     if (e.currentTarget === e.target) closeGnb();
   };
 
+  useEffect(()=>{
+    window.addEventListener("resize", () => {
+      // console.log('풋풋풋',document.querySelector('.snb'));
+      document.querySelectorAll('.snb').forEach(el=>el.classList.remove('open'));
+    });
+  },[]);
+
   return (
     <header className="header">
       <div className="header-container">
