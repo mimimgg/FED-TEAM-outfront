@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "../../scss/mypage.scss";
 import { useNavigate } from "react-router-dom";
+import { initBoardData } from "../../js/func/board_fn";
 
 function Mypage() {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState(null); // 로그인한 사용자 정보
-  const [userEduList, setUserEduList] = useState([]); // 로그인한 사용자의 학습 목록
+
+  const [userEduList, setUserEduList] = useState([]); // 로그인한 사용자의 학습 목록  
   const [reviewList, setReviewList] = useState([]); // 리뷰 데이터
   const [selectedReview, setSelectedReview] = useState(null); // 선택된 리뷰 정보 (팝업)
   const [showPopup, setShowPopup] = useState(false); // 팝업 표시 여부
+
+  const [userBoardPosts, setUserBoardPosts] = useState([]); // 사용자의 게시글 목록
 
   useEffect(() => {
     // 세션 스토리지에서 로그인한 사용자 정보 가져오기
@@ -24,15 +28,14 @@ function Mypage() {
       fetch("/data/user_data.json")
         .then((res) => res.json())
         .then((data) => {
-          // 현재 로그인한 사용자의 데이터 찾기
           const currentUser = data.find(user => user.uid === userInfo.uid);
           if (currentUser) {
-            setUserEduList(currentUser.eduIng); // 학습 목록 저장
+            setUserEduList(currentUser.eduIng);
           }
         })
         .catch(console.error);
     }
-  }, [userInfo]); // userInfo가 설정된 후 실행
+  }, [userInfo]);
 
   useEffect(() => {
     // 리뷰 데이터 불러오기
@@ -42,16 +45,26 @@ function Mypage() {
       .catch(console.error);
   }, []);
 
+  useEffect(() => {
+    // 게시판 데이터 불러오기
+    initBoardData(); // 로컬 스토리지 초기화
+    const boardData = JSON.parse(localStorage.getItem("board-data")) || [];
+
+    if (userInfo) {
+      const myPosts = boardData.filter((post) => post.uid === userInfo.uid);
+      setUserBoardPosts(myPosts);
+    }
+  }, [userInfo]);
+
   // 리뷰 팝업 열기 함수
   const openReviewPopup = (eduId) => {
-    // 로그인한 사용자가 작성한 해당 강의의 리뷰 찾기
     const userReview = reviewList.find(
       (review) => review.uid === userInfo.uid && review.eduId === eduId
     );
 
     if (userReview) {
-      setSelectedReview(userReview); // 리뷰 정보 저장
-      setShowPopup(true); // 팝업 열기
+      setSelectedReview(userReview);
+      setShowPopup(true);
     } else {
       alert("작성된 수강평이 없습니다.");
     }
@@ -87,7 +100,6 @@ function Mypage() {
             </a>
           </h3>
           <ul className="myedu-list">
-            {/* 학습 목록 출력 */}
             {userEduList.length > 0 ? (
               userEduList.map((edu) => {
                 const userReview = reviewList.find(
@@ -118,16 +130,28 @@ function Mypage() {
         {/* 내 커뮤니티 게시글 */}
         <div className="box my-community">
           <h3>
-            <a href="#none">내 커뮤니티 게시글</a>
-            <a href="#none">
+            <a href="/board">내 커뮤니티 게시글</a>
+            <a href="/board">
               <span>more</span>
             </a>
           </h3>
           <ul className="myboard-list">
-            <li className="empty-msg"><p>작성한 게시글이 없습니다.</p></li>
+            {userBoardPosts.length > 0 ? (
+              userBoardPosts.map((post) => (
+                <li key={post.idx}>
+                  <a href="#none">
+                    <h4>{post.tit}</h4>
+                    <p>{post.date} | 조회수: {post.cnt}</p>
+                  </a>
+                </li>
+              ))
+            ) : (
+              <li className="empty-msg"><p>작성한 게시글이 없습니다.</p></li>
+            )}
           </ul>
         </div>
       </div>
+      
       {/* 리뷰 팝업 */}
       {showPopup && selectedReview && (
         <div className="review-popup">
