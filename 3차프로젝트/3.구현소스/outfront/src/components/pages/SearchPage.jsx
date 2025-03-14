@@ -35,7 +35,6 @@ const SearchPage = () => {
     const el = e.currentTarget;
     console.log("장바구니 버튼 클릭!", el);
   };
-  console.log(keyword, selData);
 
   return (
     <div className="search-result">
