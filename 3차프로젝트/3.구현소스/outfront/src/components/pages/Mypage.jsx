@@ -128,8 +128,8 @@ function Mypage() {
         {/* 내 커뮤니티 게시글 */}
         <div className="box my-community">
           <h3>
-            <a href="#none">내 커뮤니티 게시글</a>
-            <a href="#none">
+            <a href="/board">내 커뮤니티 게시글</a>
+            <a href="/board">
               <span>more</span>
             </a>
           </h3>

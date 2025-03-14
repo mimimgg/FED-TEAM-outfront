@@ -7,15 +7,31 @@ import MainArea from "./MainArea";
 // 컨텍스트 API 로 전역변수구역 설정하기! ////
 import { dCon } from "../modules/dCon";
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Layout() {
   // [ 전역 상태관리 변수 설정하기 ] ////
   // [1] 로그인 상태관리변수
-  const [loginSts, setLoginSts] = useState(sessionStorage.getItem("minfo"));
+  // const [loginSts, setLoginSts] = useState(sessionStorage.getItem("minfo"));
+  const [loginSts, setLoginSts] = useState(null);
 
   // [2] 로그인 환영 메시지 상태변수 ////
   const [loginMsg, setLoginMsg] = useState(null);
+
+  // [3] 로그인 상태 유지 (sessionStorage에서 가져오기)
+  useEffect(() => {
+    const minfo = sessionStorage.getItem("minfo");
+
+    if (minfo) {
+      try {
+        // 문자열을 객체로 변환
+        const userData = JSON.parse(minfo);
+        setLoginSts(userData);
+      } catch (error) {
+        console.error("JSON parsing error:", error);
+      }
+    }
+  }, []);
 
   // [ 공통함수 ] /////////////////
   // [1] 라우터 이동함수 ////
