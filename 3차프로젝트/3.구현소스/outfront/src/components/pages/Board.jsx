@@ -42,7 +42,7 @@ function Board() {
   // [2] 전체 레코드 개수(배열데이터 개수)
   // -> 매번 계산하지 않도록 참조변수로 생성한다!
   const totalCount = useRef(baseData.length);
-  console.log("전체개수:", totalCount);
+  // console.log("전체개수:", totalCount);
 
   // [3] 페이징의 페이징 번호
   const pgPgNum = useRef(1);

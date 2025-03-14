@@ -6,12 +6,10 @@ import { initBoardData } from "../../js/func/board_fn";
 function Mypage() {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState(null); // 로그인한 사용자 정보
-
-  const [userEduList, setUserEduList] = useState([]); // 로그인한 사용자의 학습 목록  
+  const [userEduList, setUserEduList] = useState([]); // 로그인한 사용자의 학습 목록
   const [reviewList, setReviewList] = useState([]); // 리뷰 데이터
   const [selectedReview, setSelectedReview] = useState(null); // 선택된 리뷰 정보 (팝업)
   const [showPopup, setShowPopup] = useState(false); // 팝업 표시 여부
-
   const [userBoardPosts, setUserBoardPosts] = useState([]); // 사용자의 게시글 목록
 
   useEffect(() => {
@@ -47,7 +45,7 @@ function Mypage() {
 
   useEffect(() => {
     // 게시판 데이터 불러오기
-    initBoardData(); // 로컬 스토리지 초기화
+    // initBoardData(); // 로컬 스토리지 초기화
     const boardData = JSON.parse(localStorage.getItem("board-data")) || [];
 
     if (userInfo) {
@@ -130,8 +128,8 @@ function Mypage() {
         {/* 내 커뮤니티 게시글 */}
         <div className="box my-community">
           <h3>
-            <a href="/board">내 커뮤니티 게시글</a>
-            <a href="/board">
+            <a href="#none">내 커뮤니티 게시글</a>
+            <a href="#none">
               <span>more</span>
             </a>
           </h3>

@@ -9,10 +9,12 @@ function Read({ setMode, selRecord }) {
 
   // 선택된 참조변수 데이터 넣기
   const selData = selRecord.current;
-
+  
   // 전역 컨텍스트 API 사용하기!!
   const myCon = useContext(dCon);
-  // console.log('Read에서 loginSts:',myCon.loginSts);
+
+  console.log('myCon.loginSts:', myCon.loginSts);
+  console.log('myCon.loginSts.uid :', myCon.loginSts.uid); // undified
 
   // 리턴 코드구역 ///////////////////
   return (
