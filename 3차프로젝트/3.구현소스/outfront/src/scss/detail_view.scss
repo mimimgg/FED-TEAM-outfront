@@ -1,3 +1,7 @@
+/* src/scss/detail_view.scss */
+
+@import "./variables";
+
 .detail-wrap {
   margin: 0 auto;
   .detail-header {
@@ -10,10 +14,17 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 40px 0;
+      @include tablet-medium {
+        display: block;
+        padding: 40px 24px;
+      }
       clear: both;
       overflow: hidden;
       .info-txt {
         width: 65%;
+        @include tablet-medium {
+          width: 100%;
+        }
         line-height: 1.4;
         button {
           border: none;
@@ -58,8 +69,12 @@
         width: 30%;
         border-radius: 1.2rem;
         overflow: hidden;
+        @include tablet-medium {
+          width: 100%;
+          margin-top: 20px;
+        }
         img {
-          max-width: 100%;
+          width: 100%;
           object-fit: cover;
           vertical-align: top;
         }
@@ -71,11 +86,82 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    flex-direction: row-reverse;
     gap: 16px;
+    @include tablet-medium {
+      margin: 0 24px;
+      display: block;
+    }
+    aside {
+      width: 30%;
+      @include tablet-medium {
+        width: 100%;
+      }
+      .detail-aside-wrap {
+        position: sticky;
+        top: 24px;
+        margin-top: 2.4rem;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 1rem;
+        box-sizing: border-box;
+        overflow: hidden;
+        .sale-msg {
+          color: #fff;
+          background: linear-gradient(90deg, #8152fe, #d54a7d);
+          padding: 1.2rem;
+          width: 100%;
+          font-size: 1.4rem;
+          font-weight: 600;
+        }
+        .inner {
+          margin: 0 2rem;
+        }
+        p {
+          font-size: 1.4rem;
+        }
+        p.price {
+          font-size: 1.4rem;
+          margin: 2rem 0;
+          b {
+            font-size: 2.8rem;
+            font-weight: 600;
+          }
+        }
+        button {
+          border: 1px solid #ddd;
+          background: #fff;
+          padding: 14px;
+          width: 100%;
+          border-radius: 1rem;
+          font-size: 1.6rem;
+          font-weight: 600;
+          &.add-edu-btn {
+            margin-bottom: 10px;
+            background-color: rgb(0, 196, 113);
+            color: #fff;
+          }
+        }
+        .aside-info {
+          margin-top: 2.4rem;
+          background: #f1f1f1;
+          padding: 2.4rem;
+          line-height: 1.6;
+          p em {
+            width: 28%;
+            display: inline-block;
+            color: #777;
+          }
+        }
+      }
+    }
     section {
       position: relative;
-      width: 65%;
       overflow: hidden;
+      width: 65%;
+      @include tablet-medium {
+        width: 100%;
+      }
       img {
         max-width: 100%;
         margin: 0 auto;
@@ -94,6 +180,9 @@
           flex-wrap: wrap;
           justify-content: space-between;
           gap: 12px;
+          @include tablet-medium {
+            gap:0;
+          }
           li {
             font-size: 1.4rem;
             width: 49%;
@@ -234,12 +323,15 @@
         }
         .card-wrapper {
           display: flex;
-          letter-spacing: -0.3px;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          gap: 1%;
           word-break: break-word;
           .card-el {
-            width: 33.33%;
-            margin-bottom: 16px;
-            padding: 0 8px;
+            width: 32%;
+            @include tablet-medium {
+              width: 48%;
+            }
             text-align: center;
             div {
               margin-top: 16px;
@@ -258,66 +350,6 @@
           }
         }
       }
-    }
-    aside {
-      width: 30%;
-      .detail-aside-wrap {
-        position: sticky;
-        top: 24px;
-        margin-top: 2.4rem;
-        background: #fff;
-        border: 1px solid #ddd;
-        border-radius: 1rem;
-        box-sizing: border-box;
-        overflow: hidden;
-        .sale-msg {
-          color: #fff;
-          background: linear-gradient(90deg, #8152fe, #d54a7d);
-          padding: 1.2rem;
-          width: 100%;
-          font-size: 1.4rem;
-          font-weight: 600;
-        }
-        .inner {
-          margin: 0 2rem;
-        }
-        p {
-          font-size: 1.4rem;
-        }
-        p.price {
-          font-size: 1.4rem;
-          margin: 2rem 0;
-          b {
-            font-size: 2.8rem;
-            font-weight: 600;
-          }
-        }
-        button {
-          border: 1px solid #ddd;
-          background: #fff;
-          padding: 14px;
-          width: 100%;
-          border-radius: 1rem;
-          font-size: 1.6rem;
-          font-weight: 600;
-          &.add-edu-btn {
-            margin-bottom: 10px;
-            background-color: rgb(0, 196, 113);
-            color: #fff;
-          }
-        }
-        .aside-info {
-          margin-top: 2.4rem;
-          background: #f1f1f1;
-          padding: 2.4rem;
-          line-height: 1.6;
-          p em {
-            width: 28%;
-            display: inline-block;
-            color: #777;
-          }
-        }
-      }
-    }
+    }    
   }
 }

@@ -67,6 +67,36 @@ const DetailView = () => {
         </div>
       </div>
       <div className="detail-content">
+      <aside>
+          <div className="detail-aside-wrap">
+            <div className="sale-msg">{userInfo ? `${userInfo.unm}님` : "회원 가입하면"} 첫 구매 할인 중 (1일 남음)</div>
+            <div className="inner">
+              <p className="price">
+                <b>{formatPrice(edu.gPrice)}</b>
+              </p>
+              <button className="add-edu-btn">수강 신청하기</button>
+              <button className="add-cart-btn">바구니에 담기</button>
+            </div>
+            <div className="aside-info">
+              <p>
+                <em>지식공유자</em> 인프런{" "}
+              </p>
+              <p>
+                <em>수업 수</em> 총 58개 (14시간 17분){" "}
+              </p>
+              <p>
+                <em>수강기한</em> 무제한{" "}
+              </p>
+              <p>
+                <em>수료증</em> 제공{" "}
+              </p>
+              <p>
+                <em>난이도</em> {edu.gLevel}
+              </p>
+            </div>
+            {/* <p>{edu.gSkill}</p> */}
+          </div>
+        </aside>
         <section>
           <div className="detail-review-wrap">
             <h3>
@@ -202,7 +232,7 @@ const DetailView = () => {
               </h3>
               <p>
                 <a href="http://inf-mindmap.s3-website.ap-northeast-2.amazonaws.com/inflearn-python-courses-807b09e61479572aac84b4130be7a6a2.html" target="_blank" rel="noopener noreferrer">
-                  <img src="https://cdn.inflearn.com/public/files/courses/324145/9b09b0a8-ea66-4743-8aba-fd5c1395fc84/optimize.jfif" width="800" />
+                  <img src="https://cdn.inflearn.com/public/files/courses/324145/9b09b0a8-ea66-4743-8aba-fd5c1395fc84/optimize.jfif" />
                 </a>
               </p>
               <h3>
@@ -210,7 +240,7 @@ const DetailView = () => {
               </h3>
               <p>우리가 매일 만나는 웹 사이트, 앱을 만들 수 있는 프로그래밍 언어예요. 웹, 앱 말고도 게임, 인공지능 등 파이썬으로 할 수 있는 것들이 정말 많아요. 배우기가 다른 언어보다 쉽다는 점을 포함한 다양한 장점 덕분에 인기 언어로 꼽히고 있어요.</p>
               <p>
-                <img src="https://cdn.inflearn.com/public/files/courses/330551/8e3b0004-4d06-4495-a4de-3e43d4d877da/7.png" alt="" title="7.png" width="750" height="363" />
+                <img src="https://cdn.inflearn.com/public/files/courses/330551/8e3b0004-4d06-4495-a4de-3e43d4d877da/7.png" alt="" title="7.png" />
               </p>
               <h3>
                 <strong>왜 파이썬을 배워야 할까요?</strong>
@@ -267,8 +297,6 @@ const DetailView = () => {
                     </p>
                   </div>
                 </div>
-              </div>
-              <div className="card-wrapper card-wrapper-3">
                 <div className="card-el">
                   <div>
                     <p>
@@ -314,41 +342,10 @@ const DetailView = () => {
                     </p>
                   </div>
                 </div>
-              </div>
+              </div>              
             </div>
-            <hr />
           </div>
-        </section>
-        <aside>
-          <div className="detail-aside-wrap">
-            <div className="sale-msg">{userInfo ? `${userInfo.unm}님` : "회원 가입하면"} 첫 구매 할인 중 (1일 남음)</div>
-            <div className="inner">
-              <p className="price">
-                <b>{formatPrice(edu.gPrice)}</b>
-              </p>
-              <button className="add-edu-btn">수강 신청하기</button>
-              <button className="add-cart-btn">바구니에 담기</button>
-            </div>
-            <div className="aside-info">
-              <p>
-                <em>지식공유자</em> 인프런{" "}
-              </p>
-              <p>
-                <em>수업 수</em> 총 58개 (14시간 17분){" "}
-              </p>
-              <p>
-                <em>수강기한</em> 무제한{" "}
-              </p>
-              <p>
-                <em>수료증</em> 제공{" "}
-              </p>
-              <p>
-                <em>난이도</em> {edu.gLevel}
-              </p>
-            </div>
-            {/* <p>{edu.gSkill}</p> */}
-          </div>
-        </aside>
+        </section>        
       </div>
     </div>
   );
