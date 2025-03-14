@@ -59,7 +59,9 @@
     font-size: 1.4rem;
     line-height: 1.2;
     @include tablet-medium {      
-      gap: 1%;
+      margin: 0 auto;
+        width: 96%;
+        justify-content: space-between;
     }
     li {
       position: relative;
