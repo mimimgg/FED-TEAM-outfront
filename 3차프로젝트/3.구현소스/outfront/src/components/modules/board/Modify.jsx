@@ -113,7 +113,7 @@ function Modify({ setMode, selRecord, totalCount }) {
   // 리턴 코드구역 /////////////////////
   return (
     <main className="cont">
-      <h1 className="tit">OPINION</h1>
+      {/* <h1 className="tit">OPINION</h1> */}
       <table className="dtblview readone">
         <caption>OPINION : Modify</caption>
         <tbody>
