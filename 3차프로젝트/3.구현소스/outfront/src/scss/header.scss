@@ -194,7 +194,7 @@ button {
         position: relative;
         padding-inline: 1.2rem;
         font-size: 1.6rem;
-        font-weight: 600;
+        font-weight: 500;
         height: 100%;
         line-height: 2;
         color: $color-text;
@@ -209,8 +209,9 @@ button {
           width: 100%;
           color: $color-midgray;
           font-weight: 500;
+          font-size: 1.4rem;
           justify-content: flex-start;
-          padding: 1.4rem 1.6rem;
+          padding: 1.6rem 1.6rem; 
 
           &:hover {
             background: rgb(229, 249, 241);
