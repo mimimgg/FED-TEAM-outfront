@@ -18,6 +18,8 @@ const Header = () => {
   const [isOpenGnb, setIsOpenGnb] = useState(false);
   const [openSnb, setOpenSnb] = useState(null);
   const asideKey = logged ? "user" : "guest";
+  const [searchKeyword, setSearchKeyword] = useState(""); // 검색어 상태 관리
+
 
   const myCon = useContext(dCon);
 
@@ -40,6 +42,13 @@ const Header = () => {
   const handleCloseGnb = (e) => {
     if (e.currentTarget === e.target) closeGnb();
   };
+
+  // 검색 처리 함수 정의
+  const handleSearch = () => {
+    closeGnb(); // 서브 메뉴 닫기
+    myCon.goPage("search", { state: { keyword: searchKeyword } }); // 검색 페이지로 이동
+  };
+    
 
   useEffect(()=>{
     window.addEventListener("resize", () => {
@@ -99,16 +108,18 @@ const Header = () => {
                     type="search"
                     className="search-input"
                     placeholder="나의 진짜 성장을 도와줄 실무 강의를 찾아보세요"
+                    value={searchKeyword} // 검색어 상태 연결
+                    onChange={(e) => setSearchKeyword(e.target.value)} // 입력값 변경 시 상태 업데이트
                     onKeyUp={(e) => {
                       e.preventDefault();
                       if (e.key === "Enter") {
-                        closeGnb();
-                        console.log(e.target.value);
-                        myCon.goPage("search", { state: { keyword: e.target.value } });
+                        handleSearch(); // 엔터 키를 눌렀을 때 검색 수행
                       }
                     }}
                   />
-                  <button type="submit" className="search-submit">
+                  <button type="button" className="search-submit"
+                  onClick={handleSearch}  
+                  >
                     <i className="fa-solid fa-magnifying-glass"></i>
                   </button>
                 </section>
