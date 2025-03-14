@@ -105,7 +105,7 @@ const Header = () => {
                   <input
                     id="search"
                     name="search"
-                    type="search"
+                    type="text"
                     className="search-input"
                     placeholder="나의 진짜 성장을 도와줄 실무 강의를 찾아보세요"
                     value={searchKeyword} // 검색어 상태 연결
