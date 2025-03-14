@@ -119,7 +119,7 @@ const Header = () => {
                   </li>
                   <li className="aside-item">
                     <Link to="/cart" className="aside-button icon">
-                      <i class="fa-solid fa-cart-shopping"></i>
+                      <i className="fa-solid fa-cart-shopping"></i>
                     </Link>
                   </li>
                 </ul>
