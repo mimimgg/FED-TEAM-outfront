@@ -1,3 +1,4 @@
+// board.jsx
 import React, { useEffect, useRef, useState } from "react";
 
 // 제이쿼리 불러오기 ///
