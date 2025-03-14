@@ -43,7 +43,6 @@ const Header = () => {
 
   useEffect(()=>{
     window.addEventListener("resize", () => {
-      // console.log('풋풋풋',document.querySelector('.snb'));
       document.querySelectorAll('.snb').forEach(el=>el.classList.remove('open'));
     });
   },[]);
@@ -103,6 +102,7 @@ const Header = () => {
                     onKeyUp={(e) => {
                       e.preventDefault();
                       if (e.key === "Enter") {
+                        closeGnb();
                         console.log(e.target.value);
                         myCon.goPage("search", { state: { keyword: e.target.value } });
                       }
