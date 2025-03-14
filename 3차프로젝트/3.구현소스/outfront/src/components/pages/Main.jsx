@@ -39,8 +39,8 @@ const Main = () => {
       </ul>
       <ul className="list-wrap">
         {filterList.map((edu) => (
-          <li key={edu.idx} className="edu-list" onClick={() => navigate(`/detail/${edu.idx}`)}>
-            <article>
+          <li key={edu.idx} className="edu-list">
+            <article onClick={() => navigate(`/detail/${edu.idx}`)}>
               <picture>
                 <img src={`/images/edu_thumb/${edu.idx}.png`} alt={`강의 이미지 ${edu.idx}`} />
               </picture>
