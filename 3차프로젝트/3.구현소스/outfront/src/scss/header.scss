@@ -5,7 +5,7 @@ button {
   border: 0;
   padding: 0;
   margin: 0;
-  font-family: "Pretendard Variable", sans-serif;
+  font-family: 'Pretendard Variable', sans-serif;
 }
 
 .header * {
@@ -15,17 +15,17 @@ button {
 .header {
   max-width: 1440px;
   margin-inline: auto;
-
+  
   .header-container {
     padding-inline: 3.2rem;
     width: 100%;
     height: 6.4rem;
 
     @include tablet-small {
-      padding-inline: 1.6rem;
+      padding-inline: 1.6rem; 
     }
     @include mobile {
-      padding-inline: 0.8rem;
+      padding-inline: .8rem;
     }
 
     .header-content {
@@ -59,7 +59,7 @@ button {
       display: flex;
       justify-content: center;
       left: 50%;
-      transform: translateX(-50%);
+        transform: translateX(-50%);
     }
 
     .logo-img {
@@ -98,12 +98,14 @@ button {
         left: 0;
       }
     }
+    
 
     .gnb-content {
       height: 100%;
       flex-grow: 1;
       transition: left 0.5s;
     }
+
 
     .mobile-gnb-button {
       display: none;
@@ -123,17 +125,13 @@ button {
       @include tablet-medium {
         flex-direction: column-reverse;
         position: fixed;
-        width: 32rem;
+        width: 70%;
         top: 0;
         left: -100%;
         height: 100vh;
         z-index: 100;
         background: #fff;
         gap: 0;
-      }
-
-      @include mobile {
-        width: 24rem;
       }
     }
 
@@ -218,9 +216,6 @@ button {
             background: rgb(229, 249, 241);
           }
         }
-        @include mobile {
-          font-size: 1.4rem;
-        }
       }
     }
 
@@ -259,9 +254,9 @@ button {
           flex-direction: column;
           padding: 0;
         }
-        
       }
-
+      
+      
       .snb-item {
         display: block;
       }
@@ -284,8 +279,8 @@ button {
       @include tablet-medium {
         position: fixed;
         top: 6.1rem;
-        left: 16rem;
-        width: 15.9rem;
+        left: 35%;
+        width: 35%;
 
         &.open {
           display: block;
@@ -375,6 +370,7 @@ button {
         display: inline-flex;
         justify-content: center;
         align-items: center;
+
       }
       .logout {
         color: $color-midgray;
@@ -395,12 +391,12 @@ button {
         display: flex;
         column-gap: 2rem;
         margin-left: 1rem;
-
+        
         .logo-icon {
-          background: transparent;
+          background: transparent; 
           padding: 0;
         }
-
+        
         img {
           width: 2.4rem;
           border-radius: 50%;
@@ -409,6 +405,7 @@ button {
           column-gap: 1.2rem;
         }
       }
+
     }
   }
 }
