@@ -5,6 +5,12 @@ import { useContext, useEffect, useState } from "react";
 // import asideMenu from "../../js/data/aside";
 import { dCon } from "../modules/dCon";
 
+/***********************************************
+ * 요구사항 
+ * 1. pc버전에서 gnb 메뉴 클릭 후 모바일버전으로 사이즈를 줄이면 sbtn이 노출되는 현상
+ * 
+***********************************************/
+
 let logged = false;
 logged = true;
 
