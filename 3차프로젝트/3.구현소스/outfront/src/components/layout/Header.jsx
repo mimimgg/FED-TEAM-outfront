@@ -41,6 +41,12 @@ const Header = () => {
     if (e.currentTarget === e.target) closeGnb();
   };
 
+  useEffect(()=>{
+    window.addEventListener("resize", () => {
+      document.querySelectorAll('.snb').forEach(el=>el.classList.remove('open'));
+    });
+  },[]);
+
   return (
     <header className="header">
       <div className="header-container">
@@ -96,6 +102,7 @@ const Header = () => {
                     onKeyUp={(e) => {
                       e.preventDefault();
                       if (e.key === "Enter") {
+                        closeGnb();
                         console.log(e.target.value);
                         myCon.goPage("search", { state: { keyword: e.target.value } });
                       }
