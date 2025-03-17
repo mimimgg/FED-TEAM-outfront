@@ -13,25 +13,18 @@ export default function Layout() {
   // [ 전역 상태관리 변수 설정하기 ] ////
   // [1] 로그인 상태관리변수
   // const [loginSts, setLoginSts] = useState(sessionStorage.getItem("minfo"));
-  const [loginSts, setLoginSts] = useState(null);
+  // [1] 로그인 상태관리변수 : 
+  // 초기값 - 로컬스가 있으면 파싱할당!
+  const [loginSts, setLoginSts] = useState(
+    sessionStorage.getItem("minfo")
+      ? JSON.parse(sessionStorage.getItem("minfo"))
+      : null
+  );
+  // -> 초기값으로 세션스토리지 'minfo'를 할당함!
+  console.log(loginSts);
 
   // [2] 로그인 환영 메시지 상태변수 ////
   const [loginMsg, setLoginMsg] = useState(null);
-
-  // [3] 로그인 상태 유지 (sessionStorage에서 가져오기)
-  useEffect(() => {
-    const minfo = sessionStorage.getItem("minfo");
-
-    if (minfo) {
-      try {
-        // 문자열을 객체로 변환
-        const userData = JSON.parse(minfo);
-        setLoginSts(userData);
-      } catch (error) {
-        console.error("JSON parsing error:", error);
-      }
-    }
-  }, []);
 
   // [ 공통함수 ] /////////////////
   // [1] 라우터 이동함수 ////
