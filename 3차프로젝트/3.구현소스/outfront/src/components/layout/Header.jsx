@@ -5,6 +5,12 @@ import { useContext, useEffect, useState } from "react";
 // import asideMenu from "../../js/data/aside";
 import { dCon } from "../modules/dCon";
 
+/***********************************************
+ * 요구사항 
+ * 1. pc버전에서 gnb 메뉴 클릭 후 모바일버전으로 사이즈를 줄이면 sbtn이 노출되는 현상
+ * 
+***********************************************/
+
 let logged = false;
 logged = true;
 
@@ -34,6 +40,12 @@ const Header = () => {
   const handleCloseGnb = (e) => {
     if (e.currentTarget === e.target) closeGnb();
   };
+
+  useEffect(()=>{
+    window.addEventListener("resize", () => {
+      document.querySelectorAll('.snb').forEach(el=>el.classList.remove('open'));
+    });
+  },[]);
 
   return (
     <header className="header">
@@ -90,6 +102,7 @@ const Header = () => {
                     onKeyUp={(e) => {
                       e.preventDefault();
                       if (e.key === "Enter") {
+                        closeGnb();
                         console.log(e.target.value);
                         myCon.goPage("search", { state: { keyword: e.target.value } });
                       }
@@ -119,7 +132,7 @@ const Header = () => {
                   </li>
                   <li className="aside-item">
                     <Link to="/cart" className="aside-button icon">
-                      <i class="fa-solid fa-cart-shopping"></i>
+                      <i className="fa-solid fa-cart-shopping"></i>
                     </Link>
                   </li>
                 </ul>
@@ -146,7 +159,7 @@ const Header = () => {
                     </li>
                     <li className="aside-item">
                       <Link to="/cart" className="aside-button icon">
-                        <i class="fa-solid fa-cart-shopping"></i>
+                        <i className="fa-solid fa-cart-shopping"></i>
                       </Link>
                     </li>
                     <li className="aside-item">

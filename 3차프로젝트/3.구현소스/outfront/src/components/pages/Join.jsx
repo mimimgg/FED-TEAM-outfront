@@ -40,45 +40,6 @@ function Join() {
   // 아이디 메시지 상태 변수
   const [idMsg, setIdMsg] = useState(msgId[0]);
 
-  // 슬라이드 메시지 상태 변수
-  const messages = [
-    "아웃프런에서 학습한 역량을 펼쳐보세요 😎",
-    "나의 온라인 사수, 아웃프런 👍",
-    "아웃프런에서 다양한 학습의 기회를 얻으세요 💖",
-    "나의 커리어 메이트, 아웃프런 🤝",
-    "함께 성장하는 아웃프런의 일원이 되어보세요 👏",
-  ];
-
-  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
-  const [transformValue, setTransformValue] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // 다음 메시지로 이동
-      setTransformValue((prev) => {
-        if (currentMessageIndex === messages.length - 1) {
-          setCurrentMessageIndex(0); // 인덱스를 초기화
-          return -100; // 다음 슬라이드에서 첫 번째 메시지가 보이도록 설정
-        } else {
-          setCurrentMessageIndex((prevIndex) => prevIndex + 1);
-          return prev - 100; // 왼쪽으로 이동
-        }
-      });
-    }, 3000); // 2초마다 메시지 변경
-  
-    return () => clearInterval(interval);
-  }, [currentMessageIndex, messages.length]);
-
-  // 슬라이드 메세지 무한반복
-  useEffect(() => {
-    if (currentMessageIndex === messages.length - 1) {
-      setTimeout(() => {
-        setTransformValue(0); // 처음 위치로 되돌리기
-        setCurrentMessageIndex(0); // 인덱스 초기화
-      }, 3000); // 마지막 메시지 후 2초 대기
-    }
-  }, [currentMessageIndex]);
-
   // 아이디 유효성 검사
   const changeUserId = (e) => {
     const val = e.target.value;
@@ -192,17 +153,12 @@ function Join() {
       <div className="join-top">
         <h2 className="join-title">회원가입</h2>
       </div>
-      <div className="slide-text">
-      <div className="slide" style={{ transform: `translateX(${transformValue}%)` }}>
-  {messages.map((message, index) => (
-    <div key={index} className={`message ${currentMessageIndex === index ? "active" : ""}`}>
-      {message}
-    </div>
-  ))}
-  {/* 첫 번째 메시지를 다시 추가하여 무한 슬라이드 효과 구현 */}
-  <div className="message">{messages[0]}</div>
-</div>
-      </div>
+
+      <ul className="slide-text">
+        <li className="slide">아웃프런에서 학습한 역량을 펼쳐보세요 😎</li>
+        <li className="slide">나의 온라인 사수, 아웃프런 👍</li>
+        <li className="slide">아웃프런에서 다양한 학습의 기회를 얻으세요 💖</li>
+      </ul>
 
       <form onSubmit={onSubmit} className="join-form">
         <ul>

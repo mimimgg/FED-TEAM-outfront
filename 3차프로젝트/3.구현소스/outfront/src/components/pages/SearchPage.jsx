@@ -9,7 +9,7 @@ import "../../scss/pages/search.scss";
 [v] 데스크탑버전에서 검색하면 검색결과에 맞는 사진이 나와야 함 (edu_data.json -> idx)
  * 모바일버전에서 검색하면 드롭창이 자동으로 닫히고 결과가 보여야 함
 [v] 검색결과가 없을 경우에는 "검색어를 확인해주세요" 문구 노출
- * 다시 찾아보기 클릭 시 서치바에 포커스 커서 이동
+ * 다시 찾아보기 클릭 시 서치바에 포커스 이동
 ********************************************************/
 
 const SearchPage = () => {
@@ -35,7 +35,6 @@ const SearchPage = () => {
     const el = e.currentTarget;
     console.log("장바구니 버튼 클릭!", el);
   };
-  console.log(keyword, selData);
 
   return (
     <div className="search-result">
@@ -45,7 +44,12 @@ const SearchPage = () => {
             <img src="../../images/common/bono.png" alt="에러메세지" />
           </div>
           <h4 className="none-title">검색어를 확인해주세요.</h4>
-          <button className="research">다시 찾아보기</button>
+          <button className="research"
+          onClick={()=>{
+            document.querySelector('.mobile-gnb-button').click();
+            document.querySelector('.search-input').focus();
+          }}
+          >다시 찾아보기</button>
         </div>
       ) : selData.length === 0 ? ( // 검색 결과가 없을 경우
         <div className="message-container">

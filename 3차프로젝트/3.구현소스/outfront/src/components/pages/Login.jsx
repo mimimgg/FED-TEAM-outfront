@@ -21,38 +21,6 @@ function Login() {
 
   const msgPwd = ["비밀번호를 입력해주세요.", "비밀번호가 일치하지 않습니다."];
 
-  // 슬라이드 메시지 상태 변수
-  const messages = [
-    "아웃프런과 함께 달릴 준비 되셨나요? 😎",
-    "아웃프런이 다 알려드릴게요. 따라오세요👍",
-    "다양한 학습의 기회를 얻으세요 💖",
-    "나의 커리어 메이트, 아웃프런 🤝",
-    "함께 성장하는 아웃프런의 일원이 되어보세요 👏",
-  ];
-  // const currentMessageIndex = useRef(0);
-  // const transformValue = useRef(0);
-  // const prevIndex = useRef(0);
-
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     let prev = transformValue.current;
-  //     transformValue.current = prev - 100; // 왼쪽으로 이동
-  //     currentMessageIndex.current = (prevIndex + 1) % messages.length;
-  //   }, 3000); // 3초마다 메시지 변경
-
-  //   // return () => clearInterval(interval); 
-  // }, []);
-
-  // 슬라이드 메세지 무한반복 
-  // useEffect(() => {
-  //   if (currentMessageIndex === messages.length - 1) {
-  //     setTimeout(() => {
-  //       transformValue.current=0; // 처음 위치로 되돌리기
-  //       currentMessageIndex.current =0; // 인덱스 초기화
-  //     }, 3000); // 마지막 메시지 후 3초 대기
-  //   }
-  // }, [currentMessageIndex]);
-
   // 에러 메시지 상태 변수
   const [idMsg, setIdMsg] = useState(msgId[0]);
   const [pwdMsg, setPwdMsg] = useState(msgPwd[0]);
@@ -144,15 +112,11 @@ function Login() {
       <div className="join-top">
         <h2 className="join-title">로그인</h2>
       </div>
-      {/* <div className="slide-text">
-        <div className="slide" style={{ transform: `translateX(${transformValue}%)` }}>
-          {messages.map((message, index) => (
-            <div key={index} className={`message ${currentMessageIndex === index ? "active" : ""}`}>
-              {message}
-            </div>
-          ))}
-        </div>
-      </div> */}
+      <ul className="slide-text">
+        <li className="slide">아웃프런과 함께 달릴 준비 되셨나요? 😎</li>
+        <li className="slide">아웃프런이 다 알려드릴게요. 따라오세요👍</li>
+        <li className="slide">다양한 학습의 기회를 얻으세요 💖</li>
+      </ul>
       <form className="join-form" onSubmit={onSubmit}>
         <ul>
           <li className="join-id">

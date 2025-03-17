@@ -100,32 +100,57 @@
     }
   }
 
-  .msg {
-    font-size: 1.2rem;
-    padding: .4rem .6rem 0;
-  }
-
   .slide-text {
     position: relative;
-    overflow: hidden; // 넘치는 내용 숨기기
+    overflow: hidden;
+
     font-size: 1.4rem;
-    text-align: center;
     color: $color-midgray;
-    padding-top: 2rem;
+    padding: 2rem 0;
+    text-align: center;
+    line-height: 3;
+  }
   
-    .slide {
-      display: flex; // Flexbox를 사용하여 메시지를 나란히 배치
-      transition: transform 0.5s ease-in-out; // 슬라이드 애니메이션 효과
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  
+    animation: slider 7.5s infinite linear;
+  }
+  
+  .slide:nth-child(1) {
+    animation-delay: 0;
+  }
+  .slide:nth-child(2) {
+    animation-delay: -2.5s;
+  }
+  .slide:nth-child(3) {
+    animation-delay: -5s;
+  }
+  
+  @keyframes slider {
+    0% {
+      transform: translateX(0);
     }
   
-    .message {
-      min-width: 100%; // 각 메시지가 슬라이드 영역의 전체 너비를 차지하도록 설정
-      opacity: 0; // 기본적으로 투명하게 설정
-      transition: opacity 0.5s ease-in-out; // 부드러운 전환 효과
+    26% {
+      transform: translateX(0);
+    }
+    33% {
+      transform: translateX(-100%);
+      animation-timing-function: step-end;
+    }
+    93% {
+      transform: translateX(100%);
+    }
   
-      &.active {
-        opacity: 1; // 활성화된 메시지는 보이게 설정
-      }
+    100% {
+      transform: translateX(0);
     }
   }
 }
