@@ -75,13 +75,68 @@ function Mypage() {
     setSelectedReview(null);
   };
 
+  const [profileImg, setProfileImg] = useState("./images/mypage/1.png"); // 기본 프로필 이미지
+  const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB 제한
+  const ALLOWED_EXTENSIONS = ["jpg", "jpeg", "png", "gif"]; // 허용 확장자
+
+  useEffect(() => {
+    const storedUser = sessionStorage.getItem("minfo");
+    if (storedUser) {
+      setUserInfo(JSON.parse(storedUser));
+    }
+
+    // 저장된 프로필 이미지 가져오기
+    const savedProfile = localStorage.getItem("profile-img");
+    if (savedProfile) {
+      setProfileImg(savedProfile);
+    }
+  }, []);
+
+  // 프로필 이미지 변경 핸들러
+  const handleProfileChange = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      // 확장자 확인
+      const fileExtension = file.name.split(".").pop().toLowerCase();
+      if (!ALLOWED_EXTENSIONS.includes(fileExtension)) {
+        alert("이미지 파일(jpg, jpeg, png, gif)만 업로드할 수 있습니다.");
+        return;
+      }
+
+      // 파일 크기 확인
+      if (file.size > MAX_FILE_SIZE) {
+        alert("이미지 크기가 2MB를 초과했습니다. 다른 이미지를 선택해주세요.");
+        return;
+      }
+
+      // 파일이 유효하면 로컬 스토리지에 저장
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const imageUrl = e.target.result;
+        setProfileImg(imageUrl);
+        localStorage.setItem("profile-img", imageUrl); // 변경된 프로필 저장
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="mypage-wrap">
       <div className="mypage-top">
         <h2>{userInfo ? `${userInfo.unm}님의 마이페이지` : "마이페이지"}</h2>
-        <picture>
-          <img src="./images/mypage/1.png" alt="profile" />
-        </picture>
+        <label htmlFor="profile-upload">
+          <picture>
+            <img src={profileImg} alt="profile" />
+          </picture>
+        </label>
+        <input
+          type="file"
+          id="profile-upload"
+          accept="image/*"
+          style={{ display: "none" }}
+          onChange={handleProfileChange}
+        />
         <span>ID : {userInfo ? userInfo.uid : "로그인 필요!"}</span>
         <p>
           <b>{userInfo ? userInfo.unm : "비회원"}</b>님 😎 <b>아웃프런</b>에
@@ -148,7 +203,11 @@ function Mypage() {
           <ul className="myboard-list">
             {userBoardPosts.length > 0 ? (
               userBoardPosts.map((post) => (
-                <li key={post.idx} onClick={() => navigate("/board", { state: { mode: "R", selData: post } })}>
+                <li
+                  key={post.idx}
+                  onClick={() =>
+                    navigate("/board", { state: { mode: "R", selData: post } })
+                  }>
                   <h4>{post.tit}</h4>
                   <p>
                     {post.date} | 조회수: {post.cnt}
