@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import "../../scss/mypage.scss";
 import { useNavigate } from "react-router-dom";
-import { initBoardData } from "../../js/func/board_fn";
 
 function Mypage() {
   const navigate = useNavigate();
