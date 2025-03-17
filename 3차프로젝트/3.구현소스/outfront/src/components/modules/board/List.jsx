@@ -1,4 +1,4 @@
-// DC PJ 게시판 리스트 모드 모듈 - List.jsx
+// 게시판 리스트 컴포넌트 - ./src/componets/modules/board/List.jsx
 
 import React, { Fragment, useContext } from "react";
 import { dCon } from "../dCon";
@@ -42,7 +42,7 @@ function List({
     pgPgLimit++;
   } /// if ///
 
-  console.log('페이징의 페이징 한계수:',pgPgLimit);
+  console.log("페이징의 페이징 한계수:", pgPgLimit);
 
   /*********************************** 
         페이징코드 리턴 함수
@@ -82,8 +82,7 @@ function List({
             // 상태변수인 페이지번호 변경하기(리랜더링!)
             setPageNum(initNum - (pgPgSize - 1));
             // 이전 페이징 첫번호는 (시작값-(페페사이즈-1)) 이다!
-          }}
-        >
+          }}>
           ◀{" "}
         </a>
       );
@@ -111,8 +110,7 @@ function List({
                 onClick={() => {
                   // 페이지번호 업데이트하기
                   setPageNum(i + 1);
-                }}
-              >
+                }}>
                 {i + 1}
               </a>
             )
@@ -140,8 +138,7 @@ function List({
             // 상태변수인 페이지번호 변경하기(리랜더링!)
             setPageNum(limitNum + 1);
             // 다음 페이징 첫번호는 (한계값+1) 이다!
-          }}
-        >
+          }}>
           {" "}
           ▶
         </a>
@@ -207,8 +204,7 @@ function List({
                     setMode("R");
                     // 해당 데이터 참조변수에 저장하기
                     selRecord.current = v;
-                  }}
-                >
+                  }}>
                   {v.tit}
                 </a>
               </td>
@@ -239,8 +235,7 @@ function List({
                     onClick={() => {
                       // 글쓰기 모드로 변경하기
                       setMode("W");
-                    }}
-                  >
+                    }}>
                     Write
                   </button>
                 )

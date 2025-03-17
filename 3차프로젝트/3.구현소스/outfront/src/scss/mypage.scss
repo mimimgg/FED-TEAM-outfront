@@ -2,7 +2,7 @@
 
 .mypage-wrap {
   margin: 40px auto 80px;
-  max-width: 1440px;  
+  max-width: 1440px;
   .mypage-top {
     text-align: center;
     padding: 40px 0;
@@ -50,7 +50,7 @@
     gap: 5%;
     @include tablet-medium {
       display: block;
-      gap:0;
+      gap: 0;
       padding: 24px;
     }
     .box {
@@ -115,6 +115,18 @@
     }
     .myboard-list {
       margin: 24px auto;
+      position: relative;
+      li {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px dotted #ddd;
+        padding: 1.4rem 0;
+        font-size: 1.2rem;
+        h4 {
+          width: 60%;
+          cursor: pointer;
+        }
+      }
     }
   }
   .empty-msg {
@@ -136,7 +148,7 @@
     width: 300px;
     text-align: center;
     z-index: 1000;
-  
+
     .popup-content {
       line-height: 1.4;
       h3 {
@@ -149,7 +161,7 @@
         font-size: 1.4rem;
       }
     }
-  
+
     .close-btn {
       margin-top: 10px;
       padding: 5px 10px;
@@ -160,5 +172,4 @@
       border-radius: 5px;
     }
   }
-  
 }

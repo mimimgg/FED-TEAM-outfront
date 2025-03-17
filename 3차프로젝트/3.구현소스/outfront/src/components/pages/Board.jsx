@@ -1,8 +1,6 @@
-// board.jsx
-import React, { useEffect, useRef, useState } from "react";
+// 게시판 컴포넌트트 ./src/components/pages/board.jsx
 
-// 제이쿼리 불러오기 ///
-import $ from "jquery";
+import React, { useEffect, useRef, useState } from "react";
 
 // 게시판용 CSS 불러오기 ////
 import "../../scss/pages/board.scss";
@@ -14,7 +12,19 @@ import Read from "../modules/board/Read";
 import Write from "../modules/board/Write";
 import Modify from "../modules/board/Modify";
 
+import { useLocation } from "react-router-dom";
+
 function Board() {
+
+  // Mypage.jsx에서 전달된 state 값 반영
+  const location = useLocation();
+  useEffect(() => {
+    if (location.state) {
+      setMode(location.state.mode);
+      selRecord.current = location.state.selData;
+    }
+  }, [location.state]);
+
   // [ 로컬스토리지 게시판 데이터 정보확인 함수호출! ] ////
   initBoardData();
 
@@ -125,6 +135,7 @@ function Board() {
           <Read
             setMode={setMode} // 모드 상태변수 setter
             selRecord={selRecord} // 선택데이터 참조변수
+            path="/board/read/:idx"
           />
         )
       }

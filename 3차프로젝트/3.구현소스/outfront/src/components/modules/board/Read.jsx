@@ -1,4 +1,4 @@
-// DC PJ 게시판 읽기 모드 모듈 - Read.jsx
+// 게시판 읽기 컴포넌트 - ./src/componets/modules/board/Read.jsx
 
 import React, { useContext } from "react";
 import { dCon } from "../dCon";
@@ -9,12 +9,9 @@ function Read({ setMode, selRecord }) {
 
   // 선택된 참조변수 데이터 넣기
   const selData = selRecord.current;
-  
-  // 전역 컨텍스트 API 사용하기!!
-  const myCon = useContext(dCon);
 
-  console.log('myCon.loginSts:', myCon.loginSts);
-  console.log('myCon.loginSts.uid :', myCon.loginSts.uid); // undified
+  // 전역 컨텍스트 API 사용하기!!
+  const myCon = useContext(dCon);  
 
   // 리턴 코드구역 ///////////////////
   return (
@@ -55,8 +52,7 @@ function Read({ setMode, selRecord }) {
                 cols="60"
                 rows="10"
                 readOnly={true}
-                defaultValue={selData.cont}
-              ></textarea>
+                defaultValue={selData.cont}></textarea>
             </td>
           </tr>
           <tr>
@@ -74,8 +70,7 @@ function Read({ setMode, selRecord }) {
                 onClick={() => {
                   // 리스트 모드('L')로 변경하기
                   setMode("L");
-                }}
-              >
+                }}>
                 List
               </button>
               {
@@ -86,8 +81,7 @@ function Read({ setMode, selRecord }) {
                     onClick={() => {
                       // 수정모드로 변경하기
                       setMode("M");
-                    }}
-                  >
+                    }}>
                     Modify
                   </button>
                 )

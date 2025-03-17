@@ -1,3 +1,4 @@
+// 마이페이지 컴포넌트 ./src/componets/page/Mypage.jsx
 import React, { useEffect, useState } from "react";
 import "../../scss/mypage.scss";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +27,7 @@ function Mypage() {
       fetch("/data/user_data.json")
         .then((res) => res.json())
         .then((data) => {
-          const currentUser = data.find(user => user.uid === userInfo.uid);
+          const currentUser = data.find((user) => user.uid === userInfo.uid);
           if (currentUser) {
             setUserEduList(currentUser.eduIng);
           }
@@ -83,7 +84,8 @@ function Mypage() {
         </picture>
         <span>ID : {userInfo ? userInfo.uid : "로그인 필요!"}</span>
         <p>
-          <b>{userInfo ? userInfo.unm : "비회원"}</b>님 😎 <b>아웃프런</b>에 오신 것을 환영합니다! 😍 <br />
+          <b>{userInfo ? userInfo.unm : "비회원"}</b>님 😎 <b>아웃프런</b>에
+          오신 것을 환영합니다! 😍 <br />
           <b>당장 공부하지 않으면 당신의 인생이 망할 수도 있습니다!!</b>
         </p>
       </div>
@@ -101,26 +103,36 @@ function Mypage() {
             {userEduList.length > 0 ? (
               userEduList.map((edu) => {
                 const userReview = reviewList.find(
-                  (review) => review.uid === userInfo.uid && review.eduId === edu.eduId
+                  (review) =>
+                    review.uid === userInfo.uid && review.eduId === edu.eduId
                 );
 
                 return (
                   <li key={edu.eduId}>
                     <picture onClick={() => navigate(`/detail/${edu.eduId}`)}>
-                      <img src={`/images/edu_thumb/${edu.eduId}.png`} alt={`강의 이미지 ${edu.eduId}`} />
+                      <img
+                        src={`/images/edu_thumb/${edu.eduId}.png`}
+                        alt={`강의 이미지 ${edu.eduId}`}
+                      />
                     </picture>
                     <h4>{edu.eduName}</h4>
-                    <p>{edu.eduState} ({edu.eduRate}%)</p>
+                    <p>
+                      {edu.eduState} ({edu.eduRate}%)
+                    </p>
                     {parseInt(edu.eduRate) >= 60 && (
-                      <button className="my-review-btn" onClick={() => openReviewPopup(edu.eduId)}>
-                        {userReview ? `평점 (⭐${userReview.grade})` : "수강평 작성"}
+                      <button
+                        className="my-review-btn"
+                        onClick={() => openReviewPopup(edu.eduId)}>
+                        {userReview
+                          ? `평점 (⭐${userReview.grade})`
+                          : "수강평 작성"}
                       </button>
                     )}
                   </li>
                 );
               })
             ) : (
-              <li>학습중인 강의가 없습니다.</li>
+              <li className="empty-msg">학습중인 강의가 없습니다.</li>
             )}
           </ul>
         </div>
@@ -136,28 +148,34 @@ function Mypage() {
           <ul className="myboard-list">
             {userBoardPosts.length > 0 ? (
               userBoardPosts.map((post) => (
-                <li key={post.idx}>
-                  <a href="#none">
-                    <h4>{post.tit}</h4>
-                    <p>{post.date} | 조회수: {post.cnt}</p>
-                  </a>
+                <li key={post.idx} onClick={() => navigate("/board", { state: { mode: "R", selData: post } })}>
+                  <h4>{post.tit}</h4>
+                  <p>
+                    {post.date} | 조회수: {post.cnt}
+                  </p>
                 </li>
               ))
             ) : (
-              <li className="empty-msg"><p>작성한 게시글이 없습니다.</p></li>
+              <li className="empty-msg">
+                <p>작성한 게시글이 없습니다.</p>
+              </li>
             )}
           </ul>
         </div>
       </div>
-      
+
       {/* 리뷰 팝업 */}
       {showPopup && selectedReview && (
         <div className="review-popup">
           <div className="popup-content">
             <h3>수강평</h3>
-            <p><b>평점:</b> ⭐ {selectedReview.grade}/5</p>
+            <p>
+              <b>평점:</b> ⭐ {selectedReview.grade}/5
+            </p>
             <p>{selectedReview.text}</p>
-            <button className="close-btn" onClick={closePopup}>닫기</button>
+            <button className="close-btn" onClick={closePopup}>
+              닫기
+            </button>
           </div>
         </div>
       )}
