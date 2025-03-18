@@ -2,12 +2,16 @@
 import React, { useEffect, useState } from "react";
 import "../../scss/mypage.scss";
 import { useNavigate } from "react-router-dom";
+// 로그인한 사용자의 학습 정보 import 직접 불러오기
+import userData from "../../js/data/user_data.json";
+// 리뷰 데이터 import 직접 불러오기
+import reviewData from "../../js/data/review_data.json";
 
 function Mypage() {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState(null); // 로그인한 사용자 정보
   const [userEduList, setUserEduList] = useState([]); // 로그인한 사용자의 학습 목록
-  const [reviewList, setReviewList] = useState([]); // 리뷰 데이터
+  const [reviewList, setReviewList] = useState(reviewData); // 리뷰 데이터
   const [selectedReview, setSelectedReview] = useState(null); // 선택된 리뷰 정보 (팝업)
   const [showPopup, setShowPopup] = useState(false); // 팝업 표시 여부
   const [userBoardPosts, setUserBoardPosts] = useState([]); // 사용자의 게시글 목록
@@ -16,43 +20,30 @@ function Mypage() {
     // 세션 스토리지에서 로그인한 사용자 정보 가져오기
     const storedUser = sessionStorage.getItem("minfo");
     if (storedUser) {
-      setUserInfo(JSON.parse(storedUser));
-    }
-  }, []);
+      const parsedUser = JSON.parse(storedUser);
+      setUserInfo(parsedUser);
 
-  useEffect(() => {
-    // 로그인한 사용자의 학습 정보 가져오기
-    if (userInfo) {
-      fetch("/data/user_data.json")
-        .then((res) => res.json())
-        .then((data) => {
-          const currentUser = data.find((user) => user.uid === userInfo.uid);
-          if (currentUser) {
-            setUserEduList(currentUser.eduIng);
-          }
-        })
-        .catch(console.error);
-    }
-  }, [userInfo]);
-
-  useEffect(() => {
-    // 리뷰 데이터 불러오기
-    fetch("/data/review_data.json")
-      .then((res) => res.json())
-      .then(setReviewList)
-      .catch(console.error);
-  }, []);
-
-  useEffect(() => {
-    // 게시판 데이터 불러오기
-    // initBoardData(); // 로컬 스토리지 초기화
-    const boardData = JSON.parse(localStorage.getItem("board-data")) || [];
-
-    if (userInfo) {
-      const myPosts = boardData.filter((post) => post.uid === userInfo.uid);
+      // 로그인한 사용자의 학습 정보 가져오기
+      const currentUser = userData.find((user) => user.uid === parsedUser.uid);
+      if (currentUser) {
+        setUserEduList(currentUser.eduIng);
+      }
+      // 게시판 데이터 불러오기
+      const boardData = JSON.parse(localStorage.getItem("board-data")) || [];
+      const myPosts = boardData.filter((post) => post.uid === parsedUser.uid);
       setUserBoardPosts(myPosts);
     }
-  }, [userInfo]);
+  }, []);
+
+  // useEffect(() => {
+  //   // 게시판 데이터 불러오기
+  //   // initBoardData(); // 로컬 스토리지 초기화
+  //   const boardData = JSON.parse(localStorage.getItem("board-data")) || [];
+  //   if (userInfo) {
+  //     const myPosts = boardData.filter((post) => post.uid === userInfo.uid);
+  //     setUserBoardPosts(myPosts);
+  //   }
+  // }, [userInfo]);
 
   // 리뷰 팝업 열기 함수
   const openReviewPopup = (eduId) => {
