@@ -1,9 +1,9 @@
-// 게시판 읽기 컴포넌트 - ./src/componets/modules/board/Read.jsx
+// DC PJ 게시판 읽기 모드 모듈 - Read.jsx
 
-import React, { useContext } from "react";
-import { dCon } from "../dCon";
+import React, {useContext} from "react";
+import {dCon} from "../dCon";
 
-function Read({ setMode, selRecord }) {
+function Read({setMode, selRecord}) {
   // setMode - 모든 변경 상태변수 setter
   // selRecord - 선택데이터 참조변수
 
@@ -11,48 +11,32 @@ function Read({ setMode, selRecord }) {
   const selData = selRecord.current;
 
   // 전역 컨텍스트 API 사용하기!!
-  const myCon = useContext(dCon);  
+  const myCon = useContext(dCon);
+  // console.log('Read에서 loginSts:',myCon.loginSts);
 
   // 리턴 코드구역 ///////////////////
   return (
     <main className="cont">
-      {/* <h1 className="tit">OPINION</h1> */}
+      <h1 className="tit">OPINION</h1>
       <table className="dtblview readone">
         <caption>OPINION : Read</caption>
         <tbody>
           <tr>
             <td>Name</td>
             <td>
-              <input
-                type="text"
-                className="name"
-                size="20"
-                readOnly={true}
-                defaultValue={selData.unm}
-              />
+              <input type="text" className="name" size="20" readOnly={true} defaultValue={selData.unm} />
             </td>
           </tr>
           <tr>
             <td>Title</td>
             <td>
-              <input
-                type="text"
-                className="subject"
-                size="60"
-                readOnly={true}
-                defaultValue={selData.tit}
-              />
+              <input type="text" className="subject" size="60" readOnly={true} defaultValue={selData.tit} />
             </td>
           </tr>
           <tr>
             <td>Content</td>
             <td>
-              <textarea
-                className="content"
-                cols="60"
-                rows="10"
-                readOnly={true}
-                defaultValue={selData.cont}></textarea>
+              <textarea className="content" cols="60" rows="10" readOnly={true} defaultValue={selData.cont}></textarea>
             </td>
           </tr>
           <tr>

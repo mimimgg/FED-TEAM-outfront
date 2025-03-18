@@ -142,7 +142,11 @@
   .empty-msg {
     width: 100% !important;
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 1.4rem !important;
+    display: block !important;
+    border: none !important;
+    padding: 1.4rem 0;
+    color: #777;
   }
 
   // 리뷰 상세 팝업

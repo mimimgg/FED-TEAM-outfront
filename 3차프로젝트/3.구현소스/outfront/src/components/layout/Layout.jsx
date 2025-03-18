@@ -6,7 +6,7 @@ import MainArea from "./MainArea";
 
 // 컨텍스트 API 로 전역변수구역 설정하기! ////
 import { dCon } from "../modules/dCon";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 
 export default function Layout() {

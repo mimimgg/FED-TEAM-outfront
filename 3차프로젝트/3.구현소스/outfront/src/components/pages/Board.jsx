@@ -1,21 +1,17 @@
-// 게시판 컴포넌트트 ./src/components/pages/board.jsx
-
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 
 // 게시판용 CSS 불러오기 ////
 import "../../scss/pages/board.scss";
 
 // 로컬스토리지 확용 JS ////
-import { initBoardData } from "../../js/func/board_fn";
+import {initBoardData} from "../../js/func/board_fn";
 import List from "../modules/board/List";
 import Read from "../modules/board/Read";
 import Write from "../modules/board/Write";
 import Modify from "../modules/board/Modify";
-
 import { useLocation } from "react-router-dom";
 
 function Board() {
-
   // Mypage.jsx에서 전달된 state 값 반영
   const location = useLocation();
   useEffect(() => {
@@ -28,7 +24,7 @@ function Board() {
   // [ 로컬스토리지 게시판 데이터 정보확인 함수호출! ] ////
   initBoardData();
 
-  // [ 로컬스 데이터 변수할당하기! ] //////
+  // [ 로컬스 데이터 변수할당하기! : 원본 배열 데이터 ] //////
   const baseData = JSON.parse(localStorage.getItem("board-data"));
 
   // [ ★★ 후크 상태관리 변수구역 ★★ ] //////
@@ -52,7 +48,7 @@ function Board() {
   // [2] 전체 레코드 개수(배열데이터 개수)
   // -> 매번 계산하지 않도록 참조변수로 생성한다!
   const totalCount = useRef(baseData.length);
-  // console.log("전체개수:", totalCount);
+  console.log("전체개수:", totalCount);
 
   // [3] 페이징의 페이징 번호
   const pgPgNum = useRef(1);
@@ -65,16 +61,9 @@ function Board() {
   // ->>> 매번 같은 값을 유지해야하는 변수들
 
   // [1] 페이지당 개수 : 페이지당 레코드수
-  const unitSize = 10;
+  const unitSize = 7;
   // [2] 페이징의 페이징 개수 : 한번에 보여줄 페이징 개수
   const pgPgSize = 3;
-
-  // [ 데이터 정렬 ] /////////////
-  baseData
-    // ((기준1))-> 최신날짜로 내림차순
-    .sort((a, b) => (a.date > b.date ? -1 : a.date < b.date ? 1 : 0))
-    // ((기준2))-> idx로 내림차순
-    .sort((a, b) => (a.idx > b.idx ? -1 : a.idx < b.idx ? 1 : 0));
 
   // [ 일부 데이터만 선택하기 ]
   // -> 페이징을 하기위해 일정단위수만큼 보이기
@@ -89,18 +78,49 @@ function Board() {
   // 시작수(5*(2-1)) = 5 / 한계수 (5*2) = 10
   // 시작수(5*(3-1)) = 10 / 한계수 (5*3) = 15
 
-  // 선택 데이터 담을 배열변수 ///
-  const selData = [];
+  // ★★★★★★★★★★★★★★★★★★★★★★★★★ //
+  // ★★★★★ [데이터 필터링하기] ★★★★★ //
+  // ★★★★★★★★★★★★★★★★★★★★★★★★★ //
+
+  // [ 전체 데이터 검색 및 정렬 ] /////////////
+  // if(keyword == '')
+  baseData
+    // ((기준1))-> 최신날짜로 내림차순
+    .sort((a, b) => (a.date > b.date ? -1 : a.date < b.date ? 1 : 0))
+    // ((기준2))-> idx로 내림차순
+    .sort((a, b) => (a.idx > b.idx ? -1 : a.idx < b.idx ? 1 : 0));
+
+  console.log("slice를 위한 시작값/끝값", initNum, "/", limitNum);
+
+  //  [ slice() 배열 메서드를 이용한 부분값 가져오기 ]
+  const selData = baseData.slice(initNum, limitNum);
+  // 배열 메서드 slice(시작순번, 끝순번)
+  // (1) 시작순번 : 시작할 배열값 첫번째 순번
+  // (2) 끝순번 : 출력에 포함되지 않는 마지막째 배열순번
+  // (3) slice 중요특징 :
+  // 1) 배열원본을 보존하여 새로운 배열생성!
+  // 2) 끝순번 배열번호가 실제 배열번호보다 커도 에러나지 않고
+  //    자동으로 없는 순번은 빠져나가준다! (내부 break셋팅됨!)
+
+  // [선택 데이터 담을 배열변수 : for문을 사용한 경우] ///
+  // const selData = [];
 
   // [ ★★ 페이징에 맞게 데이터를 다시 담기 ★★ ] ///
-  for (let i = initNum; i < limitNum; i++) {
-    // ★★★매우중요함!!! 여분 페이지에서
-    // (전체레코드수-1)보다 크면 for문을 나가야함!
-    if (i > totalCount.current - 1) break;
+  // for (let i = initNum; i < limitNum; i++) {
+  //   // ★★★매우중요함!!! 여분 페이지에서
+  //   // (전체레코드수-1)보다 크면 for문을 나가야함!
+  //   if (i > totalCount.current - 1) break;
 
-    // 데이터 골라담기! ///
-    selData.push(baseData[i]);
-  } //////////// for : 선택데이터 담기 ///////////
+  //   // 데이터 골라담기! ///
+  //   selData.push(baseData[i]);
+  // } //////////// for : 선택데이터 담기 ///////////
+
+  /********************************************* 
+    함수명 : bindList
+    기능 : 페이지별 데이터 리스트를 생성
+    *********************************************/
+
+  const bindList = () => {};
 
   // DOM 랜더링 실행구역 ///////
   useEffect(() => {
@@ -135,7 +155,6 @@ function Board() {
           <Read
             setMode={setMode} // 모드 상태변수 setter
             selRecord={selRecord} // 선택데이터 참조변수
-            path="/board/read/:idx"
           />
         )
       }
@@ -146,6 +165,8 @@ function Board() {
           <Write
             setMode={setMode} // 모드 상태변수 setter
             totalCount={totalCount} // 전체 개수 참조변수
+            setPageNum={setPageNum} // 리스트 페이지번호 setter
+            pgPgNum={pgPgNum} // 페이징의 페이징 번호
           />
         )
       }
@@ -157,6 +178,8 @@ function Board() {
             setMode={setMode} // 모드 상태변수 setter
             selRecord={selRecord} // 선택데이터 참조변수
             totalCount={totalCount} // 전체 개수 참조변수
+            setPageNum={setPageNum} // 리스트 페이지번호 setter
+            pgPgNum={pgPgNum} // 페이징의 페이징 번호
           />
         )
       }
