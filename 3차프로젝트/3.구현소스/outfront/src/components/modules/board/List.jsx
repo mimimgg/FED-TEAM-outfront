@@ -1,7 +1,7 @@
 // DC PJ 게시판 리스트 모드 모듈 - List.jsx
 
-import React, {Fragment, useContext} from "react";
-import {dCon} from "../dCon";
+import React, { Fragment, useContext } from "react";
+import { dCon } from "../dCon";
 
 function List({
   selData, // 선택된 배열데이터 전달
@@ -13,6 +13,14 @@ function List({
   totalCount, // 전체 개수 참조변수
   pgPgSize, // 페이징의 페이징 개수
   pgPgNum, // 페이징의 페이징 번호
+
+  searchFn, // 검색함수
+  keyword, // 검색어 상태변수 getter
+  setKeyword, // 검색어 상태변수 setter
+  order, // 정렬 상태변수
+  setOrder, // 정렬 상태변수 setter
+  sortCta, // 정렬기준 상태변수 getter
+  setSortCta, // 정렬기준 상태변수 setter
 }) {
   // 전역 컨텍스트 API 사용하기!!
   const myCon = useContext(dCon);
@@ -81,7 +89,8 @@ function List({
               pgPgNum.current = 1;
               // (2) 페이지 번호도 첫 페이지번호로 변경!
               setPageNum(1);
-            }}>
+            }}
+          >
             «{" "}
           </a>
           {/* 이전 페이징으로 이동하기 */}
@@ -95,7 +104,8 @@ function List({
               // 상태변수인 페이지번호 변경하기(리랜더링!)
               setPageNum(initNum - (pgPgSize - 1));
               // 이전 페이징 첫번호는 (시작값-(페페사이즈-1)) 이다!
-            }}>
+            }}
+          >
             ◀{" "}
           </a>
         </Fragment>
@@ -124,7 +134,8 @@ function List({
                 onClick={() => {
                   // 페이지번호 업데이트하기
                   setPageNum(i + 1);
-                }}>
+                }}
+              >
                 {i + 1}
               </a>
             )
@@ -143,6 +154,7 @@ function List({
     if (pgPgNum.current !== pgPgLimit)
       hcode.push(
         <Fragment key="-2">
+          {/* 다음 페이징 이동하기 */}
           <a
             href="#"
             title="Next Paging Section"
@@ -153,25 +165,27 @@ function List({
               // 상태변수인 페이지번호 변경하기(리랜더링!)
               setPageNum(limitNum + 1);
               // 다음 페이징 첫번호는 (한계값+1) 이다!
-            }}>
+            }}
+          >
             {" "}
             ▶
           </a>
-          {/* 맨끝 페이지 이동하기 */}
+          {/* 맨끝 페이징 이동하기 */}
           <a
             href="#"
             title="Last Paging Section"
             onClick={() => {
-              // (1) 페이징의 페이징번호 맨끝번호로 변경
+              // (1) 페이징의 페이징번호 맨끝번호로 변경!
               pgPgNum.current = pgPgLimit;
               // (2) 다음 페이징의 페이징 첫 페이지번호로
               // 상태변수인 페이지번호 변경하기(리랜더링!)
               setPageNum((pgPgLimit - 1) * pgPgSize + 1);
-              // 마지막 페이징 첫번호는?
+              // 마지막 페이징 첫번호는
               // 페이징의 마지막 페이징 전페이지(pgPgLimit-1)
               // 여기에 페이징 크기 곱하고
-              // 더하기 1하면 다음 체이징의 첫번째 페이지번호임!
-            }}>
+              // 더하기 1하면 다음 페이징의 첫번째 페이지번호임!
+            }}
+          >
             {" "}
             »
           </a>
@@ -197,14 +211,66 @@ function List({
           <option value="cont">Contents</option>
           <option value="unm">Writer</option>
         </select>
-        <select name="sel" id="sel" className="sel">
-          <option value="0">Descending</option>
-          <option value="1">Ascending</option>
+        <select
+          name="sel"
+          id="sel"
+          className="sel"
+          value={order}
+          onChange={(e) => {
+            // 정렬값 반대로 변경하기
+            setOrder(order * -1);
+            // 변경시 변경한 선택값 반영하기
+            e.target.value = order;
+            // 첫 페이지로 이동
+            setPageNum(1);
+            // 페이징의 페이징구역 초기화
+            pgPgNum.current = 1;
+          }}
+        >
+          <option value="1">Descending</option>
+          <option value="-1">Ascending</option>
         </select>
-        <input id="stxt" type="text" maxLength="50" />
-        <button className="sbtn">Search</button>
-        <select name="sort_cta" id="sort_cta" className="sort_cta">
-          <option value="idx">Recent</option>
+        <input
+          id="stxt"
+          type="text"
+          maxLength="50"
+          defaultValue={keyword.kw}
+          onKeyUp={(e) => {
+            // 엔터를 친 경우 ///
+            if (e.key === "Enter") e.target.nextElementSibling.click();
+            // 다음 형제요소인 버튼 클릭이벤트 발생!
+
+            // 페이지, 페이징 모두 초기화
+            setPageNum(1);
+            pgPgNum.currnt = 1;
+          }}
+        />
+        <button className="sbtn" onClick={searchFn}>
+          Search
+        </button>
+
+        {/* 검색기준 선택박스 */}
+        <select
+          name="sort_cta"
+          id="sort_cta"
+          className="sort_cta"
+          style={{
+            float: "right",
+            translate: "0 5px",
+          }}
+          value={sortCta}
+          onChange={(e) => {
+            // 정렬기준 변경하기
+            setSortCta(e.target.value);
+            // 변경된 값 반영하기
+            e.target.value = sortCta;
+            // 첫 페이지로 이동
+            setPageNum(1);
+            // 페이징의 페이징구역 초기화
+            pgPgNum.current = 1;
+          }}
+        >
+          <option value="date">Recent</option>
           <option value="tit">Title</option>
         </select>
       </div>
@@ -238,7 +304,8 @@ function List({
                     setMode("R");
                     // 해당 데이터 참조변수에 저장하기
                     selRecord.current = v;
-                  }}>
+                  }}
+                >
                   {v.tit}
                 </a>
               </td>
@@ -269,7 +336,8 @@ function List({
                     onClick={() => {
                       // 글쓰기 모드로 변경하기
                       setMode("W");
-                    }}>
+                    }}
+                  >
                     Write
                   </button>
                 )
