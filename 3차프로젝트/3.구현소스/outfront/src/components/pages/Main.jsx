@@ -91,6 +91,21 @@ const Main = () => {
   return (
     <div className="main-wrap">
       <h2>{selCate}</h2>
+      <div className="sort-opt">
+        {/* 강의 이름, 가격 sort 선택박스 (이름순/낮은가격/높은가격) */}
+        <select>
+          <option value="name">이름순</option>
+          <option value="low-price">낮은가격</option>
+          <option value="high-price">높은가격</option>
+        </select>
+        {/* 강의 레벨순 sort 선택박스 (입문/초급/중급/고급) */}
+        <select>
+          <option value="level1">입문</option>
+          <option value="level2">초급</option>
+          <option value="level3">중급</option>
+          <option value="level4">고급</option>
+        </select>
+      </div>
       <ul className="edu-menu">
         {categories.map((category, i) => (
           <li key={category}>
@@ -116,7 +131,7 @@ const Main = () => {
             </article>
             <h3>{edu.gName}</h3>
             <p>레벨: {edu.gLevel}</p>
-            <p>가격: {formatPrice(edu.gPrice)}</p>
+            <p>가격: {formatPrice(edu.gPrice)}원</p>
             <span className="hover-txt">
               <p className="ginfo">설명: {edu.gInfo}</p>
               <p>분류: {edu.gSkill}</p>
