@@ -1,9 +1,12 @@
+// 메인 컴포넌트 ./src/components/pages/Main.jsx
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../scss/main.scss";
+// 강의 json 데이터 불러오기
+import eduData from "../../js/data/edu_data.json";
 
 const Main = () => {
-  const [eduList, setEduList] = useState([]);
+  const [eduList, setEduList] = useState(eduData); // import된 강의 데이터를 초기값으로 설정
   const categories = [
     "전체",
     "개발프로그래밍",
@@ -15,16 +18,13 @@ const Main = () => {
   ];
   const navigate = useNavigate();
 
-  // URL 해시 값에서 카테고리 가져오기
   const getHashCategory = () => {
     const hash = decodeURIComponent(window.location.hash.replace("#", ""));
     return categories.includes(hash) ? hash : "전체";
   };
 
-  // [1] 선택된 카테고리 상태값
   const [selCate, setSelCate] = useState(getHashCategory());
 
-  // [2] 해시 변경 시 카테고리 업데이트
   useEffect(() => {
     const handleHashChange = () => {
       setSelCate(getHashCategory());
@@ -34,34 +34,21 @@ const Main = () => {
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
-  // [3] 데이터 불러오기
-  useEffect(() => {
-    fetch("/data/edu_data.json")
-      .then((res) => res.json())
-      .then(setEduList)
-      .catch(console.error);
-  }, []);
-
-  // [4] 가격 형식 변환 함수
   const formatPrice = (price) =>
     price.includes("₩")
       ? `₩${Number(price.replace("₩", "")).toLocaleString()}`
       : price;
 
-  // [5] 선택된 카테고리에 따라 필터링된 강의 리스트
   const filterList =
     selCate === "전체"
       ? eduList
       : eduList.filter(({ gCate }) => gCate === selCate);
 
-  // [6] 카테고리 버튼 클릭 시 URL 해시 변경
   const handleCategoryClick = (category) => {
     window.location.hash = category;
   };
 
-  // [7] 장바구니 버튼 클릭 이벤트
   const cartBtnFn = (e) => {
-    //링크막기
     e.preventDefault();
     console.log("장바구니 버튼 클릭!", e.currentTarget);
     return false;
