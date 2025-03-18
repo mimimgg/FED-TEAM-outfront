@@ -96,8 +96,10 @@ const Main = () => {
               <img src={`/images/edu_thumb/${edu.idx}.png`} alt={`강의 이미지 ${edu.idx}`} />
             </picture>
             <h3>{edu.gName}</h3>
+            <p className="ginfo"> {edu.gInfo}</p>
             <p>레벨: {edu.gLevel}</p>
             <p>가격: {formatPrice(edu.gPrice)}</p>
+            <p>분류: {edu.gCate}</p>
           </li>
         ))}
       </ul>

@@ -98,16 +98,14 @@
         padding: 12px 0;
       }
       p {
-        margin-bottom: 8px;
+        margin-bottom: 4px;
       }
-      .hover-txt {
-        .ginfo {
-          text-overflow: ellipsis;
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2;
-        }
+      .ginfo {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
       }
       .cart-btn {
         position: absolute;
