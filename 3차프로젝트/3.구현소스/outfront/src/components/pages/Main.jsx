@@ -100,6 +100,7 @@ const Main = () => {
             <p>레벨: {edu.gLevel}</p>
             <p>가격: {formatPrice(edu.gPrice)}</p>
             <p>분류: {edu.gCate}</p>
+            {/* <a class="cart-btn" href="#none"><i class="fa-solid fa-cart-shopping"></i></a> */}
           </li>
         ))}
       </ul>

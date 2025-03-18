@@ -5,6 +5,8 @@ import {useParams, useNavigate} from "react-router-dom";
 import "../../scss/detail_view.scss";
 // 강의 json 데이터 불러오기
 import eduData from "../../js/data/edu_data.json";
+// 리뷰 json 데이터 불러오기
+import reviewData from "../../js/data/review_data.json";
 
 const DetailView = () => {
   const {id} = useParams();
@@ -30,13 +32,8 @@ const DetailView = () => {
 
   // 리뷰 데이터 가져오기
   useEffect(() => {
-    fetch("/data/review_data.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const filteredReviews = data.filter((item) => item.eduId === Number(id));
+    const filteredReviews = reviewData.filter((item) => item.eduId === Number(id));
         setReviews(filteredReviews);
-      })
-      .catch(console.error);
   }, [id]);
 
   if (!edu) return <p>강의 정보가 없습니다... ㅠㅠ</p>;
@@ -76,7 +73,7 @@ const DetailView = () => {
                 <b>{formatPrice(edu.gPrice)}</b>
               </p>
               <button className="add-edu-btn">수강 신청하기</button>
-              <button className="add-cart-btn">바구니에 담기</button>
+              {/* <button className="add-cart-btn">바구니에 담기</button> */}
             </div>
             <div className="aside-info">
               <p>
