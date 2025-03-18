@@ -6,7 +6,10 @@ import "../../scss/main.scss";
 import eduData from "../../js/data/edu_data.json";
 
 const Main = () => {
-  const [eduList, setEduList] = useState(eduData); // import된 강의 데이터를 초기값으로 설정
+  const [eduList, setEduList] = useState(eduData);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 15; // 페이지당 강의 개수
+
   const categories = [
     "전체",
     "개발프로그래밍",
@@ -28,6 +31,7 @@ const Main = () => {
   useEffect(() => {
     const handleHashChange = () => {
       setSelCate(getHashCategory());
+      setCurrentPage(1); // 카테고리 변경 시 첫 페이지로 이동
     };
 
     window.addEventListener("hashchange", handleHashChange);
@@ -39,10 +43,26 @@ const Main = () => {
       ? `₩${Number(price.replace("₩", "")).toLocaleString()}`
       : price;
 
+  // 선택된 카테고리에 맞게 필터링
   const filterList =
     selCate === "전체"
       ? eduList
       : eduList.filter(({ gCate }) => gCate === selCate);
+
+  // 현재 페이지에 맞는 강의 리스트 가져오기
+  const startIdx = (currentPage - 1) * itemsPerPage;
+  const endIdx = startIdx + itemsPerPage;
+  const currentList = filterList.slice(startIdx, endIdx);
+
+  // 총 페이지 수 계산
+  const totalPages = Math.ceil(filterList.length / itemsPerPage);
+
+  // 페이지 이동 함수
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
 
   const handleCategoryClick = (category) => {
     window.location.hash = category;
@@ -53,6 +73,20 @@ const Main = () => {
     console.log("장바구니 버튼 클릭!", e.currentTarget);
     return false;
   };
+
+  // 📌 페이지 번호 5개씩 표시하는 로직
+  const maxPageNumbers = 5; // 최대 5개의 페이지 번호 표시
+  let startPage = Math.max(1, currentPage - Math.floor(maxPageNumbers / 2));
+  let endPage = Math.min(totalPages, startPage + maxPageNumbers - 1);
+
+  if (endPage - startPage < maxPageNumbers - 1) {
+    startPage = Math.max(1, endPage - maxPageNumbers + 1);
+  }
+
+  const pageNumbers = [];
+  for (let i = startPage; i <= endPage; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div className="main-wrap">
@@ -70,7 +104,7 @@ const Main = () => {
         ))}
       </ul>
       <ul className="list-wrap">
-        {filterList.map((edu) => (
+        {currentList.map((edu) => (
           <li key={edu.idx} className="edu-list">
             <article onClick={() => navigate(`/detail/${edu.idx}`)}>
               <picture>
@@ -93,6 +127,34 @@ const Main = () => {
           </li>
         ))}
       </ul>
+
+      {/* 페이지네이션 */}
+      {totalPages > 1 && (
+        <div className="pagination">
+          <ol>
+            <li onClick={() => handlePageChange(1)} disabled={currentPage === 1}>
+              ⏮ 처음
+            </li>
+            <li onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+              ◀ 이전
+            </li>
+            {pageNumbers.map((page) => (
+              <li
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={page === currentPage ? "active" : ""}>
+                {page}
+              </li>
+            ))}
+            <li onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+              다음 ▶
+            </li>
+            <li onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages}>
+              마지막 ⏭
+            </li>
+          </ol>
+        </div>
+      )}
     </div>
   );
 };

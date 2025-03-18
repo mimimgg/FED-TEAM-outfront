@@ -121,4 +121,25 @@
       }
     }
   }
+  .pagination {
+    margin: 24px auto;
+    ol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:8px;
+    font-size: 1.4rem;
+    font-weight: 300;
+    li {
+      cursor: pointer;
+      color: #777;
+      &:hover {
+        color: #000;
+      }
+      &.active {
+        font-weight: 600;
+        color: #000;
+      }
+    }
+  }}
 }
