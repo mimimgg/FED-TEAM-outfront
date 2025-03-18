@@ -29,7 +29,7 @@
     {
         "idx": 4,
         "gName": "핵심만 쏙쏙 Jira&Confluence",
-        "gLevel": "입문",
+        "gLevel": "고급",
         "gInfo": "팀 프로젝트에 JIRA 및 Confluence를 도입하여 써보고 싶으신 분들을 대상으로 합니다",
         "gSkill": "JIRA, Confluence, 애자일",
         "gPrice": "30800",
@@ -47,7 +47,7 @@
     {
         "idx": 6,
         "gName": "원가관리회계 강의 : 원가의 정의, 원가계산, 결산, 사업계획, 성과평가",
-        "gLevel": "입문",
+        "gLevel": "고급",
         "gInfo": "회사에서 원가업무를 하시는 분들, 창업 준비중이시거나 중소기업을 운영하시는 분들에게 쉽게 원가개념에 대해서 설명해 드립니다.",
         "gSkill": "원가절감, 회계, 사업계획서",
         "gPrice": "23100",
@@ -66,7 +66,7 @@
     {
         "idx": 8,
         "gName": "[왕초보편] 앱 8개를 만들면서 배우는 안드로이드 코틀린(Android Kotlin)",
-        "gLevel": "입문",
+        "gLevel": "고급",
         "gInfo": "앱 8개를 만들면서 코틀린 문법을 이용하여 안드로이드 앱을 만들어봅니다. 8개의 실습자료 뿐만이 아니라, 다양한 이론 설명과 함께 안드로이드를 공부해봅니다.",
         "gSkill": "Android, Kotlin, Firebase",
         "gPrice": "18150",
@@ -338,7 +338,7 @@
     {
         "idx": 38,
         "gName": "(2025) 일주일만에 합격하는 정보처리기사 실기",
-        "gLevel": "입문",
+        "gLevel": "고급",
         "gInfo": "정보처리기사 실기, 단번에 합격! 코드와 이론, 핵심만 콕 집어 알려드립니다. 기출문제 완벽 정복! 체계적인 강의로 합격의 문을 여세요.",
         "gSkill": "정보처리기사, C, Java",
         "gPrice": "82500",
@@ -356,7 +356,7 @@
     {
         "idx": 40,
         "gName": "비전공자도 이해할 수 있는 쿠버네티스 입문/실전",
-        "gLevel": "초급",
+        "gLevel": "중급",
         "gInfo": "비전공자 입장에서도 쉽게 이해할 수 있고, 실전에서 바로 적용 가능한 '쿠버네티스 입문/실전' 강의를 만들어봤습니다!",
         "gSkill": "Kubernetes, Docker, infrastructure",
         "gPrice": "77000",
@@ -419,7 +419,7 @@
     {
         "idx": 47,
         "gName": "RAG를 활용한 LLM Application 개발 (feat. LangChain)",
-        "gLevel": "초급",
+        "gLevel": "중급",
         "gInfo": "실리콘밸리 GenAI 해커톤 우승자에게 배우는 RAG. 현업 노하우를 가득 담았습니다",
         "gSkill": "LLM, RAG, LangChain",
         "gPrice": "66000",
@@ -455,7 +455,7 @@
     {
         "idx": 51,
         "gName": "직장인을 위한 GPTs 업무 자동화 - 사장님 몰래 일 편하게 하기!",
-        "gLevel": "입문",
+        "gLevel": "중문",
         "gInfo": "GPTs를 활용해 반복적이고 번거로운 업무를 자동화시킬 수 있어요. 비개발자도 여러 외부 자동화 서비스를 연동해 더 복잡한 업무들도 GPTs로 자동화시켜보세요!",
         "gSkill": "GPTs, ChatGPT, 업무 생산성",
         "gPrice": "33000",
@@ -500,7 +500,7 @@
     {
         "idx": 56,
         "gName": "그림으로 쉽게 배우는 자료구조와 알고리즘 (기본편)",
-        "gLevel": "입문",
+        "gLevel": "중문",
         "gInfo": "이 강의를 통해 선형 자료구조와 알고리즘을 배울 수 있습니다.",
         "gSkill": "알고리즘",
         "gPrice": "55000",
@@ -509,7 +509,7 @@
     {
         "idx": 57,
         "gName": "스프링 부트 - 핵심 원리와 활용",
-        "gLevel": "초급",
+        "gLevel": "중급",
         "gInfo": "실무에 필요한 스프링 부트는 이 강의 하나로 모두 정리해드립니다.",
         "gSkill": "Spring Boot, Spring, spring-boot-actuator",
         "gPrice": "99000",

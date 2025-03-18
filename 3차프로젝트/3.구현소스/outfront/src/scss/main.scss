@@ -3,12 +3,26 @@
 @import "./variables";
 
 .main-wrap {
+  position: relative;
   max-width: 1440px;
   margin: 100px auto;
   h2 {
     font-size: 2rem;
     font-weight: 600;
     text-align: center;
+  }
+  .sort-opt {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+    label {
+      display: none;
+    }
+    select {
+      font-size: 1.2rem;
+      padding: 12px;
+      border: 1px solid #ddd;
+    }
   }
   .edu-menu {
     display: flex;

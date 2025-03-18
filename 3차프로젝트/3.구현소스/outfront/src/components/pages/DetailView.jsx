@@ -3,6 +3,8 @@
 import React, {useState, useEffect} from "react";
 import {useParams, useNavigate} from "react-router-dom";
 import "../../scss/detail_view.scss";
+// 강의 json 데이터 불러오기
+import eduData from "../../js/data/edu_data.json";
 
 const DetailView = () => {
   const {id} = useParams();
@@ -21,13 +23,9 @@ const DetailView = () => {
 
   // 강의 데이터 가져오기
   useEffect(() => {
-    fetch("/data/edu_data.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const selectedEdu = data.find((item) => item.idx === Number(id));
-        setEdu(selectedEdu);
-      })
-      .catch(console.error);
+    // eduData에서 id에 해당하는 강의 정보를 찾아서 edu 상태로 설정
+    const selectedEdu = eduData.find((item) => item.idx === Number(id));
+    setEdu(selectedEdu);
   }, [id]);
 
   // 리뷰 데이터 가져오기
@@ -43,7 +41,10 @@ const DetailView = () => {
 
   if (!edu) return <p>강의 정보가 없습니다... ㅠㅠ</p>;
 
-  const formatPrice = (price) => (price.includes("₩") ? `₩${Number(price.replace("₩", "")).toLocaleString()}` : price);
+  const formatPrice = (price) => {
+    const priceNum = Number(price);
+    return priceNum === 0 ? "무료" : `₩${priceNum.toLocaleString()}`;
+  };
 
   return (
     <div className="detail-wrap">
@@ -113,7 +114,7 @@ const DetailView = () => {
                   </li>
                 ))
               ) : (
-                <p>리뷰가 없습니다... ㅠㅠ</p>
+                <p className="empty-msg">이 강의는 리뷰가 없습니다... ㅠㅠ</p>
               )}
             </ul>
           </div>
