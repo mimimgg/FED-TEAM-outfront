@@ -171,9 +171,9 @@ const Main = () => {
             <span className="hover-txt">
               <p className="ginfo">설명: {edu.gInfo}</p>
               <p>분류: {edu.gSkill}</p>
-              <a className="cart-btn" onClick={cartBtnFn} href="#">
+              {/* <a className="cart-btn" onClick={cartBtnFn} href="#">
                 <i className="fa-solid fa-cart-shopping"></i>
-              </a>
+              </a> */}
             </span>
           </li>
         ))}
