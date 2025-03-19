@@ -35,16 +35,6 @@ function Mypage() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   // 게시판 데이터 불러오기
-  //   // initBoardData(); // 로컬 스토리지 초기화
-  //   const boardData = JSON.parse(localStorage.getItem("board-data")) || [];
-  //   if (userInfo) {
-  //     const myPosts = boardData.filter((post) => post.uid === userInfo.uid);
-  //     setUserBoardPosts(myPosts);
-  //   }
-  // }, [userInfo]);
-
   // 리뷰 팝업 열기 함수
   const openReviewPopup = (eduId) => {
     const userReview = reviewList.find((review) => review.uid === userInfo.uid && review.eduId === eduId);
