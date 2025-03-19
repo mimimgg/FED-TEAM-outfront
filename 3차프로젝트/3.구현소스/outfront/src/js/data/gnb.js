@@ -5,23 +5,23 @@ const gnbMenu = [
     sub: [
       {
         txt: "개발,프로그래밍",
-        link: "/education/it-programming",
+        link: "#개발프로그래밍",
       },
       {
         txt: "인공지능",
-        link: "/education/artificial-intelligence",
+        link: "#인공지능",
       },
       {
         txt: "게임 개발",
-        link: "/education/game-dev-all",
+        link: "#게임개발",
       },
       {
         txt: "데이터 사이언스",
-        link: "/education/data-science",
+        link: "#데이터사이언스",
       },
       {
         txt: "보안, 네트워크",
-        link: "/education/it",
+        link: "#보안네트워크",
       },
     ],
   },

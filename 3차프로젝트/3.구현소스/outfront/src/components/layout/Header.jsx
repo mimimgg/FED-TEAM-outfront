@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import "../../scss/header.scss";
 import gnbMenu from "../../js/data/gnb";
-import { useContext, useEffect, useState } from "react";
+import { memo, useContext, useEffect, useState } from "react";
 // import asideMenu from "../../js/data/aside";
 import { dCon } from "../modules/dCon";
 
 let logged = false;
 logged = true;
 
-const Header = () => {
+const Header = memo(({goPage, loginSts, setLoginSts}) => {
   const [isOpenGnb, setIsOpenGnb] = useState(false);
   const [openSnb, setOpenSnb] = useState(null);
   // const asideKey = logged ? "user" : "guest";
@@ -16,7 +16,7 @@ const Header = () => {
   // 검색어 상태 관리
   const [searchKeyword, setSearchKeyword] = useState(""); 
 
-  const myCon = useContext(dCon);
+  // const myCon = useContext(dCon);
 
   // TODO: 메모이제이션
   console.log("상단영역렌더링");
@@ -43,7 +43,7 @@ const Header = () => {
     // 서브 메뉴 닫기
     closeGnb(); 
     // 검색 페이지로 이동
-    myCon.goPage("search", { state: { keyword: searchKeyword } }); 
+    goPage("search", { state: { keyword: searchKeyword } }); 
   };
 
   // 검색 처리 함수 정의
@@ -51,7 +51,7 @@ const Header = () => {
     // 서브 메뉴 닫기
     closeGnb();
     // 검색 페이지로 이동
-    myCon.goPage("goPage", { state: { keyword: searchKeyword } }); 
+    goPage("goPage", { state: { keyword: searchKeyword } }); 
   };
 
   useEffect(()=>{
@@ -135,7 +135,7 @@ const Header = () => {
           <aside className="aside">
             {
               // 로그인이 아닌 상태
-              !myCon.loginSts && (
+              !loginSts && (
                 <ul className="aside-list">
                   <li className="aside-item">
                     <Link to="/login" className="aside-button">
@@ -157,7 +157,7 @@ const Header = () => {
             }
             {
               // 로그인 상태
-              myCon.loginSts && (
+              loginSts && (
                 <ul className="aside-list">
                   <div>
                     <li className="aside-item">
@@ -165,9 +165,9 @@ const Header = () => {
                         href="#"
                         onClick={(e) => {
                           e.preventDefault();
-                          myCon.setLoginSts(null);
+                          setLoginSts(null);
                           sessionStorage.removeItem("minfo");
-                          myCon.goPage("/");
+                          goPage("/");
                         }}
                         className="logout"
                       >
@@ -196,6 +196,6 @@ const Header = () => {
       </div>
     </header>
   );
-};
+});
 
-export default Header;
+export {Header};
