@@ -221,6 +221,18 @@
                 color: #212529;
               }
             }
+            .star-grade {
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              b {
+                padding-right: 4px;
+              }
+              .half-star:nth-child(2n-1) {
+                transform: scaleX(-1);
+              }
+            }
+        
           }
         }
       }

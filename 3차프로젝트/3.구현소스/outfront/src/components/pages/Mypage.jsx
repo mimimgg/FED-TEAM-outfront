@@ -1,7 +1,7 @@
 // 마이페이지 컴포넌트 ./src/componets/page/Mypage.jsx
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import "../../scss/mypage.scss";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 // 로그인한 사용자의 학습 정보 import 직접 불러오기
 import userData from "../../js/data/user_data.json";
 // 리뷰 데이터 import 직접 불러오기
@@ -47,9 +47,7 @@ function Mypage() {
 
   // 리뷰 팝업 열기 함수
   const openReviewPopup = (eduId) => {
-    const userReview = reviewList.find(
-      (review) => review.uid === userInfo.uid && review.eduId === eduId
-    );
+    const userReview = reviewList.find((review) => review.uid === userInfo.uid && review.eduId === eduId);
 
     if (userReview) {
       setSelectedReview(userReview);
@@ -120,17 +118,10 @@ function Mypage() {
             <img src={profileImg} alt="profile" />
           </picture>
         </label>
-        <input
-          type="file"
-          id="profile-upload"
-          accept="image/*"
-          style={{ display: "none" }}
-          onChange={handleProfileChange}
-        />
+        <input type="file" id="profile-upload" accept="image/*" style={{display: "none"}} onChange={handleProfileChange} />
         <span>ID : {userInfo ? userInfo.uid : "로그인 필요!"}</span>
         <p>
-          <b>{userInfo ? userInfo.unm : "비회원"}</b>님 😎 <b>아웃프런</b>에
-          오신 것을 환영합니다! 😍 <br />
+          <b>{userInfo ? userInfo.unm : "비회원"}</b>님 😎 <b>아웃프런</b>에 오신 것을 환영합니다! 😍 <br />
           <b>당장 공부하지 않으면 당신의 인생이 망할 수도 있습니다!!</b>
         </p>
       </div>
@@ -147,30 +138,26 @@ function Mypage() {
           <ul className="myedu-list">
             {userEduList.length > 0 ? (
               userEduList.map((edu) => {
-                const userReview = reviewList.find(
-                  (review) =>
-                    review.uid === userInfo.uid && review.eduId === edu.eduId
-                );
+                const userReview = reviewList.find((review) => review.uid === userInfo.uid && review.eduId === edu.eduId);
 
                 return (
                   <li key={edu.eduId}>
                     <picture onClick={() => navigate(`/detail/${edu.eduId}`)}>
-                      <img
-                        src={`/images/edu_thumb/${edu.eduId}.png`}
-                        alt={`강의 이미지 ${edu.eduId}`}
-                      />
+                      <img src={`/images/edu_thumb/${edu.eduId}.png`} alt={`강의 이미지 ${edu.eduId}`} />
                     </picture>
                     <h4>{edu.eduName}</h4>
                     <p>
                       {edu.eduState} ({edu.eduRate}%)
                     </p>
                     {parseInt(edu.eduRate) >= 60 && (
-                      <button
-                        className="my-review-btn"
-                        onClick={() => openReviewPopup(edu.eduId)}>
-                        {userReview
-                          ? `평점 (⭐${userReview.grade})`
-                          : "수강평 작성"}
+                      <button className="my-review-btn" onClick={() => openReviewPopup(edu.eduId)}>
+                        {userReview ? (
+                          <span className="star-grade2">
+                            평점 (<img src="/images/main/star.png" alt="별" width="8px" /><img src="/images/main/star.png" alt="별" width="8px" /> {userReview.grade})
+                          </span>
+                        ) : (
+                          "수강평 작성"
+                        )}
                       </button>
                     )}
                   </li>
@@ -193,11 +180,7 @@ function Mypage() {
           <ul className="myboard-list">
             {userBoardPosts.length > 0 ? (
               userBoardPosts.map((post) => (
-                <li
-                  key={post.idx}
-                  onClick={() =>
-                    navigate("/board", { state: { mode: "R", selData: post } })
-                  }>
+                <li key={post.idx} onClick={() => navigate("/board", {state: {mode: "R", selData: post}})}>
                   <h4>{post.tit}</h4>
                   <p>
                     {post.date} | 조회수: {post.cnt}
@@ -218,8 +201,13 @@ function Mypage() {
         <div className="review-popup">
           <div className="popup-content">
             <h3>수강평</h3>
-            <p>
-              <b>평점:</b> { '⭐'.repeat(Math.floor(selectedReview.grade)) } {selectedReview.grade}/5
+            <p className="star-grade">
+              <b>평점:</b>
+              {Array.from({length: Math.round(selectedReview.grade / 0.5)}, (_, i) => (
+                <span className="half-star">
+                  <img key={i} src="/images/main/star.png" alt="별" width="8px" />
+                </span>
+              ))}
             </p>
             <p>{selectedReview.text}</p>
             <button className="close-btn" onClick={closePopup}>

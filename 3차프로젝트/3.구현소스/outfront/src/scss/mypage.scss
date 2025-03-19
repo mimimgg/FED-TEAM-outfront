@@ -125,6 +125,11 @@
           cursor: pointer;
         }
       }
+      .star-grade2 {
+        img:nth-child(2n) {
+          transform: scaleX(-1);
+        }
+      }
     }
     .myboard-list {
       margin: 24px auto;
@@ -178,6 +183,17 @@
       p {
         margin: 5px 0;
         font-size: 1.4rem;
+      }
+    }
+    .star-grade {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      b {
+        padding-right: 4px;
+      }
+      .half-star:nth-child(2n-1) {
+        transform: scaleX(-1);
       }
     }
 

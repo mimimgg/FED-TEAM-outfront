@@ -88,7 +88,9 @@ const DetailView = () => {
               </p>
               {userEduState ? (
                 <button className="edu-state-btn">
-                  <Link to="/myedu">{userEduState}(진행률:{userEduRate}%)</Link>
+                  <Link to="/myedu">
+                    {userEduState}(진행률:{userEduRate}%)
+                  </Link>
                 </button>
               ) : (
                 <button className="add-edu-btn">
@@ -126,8 +128,14 @@ const DetailView = () => {
               {reviews.length > 0 ? (
                 reviews.map((review, i) => (
                   <li key={i}>
-                    <span>
-                      <b>{review.name}님</b> 수강평 평점 { '⭐'.repeat(Math.floor(review.grade)) } {review.grade}/5
+                    <span className="star-grade">
+                      <b>{review.name}님</b>
+                      수강평 평점{" "}{review.grade}
+                      {Array.from({length: Math.round(review.grade / 0.5)}, (_, i) => (
+                        <span className="half-star">
+                          <img key={i} src="/images/main/star.png" alt="별" width="8px" />
+                        </span>
+                      ))}
                     </span>
                     <p>{review.text}</p>
                   </li>
