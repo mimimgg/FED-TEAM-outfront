@@ -12,7 +12,9 @@ const Header = () => {
   const [isOpenGnb, setIsOpenGnb] = useState(false);
   const [openSnb, setOpenSnb] = useState(null);
   // const asideKey = logged ? "user" : "guest";
-  const [searchKeyword, setSearchKeyword] = useState(""); // 검색어 상태 관리
+
+  // 검색어 상태 관리
+  const [searchKeyword, setSearchKeyword] = useState(""); 
 
   const myCon = useContext(dCon);
 
@@ -38,14 +40,18 @@ const Header = () => {
 
   // 검색 처리 함수 정의
   const handleSearch = () => {
-    closeGnb(); // 서브 메뉴 닫기
-    myCon.goPage("search", { state: { keyword: searchKeyword } }); // 검색 페이지로 이동
+    // 서브 메뉴 닫기
+    closeGnb(); 
+    // 검색 페이지로 이동
+    myCon.goPage("search", { state: { keyword: searchKeyword } }); 
   };
 
   // 검색 처리 함수 정의
   const handleClick = () => {
-    closeGnb(); // 서브 메뉴 닫기
-    myCon.goPage("goPage", { state: { keyword: searchKeyword } }); // 검색 페이지로 이동
+    // 서브 메뉴 닫기
+    closeGnb();
+    // 검색 페이지로 이동
+    myCon.goPage("goPage", { state: { keyword: searchKeyword } }); 
   };
 
   useEffect(()=>{
@@ -82,7 +88,8 @@ const Header = () => {
                               <ul className="snb-list">
                                 {gnb.sub.map((snb) => (
                                   <li key={`snb-menu-${snb.txt}`} className="sub-item"
-                                  onClick={handleClick}>
+                                  // onClick={handleClick}
+                                  >
                                     <Link to={snb.link} className="snb-button">
                                       {snb.txt}
                                     </Link>
