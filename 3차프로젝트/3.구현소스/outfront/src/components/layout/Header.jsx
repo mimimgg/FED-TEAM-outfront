@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import "../../scss/header.scss";
 import gnbMenu from "../../js/data/gnb";
-import { memo, useContext, useEffect, useState } from "react";
+import {memo, useContext, useEffect, useState} from "react";
 // import asideMenu from "../../js/data/aside";
-import { dCon } from "../modules/dCon";
+import {dCon} from "../modules/dCon";
 
 let logged = false;
 logged = true;
@@ -14,14 +14,25 @@ const Header = memo(({goPage, loginSts, setLoginSts}) => {
   // const asideKey = logged ? "user" : "guest";
 
   // 검색어 상태 관리
-  const [searchKeyword, setSearchKeyword] = useState(""); 
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   // const myCon = useContext(dCon);
 
   // TODO: 메모이제이션
   console.log("상단영역렌더링");
 
-  const handleClickGnb = (txt) => setOpenSnb(txt);
+  // 상단 추가 강의메뉴의 서브메뉴에 .open 클래스 추가
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = () => {
+    setOpenSnb(null); // 다른 GNB 메뉴가 열려 있으면 닫기
+    setIsOpen((prev) => !prev);
+  };
+
+  const handleClickGnb = (txt) => {
+    // setOpenSnb(txt);
+    setIsOpen(false); // 강의 메뉴 닫기
+    setOpenSnb((prev) => (prev === txt ? null : txt)); // 클릭한 메뉴만 토글
+  };
 
   const handleOpenGnb = () => {
     setIsOpenGnb(true);
@@ -41,9 +52,9 @@ const Header = memo(({goPage, loginSts, setLoginSts}) => {
   // 검색 처리 함수 정의
   const handleSearch = () => {
     // 서브 메뉴 닫기
-    closeGnb(); 
+    closeGnb();
     // 검색 페이지로 이동
-    goPage("search", { state: { keyword: searchKeyword } }); 
+    goPage("search", {state: {keyword: searchKeyword}});
   };
 
   // 검색 처리 함수 정의
@@ -51,14 +62,14 @@ const Header = memo(({goPage, loginSts, setLoginSts}) => {
     // 서브 메뉴 닫기
     closeGnb();
     // 검색 페이지로 이동
-    goPage("goPage", { state: { keyword: searchKeyword } }); 
+    goPage("goPage", {state: {keyword: searchKeyword}});
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     window.addEventListener("resize", () => {
-      document.querySelectorAll('.snb').forEach(el=>el.classList.remove('open'));
+      document.querySelectorAll(".snb").forEach((el) => el.classList.remove("open"));
     });
-  },[]);
+  }, []);
 
   return (
     <header className="header">
@@ -77,6 +88,45 @@ const Header = memo(({goPage, loginSts, setLoginSts}) => {
               <div className="gnb-content">
                 <nav className="gnb">
                   <ul className="gnb-list">
+                    <li className="gnb-item">
+                      <button type="button" id="top-edu-menu" className="gnb-button" onClick={toggleMenu}>
+                        <a href="#none">강의</a>
+                      </button>
+                      <nav className={`snb edu-drop-menu ${isOpen ? "open" : ""}`}>
+                        <ul className="snb-list">
+                          <li className="sub-item">
+                            <a className="snb-button" href="/#전체">
+                              전체
+                            </a>
+                          </li>
+                          <li className="sub-item">
+                            <a className="snb-button" href="/#개발프로그래밍">
+                              개발프로그래밍
+                            </a>
+                          </li>
+                          <li className="sub-item">
+                            <a className="snb-button" href="/#게임개발">
+                              게임개발
+                            </a>
+                          </li>
+                          <li className="sub-item">
+                            <a className="snb-button" href="/#인공지능">
+                              인공지능
+                            </a>
+                          </li>
+                          <li className="sub-item">
+                            <a className="snb-button" href="/#보안네트워크">
+                              보안네트워크
+                            </a>
+                          </li>
+                          <li className="sub-item">
+                            <a className="snb-button" href="/#기타">
+                              기타
+                            </a>
+                          </li>
+                        </ul>
+                      </nav>
+                    </li>
                     {gnbMenu.map((gnb) => (
                       <li key={`gnb-menu-${gnb.txt}`} className="gnb-item">
                         {gnb.sub ? (
@@ -87,8 +137,10 @@ const Header = memo(({goPage, loginSts, setLoginSts}) => {
                             <nav className={`snb ${openSnb === gnb.txt ? "open" : ""}`}>
                               <ul className="snb-list">
                                 {gnb.sub.map((snb) => (
-                                  <li key={`snb-menu-${snb.txt}`} className="sub-item"
-                                  // onClick={handleClick}
+                                  <li
+                                    key={`snb-menu-${snb.txt}`}
+                                    className="sub-item"
+                                    // onClick={handleClick}
                                   >
                                     <Link to={snb.link} className="snb-button">
                                       {snb.txt}
@@ -123,9 +175,7 @@ const Header = memo(({goPage, loginSts, setLoginSts}) => {
                       }
                     }}
                   />
-                  <button type="button" className="search-submit"
-                  onClick={handleSearch}  
-                  >
+                  <button type="button" className="search-submit" onClick={handleSearch}>
                     <i className="fa-solid fa-magnifying-glass"></i>
                   </button>
                 </section>
@@ -169,8 +219,7 @@ const Header = memo(({goPage, loginSts, setLoginSts}) => {
                           sessionStorage.removeItem("minfo");
                           goPage("/");
                         }}
-                        className="logout"
-                      >
+                        className="logout">
                         로그아웃
                       </a>
                     </li>
@@ -181,10 +230,7 @@ const Header = memo(({goPage, loginSts, setLoginSts}) => {
                     </li>
                     <li className="aside-item">
                       <Link to="/mypage" className="aside-button logo-icon">
-                        <img
-                          src="https://cdn.inflearn.com/public/main/profile/default_profile.png"
-                          alt="아웃프런마이페이지"
-                        />
+                        <img src="https://cdn.inflearn.com/public/main/profile/default_profile.png" alt="아웃프런마이페이지" />
                       </Link>
                     </li>
                   </div>
