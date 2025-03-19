@@ -7,7 +7,7 @@ import { memo } from "react";
 import "../../scss/footer_area.scss";
 
 export const FooterArea = memo(() => {
-  console.log('하단영역랜더링!!!');
+  console.log('하단영역랜더링');
   const handleLinkClick = (e) => {
     e.preventDefault();
   };
