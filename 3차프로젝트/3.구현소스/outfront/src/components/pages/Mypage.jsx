@@ -153,7 +153,7 @@ function Mypage() {
                       <button className="my-review-btn" onClick={() => openReviewPopup(edu.eduId)}>
                         {userReview ? (
                           <span className="star-grade2">
-                            평점 (<img src="/images/main/star.png" alt="별" width="8px" /><img src="/images/main/star.png" alt="별" width="8px" /> {userReview.grade})
+                            평점 (<img src="/images/main/star.png" alt="별" width="8px" /><img src="/images/main/star.png" alt="별" width="8" /> {userReview.grade})
                           </span>
                         ) : (
                           "수강평 작성"
@@ -205,7 +205,7 @@ function Mypage() {
               <b>평점:</b>
               {Array.from({length: Math.round(selectedReview.grade / 0.5)}, (_, i) => (
                 <span className="half-star">
-                  <img key={i} src="/images/main/star.png" alt="별" width="8px" />
+                  <img key={i} src="/images/main/star.png" alt="별" width="8" />
                 </span>
               ))}
             </p>

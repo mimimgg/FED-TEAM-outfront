@@ -126,8 +126,11 @@
         }
       }
       .star-grade2 {
+        img {
+          transform: translateY(2px);
+        }
         img:nth-child(2n) {
-          transform: scaleX(-1);
+          transform: translateY(2px) scaleX(-1);
         }
       }
     }
