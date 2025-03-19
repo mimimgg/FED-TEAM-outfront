@@ -5,12 +5,6 @@ import { useContext, useEffect, useState } from "react";
 // import asideMenu from "../../js/data/aside";
 import { dCon } from "../modules/dCon";
 
-/***********************************************
- * 요구사항 
- * 1. pc버전에서 gnb 메뉴 클릭 후 모바일버전으로 사이즈를 줄이면 sbtn이 노출되는 현상
- * 
-***********************************************/
-
 let logged = false;
 logged = true;
 
@@ -19,7 +13,6 @@ const Header = () => {
   const [openSnb, setOpenSnb] = useState(null);
   const asideKey = logged ? "user" : "guest";
   const [searchKeyword, setSearchKeyword] = useState(""); // 검색어 상태 관리
-
 
   const myCon = useContext(dCon);
 
@@ -48,7 +41,12 @@ const Header = () => {
     closeGnb(); // 서브 메뉴 닫기
     myCon.goPage("search", { state: { keyword: searchKeyword } }); // 검색 페이지로 이동
   };
-    
+
+  // 검색 처리 함수 정의
+  const handleClick = () => {
+    closeGnb(); // 서브 메뉴 닫기
+    myCon.goPage("goPage", { state: { keyword: searchKeyword } }); // 검색 페이지로 이동
+  };
 
   useEffect(()=>{
     window.addEventListener("resize", () => {
@@ -83,7 +81,8 @@ const Header = () => {
                             <nav className={`snb ${openSnb === gnb.txt ? "open" : ""}`}>
                               <ul className="snb-list">
                                 {gnb.sub.map((snb) => (
-                                  <li key={`snb-menu-${snb.txt}`} className="sub-item">
+                                  <li key={`snb-menu-${snb.txt}`} className="sub-item"
+                                  onClick={handleClick}>
                                     <Link to={snb.link} className="snb-button">
                                       {snb.txt}
                                     </Link>
