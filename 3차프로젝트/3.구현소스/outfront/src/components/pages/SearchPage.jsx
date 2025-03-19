@@ -28,7 +28,7 @@ const SearchPage = () => {
   });
 
   // 가격형식 변환 함수
-  const formatPrice = (price) => (price.includes("₩") ? `₩${Number(price.replace("₩", "")).toLocaleString()}` : price);
+  const formatPrice = (price) => (Number(price) === 0 ? "무료" : `₩${Number(price).toLocaleString()}`);
 
   // 장바구니 버튼 클릭 핸들러
   const cartBtnFn = (e) => {
@@ -77,9 +77,9 @@ const SearchPage = () => {
                   <img src={`./images/edu_thumb/${v.idx}.png`} alt={`강의 이미지 ${v.gName}`} />
                 </div>
                 <h3 className="search-tit">{v.gName}</h3>
+                <p className="search-desc">설명: {v.gInfo}</p>
                 <p>레벨: {v.gLevel}</p>
                 <p>가격: {formatPrice(v.gPrice)}</p>
-                <p className="search-desc">설명: {v.gInfo}</p>
                 <p>분류: {v.gSkill}</p>
                 <a className="cart-btn" onClick={cartBtnFn} href="#none">
                   <i className="fa-solid fa-cart-shopping"></i>
