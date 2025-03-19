@@ -3,8 +3,27 @@
 @import "./variables";
 
 .main-wrap {
+  position: relative;
   max-width: 1440px;
   margin: 100px auto;
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  .sort-opt {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+    label {
+      display: none;
+    }
+    select {
+      font-size: 1.2rem;
+      padding: 12px;
+      border: 1px solid #ddd;
+    }
+  }
   .edu-menu {
     display: flex;
     justify-content: center;
@@ -42,11 +61,11 @@
       &:last-child {
         border-right: 1px solid $color-board;
         @include tablet-medium {
-          border:none;
+          border: none;
         }
       }
       @include tablet-medium {
-        border:none;
+        border: none;
       }
     }
   }
@@ -59,16 +78,17 @@
     font-size: 1.4rem;
     line-height: 1.2;
     padding-left: 24px;
-    @include tablet-medium {      
+    @include tablet-medium {
       margin: 0 auto;
-        width: 96%;
-        justify-content: space-between;
-        padding-left: 0px;
+      width: 96%;
+      justify-content: space-between;
+      padding-left: 0px;
+      gap: 24px 0;
     }
     li {
       position: relative;
       width: calc(20% - 24px);
-      color: $color-text;      
+      color: $color-text;
       @include tablet-medium {
         width: 48%;
       }
@@ -78,16 +98,14 @@
         padding: 12px 0;
       }
       p {
-        margin-bottom: 8px;
+        margin-bottom: 4px;
       }
-      .hover-txt {
-        .ginfo {
-          text-overflow: ellipsis;
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2;
-        }
+      .ginfo {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
       }
       .cart-btn {
         position: absolute;
@@ -115,4 +133,25 @@
       }
     }
   }
+  .pagination {
+    margin: 24px auto;
+    ol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:8px;
+    font-size: 1.4rem;
+    font-weight: 300;
+    li {
+      cursor: pointer;
+      color: #777;
+      &:hover {
+        color: #000;
+      }
+      &.active {
+        font-weight: 600;
+        color: #000;
+      }
+    }
+  }}
 }
