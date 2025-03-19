@@ -5,19 +5,16 @@ import { useContext, useEffect, useState } from "react";
 // import asideMenu from "../../js/data/aside";
 import { dCon } from "../modules/dCon";
 
-/***********************************************
- * 요구사항 
- * 1. pc버전에서 gnb 메뉴 클릭 후 모바일버전으로 사이즈를 줄이면 sbtn이 노출되는 현상
- * 
-***********************************************/
-
 let logged = false;
 logged = true;
 
 const Header = () => {
   const [isOpenGnb, setIsOpenGnb] = useState(false);
   const [openSnb, setOpenSnb] = useState(null);
-  const asideKey = logged ? "user" : "guest";
+  // const asideKey = logged ? "user" : "guest";
+
+  // 검색어 상태 관리
+  const [searchKeyword, setSearchKeyword] = useState(""); 
 
   const myCon = useContext(dCon);
 
@@ -39,6 +36,22 @@ const Header = () => {
 
   const handleCloseGnb = (e) => {
     if (e.currentTarget === e.target) closeGnb();
+  };
+
+  // 검색 처리 함수 정의
+  const handleSearch = () => {
+    // 서브 메뉴 닫기
+    closeGnb(); 
+    // 검색 페이지로 이동
+    myCon.goPage("search", { state: { keyword: searchKeyword } }); 
+  };
+
+  // 검색 처리 함수 정의
+  const handleClick = () => {
+    // 서브 메뉴 닫기
+    closeGnb();
+    // 검색 페이지로 이동
+    myCon.goPage("goPage", { state: { keyword: searchKeyword } }); 
   };
 
   useEffect(()=>{
@@ -74,7 +87,9 @@ const Header = () => {
                             <nav className={`snb ${openSnb === gnb.txt ? "open" : ""}`}>
                               <ul className="snb-list">
                                 {gnb.sub.map((snb) => (
-                                  <li key={`snb-menu-${snb.txt}`} className="sub-item">
+                                  <li key={`snb-menu-${snb.txt}`} className="sub-item"
+                                  // onClick={handleClick}
+                                  >
                                     <Link to={snb.link} className="snb-button">
                                       {snb.txt}
                                     </Link>
@@ -96,19 +111,21 @@ const Header = () => {
                   <input
                     id="search"
                     name="search"
-                    type="search"
+                    type="text"
                     className="search-input"
                     placeholder="나의 진짜 성장을 도와줄 실무 강의를 찾아보세요"
+                    value={searchKeyword} // 검색어 상태 연결
+                    onChange={(e) => setSearchKeyword(e.target.value)} // 입력값 변경 시 상태 업데이트
                     onKeyUp={(e) => {
                       e.preventDefault();
                       if (e.key === "Enter") {
-                        closeGnb();
-                        console.log(e.target.value);
-                        myCon.goPage("search", { state: { keyword: e.target.value } });
+                        handleSearch(); // 엔터 키를 눌렀을 때 검색 수행
                       }
                     }}
                   />
-                  <button type="submit" className="search-submit">
+                  <button type="button" className="search-submit"
+                  onClick={handleSearch}  
+                  >
                     <i className="fa-solid fa-magnifying-glass"></i>
                   </button>
                 </section>

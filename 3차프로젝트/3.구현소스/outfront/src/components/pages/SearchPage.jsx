@@ -7,9 +7,9 @@ import "../../scss/pages/search.scss";
 /********************************************************
  * [ 요구사항 ]
 [v] 데스크탑버전에서 검색하면 검색결과에 맞는 사진이 나와야 함 (edu_data.json -> idx)
- * 모바일버전에서 검색하면 드롭창이 자동으로 닫히고 결과가 보여야 함
+[v] 모바일버전에서 검색하면 드롭창이 자동으로 닫히고 결과가 보여야 함
 [v] 검색결과가 없을 경우에는 "검색어를 확인해주세요" 문구 노출
- * 다시 찾아보기 클릭 시 서치바에 포커스 이동
+[v] 다시 찾아보기 클릭 시 서치바에 포커스 이동
 ********************************************************/
 
 const SearchPage = () => {
@@ -28,7 +28,7 @@ const SearchPage = () => {
   });
 
   // 가격형식 변환 함수
-  const formatPrice = (price) => (price.includes("₩") ? `₩${Number(price.replace("₩", "")).toLocaleString()}` : price);
+  const formatPrice = (price) => (Number(price) === 0 ? "무료" : `₩${Number(price).toLocaleString()}`);
 
   // 장바구니 버튼 클릭 핸들러
   const cartBtnFn = (e) => {
@@ -58,7 +58,12 @@ const SearchPage = () => {
         </div>
         <h4 className="none-title"><span>"{keyword}"</span>의 검색결과가 존재하지 않습니다.</h4>
         <p className="none-desc">열심히 찾아서 준비할게요...</p>
-        <button className="research">다시 찾아보기</button>
+        <button className="research"
+        onClick={()=>{
+          document.querySelector('.mobile-gnb-button').click();
+          document.querySelector('.search-input').focus();
+        }}
+        >다시 찾아보기</button>
       </div>
       ) : (
         <>
@@ -72,9 +77,9 @@ const SearchPage = () => {
                   <img src={`./images/edu_thumb/${v.idx}.png`} alt={`강의 이미지 ${v.gName}`} />
                 </div>
                 <h3 className="search-tit">{v.gName}</h3>
+                <p className="search-desc">설명: {v.gInfo}</p>
                 <p>레벨: {v.gLevel}</p>
                 <p>가격: {formatPrice(v.gPrice)}</p>
-                <p className="search-desc">설명: {v.gInfo}</p>
                 <p>분류: {v.gSkill}</p>
                 <a className="cart-btn" onClick={cartBtnFn} href="#none">
                   <i className="fa-solid fa-cart-shopping"></i>
