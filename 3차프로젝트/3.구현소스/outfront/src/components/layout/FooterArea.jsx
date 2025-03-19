@@ -3,9 +3,11 @@
 // import { Link } from "react-router-dom";
 
 // import React from 'react';
+import { memo } from "react";
 import "../../scss/footer_area.scss";
 
-export default function FooterArea() {
+export const FooterArea = memo(() => {
+  console.log('하단영역랜더링!!!');
   const handleLinkClick = (e) => {
     e.preventDefault();
   };
@@ -83,4 +85,4 @@ export default function FooterArea() {
       </footer>
     </>
   );
-} //// FooterArea 컴포넌트 ////
+}); //// FooterArea 컴포넌트 ////

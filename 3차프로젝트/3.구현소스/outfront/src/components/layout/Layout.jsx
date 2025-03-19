@@ -1,13 +1,13 @@
 /// 레이아웃영역 컴포넌트 : Layout.jsx ///
 
-import FooterArea from "./FooterArea";
-import Header from "./Header";
+import {FooterArea} from "./FooterArea";
+import {Header} from "./Header";
 import MainArea from "./MainArea";
 
 // 컨텍스트 API 로 전역변수구역 설정하기! ////
 import { dCon } from "../modules/dCon";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function Layout() {
   // [ 전역 상태관리 변수 설정하기 ] ////
@@ -26,9 +26,19 @@ export default function Layout() {
   // [2] 로그인 환영 메시지 상태변수 ////
   const [loginMsg, setLoginMsg] = useState(null);
 
+
+  // [3] 강제상태변경변수
+  const [force, setForce] = useState(true);
+
   // [ 공통함수 ] /////////////////
   // [1] 라우터 이동함수 ////
-  const goPage = useNavigate();
+  const goNav = useNavigate();
+
+  // 라우터 이동처리함수 : 콜백처리함수(메모이제이션 처리를 위함!) //////
+  const goPage = useCallback((pm1,pm2)=>{
+    // pm1 - 라우터이동주소, pm2 - state 전달객체
+    goNav(pm1, pm2);
+  },[]);
 
   // [2] 로그인 환영 메시지 생성함수 ///
   const makeMsg = (name) => {
@@ -63,7 +73,7 @@ export default function Layout() {
         goPage, // 라우터 이동함수
         logoutFn, // 로그아웃 함수
       }}>
-      <Header />
+      <Header goPage={goPage} loginSts={loginSts} setLoginSts={setLoginSts} setForce={setForce} force={force} />
       <MainArea />
       <FooterArea />
     </dCon.Provider>
