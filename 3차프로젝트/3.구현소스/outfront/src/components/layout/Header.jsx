@@ -11,7 +11,7 @@ logged = true;
 const Header = () => {
   const [isOpenGnb, setIsOpenGnb] = useState(false);
   const [openSnb, setOpenSnb] = useState(null);
-  const asideKey = logged ? "user" : "guest";
+  // const asideKey = logged ? "user" : "guest";
   const [searchKeyword, setSearchKeyword] = useState(""); // 검색어 상태 관리
 
   const myCon = useContext(dCon);
