@@ -24,6 +24,8 @@
       overflow: hidden;
       display: inline-block;
       cursor: pointer;
+      border: 4px solid #fff;
+      background: #eee;
       img {
         width: 100%;
         height: 100%;
@@ -88,7 +90,7 @@
       margin: 24px auto;
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
+      justify-content: flex-start;
       gap: 1%;
       li {
         position: relative;
@@ -121,6 +123,14 @@
           padding: 8px 24px;
           width: 100%;
           cursor: pointer;
+        }
+      }
+      .star-grade2 {
+        img {
+          transform: translateY(2px);
+        }
+        img:nth-child(2n) {
+          transform: translateY(2px) scaleX(-1);
         }
       }
     }
@@ -176,6 +186,17 @@
       p {
         margin: 5px 0;
         font-size: 1.4rem;
+      }
+    }
+    .star-grade {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      b {
+        padding-right: 4px;
+      }
+      .half-star:nth-child(2n-1) {
+        transform: scaleX(-1);
       }
     }
 

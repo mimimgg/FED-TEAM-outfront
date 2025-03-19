@@ -29,6 +29,14 @@
           width: 100%;
         }
         line-height: 1.4;
+        .star-grade2 {
+          img {
+            transform: translateY(2px);
+          }
+          img:nth-child(2n) {
+            transform: translateY(2px) scaleX(-1);
+          }
+        }
         button {
           border: none;
           background: #fff;
@@ -58,7 +66,6 @@
         }
         span {
           font-size: 1.6rem;
-          display: flex;
           svg {
             stroke: #fab005;
             fill: #fab005;
@@ -221,6 +228,18 @@
                 color: #212529;
               }
             }
+            .star-grade {
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              b {
+                padding-right: 4px;
+              }
+              .half-star:nth-child(2n-1) {
+                transform: scaleX(-1);
+              }
+            }
+        
           }
         }
       }

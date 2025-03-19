@@ -1,10 +1,14 @@
 // 강의 상세페이지 컴포넌트 : ./src/components/pages/DetailView.jsx ////
 
 import React, {useState, useEffect} from "react";
-import {useParams, useNavigate} from "react-router-dom";
+import {useParams, useNavigate, Link} from "react-router-dom";
 import "../../scss/detail_view.scss";
 // 강의 json 데이터 불러오기
 import eduData from "../../js/data/edu_data.json";
+// 리뷰 json 데이터 불러오기
+import reviewData from "../../js/data/review_data.json";
+// 로그인한 사용자의 학습 데이터 불러오기
+import userData from "../../js/data/user_data.json";
 
 const DetailView = () => {
   const {id} = useParams();
@@ -12,14 +16,27 @@ const DetailView = () => {
   const [reviews, setReviews] = useState([]); // 리뷰를 배열로 저장
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState(null);
+  const [userEduState, setUserEduState] = useState(null);
+  const [userEduRate, setUserEduRate] = useState(null);
 
   useEffect(() => {
     // 세션 스토리지에서 로그인한 사용자 정보 가져오기
     const storedUser = sessionStorage.getItem("minfo");
     if (storedUser) {
-      setUserInfo(JSON.parse(storedUser));
+      const parsedUser = JSON.parse(storedUser);
+      setUserInfo(parsedUser);
+
+      // 로그인한 사용자의 학습 데이터 확인
+      const currentUserData = userData.find((user) => user.uid === parsedUser.uid);
+      if (currentUserData) {
+        const enrolledCourse = currentUserData.eduIng.find((course) => course.eduId === Number(id));
+        if (enrolledCourse) {
+          setUserEduState(enrolledCourse.eduState);
+          setUserEduRate(enrolledCourse.eduRate);
+        }
+      }
     }
-  }, []);
+  }, [id]);
 
   // 강의 데이터 가져오기
   useEffect(() => {
@@ -30,13 +47,8 @@ const DetailView = () => {
 
   // 리뷰 데이터 가져오기
   useEffect(() => {
-    fetch("/data/review_data.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const filteredReviews = data.filter((item) => item.eduId === Number(id));
-        setReviews(filteredReviews);
-      })
-      .catch(console.error);
+    const filteredReviews = reviewData.filter((item) => item.eduId === Number(id));
+    setReviews(filteredReviews);
   }, [id]);
 
   if (!edu) return <p>강의 정보가 없습니다... ㅠㅠ</p>;
@@ -59,7 +71,14 @@ const DetailView = () => {
             </p>
             <h2>{edu.gName}</h2>
             <p>{edu.gInfo}</p>
-            <span> (⭐4.7 ) 수강평 986개 수강생 31,831명
+            <span>
+              {" "}
+              ({" "}
+              <span className="star-grade2">
+                <img src="/images/main/star.png" alt="별" width="8" />
+                <img src="/images/main/star.png" alt="별" width="8" />
+              </span>
+              4.7 {" "}) 수강평 986개 수강생 31,831명
             </span>
           </div>
           <div className="edu-thumb">
@@ -68,15 +87,25 @@ const DetailView = () => {
         </div>
       </div>
       <div className="detail-content">
-      <aside>
+        <aside>
           <div className="detail-aside-wrap">
             <div className="sale-msg">{userInfo ? `${userInfo.unm}님` : "회원 가입하면"} 첫 구매 할인 중 (1일 남음)</div>
             <div className="inner">
               <p className="price">
                 <b>{formatPrice(edu.gPrice)}</b>
               </p>
-              <button className="add-edu-btn">수강 신청하기</button>
-              <button className="add-cart-btn">바구니에 담기</button>
+              {userEduState ? (
+                <button className="edu-state-btn">
+                  <Link to="/myedu">
+                    {userEduState}(진행률:{userEduRate}%)
+                  </Link>
+                </button>
+              ) : (
+                <button className="add-edu-btn">
+                  <Link to="/mypage">수강 신청하기</Link>
+                </button>
+              )}
+              {/* <button className="add-cart-btn">바구니에 담기</button> */}
             </div>
             <div className="aside-info">
               <p>
@@ -107,8 +136,14 @@ const DetailView = () => {
               {reviews.length > 0 ? (
                 reviews.map((review, i) => (
                   <li key={i}>
-                    <span>
-                      <b>{review.name}님</b> 수강평 평점 {review.grade}
+                    <span className="star-grade">
+                      <b>{review.name}님</b>
+                      수강평 평점 {review.grade}
+                      {Array.from({length: Math.round(review.grade / 0.5)}, (_, i) => (
+                        <span className="half-star">
+                          <img key={i} src="/images/main/star.png" alt="별" width="8" />
+                        </span>
+                      ))}
                     </span>
                     <p>{review.text}</p>
                   </li>
@@ -343,10 +378,10 @@ const DetailView = () => {
                     </p>
                   </div>
                 </div>
-              </div>              
+              </div>
             </div>
           </div>
-        </section>        
+        </section>
       </div>
     </div>
   );
