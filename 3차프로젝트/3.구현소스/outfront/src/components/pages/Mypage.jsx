@@ -219,7 +219,8 @@ function Mypage() {
           <div className="popup-content">
             <h3>수강평</h3>
             <p>
-              <b>평점:</b> ⭐ {selectedReview.grade}/5
+              {/* selectedReview.grade 값을 소숫점 버린 개수만큼 ⭐추가하기  */}
+              <b>평점:</b> { '⭐'.repeat(Math.floor(selectedReview.grade)) } {selectedReview.grade}/5
             </p>
             <p>{selectedReview.text}</p>
             <button className="close-btn" onClick={closePopup}>

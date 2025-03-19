@@ -127,7 +127,7 @@ const DetailView = () => {
                 reviews.map((review, i) => (
                   <li key={i}>
                     <span>
-                      <b>{review.name}님</b> 수강평 평점 {review.grade}
+                      <b>{review.name}님</b> 수강평 평점 { '⭐'.repeat(Math.floor(review.grade)) } {review.grade}/5
                     </span>
                     <p>{review.text}</p>
                   </li>
