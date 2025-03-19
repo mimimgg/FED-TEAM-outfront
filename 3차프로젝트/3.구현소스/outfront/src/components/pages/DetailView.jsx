@@ -71,7 +71,15 @@ const DetailView = () => {
             </p>
             <h2>{edu.gName}</h2>
             <p>{edu.gInfo}</p>
-            <span> (⭐4.7 ) 수강평 986개 수강생 31,831명</span>
+            <span>
+              {" "}
+              ({" "}
+              <span className="star-grade2">
+                <img src="/images/main/star.png" alt="별" width="8" />
+                <img src="/images/main/star.png" alt="별" width="8" />
+              </span>
+              4.7 {" "}) 수강평 986개 수강생 31,831명
+            </span>
           </div>
           <div className="edu-thumb">
             <img src={`/images/edu_thumb/${edu.idx}.png`} alt={`교육 이미지 ${edu.idx}`} />
@@ -88,7 +96,9 @@ const DetailView = () => {
               </p>
               {userEduState ? (
                 <button className="edu-state-btn">
-                  <Link to="/myedu">{userEduState}(진행률:{userEduRate}%)</Link>
+                  <Link to="/myedu">
+                    {userEduState}(진행률:{userEduRate}%)
+                  </Link>
                 </button>
               ) : (
                 <button className="add-edu-btn">
@@ -126,8 +136,14 @@ const DetailView = () => {
               {reviews.length > 0 ? (
                 reviews.map((review, i) => (
                   <li key={i}>
-                    <span>
-                      <b>{review.name}님</b> 수강평 평점 {review.grade}
+                    <span className="star-grade">
+                      <b>{review.name}님</b>
+                      수강평 평점 {review.grade}
+                      {Array.from({length: Math.round(review.grade / 0.5)}, (_, i) => (
+                        <span className="half-star">
+                          <img key={i} src="/images/main/star.png" alt="별" width="8" />
+                        </span>
+                      ))}
                     </span>
                     <p>{review.text}</p>
                   </li>
