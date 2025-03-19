@@ -1,14 +1,16 @@
 // DC PJ 게시판 쓰기 모드 모듈 - Write.jsx
 
-import React, { useContext } from "react";
-import { dCon } from "../dCon";
+import React, {useContext} from "react";
+import {dCon} from "../dCon";
 
 // 제이쿼리 불러오기 ////
 import $ from "jquery";
 
-function Write({ setMode, totalCount }) {
+function Write({setMode, totalCount, setPageNum, pgPgNum}) {
   // setMode - 모든 변경 상태변수 setter
   // totalCount - 전체 개수 참조변수 (글쓰기시 카운트 1증가!)
+  // setPageNum - 리스트 페이지번호 setter (글쓴후 첫페이지 이동)
+  // pgPgNum - 페이징의 페이징 번호 (글쓴후 페이징구역도 1)
 
   // 전역 컨텍스트 API 사용하기!!
   const myCon = useContext(dCon);
@@ -82,7 +84,13 @@ function Write({ setMode, totalCount }) {
       // 6) 전체 개수 참조변수 1증가하기
       totalCount.current++;
 
-      // 7) 리스트 이동을 위해 모드 변경하기
+      // 7) 페이지 번호 초기화
+      setPageNum(1);
+
+      // 8) 페이지 구역 번호 초기화
+      pgPgNum.current = 1;
+
+      // 9) 리스트 이동을 위해 모드 변경하기
       setMode("L");
     } /// else /////
   }; ////////// submitFn 함수 //////////////
@@ -90,7 +98,7 @@ function Write({ setMode, totalCount }) {
   // 리턴 코드구역 ///////////////////
   return (
     <main className="cont">
-      {/* <h1 className="tit">OPINION</h1> */}
+      <h1 className="tit">OPINION</h1>
       <table className="dtblview readone">
         <caption>OPINION : Write</caption>
         <tbody>
@@ -135,8 +143,7 @@ function Write({ setMode, totalCount }) {
                 onClick={() => {
                   // 리스트 모드('L')로 변경하기
                   setMode("L");
-                }}
-              >
+                }}>
                 List
               </button>
             </td>

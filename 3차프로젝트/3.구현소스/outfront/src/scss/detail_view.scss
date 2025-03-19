@@ -189,6 +189,12 @@
           @include tablet-medium {
             gap:0;
           }
+          .empty-msg {
+            font-size: 1.4rem;
+            text-align: center;
+            margin: 0 auto;
+            color: #777;
+          }
           li {
             font-size: 1.4rem;
             width: 49%;

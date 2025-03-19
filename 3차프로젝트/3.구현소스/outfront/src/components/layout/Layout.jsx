@@ -6,13 +6,22 @@ import MainArea from "./MainArea";
 
 // 컨텍스트 API 로 전역변수구역 설정하기! ////
 import { dCon } from "../modules/dCon";
-import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
 
 export default function Layout() {
   // [ 전역 상태관리 변수 설정하기 ] ////
   // [1] 로그인 상태관리변수
-  const [loginSts, setLoginSts] = useState(sessionStorage.getItem("minfo"));
+  // const [loginSts, setLoginSts] = useState(sessionStorage.getItem("minfo"));
+  // [1] 로그인 상태관리변수 : 
+  // 초기값 - 로컬스가 있으면 파싱할당!
+  const [loginSts, setLoginSts] = useState(
+    sessionStorage.getItem("minfo")
+      ? JSON.parse(sessionStorage.getItem("minfo"))
+      : null
+  );
+  // -> 초기값으로 세션스토리지 'minfo'를 할당함!
+  console.log(loginSts);
 
   // [2] 로그인 환영 메시지 상태변수 ////
   const [loginMsg, setLoginMsg] = useState(null);

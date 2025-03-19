@@ -1,8 +1,14 @@
 // 강의 상세페이지 컴포넌트 : ./src/components/pages/DetailView.jsx ////
 
 import React, {useState, useEffect} from "react";
-import {useParams, useNavigate} from "react-router-dom";
+import {useParams, useNavigate, Link} from "react-router-dom";
 import "../../scss/detail_view.scss";
+// 강의 json 데이터 불러오기
+import eduData from "../../js/data/edu_data.json";
+// 리뷰 json 데이터 불러오기
+import reviewData from "../../js/data/review_data.json";
+// 로그인한 사용자의 학습 데이터 불러오기
+import userData from "../../js/data/user_data.json";
 
 const DetailView = () => {
   const {id} = useParams();
@@ -10,40 +16,47 @@ const DetailView = () => {
   const [reviews, setReviews] = useState([]); // 리뷰를 배열로 저장
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState(null);
+  const [userEduState, setUserEduState] = useState(null);
+  const [userEduRate, setUserEduRate] = useState(null);
 
   useEffect(() => {
     // 세션 스토리지에서 로그인한 사용자 정보 가져오기
     const storedUser = sessionStorage.getItem("minfo");
     if (storedUser) {
-      setUserInfo(JSON.parse(storedUser));
+      const parsedUser = JSON.parse(storedUser);
+      setUserInfo(parsedUser);
+
+      // 로그인한 사용자의 학습 데이터 확인
+      const currentUserData = userData.find((user) => user.uid === parsedUser.uid);
+      if (currentUserData) {
+        const enrolledCourse = currentUserData.eduIng.find((course) => course.eduId === Number(id));
+        if (enrolledCourse) {
+          setUserEduState(enrolledCourse.eduState);
+          setUserEduRate(enrolledCourse.eduRate);
+        }
+      }
     }
-  }, []);
+  }, [id]);
 
   // 강의 데이터 가져오기
   useEffect(() => {
-    fetch("/data/edu_data.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const selectedEdu = data.find((item) => item.idx === Number(id));
-        setEdu(selectedEdu);
-      })
-      .catch(console.error);
+    // eduData에서 id에 해당하는 강의 정보를 찾아서 edu 상태로 설정
+    const selectedEdu = eduData.find((item) => item.idx === Number(id));
+    setEdu(selectedEdu);
   }, [id]);
 
   // 리뷰 데이터 가져오기
   useEffect(() => {
-    fetch("/data/review_data.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const filteredReviews = data.filter((item) => item.eduId === Number(id));
-        setReviews(filteredReviews);
-      })
-      .catch(console.error);
+    const filteredReviews = reviewData.filter((item) => item.eduId === Number(id));
+    setReviews(filteredReviews);
   }, [id]);
 
   if (!edu) return <p>강의 정보가 없습니다... ㅠㅠ</p>;
 
-  const formatPrice = (price) => (price.includes("₩") ? `₩${Number(price.replace("₩", "")).toLocaleString()}` : price);
+  const formatPrice = (price) => {
+    const priceNum = Number(price);
+    return priceNum === 0 ? "무료" : `₩${priceNum.toLocaleString()}`;
+  };
 
   return (
     <div className="detail-wrap">
@@ -58,8 +71,7 @@ const DetailView = () => {
             </p>
             <h2>{edu.gName}</h2>
             <p>{edu.gInfo}</p>
-            <span> (⭐4.7 ) 수강평 986개 수강생 31,831명
-            </span>
+            <span> (⭐4.7 ) 수강평 986개 수강생 31,831명</span>
           </div>
           <div className="edu-thumb">
             <img src={`/images/edu_thumb/${edu.idx}.png`} alt={`교육 이미지 ${edu.idx}`} />
@@ -67,15 +79,23 @@ const DetailView = () => {
         </div>
       </div>
       <div className="detail-content">
-      <aside>
+        <aside>
           <div className="detail-aside-wrap">
             <div className="sale-msg">{userInfo ? `${userInfo.unm}님` : "회원 가입하면"} 첫 구매 할인 중 (1일 남음)</div>
             <div className="inner">
               <p className="price">
                 <b>{formatPrice(edu.gPrice)}</b>
               </p>
-              <button className="add-edu-btn">수강 신청하기</button>
-              <button className="add-cart-btn">바구니에 담기</button>
+              {userEduState ? (
+                <button className="edu-state-btn">
+                  <Link to="/myedu">{userEduState}(진행률:{userEduRate}%)</Link>
+                </button>
+              ) : (
+                <button className="add-edu-btn">
+                  <Link to="/mypage">수강 신청하기</Link>
+                </button>
+              )}
+              {/* <button className="add-cart-btn">바구니에 담기</button> */}
             </div>
             <div className="aside-info">
               <p>
@@ -113,7 +133,7 @@ const DetailView = () => {
                   </li>
                 ))
               ) : (
-                <p>리뷰가 없습니다... ㅠㅠ</p>
+                <p className="empty-msg">이 강의는 리뷰가 없습니다... ㅠㅠ</p>
               )}
             </ul>
           </div>
@@ -342,10 +362,10 @@ const DetailView = () => {
                     </p>
                   </div>
                 </div>
-              </div>              
+              </div>
             </div>
           </div>
-        </section>        
+        </section>
       </div>
     </div>
   );
