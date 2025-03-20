@@ -75,14 +75,14 @@ const DetailView = () => {
               {" "}
               ({" "}
               <span className="star-grade2">
-                <img src="/images/main/star.png" alt="별" width="8" />
-                <img src="/images/main/star.png" alt="별" width="8" />
+                <img src="../images/main/star.png" alt="별" width="8" />
+                <img src="../images/main/star.png" alt="별" width="8" />
               </span>
               4.7 {" "}) 수강평 986개 수강생 31,831명
             </span>
           </div>
           <div className="edu-thumb">
-            <img src={`/images/edu_thumb/${edu.idx}.png`} alt={`교육 이미지 ${edu.idx}`} />
+            <img src={`../images/edu_thumb/${edu.idx}.png`} alt={`교육 이미지 ${edu.idx}`} />
           </div>
         </div>
       </div>
@@ -141,7 +141,7 @@ const DetailView = () => {
                       수강평 평점 {review.grade}
                       {Array.from({length: Math.round(review.grade / 0.5)}, (_, i) => (
                         <span className="half-star">
-                          <img key={i} src="/images/main/star.png" alt="별" width="8" />
+                          <img key={i} src="../images/main/star.png" alt="별" width="8" />
                         </span>
                       ))}
                     </span>

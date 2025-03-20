@@ -60,7 +60,7 @@ import CartList from './components/modules/CartList.jsx';
 export default function MainComponent(){
   // 리턴 코드구역
   return (
-  <BrowserRouter>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Routes>
       {/* 최상위 Route는 쌍으로 태그를 만든다!
       슬래쉬는 루트를 말하고 레이아웃 컴포넌트 불러옴 */}

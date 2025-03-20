@@ -96,7 +96,7 @@ const Main = () => {
         {currentList.map((edu) => (
           <li key={edu.idx} className="edu-list" onClick={() => navigate(`/detail/${edu.idx}`)}>
             <picture>
-              <img src={`/images/edu_thumb/${edu.idx}.png`} alt={`강의 이미지 ${edu.idx}`} />
+              <img src={`./images/edu_thumb/${edu.idx}.png`} alt={`강의 이미지 ${edu.idx}`} />
             </picture>
             <h3>{edu.gName}</h3>
             <p className="ginfo"> {edu.gInfo}</p>
