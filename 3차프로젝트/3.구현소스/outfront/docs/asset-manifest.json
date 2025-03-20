@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/FED-TEAM-outfront/static/css/main.7b9f1424.css",
+    "main.js": "/FED-TEAM-outfront/static/js/main.801c6526.js",
+    "index.html": "/FED-TEAM-outfront/index.html",
+    "main.7b9f1424.css.map": "/FED-TEAM-outfront/static/css/main.7b9f1424.css.map",
+    "main.801c6526.js.map": "/FED-TEAM-outfront/static/js/main.801c6526.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7b9f1424.css",
+    "static/js/main.801c6526.js"
+  ]
+}
