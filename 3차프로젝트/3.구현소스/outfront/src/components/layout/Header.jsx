@@ -55,7 +55,7 @@ const Header = memo(({ goPage, loginSts, setLoginSts }) => {
         <div className="header-content">
           <div className="header-content-box">
             <h1 className="logo">
-              <a href="/">
+              <a href="./">
                 <img src="../../images/common/brand_logo.png" alt="아웃프런 브랜드 로고" className="logo-img" />
               </a>
             </h1>
