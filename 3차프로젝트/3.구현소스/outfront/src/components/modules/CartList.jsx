@@ -20,8 +20,8 @@ const CartList = ({}) => {
                   </p>
                 </div>
               </div>
-              <button type="text" className="delete-box">
-                <a href="#" className="delete-txt">
+              <button type="text" className="border-box">
+                <a href="#" className="border-txt">
                   선택삭제
                 </a>
               </button>
@@ -41,12 +41,31 @@ const CartList = ({}) => {
                   </ul>
                 </div>
                 <div className="edu-list-right">
-                  <h4>89,000원</h4>
+                  <h4>gPrice</h4>
                 </div>
               </div>
             </div>
           </div>
-          <div className="pay-list"></div>
+          <div className="pay-list">
+            <div className="pay-title">
+              <h5>구매자정보</h5>
+              <button type="text" className="border-box">
+                <a href="#" className="border-txt">
+                  수정
+                </a>
+              </button>
+            </div>
+            <div className="user-desc">
+              <div className="user">
+                <p className="user-title">이름</p>
+                <p className="user-desc">name</p>
+              </div>
+              <div className="user">
+                <p className="user-title">이메일</p>
+                <p className="user-desc">email</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

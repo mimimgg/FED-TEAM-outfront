@@ -14,8 +14,6 @@
 .basket-wrap {
   display: flex;
   justify-content: space-between;
-  height: 400px;
-  background-color: bisque;
   gap: 5%;
 
   .basket-list {
@@ -25,7 +23,7 @@
       display: flex;
       justify-content: space-between;
       padding-block: 1.5rem;
-      border-bottom: .1rem solid $color-lightegray;
+      border-bottom: 0.1rem solid $color-lightegray;
 
       .select-box {
         display: flex;
@@ -46,25 +44,12 @@
         }
       }
 
-      .delete-box {
-        .delete-txt {
-          border: 1px solid $color-lightegray;
-          color: $color-text;
-          height: 3rem;
-          width: max-content;
-          padding-inline: 1.6rem;
-          border-radius: 0.8rem;
-          font-size: 1.2rem;
-          font-weight: 500;
-          display: inline-flex;
-          justify-content: center;
-          align-items: center;
-        }
-      }
+      
     }
 
     .edu-list-container {
-      margin-block: 1.6rem;
+      padding-block: 1.6rem;
+      border-bottom: 1px solid $color-lightegray;
 
       .edu-list-wrap {
         display: flex;
@@ -74,10 +59,12 @@
           display: flex;
           align-items: flex-start;
           gap: 1rem;
+          width: 80%;
+          border-right: 1px solid $color-lightegray;
 
           img {
             width: 12rem;
-            border-radius: .8rem;
+            border-radius: 0.8rem;
             border: 1px solid $color-lightegray;
           }
 
@@ -85,7 +72,7 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            
+
             .gname {
               font-size: 1.4rem;
               font-weight: 500;
@@ -96,11 +83,68 @@
             }
           }
         }
+        .edu-list-right {
+          h4 {
+            font-size: 1.4rem;
+            font-weight: 500;
+          }
+        }
       }
     }
   }
 
   .pay-list {
     width: 25%;
+    border: 1px solid $color-lightegray;
+    border-radius: .8rem;
+    padding: 1.6rem;
+
+    .pay-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid $color-lightegray;
+      padding-bottom: 1.5rem;
+
+      h5 {
+        font-size: 1.4rem;
+        font-weight: 500;
+      }
+    }
+
+    .user-desc {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+
+      .user {
+        display: flex;
+        font-size: 1.2rem;
+        
+        .user-title {
+          color: $color-midgray;
+          width: 30%;
+        }
+        .user-desc {
+          color: $color-text;
+        }
+      }
+    }
+  }
+}
+
+.border-box {
+  .border-txt {
+    border: 1px solid $color-lightegray;
+    color: $color-text;
+    height: 3rem;
+    width: max-content;
+    padding-inline: 1.6rem;
+    border-radius: 0.8rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
   }
 }
