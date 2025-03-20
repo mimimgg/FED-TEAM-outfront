@@ -89,7 +89,7 @@ function Login() {
           document.querySelector(".log-submit").innerText = "아웃프런에 오신 것을 환영합니다 🎉";
 
           setTimeout(() => {
-            myCon.goPage("./");
+            myCon.goPage("/mypage");
           }, 1000);
         } else {
           setPwdMsg(msgPwd[1]);
