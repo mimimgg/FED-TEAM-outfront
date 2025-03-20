@@ -59,7 +59,7 @@ export default function Layout() {
     // (3) 로그인 메시지 초기화
     setLoginMsg(null);
     // (4) 메인 페이지로 돌아가기
-    goPage("/");
+    goPage("./");
   }; /// logoutFn ///
 
   // 리턴 코드구역 ////
