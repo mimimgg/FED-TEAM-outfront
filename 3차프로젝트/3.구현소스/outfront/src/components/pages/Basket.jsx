@@ -1,4 +1,4 @@
-import { Cart } from "../../components/modules/Cart";
+import { Cart } from "../modules/CartList";
 
 const Basket = () => {
   return <Cart />;
