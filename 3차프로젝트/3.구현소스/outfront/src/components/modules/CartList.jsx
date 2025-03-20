@@ -1,12 +1,13 @@
+// CartList.jsx
 import React from 'react';
 import "../../scss/pages/cart.scss";
 
-export const Cart = () => {
+const CartList = ({}) => {
   return (
     <>
-      <h2 className="title">수강바구니</h2>
+    <h1>test</h1>
     </>
   );
-}
+};
 
-export default Cart;
+export default CartList;

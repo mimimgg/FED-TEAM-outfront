@@ -170,7 +170,7 @@ const Header = memo(({ goPage, loginSts, setLoginSts }) => {
                   </Link>
                 </li>
                 <li className="aside-item">
-                  <Link to="/cart" className="aside-button icon">
+                  <Link to="/cartlist" className="aside-button icon">
                     <i className="fa-solid fa-cart-shopping"></i>
                   </Link>
                 </li>
@@ -193,7 +193,7 @@ const Header = memo(({ goPage, loginSts, setLoginSts }) => {
                     </a>
                   </li>
                   <li className="aside-item">
-                    <Link to="/cart" className="aside-button icon">
+                    <Link to="/cartlist" className="aside-button icon">
                       <i className="fa-solid fa-cart-shopping"></i>
                     </Link>
                   </li>
