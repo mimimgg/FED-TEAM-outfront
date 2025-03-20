@@ -67,10 +67,10 @@ const Header = memo(({ goPage, loginSts, setLoginSts }) => {
                 <nav className="gnb">
                   <ul className="gnb-list">
                     <li className="gnb-item">
-                      <button type="button" id="top-edu-menu" className="gnb-button" onClick={toggleMenu}>
+                      <button type="button" className="gnb-button" onClick={toggleMenu}>
                         강의
                       </button>
-                      <nav className={`snb edu-drop-menu ${openSnb === '강의' ? "open" : ""}`}>
+                      <nav className={`snb ${openSnb === '강의' ? "open" : ""}`}>
                         <ul className="snb-list">
                           <li className="sub-item">
                             <a className="snb-button" href="/#전체">
