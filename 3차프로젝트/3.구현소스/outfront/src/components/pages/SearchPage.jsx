@@ -81,9 +81,6 @@ const SearchPage = () => {
                 <p>레벨: {v.gLevel}</p>
                 <p>가격: {formatPrice(v.gPrice)}</p>
                 <p>분류: {v.gSkill}</p>
-                <a className="cart-btn" onClick={cartBtnFn} href="#none">
-                  <i className="fa-solid fa-cart-shopping"></i>
-                </a>
               </div>
             ))}
           </section>
