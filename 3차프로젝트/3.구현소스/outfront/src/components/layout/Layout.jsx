@@ -30,6 +30,14 @@ export default function Layout() {
   // [3] 강제상태변경변수
   const [force, setForce] = useState(true);
 
+  // [4] 장바구니정보변수
+  const [cartInfo, setCartInfo] = useState(
+    localStorage.getItem('cart-info')
+    ? JSON.parse(localStorage.getItem('cart-info')).filter(v=>{
+      if(v.gOwner === (loginSts?loginSts.idx : 0)) return true;
+    })
+    :null);
+
   // [ 공통함수 ] /////////////////
   // [1] 라우터 이동함수 ////
   const goNav = useNavigate();
@@ -72,8 +80,10 @@ export default function Layout() {
         makeMsg, // 로그인메시지 생성함수
         goPage, // 라우터 이동함수
         logoutFn, // 로그아웃 함수
+        cartInfo, // 장바구니정보 getter
+        setCartInfo, // 장바구니정보 setter
       }}>
-      <Header goPage={goPage} loginSts={loginSts} setLoginSts={setLoginSts} setForce={setForce} force={force} />
+      <Header goPage={goPage} loginSts={loginSts} setLoginSts={setLoginSts} setForce={setForce} force={force} cartInfo={cartInfo} setCartInfo={setCartInfo} />
       <MainArea />
       <FooterArea />
     </dCon.Provider>

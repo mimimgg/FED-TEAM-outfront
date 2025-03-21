@@ -3,12 +3,12 @@ import "../../scss/header.scss";
 import gnbMenu from "../../js/data/gnb";
 import { memo, useEffect, useState } from "react";
 
-const Header = memo(({ goPage, loginSts, setLoginSts }) => {
+const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) => {
   const location = useLocation(); // 현재 경로를 가져옴
   const [isOpenGnb, setIsOpenGnb] = useState(false);
   const [openSnb, setOpenSnb] = useState(null);
   const [searchKeyword, setSearchKeyword] = useState("");
-
+  // console.log('상단리랜더링');
   // 햄버거 메뉴가 열려 있을 때 경로가 변경되면 닫기
   useEffect(() => {
     setIsOpenGnb(false); // 경로가 변경될 때 햄버거 메뉴 닫기
@@ -16,7 +16,7 @@ const Header = memo(({ goPage, loginSts, setLoginSts }) => {
   }, [location]);
 
   const toggleMenu = () => {
-    setOpenSnb((prev) => (prev === '강의' ? null : '강의')); // 강의 메뉴 토글
+    setOpenSnb((prev) => (prev === "강의" ? null : "강의")); // 강의 메뉴 토글
   };
 
   const handleClickGnb = (txt) => {
@@ -56,21 +56,38 @@ const Header = memo(({ goPage, loginSts, setLoginSts }) => {
           <div className="header-content-box">
             <h1 className="logo">
               <a href="./">
-                <img src="../../images/common/brand_logo.png" alt="아웃프런 브랜드 로고" className="logo-img" />
+                <img
+                  src="../../images/common/brand_logo.png"
+                  alt="아웃프런 브랜드 로고"
+                  className="logo-img"
+                />
               </a>
             </h1>
-            <div className={`gnb-container ${isOpenGnb ? "open" : "close"}`} onClick={handleCloseGnb}>
-              <button type="button" className="mobile-gnb-button" onClick={handleOpenGnb}>
+            <div
+              className={`gnb-container ${isOpenGnb ? "open" : "close"}`}
+              onClick={handleCloseGnb}
+            >
+              <button
+                type="button"
+                className="mobile-gnb-button"
+                onClick={handleOpenGnb}
+              >
                 <i className="fa-solid fa-bars"></i>
               </button>
               <div className="gnb-content">
                 <nav className="gnb">
                   <ul className="gnb-list">
                     <li className="gnb-item">
-                      <button type="button" className="gnb-button" onClick={toggleMenu}>
+                      <button
+                        type="button"
+                        className="gnb-button"
+                        onClick={toggleMenu}
+                      >
                         강의
                       </button>
-                      <nav className={`snb ${openSnb === '강의' ? "open" : ""}`}>
+                      <nav
+                        className={`snb ${openSnb === "강의" ? "open" : ""}`}
+                      >
                         <ul className="snb-list">
                           <li className="sub-item">
                             <a className="snb-button" href="/#전체">
@@ -109,13 +126,24 @@ const Header = memo(({ goPage, loginSts, setLoginSts }) => {
                       <li key={`gnb-menu-${gnb.txt}`} className="gnb-item">
                         {gnb.sub ? (
                           <>
-                            <button type="button" className="gnb-button" onClick={() => handleClickGnb(gnb.txt)}>
+                            <button
+                              type="button"
+                              className="gnb-button"
+                              onClick={() => handleClickGnb(gnb.txt)}
+                            >
                               {gnb.txt}
                             </button>
-                            <nav className={`snb ${openSnb === gnb.txt ? "open" : ""}`}>
+                            <nav
+                              className={`snb ${
+                                openSnb === gnb.txt ? "open" : ""
+                              }`}
+                            >
                               <ul className="snb-list">
                                 {gnb.sub.map((snb) => (
-                                  <li key={`snb-menu-${snb.txt}`} className="sub-item">
+                                  <li
+                                    key={`snb-menu-${snb.txt}`}
+                                    className="sub-item"
+                                  >
                                     <Link to={snb.link} className="snb-button">
                                       {snb.txt}
                                     </Link>
@@ -149,7 +177,11 @@ const Header = memo(({ goPage, loginSts, setLoginSts }) => {
                       }
                     }}
                   />
-                  <button type="button" className="search-submit" onClick={handleSearch}>
+                  <button
+                    type="button"
+                    className="search-submit"
+                    onClick={handleSearch}
+                  >
                     <i className="fa-solid fa-magnifying-glass"></i>
                   </button>
                 </section>
@@ -172,6 +204,9 @@ const Header = memo(({ goPage, loginSts, setLoginSts }) => {
                 <li className="aside-item">
                   <Link to="/cartlist" className="aside-button icon">
                     <i className="fa-solid fa-cart-shopping"></i>
+                    <span className={"cart-cnt" + (cartInfo ? " on" : "")}>
+                      {cartInfo ? cartInfo.length : 0}
+                    </span>
                   </Link>
                 </li>
               </ul>
@@ -186,20 +221,39 @@ const Header = memo(({ goPage, loginSts, setLoginSts }) => {
                         e.preventDefault();
                         setLoginSts(null);
                         sessionStorage.removeItem("minfo");
+
+                        let finalInfo = localStorage.getItem("cart-info")
+                          ? JSON.parse(
+                              localStorage.getItem("cart-info")
+                            ).filter((v) => {
+                              if (v.gOwner === 0) return true;
+                            })
+                          : null;
+
+                        // 카드정보 전역 업데이트하기
+                        setCartInfo(finalInfo);
+
                         goPage("/");
                       }}
-                      className="logout">
+                      className="logout"
+                    >
                       로그아웃
                     </a>
                   </li>
                   <li className="aside-item">
-                    <Link to="/cartlist" className="aside-button icon">
-                      <i className="fa-solid fa-cart-shopping"></i>
+                    <Link to="/mypage" className="aside-button logo-icon">
+                      <img
+                        src="https://cdn.inflearn.com/public/main/profile/default_profile.png"
+                        alt="아웃프런마이페이지"
+                      />
                     </Link>
                   </li>
                   <li className="aside-item">
-                    <Link to="/mypage" className="aside-button logo-icon">
-                      <img src="https://cdn.inflearn.com/public/main/profile/default_profile.png" alt="아웃프런마이페이지" />
+                    <Link to="/cartlist" className="aside-button icon">
+                      <i className="fa-solid fa-cart-shopping"></i>
+                      <span className={"cart-cnt" + (cartInfo ? " on" : "")}>
+                        {cartInfo ? cartInfo.length : 0}
+                      </span>
                     </Link>
                   </li>
                 </div>

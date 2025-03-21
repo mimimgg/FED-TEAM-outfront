@@ -378,6 +378,25 @@ button {
         justify-content: center;
         align-items: center;
 
+        span.cart-cnt {
+          position: absolute;
+          background-color: $color-secondary;
+          width: 1.8rem;
+          height: 1.8rem;
+          border-radius: 50%;
+          font-size: 12px;
+          line-height: 16px;
+          color: #fff;
+          border: 1px solid hotpink;
+          text-align: center;
+          translate: 74% -60%;
+          &.on{
+            display: block;
+          }
+      }
+      .header * {
+          box-sizing: border-box;
+      }
       }
       .logout {
         color: $color-midgray;
