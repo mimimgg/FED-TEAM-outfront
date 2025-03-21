@@ -50,7 +50,7 @@ const CartList = ({}) => {
         <div className="basket-wrap">
           {cartItem.length === 0 ? ( // cartItem이 비어 있는 경우
             <div className="empty-cart">
-              <p>수강 바구니가 비어 있습니다.</p>
+              <p>담긴 강의가 없습니다.</p>
               <Link to="/" className="border-box">
                 담으러 가기 🧺
               </Link>
@@ -96,9 +96,8 @@ const CartList = ({}) => {
                           <ul className="text-box">
                             <li className="gname">{item.gName}</li>
                             <ol className="cat-box">
-                              <li className="gcate">{item.gCate}</li>
                               <li className="glavel">{item.gLevel}</li>
-                              <li className="gskill">{item.gSkill}</li>
+                              <li className="gdate">{item.gDate}</li>
                             </ol>
                           </ul>
                           <h4>{formatPrice(item.gPrice)}</h4>
