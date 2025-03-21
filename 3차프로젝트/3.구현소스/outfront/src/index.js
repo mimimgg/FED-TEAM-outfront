@@ -17,6 +17,7 @@ import Join from './components/pages/Join.jsx';
 import MyEdu from './components/pages/MyEdu.jsx';
 import SearchPage from './components/pages/SearchPage.jsx';
 import Board from './components/pages/Board.jsx';
+import CartList from './components/modules/CartList.jsx';
 // import SearchPage from './components/pages/SearchPage.jsx';
 
 
@@ -74,6 +75,7 @@ export default function MainComponent(){
         <Route path="myedu" element={<MyEdu />} />
         <Route path="login" element={<Login />} />
         <Route path="join" element={<Join />} />
+        <Route path="CartList" element={<CartList />} />
         <Route path="search" element={<SearchPage />} />
         <Route path="board" element={<Board />} />
       </Route>

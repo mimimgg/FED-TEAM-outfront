@@ -133,6 +133,9 @@ button {
         background: #fff;
         gap: 0;
       }
+      @include mobile {
+        width: 90%;
+      }
     }
 
     .gnb {
@@ -307,6 +310,9 @@ button {
           align-items: center;
         }
       }
+      @include mobile {
+        left: 45%;
+        width: 45%; }
     }
 
     .search-form {
