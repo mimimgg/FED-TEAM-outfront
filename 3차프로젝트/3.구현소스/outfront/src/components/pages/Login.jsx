@@ -88,6 +88,18 @@ function Login() {
           console.log(myCon.loginSts);
           document.querySelector(".log-submit").innerText = "아웃프런에 오신 것을 환영합니다 🎉";
 
+          let finalInfo = localStorage.getItem("cart-info")
+          ? JSON.parse(
+              localStorage.getItem("cart-info")
+            ).filter((v) => {
+              if (v.gOwner === (result ? result.idx : 0))
+                return true;
+            })
+          : null;
+
+        // 카드정보 전역 업데이트하기
+        myCon.setCartInfo(finalInfo);
+
           setTimeout(() => {
             myCon.goPage("/mypage");
           }, 1000);

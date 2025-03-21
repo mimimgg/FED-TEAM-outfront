@@ -1,26 +1,47 @@
 // CartList.jsx
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../scss/pages/cart.scss";
 
 // 수강 데이터 불러오기
 import eduData from "../../js/data/edu_data.json";
 
 import { Link } from "react-router-dom";
+import { dCon } from "./dCon";
 
 const CartList = ({}) => {
-  const [userInfo, setUserInfo] = useState(null); // 로그인한 사용자 정보
-  const [cartItem, setCartItem] = useState(eduData);
+  const [userInfo, setUserInfo] = useState(sessionStorage.getItem("minfo")?
+  JSON.parse(sessionStorage.getItem("minfo")):null); // 로그인한 사용자 정보
+
+  const [cartItem, setCartItem] = useState(
+    localStorage.getItem('cart-info')
+    ?JSON.parse(localStorage.getItem('cart-info')).filter(v=>{
+      if(v.gOwner === (userInfo?userInfo.idx : 0)) return true;
+    })
+    :[]);
+
+
+
   const formatPrice = (price) => (Number(price) === 0 ? "무료" : `₩${Number(price).toLocaleString()}`);
   const [selectedItems, setSelectedItems] = useState(new Array(cartItem.length).fill(false));
+
+  // 전역 Context API 사용하기 : 전역 카트정보(cartInfo) 변경하기위함 ////////
+  const myCon = useContext(dCon);
+
 
   useEffect(() => {
     // 세션 스토리지에서 로그인한 사용자 정보 가져오기
     const storedUser = sessionStorage.getItem("minfo");
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
-      setUserInfo(parsedUser);
-    }
+      setUserInfo(parsedUser); }
+
+    
+
+    
+    myCon.setCartInfo(cartItem.length===0?null:cartItem);
   }, []);
+  
+console.log('로그인?',userInfo);
 
   const handleSelectAllChange = (event) => {
     const isChecked = event.target.checked; // 전체 선택 체크박스 상태
@@ -38,8 +59,13 @@ const CartList = ({}) => {
 
   const handleDeleteSelected = () => {
     const updatedCartItems = cartItem.filter((_, index) => !selectedItems[index]); // 선택되지 않은 항목만 남김
+    // 로컬스 일치시키기
+    localStorage.setItem('cart-info', JSON.stringify(updatedCartItems));
+    // 전역 카트정보 업데이트 하기(지우고난뒤에 배열값개수가 0이면 null로 업데이트 해야 카트 아이콘이 사라짐!)
+    myCon.setCartInfo(updatedCartItems.length===0?null:updatedCartItems);
     setCartItem(updatedCartItems); // 업데이트된 항목으로 상태 변경
     setSelectedItems(new Array(updatedCartItems.length).fill(false)); // 선택 상태 초기화
+
   };
 
   return (
@@ -79,7 +105,7 @@ const CartList = ({}) => {
                 </div>
                 <div className="edu-list-container">
                   {cartItem.map((item, index) => (
-                    <div className="edu-list-wrap" key={item.id}>
+                    <div className="edu-list-wrap" key={index}>
                       <div className="edu-list-left">
                         <input
                           type="checkbox"
