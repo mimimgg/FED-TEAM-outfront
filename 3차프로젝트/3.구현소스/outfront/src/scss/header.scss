@@ -5,7 +5,7 @@ button {
   border: 0;
   padding: 0;
   margin: 0;
-  font-family: 'Pretendard Variable', sans-serif;
+  font-family: "Pretendard Variable", sans-serif;
 }
 
 .header * {
@@ -15,17 +15,17 @@ button {
 .header {
   max-width: 1440px;
   margin-inline: auto;
-  
+
   .header-container {
     padding-inline: 3.2rem;
     width: 100%;
     height: 6.4rem;
 
     @include tablet-small {
-      padding-inline: 1.6rem; 
+      padding-inline: 1.6rem;
     }
     @include mobile {
-      padding-inline: .8rem;
+      padding-inline: 0.8rem;
     }
 
     .header-content {
@@ -59,7 +59,7 @@ button {
       display: flex;
       justify-content: center;
       left: 50%;
-        transform: translateX(-50%);
+      transform: translateX(-50%);
     }
 
     .logo-img {
@@ -98,14 +98,12 @@ button {
         left: 0;
       }
     }
-    
 
     .gnb-content {
       height: 100%;
       flex-grow: 1;
       transition: left 0.5s;
     }
-
 
     .mobile-gnb-button {
       display: none;
@@ -214,7 +212,7 @@ button {
           font-weight: 500;
           font-size: 1.4rem;
           justify-content: flex-start;
-          padding: 1.6rem 1.6rem; 
+          padding: 1.6rem 1.6rem;
 
           &:hover {
             background: rgb(229, 249, 241);
@@ -259,8 +257,7 @@ button {
           padding: 0;
         }
       }
-      
-      
+
       .snb-item {
         display: block;
       }
@@ -312,7 +309,8 @@ button {
       }
       @include mobile {
         left: 45%;
-        width: 45%; }
+        width: 45%;
+      }
     }
 
     .search-form {
@@ -380,23 +378,24 @@ button {
 
         span.cart-cnt {
           position: absolute;
-          background-color: $color-secondary;
-          width: 1.8rem;
-          height: 1.8rem;
+          background-color: #fe5b16;
+          width: 1.6rem;
+          height: 1.6rem;
           border-radius: 50%;
-          font-size: 12px;
-          line-height: 16px;
+          font-size: 10px;
+          font-weight: 500;
+          line-height: 14px;
           color: #fff;
           border: 1px solid hotpink;
           text-align: center;
           translate: 74% -60%;
-          &.on{
+          &.on {
             display: block;
           }
-      }
-      .header * {
+        }
+        .header * {
           box-sizing: border-box;
-      }
+        }
       }
       .logout {
         color: $color-midgray;
@@ -417,12 +416,12 @@ button {
         display: flex;
         column-gap: 2rem;
         margin-left: 1rem;
-        
+
         .logo-icon {
-          background: transparent; 
+          background: transparent;
           padding: 0;
         }
-        
+
         img {
           width: 2.4rem;
           border-radius: 50%;
@@ -431,8 +430,6 @@ button {
           column-gap: 1.2rem;
         }
       }
-
     }
   }
 }
-

@@ -1,53 +1,51 @@
-// CartList.jsx
 import React, { useContext, useEffect, useState } from "react";
 import "../../scss/pages/cart.scss";
-
-// 수강 데이터 불러오기
-import eduData from "../../js/data/edu_data.json";
-
 import { Link } from "react-router-dom";
-import { dCon } from "./dCon";
+import { dCon } from "./dCon"; // Context API import
 
-const CartList = ({}) => {
-  const [userInfo, setUserInfo] = useState(sessionStorage.getItem("minfo")?
-  JSON.parse(sessionStorage.getItem("minfo")):null); // 로그인한 사용자 정보
+const CartList = () => {
+  // 로그인한 사용자 정보 상태
+  const [userInfo, setUserInfo] = useState(
+    sessionStorage.getItem("minfo") ? JSON.parse(sessionStorage.getItem("minfo")) : null
+  );
 
+  // 장바구니 항목 상태
   const [cartItem, setCartItem] = useState(
-    localStorage.getItem('cart-info')
-    ?JSON.parse(localStorage.getItem('cart-info')).filter(v=>{
-      if(v.gOwner === (userInfo?userInfo.idx : 0)) return true;
-    })
-    :[]);
+    localStorage.getItem("cart-info")
+      ? JSON.parse(localStorage.getItem("cart-info")).filter((v) => {
+          // 로그인한 사용자와 동일한 소유자 필터링
+          return v.gOwner === (userInfo ? userInfo.idx : 0);
+        })
+      : []
+  );
 
-
-
+  // 가격 포맷팅 함수
   const formatPrice = (price) => (Number(price) === 0 ? "무료" : `₩${Number(price).toLocaleString()}`);
+
+  // 선택된 항목 상태
   const [selectedItems, setSelectedItems] = useState(new Array(cartItem.length).fill(false));
 
-  // 전역 Context API 사용하기 : 전역 카트정보(cartInfo) 변경하기위함 ////////
+  // 전역 Context API 사용
   const myCon = useContext(dCon);
 
-
+  // 컴포넌트가 마운트될 때 사용자 정보 및 카트 정보 가져오기
   useEffect(() => {
-    // 세션 스토리지에서 로그인한 사용자 정보 가져오기
     const storedUser = sessionStorage.getItem("minfo");
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
-      setUserInfo(parsedUser); }
+      setUserInfo(parsedUser);
+    }
+    // 카트 정보 업데이트
+    myCon.setCartInfo(cartItem.length === 0 ? null : cartItem);
+  }, [cartItem, myCon]);
 
-    
-
-    
-    myCon.setCartInfo(cartItem.length===0?null:cartItem);
-  }, []);
-  
-console.log('로그인?',userInfo);
-
+  // 전체 선택 체크박스 핸들러
   const handleSelectAllChange = (event) => {
     const isChecked = event.target.checked; // 전체 선택 체크박스 상태
     setSelectedItems(new Array(cartItem.length).fill(isChecked));
   };
 
+  // 개별 체크박스 핸들러
   const handleCheckboxChange = (index) => {
     const updatedSelectedItems = [...selectedItems];
     updatedSelectedItems[index] = !updatedSelectedItems[index]; // 체크박스 상태 토글
@@ -55,18 +53,32 @@ console.log('로그인?',userInfo);
   };
 
   // 선택된 항목 수 계산
-  const selectedCount = selectedItems.filter(Boolean).length; // true 값의 수를 세어 선택된 항목 수를 계산
+  const selectedCount = selectedItems.filter(Boolean).length;
 
+  // 선택된 항목 삭제 핸들러
   const handleDeleteSelected = () => {
     const updatedCartItems = cartItem.filter((_, index) => !selectedItems[index]); // 선택되지 않은 항목만 남김
-    // 로컬스 일치시키기
-    localStorage.setItem('cart-info', JSON.stringify(updatedCartItems));
-    // 전역 카트정보 업데이트 하기(지우고난뒤에 배열값개수가 0이면 null로 업데이트 해야 카트 아이콘이 사라짐!)
-    myCon.setCartInfo(updatedCartItems.length===0?null:updatedCartItems);
-    setCartItem(updatedCartItems); // 업데이트된 항목으로 상태 변경
-    setSelectedItems(new Array(updatedCartItems.length).fill(false)); // 선택 상태 초기화
-
+    localStorage.setItem("cart-info", JSON.stringify(updatedCartItems)); // 로컬 스토리지 업데이트
+    myCon.setCartInfo(updatedCartItems.length === 0 ? null : updatedCartItems); // 카트 정보 업데이트
+    setCartItem(updatedCartItems); // 상태 변경
+    setSelectedItems(new Array(cartItem.length).fill(false)); // 선택 상태 초기화
   };
+
+  // 총 결제 금액 계산
+  const totalPrice = selectedItems.reduce((total, isSelected, index) => {
+    if (isSelected) {
+      return total + Number(cartItem[index].gPrice);
+    }
+    return total;
+  }, 0);
+
+  // 총 결제 금액 텍스트 설정
+  let totalPriceText = "";
+  if (totalPrice === 0 && selectedCount > 0) {
+    totalPriceText = "무료";
+  } else if (totalPrice > 0) {
+    totalPriceText = formatPrice(totalPrice);
+  }
 
   return (
     <>
@@ -74,12 +86,10 @@ console.log('로그인?',userInfo);
         <h2 className="basket-title">✨ {userInfo ? `${userInfo.unm}님의 수강바구니 ✨` : "수강바구니"}</h2>
 
         <div className="basket-wrap">
-          {cartItem.length === 0 ? ( // cartItem이 비어 있는 경우
+          {cartItem.length === 0 ? ( // 장바구니가 비어 있는 경우
             <div className="empty-cart">
               <p>담긴 강의가 없습니다.</p>
-              <Link to="/" className="border-box">
-                담으러 가기 🧺
-              </Link>
+              <Link to="/" className="border-box">담으러 가기 🧺</Link>
             </div>
           ) : (
             <>
@@ -90,13 +100,11 @@ console.log('로그인?',userInfo);
                       type="checkbox"
                       className="checkbtn"
                       onChange={handleSelectAllChange} // 전체 선택 체크박스 변경 핸들러
-                      checked={selectedCount === cartItem.length}
+                      checked={selectedCount === cartItem.length} // 전체 선택 체크 상태
                     />
                     <div className="select-title">
                       <p className="select-txt">전체선택</p>
-                      <p className="select-num">
-                        <span>{selectedCount}</span>/{cartItem.length}
-                      </p>
+                      <p className="select-num"><span>{selectedCount}</span>/{cartItem.length}</p>
                     </div>
                   </div>
                   <button type="button" className="border-box" onClick={handleDeleteSelected}>
@@ -104,17 +112,17 @@ console.log('로그인?',userInfo);
                   </button>
                 </div>
                 <div className="edu-list-container">
-                  {cartItem.map((item, index) => (
-                    <div className="edu-list-wrap" key={index}>
+                  {cartItem.map((item, i) => (
+                    <div className="edu-list-wrap" key={item.idx}>
                       <div className="edu-list-left">
                         <input
                           type="checkbox"
                           className="checkbtn"
-                          checked={selectedItems[index]}
-                          onChange={() => handleCheckboxChange(index)}
+                          checked={selectedItems[i]} // 개별 체크 상태
+                          onChange={() => handleCheckboxChange(i)} // 개별 체크박스 변경 핸들러
                         />
                         <img
-                          src={`./images/edu_thumb/${item.idx}.png`}
+                          src={`images/edu_thumb/${item.idx}.png`} // 강의 이미지 경로
                           alt={`강의 이미지 ${item.idx}`}
                           className="edu-img"
                         />
@@ -123,7 +131,7 @@ console.log('로그인?',userInfo);
                             <li className="gname">{item.gName}</li>
                             <ol className="cat-box">
                               <li className="glavel">{item.gLevel}</li>
-                              <li className="gdate">{item.gDate}</li>
+                              <li className="gcate">{item.gCate}</li>
                             </ol>
                           </ul>
                           <h4>{formatPrice(item.gPrice)}</h4>
@@ -142,9 +150,7 @@ console.log('로그인?',userInfo);
           <div className="pay-list">
             <div className="pay-title">
               <h5>구매자정보</h5>
-              <Link to="/mypage" className="border-box">
-                수정
-              </Link>
+              <Link to="/mypage" className="border-box">수정</Link>
             </div>
             <div className="horizon"></div>
             <div className="user-desc">
@@ -165,7 +171,7 @@ console.log('로그인?',userInfo);
             <div className="total-price">
               <div className="total-desc">
                 <p>총 결제금액</p>
-                <span>가격불러오기</span>
+                <span>{totalPriceText}</span>
               </div>
               <button className="submit">결제하기</button>
             </div>
