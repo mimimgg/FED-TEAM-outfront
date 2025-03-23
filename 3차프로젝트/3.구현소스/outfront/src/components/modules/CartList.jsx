@@ -19,6 +19,10 @@ const CartList = () => {
       : []
   );
 
+  useEffect(() => {
+    console.log("Current cartItem:", cartItem);
+  }, [cartItem]);
+
   // 가격 포맷팅 함수
   const formatPrice = (price) => (Number(price) === 0 ? "무료" : `₩${Number(price).toLocaleString()}`);
 
@@ -89,7 +93,9 @@ const CartList = () => {
           {cartItem.length === 0 ? ( // 장바구니가 비어 있는 경우
             <div className="empty-cart">
               <p>담긴 강의가 없습니다.</p>
-              <Link to="/" className="border-box">담으러 가기 🧺</Link>
+              <Link to="/" className="border-box">
+                담으러 가기 🧺
+              </Link>
             </div>
           ) : (
             <>
@@ -104,7 +110,9 @@ const CartList = () => {
                     />
                     <div className="select-title">
                       <p className="select-txt">전체선택</p>
-                      <p className="select-num"><span>{selectedCount}</span>/{cartItem.length}</p>
+                      <p className="select-num">
+                        <span>{selectedCount}</span>/{cartItem.length}
+                      </p>
                     </div>
                   </div>
                   <button type="button" className="border-box" onClick={handleDeleteSelected}>
@@ -113,7 +121,7 @@ const CartList = () => {
                 </div>
                 <div className="edu-list-container">
                   {cartItem.map((item, i) => (
-                    <div className="edu-list-wrap" key={item.idx}>
+                    <div className="edu-list-wrap">
                       <div className="edu-list-left">
                         <input
                           type="checkbox"
@@ -126,16 +134,19 @@ const CartList = () => {
                           alt={`강의 이미지 ${item.idx}`}
                           className="edu-img"
                         />
-                        <div className="box">
-                          <ul className="text-box">
-                            <li className="gname">{item.gName}</li>
-                            <ol className="cat-box">
-                              <li className="glavel">{item.gLevel}</li>
-                              <li className="gcate">{item.gCate}</li>
-                            </ol>
-                          </ul>
-                          <h4>{formatPrice(item.gPrice)}</h4>
-                        </div>
+                        <Link to={``} style={{cursor: "pointer"}}>
+                          <div className="box">
+                            <ul className="text-box">
+                              <li className="gname">{item.gName}</li>
+                              <ol className="cat-box">
+                                <li className="glavel">{item.gLevel}</li>
+                                <li className="gcate">{item.gCate}</li>
+                                <li className="gdate">{item.gDate}</li>
+                              </ol>
+                            </ul>
+                            <h4>{formatPrice(item.gPrice)}</h4>
+                          </div>
+                        </Link>
                       </div>
                       <div className="edu-list-right">
                         <h4>{formatPrice(item.gPrice)}</h4>
@@ -150,7 +161,9 @@ const CartList = () => {
           <div className="pay-list">
             <div className="pay-title">
               <h5>구매자정보</h5>
-              <Link to="/mypage" className="border-box">수정</Link>
+              <Link to="/mypage" className="border-box">
+                수정
+              </Link>
             </div>
             <div className="horizon"></div>
             <div className="user-desc">

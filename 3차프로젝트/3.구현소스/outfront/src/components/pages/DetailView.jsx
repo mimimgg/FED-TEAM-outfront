@@ -142,7 +142,7 @@ const DetailView = () => {
                           gName: edu.gName,
                           gLevel: edu.gLevel,
                           gPrice: edu.gPrice,
-                          gDate: "무제한 수강",
+                          gDate: edu.gDate,
                           gOwner: userInfo ? userInfo.idx : 0,
                         };
 
@@ -181,7 +181,7 @@ const DetailView = () => {
                 <em>수업 수</em> 총 58개 (14시간 17분){" "}
               </p>
               <p>
-                <em>수강기한</em> 무제한{" "}
+                <em>수강기한</em> {edu.gDate}
               </p>
               <p>
                 <em>수료증</em> 제공{" "}
