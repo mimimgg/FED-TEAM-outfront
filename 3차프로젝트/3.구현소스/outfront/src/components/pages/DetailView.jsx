@@ -71,6 +71,40 @@ const DetailView = () => {
     return priceNum === 0 ? "무료" : `₩${priceNum.toLocaleString()}`;
   };
 
+  const handleAddToCart = () => {
+    let temp;
+    if (localStorage.getItem("cart-info"))
+      temp = JSON.parse(localStorage.getItem("cart-info"));
+    else temp = [];
+
+    // 이미 장바구니에 담긴 강의인지 확인
+    const isAlreadyInCart = temp.some(item => item.idx === edu.idx);
+    if (isAlreadyInCart) {
+      alert("이미 장바구니에 담긴 강의입니다🙏");
+      return; // 이미 담긴 경우 종료
+    }
+
+    let data = {
+      idx: edu.idx,
+      gName: edu.gName,
+      gLevel: edu.gLevel,
+      gPrice: edu.gPrice,
+      gDate: edu.gDate,
+      gOwner: userInfo ? userInfo.idx : 0,
+    };
+
+    // 강의 추가
+    temp.push(data);
+    localStorage.setItem("cart-info", JSON.stringify(temp));
+    alert("강의가 장바구니에 추가되었습니다🎉");
+    setIsInCart(true); // 장바구니에 담겼음을 표시
+
+    // 장바구니 정보 업데이트
+    let finalInfo = JSON.parse(localStorage.getItem("cart-info")).filter(v => v.gOwner === (userInfo ? userInfo.idx : 0));
+    myCon.setCartInfo(finalInfo);
+  };
+
+
   return (
     <div className="detail-wrap">
       <div className="detail-header">
@@ -116,46 +150,55 @@ const DetailView = () => {
                   </Link>
                 </button>
               ) : (
-                <button className="add-edu-btn" onClick={(e) => {
-                  e.preventDefault();
-                  if (isInCart) {
-                    alert("수강바구니에 담긴 강의입니다."); // 이미 담긴 경우 알림
-                  } else {
-                    let temp;
-                    if (localStorage.getItem("cart-info"))
-                      temp = JSON.parse(localStorage.getItem("cart-info"));
-                    else temp = [];
-                
-                    let data = {
-                      idx: edu.idx,
-                      gName: edu.gName,
-                      gLevel: edu.gLevel,
-                      gPrice: edu.gPrice,
-                      gDate: edu.gDate,
-                      gOwner: userInfo ? userInfo.idx : 0,
-                    };
-                
-                    temp.push(data);
-                
-                    localStorage.setItem("cart-info", JSON.stringify(temp));
-                    alert("수강신청에 성공하였습니다🎉");
-                    setIsInCart(true); // 장바구니에 담겼음을 표시
-                
-                    let finalInfo = localStorage.getItem("cart-info")
-                      ? JSON.parse(localStorage.getItem("cart-info")).filter((v) => {
-                          if (v.gOwner === (userInfo ? userInfo.idx : 0))
-                            return true;
-                        })
-                      : null;
-                
-                    // 카드정보 전역 업데이트하기
-                    myCon.setCartInfo(finalInfo);
-                  }
-                }}>
-                  {isInCart ? "수강바구니에 담긴 강의입니다." : "수강 신청하기"}
+                <button
+                  className="add-edu-btn"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (isInCart) {
+                      // 이미 담긴 경우 장바구니로 이동
+                      navigate("/cartlist");
+                    } else {
+                      let temp;
+                      if (localStorage.getItem("cart-info")) temp = JSON.parse(localStorage.getItem("cart-info"));
+                      else temp = [];
+
+                      let data = {
+                        idx: edu.idx,
+                        gName: edu.gName,
+                        gLevel: edu.gLevel,
+                        gPrice: edu.gPrice,
+                        gDate: edu.gDate,
+                        gOwner: userInfo ? userInfo.idx : 0,
+                      };
+
+                      temp.push(data);
+                      localStorage.setItem("cart-info", JSON.stringify(temp));
+                      alert("강의가 장바구니에 추가되었습니다🎉");
+                      setIsInCart(true); // 장바구니에 담겼음을 표시
+
+                      // 장바구니 정보 업데이트
+                      let finalInfo = localStorage.getItem("cart-info")
+                        ? JSON.parse(localStorage.getItem("cart-info")).filter(
+                            (v) => v.gOwner === (userInfo ? userInfo.idx : 0)
+                          )
+                        : null;
+
+                      // 카드정보 전역 업데이트하기
+                      myCon.setCartInfo(finalInfo);
+
+                      // 장바구니로 이동
+                      navigate("/cartlist");
+                    }
+                  }}
+                >
+                  {isInCart ? "수강바구니로 이동" : "수강 신청하기"}
                 </button>
               )}
-              {/* <button className="add-cart-btn">바구니에 담기</button> */}
+              {!isInCart && (
+                    <button className="add-cart-btn" onClick={handleAddToCart}>
+                      바구니에 담기
+                    </button>
+                  )}
             </div>
             <div className="aside-info">
               <p>
