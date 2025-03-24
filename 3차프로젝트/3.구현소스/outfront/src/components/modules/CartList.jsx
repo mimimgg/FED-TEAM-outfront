@@ -57,9 +57,7 @@ const CartList = () => {
       alert("결제가 완료되었습니다."); // alert로 메시지 표시
     }
   };
-  
-  
-  
+
 
   // 총 결제 금액 계산
   const totalPrice = selectedItems.reduce((total, isSelected, index) => {
@@ -115,9 +113,18 @@ const CartList = () => {
                       </p>
                     </div>
                   </div>
-                  <button type="button" className="border-box" onClick={handleCheckout}>
-                    결제하기
-                  </button>
+                  <button 
+    type="button" 
+    className="border-box" 
+    onClick={() => {
+      const updatedCartItems = cartItem.filter((_, index) => !selectedItems[index]);
+      setCartItem(updatedCartItems);
+      localStorage.setItem("cart-info", JSON.stringify(updatedCartItems)); // 로컬 스토리지 업데이트
+      setSelectedItems(new Array(updatedCartItems.length).fill(false)); // 선택 상태 초기화
+    }}
+  >
+    삭제하기
+  </button>
                 </div>
                 <div className="edu-list-container">
                   {cartItem.map((item, i) => (
