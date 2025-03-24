@@ -56,7 +56,7 @@ const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) =
         <div className="header-content">
           <div className="header-content-box">
             <h1 className="logo">
-              <a href="./">
+              <a href={`${process.env.PUBLIC_URL}/`}>
                 <img
                   src={`${process.env.PUBLIC_URL}/images/common/brand_logo.png`}
                   alt="아웃프런 브랜드 로고"
@@ -91,32 +91,32 @@ const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) =
                       >
                         <ul className="snb-list">
                           <li className="sub-item">
-                            <a className="snb-button" href="/#전체">
+                            <a className="snb-button" href={`${process.env.PUBLIC_URL}/#전체`}>
                               전체
                             </a>
                           </li>
                           <li className="sub-item">
-                            <a className="snb-button" href="/#개발프로그래밍">
+                            <a className="snb-button" href={`${process.env.PUBLIC_URL}/#개발프로그래밍`}>
                               개발프로그래밍
                             </a>
                           </li>
                           <li className="sub-item">
-                            <a className="snb-button" href="/#게임개발">
+                            <a className="snb-button" href={`${process.env.PUBLIC_URL}/#게임개발`}>
                               게임개발
                             </a>
                           </li>
                           <li className="sub-item">
-                            <a className="snb-button" href="/#인공지능">
+                            <a className="snb-button" href={`${process.env.PUBLIC_URL}/#인공지능`}>
                               인공지능
                             </a>
                           </li>
                           <li className="sub-item">
-                            <a className="snb-button" href="/#보안네트워크">
+                            <a className="snb-button" href={`${process.env.PUBLIC_URL}/#보안네트워크`}>
                               보안네트워크
                             </a>
                           </li>
                           <li className="sub-item">
-                            <a className="snb-button" href="/#기타">
+                            <a className="snb-button" href={`${process.env.PUBLIC_URL}/#v`}>
                               기타
                             </a>
                           </li>
