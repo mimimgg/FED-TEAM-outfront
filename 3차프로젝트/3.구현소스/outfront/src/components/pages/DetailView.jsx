@@ -57,7 +57,7 @@ const DetailView = () => {
       const isAlreadyInCart = cartItems.some((item) => item.idx === selectedEdu.idx);
       setIsInCart(isAlreadyInCart);
     }
-    
+
     // 나의 강의에 이미 담긴 강의인지 확인
     const savedMyEdu = localStorage.getItem("user-education");
     if (savedMyEdu) {
@@ -65,7 +65,6 @@ const DetailView = () => {
       const isAlreadyInMyEdu = myEduItems.some((item) => item.eduId === selectedEdu.idx);
       setIsInMyEdu(isAlreadyInMyEdu);
     }
-
   }, [id]);
 
   // 리뷰 데이터 가져오기
@@ -83,12 +82,11 @@ const DetailView = () => {
 
   const handleAddToCart = () => {
     let temp;
-    if (localStorage.getItem("cart-info"))
-      temp = JSON.parse(localStorage.getItem("cart-info"));
+    if (localStorage.getItem("cart-info")) temp = JSON.parse(localStorage.getItem("cart-info"));
     else temp = [];
 
     // 이미 장바구니에 담긴 강의인지 확인
-    const isAlreadyInCart = temp.some(item => item.idx === edu.idx);
+    const isAlreadyInCart = temp.some((item) => item.idx === edu.idx);
     if (isAlreadyInCart) {
       alert("이미 장바구니에 담긴 강의입니다🙏");
       return; // 이미 담긴 경우 종료
@@ -110,10 +108,11 @@ const DetailView = () => {
     setIsInCart(true); // 장바구니에 담겼음을 표시
 
     // 장바구니 정보 업데이트
-    let finalInfo = JSON.parse(localStorage.getItem("cart-info")).filter(v => v.gOwner === (userInfo ? userInfo.idx : 0));
+    let finalInfo = JSON.parse(localStorage.getItem("cart-info")).filter(
+      (v) => v.gOwner === (userInfo ? userInfo.idx : 0)
+    );
     myCon.setCartInfo(finalInfo);
   };
-
 
   return (
     <div className="detail-wrap">
@@ -164,8 +163,11 @@ const DetailView = () => {
                   className="add-edu-btn"
                   onClick={(e) => {
                     e.preventDefault();
-                    if (isInCart  || isInMyEdu) {
-                      // 이미 담긴 경우 장바구니로 이동
+                    if (isInMyEdu) {
+                      // 내 학습에 이미 담긴 경우 마이 페이지로 이동
+                      navigate("/mypage");
+                    } else if (isInCart) {
+                      // 이미 장바구니에 담긴 경우 장바구니로 이동
                       navigate("/cartlist");
                     } else {
                       let temp;
@@ -201,14 +203,14 @@ const DetailView = () => {
                     }
                   }}
                 >
-                  {isInCart || isInMyEdu ? "수강바구니로 이동" : "수강 신청하기"}
+                  {isInMyEdu ? "학습하러 가기" : isInCart ? "수강바구니로 이동" : "수강 신청하기"}
                 </button>
               )}
               {!isInCart && !isInMyEdu && (
-                    <button className="add-cart-btn" onClick={handleAddToCart}>
-                      바구니에 담기
-                    </button>
-                  )}
+                <button className="add-cart-btn" onClick={handleAddToCart}>
+                  바구니에 담기
+                </button>
+              )}
             </div>
             <div className="aside-info">
               <p>
