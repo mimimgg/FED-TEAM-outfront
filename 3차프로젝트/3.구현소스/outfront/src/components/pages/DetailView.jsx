@@ -19,6 +19,7 @@ const DetailView = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [userEduState, setUserEduState] = useState(null);
   const [userEduRate, setUserEduRate] = useState(null);
+  const [isInCart, setIsInCart] = useState(false); // 장바구니에 담겼는지 상태 추가
 
   // 전역 Context API 사용하기: 카트정보(cartInfo) 업데이트 목적 ////
   const myCon = useContext(dCon);
@@ -31,13 +32,9 @@ const DetailView = () => {
       setUserInfo(parsedUser);
 
       // 로그인한 사용자의 학습 데이터 확인
-      const currentUserData = userData.find(
-        (user) => user.uid === parsedUser.uid
-      );
+      const currentUserData = userData.find((user) => user.uid === parsedUser.uid);
       if (currentUserData) {
-        const enrolledCourse = currentUserData.eduIng.find(
-          (course) => course.eduId === Number(id)
-        );
+        const enrolledCourse = currentUserData.eduIng.find((course) => course.eduId === Number(id));
         if (enrolledCourse) {
           setUserEduState(enrolledCourse.eduState);
           setUserEduRate(enrolledCourse.eduRate);
@@ -51,13 +48,19 @@ const DetailView = () => {
     // eduData에서 id에 해당하는 강의 정보를 찾아서 edu 상태로 설정
     const selectedEdu = eduData.find((item) => item.idx === Number(id));
     setEdu(selectedEdu);
+
+    // 장바구니에 이미 담긴 강의인지 확인
+    const savedCart = localStorage.getItem("cart-info");
+    if (savedCart) {
+      const cartItems = JSON.parse(savedCart);
+      const isAlreadyInCart = cartItems.some((item) => item.idx === selectedEdu.idx);
+      setIsInCart(isAlreadyInCart);
+    }
   }, [id]);
 
   // 리뷰 데이터 가져오기
   useEffect(() => {
-    const filteredReviews = reviewData.filter(
-      (item) => item.eduId === Number(id)
-    );
+    const filteredReviews = reviewData.filter((item) => item.eduId === Number(id));
     setReviews(filteredReviews);
   }, [id]);
 
@@ -92,10 +95,7 @@ const DetailView = () => {
             </span>
           </div>
           <div className="edu-thumb">
-            <img
-              src={`../images/edu_thumb/${edu.idx}.png`}
-              alt={`교육 이미지 ${edu.idx}`}
-            />
+            <img src={`../images/edu_thumb/${edu.idx}.png`} alt={`교육 이미지 ${edu.idx}`} />
           </div>
         </div>
       </div>
@@ -103,8 +103,7 @@ const DetailView = () => {
         <aside>
           <div className="detail-aside-wrap">
             <div className="sale-msg">
-              {userInfo ? `${userInfo.unm}님` : "회원 가입하면"} 첫 구매 할인 중
-              (1일 남음)
+              {userInfo ? `${userInfo.unm}님` : "회원 가입하면"} 첫 구매 할인 중 (1일 남음)
             </div>
             <div className="inner">
               <p className="price">
@@ -117,58 +116,43 @@ const DetailView = () => {
                   </Link>
                 </button>
               ) : (
-                <button className="add-edu-btn">
-                  <a
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      let temp;
-                      if (localStorage.getItem("cart-info"))
-                        temp = JSON.parse(localStorage.getItem("cart-info"));
-                      else temp = [];
-
-                      let isBe;
-                      // 이미 데이터가 있으면 데이터중복 검사실행!
-                      if (temp.length > 0) {
-                        isBe = temp.some((v) => {
-                          if (v.gName === edu.gName) return true;
-                        });
-                        console.log("기존 데이터 있나?", isBe);
-                      }
-
-                      if (!isBe) {
-                        let data = {
-                          idx: edu.idx,
-                          gName: edu.gName,
-                          gLevel: edu.gLevel,
-                          gPrice: edu.gPrice,
-                          gDate: edu.gDate,
-                          gOwner: userInfo ? userInfo.idx : 0,
-                        };
-
-                        temp.push(data);
-
-                        localStorage.setItem("cart-info", JSON.stringify(temp));
-                        alert("수강신청에 성공하였습니다🎉");
-
-                        let finalInfo = localStorage.getItem("cart-info")
-                          ? JSON.parse(
-                              localStorage.getItem("cart-info")
-                            ).filter((v) => {
-                              if (v.gOwner === (userInfo ? userInfo.idx : 0))
-                                return true;
-                            })
-                          : null;
-
-                        // 카드정보 전역 업데이트하기
-                        myCon.setCartInfo(finalInfo);
-                      } else {
-                        alert("이미 신청하신 강의입니다🙏");
-                      }
-                    }}
-                  >
-                    수강 신청하기
-                  </a>
+                <button className="add-edu-btn" onClick={(e) => {
+                  e.preventDefault();
+                  if (isInCart) {
+                    alert("수강바구니에 담긴 강의입니다."); // 이미 담긴 경우 알림
+                  } else {
+                    let temp;
+                    if (localStorage.getItem("cart-info"))
+                      temp = JSON.parse(localStorage.getItem("cart-info"));
+                    else temp = [];
+                
+                    let data = {
+                      idx: edu.idx,
+                      gName: edu.gName,
+                      gLevel: edu.gLevel,
+                      gPrice: edu.gPrice,
+                      gDate: edu.gDate,
+                      gOwner: userInfo ? userInfo.idx : 0,
+                    };
+                
+                    temp.push(data);
+                
+                    localStorage.setItem("cart-info", JSON.stringify(temp));
+                    alert("수강신청에 성공하였습니다🎉");
+                    setIsInCart(true); // 장바구니에 담겼음을 표시
+                
+                    let finalInfo = localStorage.getItem("cart-info")
+                      ? JSON.parse(localStorage.getItem("cart-info")).filter((v) => {
+                          if (v.gOwner === (userInfo ? userInfo.idx : 0))
+                            return true;
+                        })
+                      : null;
+                
+                    // 카드정보 전역 업데이트하기
+                    myCon.setCartInfo(finalInfo);
+                  }
+                }}>
+                  {isInCart ? "수강바구니에 담긴 강의입니다." : "수강 신청하기"}
                 </button>
               )}
               {/* <button className="add-cart-btn">바구니에 담기</button> */}
@@ -205,19 +189,11 @@ const DetailView = () => {
                     <span className="star-grade">
                       <b>{review.name}님</b>
                       수강평 평점 {review.grade}
-                      {Array.from(
-                        { length: Math.round(review.grade / 0.5) },
-                        (_, i) => (
-                          <span className="half-star">
-                            <img
-                              key={i}
-                              src="../images/main/star.png"
-                              alt="별"
-                              width="8"
-                            />
-                          </span>
-                        )
-                      )}
+                      {Array.from({ length: Math.round(review.grade / 0.5) }, (_, i) => (
+                        <span className="half-star">
+                          <img key={i} src="../images/main/star.png" alt="별" width="8" />
+                        </span>
+                      ))}
                     </span>
                     <p>{review.text}</p>
                   </li>
@@ -287,9 +263,7 @@ const DetailView = () => {
                       d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
                     ></path>
                   </svg>
-                  <p className="mantine-Text-root css-1c7euc4 mantine-5jqdej">
-                    데이터 분석
-                  </p>
+                  <p className="mantine-Text-root css-1c7euc4 mantine-5jqdej">데이터 분석</p>
                 </li>
                 <li className="mantine-Group-root css-1n0sxg9 mantine-1yyyn9b">
                   <svg
@@ -307,9 +281,7 @@ const DetailView = () => {
                       d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
                     ></path>
                   </svg>
-                  <p className="mantine-Text-root css-1c7euc4 mantine-5jqdej">
-                    업무 자동화
-                  </p>
+                  <p className="mantine-Text-root css-1c7euc4 mantine-5jqdej">업무 자동화</p>
                 </li>
               </ul>
             </div>
@@ -326,26 +298,20 @@ const DetailView = () => {
               <p>
                 <img src="https://cdn.inflearn.com/public/files/courses/324145/129d8e36-3974-4ebe-a5fa-e4bd82f8ac0f/speak.gif" />
               </p>
-              <h3>
-                프로그래밍이 우리에게 자유를 줄 수단이라서가 아닐까요?&nbsp;
-              </h3>
+              <h3>프로그래밍이 우리에게 자유를 줄 수단이라서가 아닐까요?&nbsp;</h3>
               <ul>
                 <li>과제를 위한 자료 찾기를 클릭 한 번으로!</li>
                 <li>수많은 거래처에 보낼 문서를 엔터 한 번으로!</li>
                 <li>매달 해야 하는 반복 업무를 컴퓨터가 자동으로!</li>
               </ul>
               <p>
-                최근 코딩과 관련된 교육 과목이 증가하면서 프로그래밍과 관련된
-                교육/직무에 관한 관심도 많이 증가하고 있죠. 게다가 수많은
-                기업이나 팀에서 코딩을 필수 덕목으로 생각하기 시작했어요.{" "}
-                <span>
-                  대기업 입사 면접에서 비전공자들에게 파이썬 할 줄 아냐고
-                  물어보기도 하죠.
-                </span>
+                최근 코딩과 관련된 교육 과목이 증가하면서 프로그래밍과 관련된 교육/직무에 관한 관심도 많이 증가하고
+                있죠. 게다가 수많은 기업이나 팀에서 코딩을 필수 덕목으로 생각하기 시작했어요.{" "}
+                <span>대기업 입사 면접에서 비전공자들에게 파이썬 할 줄 아냐고 물어보기도 하죠.</span>
               </p>
               <p>
-                프로그래밍을 취미로 투잡하는 사람들, 여행 다니며 일하는 만들고
-                싶은 것을 만드는 노마드 인생을 즐기는 사람들도 늘어나고 있어요.
+                프로그래밍을 취미로 투잡하는 사람들, 여행 다니며 일하는 만들고 싶은 것을 만드는 노마드 인생을 즐기는
+                사람들도 늘어나고 있어요.
               </p>
             </div>
 
@@ -363,10 +329,7 @@ const DetailView = () => {
                     <p>
                       <span>🥺</span>
                     </p>
-                    <p>
-                      코딩 강의가 너무 비싼데, 강의 내용이 좋을지 모르겠어요.
-                      한두 번 듣고 안 들을까 봐 걱정돼요.
-                    </p>
+                    <p>코딩 강의가 너무 비싼데, 강의 내용이 좋을지 모르겠어요. 한두 번 듣고 안 들을까 봐 걱정돼요.</p>
                   </div>
                 </div>
                 <div className="card-el">
@@ -376,8 +339,7 @@ const DetailView = () => {
                     </p>
                     <p>
                       <span>
-                        혼자 코딩 공부 중인데, 제가 하는 게 맞는지 모르겠어요.
-                        모르는 건 누구한테 질문해야 하나요?
+                        혼자 코딩 공부 중인데, 제가 하는 게 맞는지 모르겠어요. 모르는 건 누구한테 질문해야 하나요?
                       </span>
                     </p>
                   </div>
@@ -390,10 +352,7 @@ const DetailView = () => {
                       <span>🤔</span>
                     </p>
                     <p>
-                      <span>
-                        무작정 시작해도 되는 건가요? 어떤 걸 어떻게 공부해야
-                        할지 모르겠어요.
-                      </span>
+                      <span>무작정 시작해도 되는 건가요? 어떤 걸 어떻게 공부해야 할지 모르겠어요.</span>
                     </p>
                   </div>
                 </div>
@@ -403,10 +362,7 @@ const DetailView = () => {
                       <span>🤨</span>
                     </p>
                     <p>
-                      <span>
-                        시간도 없고 학원도 너무 멀어서 코딩 공부를 시작하기가
-                        쉽지 않아요.
-                      </span>
+                      <span>시간도 없고 학원도 너무 멀어서 코딩 공부를 시작하기가 쉽지 않아요.</span>
                     </p>
                   </div>
                 </div>
@@ -432,10 +388,9 @@ const DetailView = () => {
                 <strong>파이썬(Python)이란?</strong>
               </h3>
               <p>
-                우리가 매일 만나는 웹 사이트, 앱을 만들 수 있는 프로그래밍
-                언어예요. 웹, 앱 말고도 게임, 인공지능 등 파이썬으로 할 수 있는
-                것들이 정말 많아요. 배우기가 다른 언어보다 쉽다는 점을 포함한
-                다양한 장점 덕분에 인기 언어로 꼽히고 있어요.
+                우리가 매일 만나는 웹 사이트, 앱을 만들 수 있는 프로그래밍 언어예요. 웹, 앱 말고도 게임, 인공지능 등
+                파이썬으로 할 수 있는 것들이 정말 많아요. 배우기가 다른 언어보다 쉽다는 점을 포함한 다양한 장점 덕분에
+                인기 언어로 꼽히고 있어요.
               </p>
               <p>
                 <img
@@ -448,17 +403,14 @@ const DetailView = () => {
                 <strong>왜 파이썬을 배워야 할까요?</strong>
               </h3>
               <p>
-                파이썬은 문법 구조가 쉽기 때문에 프로그래밍을 처음 접하는
-                초보자도 쉽게 이해할 수 있어요. 파이썬은 그 어떤 프로그래밍
-                언어보다 <span>확장성이 월등히 높은 언어</span>예요. 데이터
-                분석가도, 웹 개발자도, 머신러닝 연구자도, 대학원생도 파이썬을
-                사용하죠. 당신이 어떤 업무를 맡더라도 파이썬만 알아두면 척척
+                파이썬은 문법 구조가 쉽기 때문에 프로그래밍을 처음 접하는 초보자도 쉽게 이해할 수 있어요. 파이썬은 그
+                어떤 프로그래밍 언어보다 <span>확장성이 월등히 높은 언어</span>예요. 데이터 분석가도, 웹 개발자도,
+                머신러닝 연구자도, 대학원생도 파이썬을 사용하죠. 당신이 어떤 업무를 맡더라도 파이썬만 알아두면 척척
                 대응하기 쉬워집니다.
               </p>
               <p>
-                당연히 비전공자도 다룰 수 있습니다. 프로그래밍 언어는 만국
-                공통어에요. 만약 C, Java 등의 언어를 접해봤다면 더욱 쉽게
-                파이썬을 익힐 수 있겠죠.
+                당연히 비전공자도 다룰 수 있습니다. 프로그래밍 언어는 만국 공통어에요. 만약 C, Java 등의 언어를
+                접해봤다면 더욱 쉽게 파이썬을 익힐 수 있겠죠.
               </p>
             </div>
             <div className="box-list5">
@@ -481,10 +433,7 @@ const DetailView = () => {
                       <b>코딩 입문에 딱</b>
                     </p>
                     <p>
-                      <span>
-                        파이썬은 사람의 언어와 닮아서 상대적으로 배우기 쉬운
-                        개발 언어입니다.
-                      </span>
+                      <span>파이썬은 사람의 언어와 닮아서 상대적으로 배우기 쉬운 개발 언어입니다.</span>
                     </p>
                   </div>
                 </div>
@@ -504,10 +453,7 @@ const DetailView = () => {
                         <b>거대한 커뮤니티</b>
                       </strong>
                     </p>
-                    <p>
-                      커뮤니티에서 참고할 자료가 많고, 다른 사람들에게
-                      도움받기도 쉬워요.&nbsp;
-                    </p>
+                    <p>커뮤니티에서 참고할 자료가 많고, 다른 사람들에게 도움받기도 쉬워요.&nbsp;</p>
                   </div>
                 </div>
                 <div className="card-el">
@@ -527,10 +473,7 @@ const DetailView = () => {
                       </span>
                     </p>
                     <p>
-                      <span>
-                        웹 개발, 데이터 분석, 해킹 등 다양한 분야에서 쓰이는
-                        언어예요.
-                      </span>
+                      <span>웹 개발, 데이터 분석, 해킹 등 다양한 분야에서 쓰이는 언어예요.</span>
                     </p>
                   </div>
                 </div>
@@ -551,10 +494,7 @@ const DetailView = () => {
                       </span>
                     </p>
                     <p>
-                      <span>
-                        다양한 파이썬 라이브러리와 함께 빠른 결과물을 만들 수
-                        있어요.
-                      </span>
+                      <span>다양한 파이썬 라이브러리와 함께 빠른 결과물을 만들 수 있어요.</span>
                     </p>
                   </div>
                 </div>
@@ -575,10 +515,7 @@ const DetailView = () => {
                       </strong>
                     </p>
                     <p>
-                      <span>
-                        메일 분류, 웹 크롤링 등 반복적이고 오래 걸리는 일을
-                        빨리할 수 있어요.
-                      </span>
+                      <span>메일 분류, 웹 크롤링 등 반복적이고 오래 걸리는 일을 빨리할 수 있어요.</span>
                     </p>
                   </div>
                 </div>
@@ -599,10 +536,7 @@ const DetailView = () => {
                       </span>
                     </p>
                     <p>
-                      <span>
-                        인스타그램 등 유명 사이트도 파이썬으로 만들어진 경우가
-                        많아요.
-                      </span>
+                      <span>인스타그램 등 유명 사이트도 파이썬으로 만들어진 경우가 많아요.</span>
                     </p>
                   </div>
                 </div>
