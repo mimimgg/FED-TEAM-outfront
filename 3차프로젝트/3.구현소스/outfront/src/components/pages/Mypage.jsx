@@ -1,7 +1,7 @@
 // 마이페이지 컴포넌트 ./src/componets/page/Mypage.jsx
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "../../scss/mypage.scss";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // 로그인한 사용자의 학습 정보 import 직접 불러오기
 import userData from "../../js/data/user_data.json";
 // 리뷰 데이터 import 직접 불러오기
@@ -28,6 +28,15 @@ function Mypage() {
       if (currentUser) {
         setUserEduList(currentUser.eduIng);
       }
+      
+      // 로컬스토리지에 결제한 강의 정보 불러오기
+      const userEducation = localStorage.getItem("user-education");
+      if (userEducation) {
+        const purchasedCourses = JSON.parse(userEducation);
+        // 기존 학습 목록에 결제한 강의 추가
+        setUserEduList((prevEduList) => [...prevEduList, ...purchasedCourses]);
+      }
+      
       // 게시판 데이터 불러오기
       const boardData = JSON.parse(localStorage.getItem("board-data")) || [];
       const myPosts = boardData.filter((post) => post.uid === parsedUser.uid);
@@ -108,7 +117,13 @@ function Mypage() {
             <img src={profileImg} alt="profile" />
           </picture>
         </label>
-        <input type="file" id="profile-upload" accept="image/*" style={{display: "none"}} onChange={handleProfileChange} />
+        <input
+          type="file"
+          id="profile-upload"
+          accept="image/*"
+          style={{ display: "none" }}
+          onChange={handleProfileChange}
+        />
         <span>ID : {userInfo ? userInfo.uid : "로그인 필요!"}</span>
         <p>
           <b>{userInfo ? userInfo.unm : "비회원"}</b>님 😎 <b>아웃프런</b>에 오신 것을 환영합니다! 😍 <br />
@@ -128,7 +143,9 @@ function Mypage() {
           <ul className="myedu-list">
             {userEduList.length > 0 ? (
               userEduList.map((edu) => {
-                const userReview = reviewList.find((review) => review.uid === userInfo.uid && review.eduId === edu.eduId);
+                const userReview = reviewList.find(
+                  (review) => review.uid === userInfo.uid && review.eduId === edu.eduId
+                );
 
                 return (
                   <li key={edu.eduId}>
@@ -143,7 +160,8 @@ function Mypage() {
                       <button className="my-review-btn" onClick={() => openReviewPopup(edu.eduId)}>
                         {userReview ? (
                           <span className="star-grade2">
-                            평점 (<img src="./images/main/star.png" alt="별" width="8px" /><img src="./images/main/star.png" alt="별" width="8" /> {userReview.grade})
+                            평점 (<img src="./images/main/star.png" alt="별" width="8px" />
+                            <img src="./images/main/star.png" alt="별" width="8" /> {userReview.grade})
                           </span>
                         ) : (
                           "수강평 작성"
@@ -170,7 +188,7 @@ function Mypage() {
           <ul className="myboard-list">
             {userBoardPosts.length > 0 ? (
               userBoardPosts.map((post) => (
-                <li key={post.idx} onClick={() => navigate("/board", {state: {mode: "R", selData: post}})}>
+                <li key={post.idx} onClick={() => navigate("/board", { state: { mode: "R", selData: post } })}>
                   <h4>{post.tit}</h4>
                   <p>
                     {post.date} | 조회수: {post.cnt}
@@ -193,7 +211,7 @@ function Mypage() {
             <h3>수강평</h3>
             <p className="star-grade">
               <b>평점:</b>
-              {Array.from({length: Math.round(selectedReview.grade / 0.5)}, (_, i) => (
+              {Array.from({ length: Math.round(selectedReview.grade / 0.5) }, (_, i) => (
                 <span className="half-star">
                   <img key={i} src="./images/main/star.png" alt="별" width="8" />
                 </span>
