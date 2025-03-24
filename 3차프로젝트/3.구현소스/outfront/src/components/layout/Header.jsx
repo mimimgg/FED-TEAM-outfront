@@ -3,6 +3,7 @@ import "../../scss/header.scss";
 import gnbMenu from "../../js/data/gnb";
 import { memo, useEffect, useState } from "react";
 
+
 const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) => {
   const location = useLocation(); // 현재 경로를 가져옴
   const [isOpenGnb, setIsOpenGnb] = useState(false);
@@ -57,7 +58,7 @@ const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) =
             <h1 className="logo">
               <a href="./">
                 <img
-                  src="../../images/common/brand_logo.png"
+                  src="./images/common/brand_logo.png"
                   alt="아웃프런 브랜드 로고"
                   className="logo-img"
                 />

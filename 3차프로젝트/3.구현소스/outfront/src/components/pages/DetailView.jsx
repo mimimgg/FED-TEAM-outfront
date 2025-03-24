@@ -138,18 +138,18 @@ const DetailView = () => {
 
                       if (!isBe) {
                         let data = {
-                          idx: temp.length + 1,
+                          idx: edu.idx,
                           gName: edu.gName,
                           gLevel: edu.gLevel,
                           gPrice: edu.gPrice,
-                          gDate: "무제한 수강",
+                          gDate: edu.gDate,
                           gOwner: userInfo ? userInfo.idx : 0,
                         };
 
                         temp.push(data);
 
                         localStorage.setItem("cart-info", JSON.stringify(temp));
-                        alert("수강신청 성공~!");
+                        alert("수강신청에 성공하였습니다🎉");
 
                         let finalInfo = localStorage.getItem("cart-info")
                           ? JSON.parse(
@@ -163,7 +163,7 @@ const DetailView = () => {
                         // 카드정보 전역 업데이트하기
                         myCon.setCartInfo(finalInfo);
                       } else {
-                        alert("이미 신청한 강의입니다.");
+                        alert("이미 신청하신 강의입니다🙏");
                       }
                     }}
                   >
@@ -181,7 +181,7 @@ const DetailView = () => {
                 <em>수업 수</em> 총 58개 (14시간 17분){" "}
               </p>
               <p>
-                <em>수강기한</em> 무제한{" "}
+                <em>수강기한</em> {edu.gDate}
               </p>
               <p>
                 <em>수료증</em> 제공{" "}
