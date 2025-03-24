@@ -207,10 +207,10 @@ const DetailView = () => {
                 </button>
               )}
               {!isInCart && !isInMyEdu && (
-                <button className="add-cart-btn" onClick={handleAddToCart}>
-                  바구니에 담기
-                </button>
-              )}
+                    <button className="add-cart-btn" onClick={handleAddToCart}>
+                      바구니에 담기
+                    </button>
+                  )}
             </div>
             <div className="aside-info">
               <p>

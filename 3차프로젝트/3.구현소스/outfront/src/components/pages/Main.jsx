@@ -64,34 +64,34 @@ const Main = () => {
   return (
     <div className="main-wrap">
       <h2>{selCate}</h2>
-      <div className="sort-opt">
-        <label>정렬</label>
-        <select onChange={(e) => setSortType(e.target.value)} value={sortType}>
-          <option value="default">기본 정렬</option>
-          <option value="name">이름순 (가나다 순)</option>
-          <option value="low-price">가격 낮은 순</option>
-          <option value="high-price">가격 높은 순</option>
-        </select>
-        <select onChange={(e) => setLevelFilter(e.target.value)} value={levelFilter}>
-          <option value="all">전체 레벨</option>
-          <option value="입문">입문</option>
-          <option value="초급">초급</option>
-          <option value="중급">중급</option>
-          <option value="고급">고급</option>
-        </select>
+      <div className="edu-menu-wrap">
+        <ul className="edu-menu">
+          {categories.map((category, i) => (
+            <li key={category}>
+              <button onClick={() => (window.location.hash = category)} className={selCate === category ? "active" : ""}>
+                <img src={`${process.env.PUBLIC_URL}/images/main/icon${i}.svg`} alt={category} />
+                {category}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <div className="sort-opt">
+          <label>정렬</label>
+          <select onChange={(e) => setSortType(e.target.value)} value={sortType}>
+            <option value="default">전체 정렬</option>
+            <option value="name">이름순 (가나다 순)</option>
+            <option value="low-price">가격 낮은 순</option>
+            <option value="high-price">가격 높은 순</option>
+          </select>
+          <select onChange={(e) => setLevelFilter(e.target.value)} value={levelFilter}>
+            <option value="all">전체 레벨</option>
+            <option value="입문">입문</option>
+            <option value="초급">초급</option>
+            <option value="중급">중급</option>
+            <option value="고급">고급</option>
+          </select>
+        </div>
       </div>
-
-      <ul className="edu-menu">
-        {categories.map((category, i) => (
-          <li key={category}>
-            <button onClick={() => handleCategoryClick(category)} className={selCate === category ? "active" : ""}>
-              <img src={`${process.env.PUBLIC_URL}/images/main/icon${i}.svg`} alt={category} />
-              {category}
-            </button>
-          </li>
-        ))}
-      </ul>
-
       <ul className="list-wrap">
         {currentList.map((edu) => (
           <li key={edu.idx} className="edu-list" onClick={() => navigate(`/detail/${edu.idx}`)}>
@@ -111,15 +111,42 @@ const Main = () => {
       {totalPages > 1 && (
         <div className="pagination">
           <ol>
-            <li onClick={() => handlePageChange(1)} disabled={currentPage === 1}>⏮ 처음</li>
-            <li onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>◀ 이전</li>
+            <li
+              onClick={() => handlePageChange(1)}
+              className={currentPage === 1 ? "disabled" : ""}
+              style={{ display: currentPage === 1 ? "none" : "inline-block" }}>
+              ⏮ 처음
+            </li>
+            <li
+              onClick={() => handlePageChange(currentPage - 1)}
+              className={currentPage === 1 ? "disabled" : ""}
+              style={{ display: currentPage === 1 ? "none" : "inline-block" }}>
+              ◀
+            </li>
             {[...Array(totalPages)].map((_, i) => (
-              <li key={i + 1} onClick={() => handlePageChange(i + 1)} className={i + 1 === currentPage ? "active" : ""}>
+              <li
+                key={i + 1}
+                onClick={() => handlePageChange(i + 1)}
+                className={i + 1 === currentPage ? "active" : ""}>
                 {i + 1}
               </li>
             ))}
-            <li onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>다음 ▶</li>
-            <li onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages}>마지막 ⏭</li>
+            <li
+              onClick={() => handlePageChange(currentPage + 1)}
+              className={currentPage === totalPages ? "disabled" : ""}
+              style={{
+                display: currentPage === totalPages ? "none" : "inline-block",
+              }}>
+              ▶
+            </li>
+            <li
+              onClick={() => handlePageChange(totalPages)}
+              className={currentPage === totalPages ? "disabled" : ""}
+              style={{
+                display: currentPage === totalPages ? "none" : "inline-block",
+              }}>
+              마지막 ⏭
+            </li>
           </ol>
         </div>
       )}
