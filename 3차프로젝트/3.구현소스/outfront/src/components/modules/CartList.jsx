@@ -32,6 +32,7 @@ const CartList = () => {
   // 전역 Context API 사용
   const myCon = useContext(dCon);
 
+
   // 컴포넌트가 마운트될 때 사용자 정보 및 카트 정보 가져오기
   useEffect(() => {
     const storedUser = sessionStorage.getItem("minfo");
@@ -83,6 +84,7 @@ const CartList = () => {
   } else if (totalPrice > 0) {
     totalPriceText = formatPrice(totalPrice);
   }
+  
 
   return (
     <>
@@ -134,7 +136,7 @@ const CartList = () => {
                           alt={`강의 이미지 ${item.idx}`}
                           className="edu-img"
                         />
-                        <Link to={``} style={{cursor: "pointer"}}>
+                        <Link to={`/detail/${item.idx}`} style={{cursor: "pointer"}}>
                           <div className="box">
                             <ul className="text-box">
                               <li className="gname">{item.gName}</li>
@@ -196,3 +198,6 @@ const CartList = () => {
 };
 
 export default CartList;
+
+
+

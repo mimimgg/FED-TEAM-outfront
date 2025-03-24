@@ -54,7 +54,7 @@ const SearchPage = () => {
       ) : selData.length === 0 ? ( // 검색 결과가 없을 경우
         <div className="message-container">
         <div className="img-box">
-          <img src="../../images/common/bono.png" alt="에러메세지" />
+          <img src="../images/common/bono.png" alt="에러메세지" />
         </div>
         <h4 className="none-title"><span>"{keyword}"</span>의 검색결과가 존재하지 않습니다.</h4>
         <p className="none-desc">열심히 찾아서 준비할게요...</p>
