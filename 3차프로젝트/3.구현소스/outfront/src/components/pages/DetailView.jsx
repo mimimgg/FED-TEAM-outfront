@@ -204,7 +204,7 @@ const DetailView = () => {
                   {isInCart || isInMyEdu ? "수강바구니로 이동" : "수강 신청하기"}
                 </button>
               )}
-              {!isInCart && !isInMyEdu && (
+              {!userEduState &&!isInCart && !isInMyEdu && (
                     <button className="add-cart-btn" onClick={handleAddToCart}>
                       바구니에 담기
                     </button>
