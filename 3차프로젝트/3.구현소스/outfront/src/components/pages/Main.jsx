@@ -111,15 +111,42 @@ const Main = () => {
       {totalPages > 1 && (
         <div className="pagination">
           <ol>
-            <li onClick={() => handlePageChange(1)} disabled={currentPage === 1}>⏮ 처음</li>
-            <li onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>◀ 이전</li>
+            <li
+              onClick={() => handlePageChange(1)}
+              className={currentPage === 1 ? "disabled" : ""}
+              style={{ display: currentPage === 1 ? "none" : "inline-block" }}>
+              ⏮ 처음
+            </li>
+            <li
+              onClick={() => handlePageChange(currentPage - 1)}
+              className={currentPage === 1 ? "disabled" : ""}
+              style={{ display: currentPage === 1 ? "none" : "inline-block" }}>
+              ◀
+            </li>
             {[...Array(totalPages)].map((_, i) => (
-              <li key={i + 1} onClick={() => handlePageChange(i + 1)} className={i + 1 === currentPage ? "active" : ""}>
+              <li
+                key={i + 1}
+                onClick={() => handlePageChange(i + 1)}
+                className={i + 1 === currentPage ? "active" : ""}>
                 {i + 1}
               </li>
             ))}
-            <li onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>다음 ▶</li>
-            <li onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages}>마지막 ⏭</li>
+            <li
+              onClick={() => handlePageChange(currentPage + 1)}
+              className={currentPage === totalPages ? "disabled" : ""}
+              style={{
+                display: currentPage === totalPages ? "none" : "inline-block",
+              }}>
+              ▶
+            </li>
+            <li
+              onClick={() => handlePageChange(totalPages)}
+              className={currentPage === totalPages ? "disabled" : ""}
+              style={{
+                display: currentPage === totalPages ? "none" : "inline-block",
+              }}>
+              마지막 ⏭
+            </li>
           </ol>
         </div>
       )}
