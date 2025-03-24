@@ -3,6 +3,13 @@ import "../../scss/header.scss";
 import gnbMenu from "../../js/data/gnb";
 import { memo, useEffect, useState } from "react";
 
+/////////////////////////////////////////////////
+// 1. 장바구니 버튼 실시간 반영 (새로고침 하면 됨)
+// 2. 메인에서 장바구니로 담는 건 ok
+//    - 장바구니에서 결제하기 버튼 클릭 시 마이페이지 > 내 학습으로 넘어가는거 ok
+//    - 내 학습에 있어도 메인에는 이미 담겨있다고 나와야 함. 
+/////////////////////////////////////////////////
+
 
 const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) => {
   const location = useLocation(); // 현재 경로를 가져옴
@@ -49,6 +56,7 @@ const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) =
       setOpenSnb(null); // 화면 크기 조정 시 서브 메뉴 닫기
     });
   }, []);
+  
 
   return (
     <header className="header">
