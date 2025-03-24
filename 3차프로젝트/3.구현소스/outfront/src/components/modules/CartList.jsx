@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import "../../scss/pages/cart.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { dCon } from "./dCon"; // Context API import
+import "../../scss/pages/cart.scss";
 
 const CartList = () => {
+  const navigate = useNavigate(); // useNavigate 훅 사용
   const [userInfo, setUserInfo] = useState(
     sessionStorage.getItem("minfo") ? JSON.parse(sessionStorage.getItem("minfo")) : null
   );
@@ -24,40 +25,42 @@ const CartList = () => {
   // 결제하기 핸들러
   const handleCheckout = () => {
     const selectedItemsToCheckout = cartItem.filter((_, index) => selectedItems[index]);
-  
+
     if (selectedItemsToCheckout.length > 0) {
       // 결제한 강의 정보만 추출하여 필요한 데이터 구조로 변환
-      const coursesToSave = selectedItemsToCheckout.map(item => ({
+      const coursesToSave = selectedItemsToCheckout.map((item) => ({
         eduId: item.idx, // 강의 ID
         eduName: item.gName, // 강의 이름
         eduState: "수강중", // 강의 상태
         eduRate: 100, // 강의 비율 (예시로 100으로 설정)
-        gPrice: item.gPrice // 강의 가격
+        gPrice: item.gPrice, // 강의 가격
       }));
-  
+
       // 로컬 스토리지에서 기존 결제한 강의 목록 가져오기
       const existingUserEducation = localStorage.getItem("user-education");
       const existingCourses = existingUserEducation ? JSON.parse(existingUserEducation) : [];
-  
+
       // 새로운 강의 목록을 기존 목록에 추가
       const updatedCourses = [...existingCourses, ...coursesToSave];
-  
+
       // 업데이트된 강의 목록을 로컬 스토리지에 저장
       localStorage.setItem("user-education", JSON.stringify(updatedCourses));
-  
+
       // 장바구니 업데이트
       const updatedCartItems = cartItem.filter((_, index) => !selectedItems[index]);
       setCartItem(updatedCartItems);
       localStorage.setItem("cart-info", JSON.stringify(updatedCartItems)); // 로컬 스토리지 업데이트
-  
+
       // 선택 상태 초기화
       setSelectedItems(new Array(cartItem.length).fill(false));
-  
+
       // 결제 완료 메시지
       alert("결제가 완료되었습니다."); // alert로 메시지 표시
+
+      // 마이페이지로 이동
+      navigate("/mypage"); // 결제 완료 후 마이페이지로 이동
     }
   };
-
 
   // 총 결제 금액 계산
   const totalPrice = selectedItems.reduce((total, isSelected, index) => {
@@ -77,7 +80,6 @@ const CartList = () => {
 
   // 가격 3자리수 콤마 추가
   const formatPrice = (price) => (Number(price) === 0 ? "무료" : `₩${Number(price).toLocaleString()}`);
-
 
   return (
     <>
@@ -113,18 +115,18 @@ const CartList = () => {
                       </p>
                     </div>
                   </div>
-                  <button 
-    type="button" 
-    className="border-box" 
-    onClick={() => {
-      const updatedCartItems = cartItem.filter((_, index) => !selectedItems[index]);
-      setCartItem(updatedCartItems);
-      localStorage.setItem("cart-info", JSON.stringify(updatedCartItems)); // 로컬 스토리지 업데이트
-      setSelectedItems(new Array(updatedCartItems.length).fill(false)); // 선택 상태 초기화
-    }}
-  >
-    삭제하기
-  </button>
+                  <button
+                    type="button"
+                    className="border-box"
+                    onClick={() => {
+                      const updatedCartItems = cartItem.filter((_, index) => !selectedItems[index]);
+                      setCartItem(updatedCartItems);
+                      localStorage.setItem("cart-info", JSON.stringify(updatedCartItems)); // 로컬 스토리지 업데이트
+                      setSelectedItems(new Array(updatedCartItems.length).fill(false)); // 선택 상태 초기화
+                    }}
+                  >
+                    삭제하기
+                  </button>
                 </div>
                 <div className="edu-list-container">
                   {cartItem.map((item, i) => (
@@ -160,7 +162,7 @@ const CartList = () => {
                         </Link>
                       </div>
                       <div className="edu-list-right">
-                      <h4>{formatPrice(item.gPrice)}</h4>
+                        <h4>{formatPrice(item.gPrice)}</h4>
                       </div>
                     </div>
                   ))}
