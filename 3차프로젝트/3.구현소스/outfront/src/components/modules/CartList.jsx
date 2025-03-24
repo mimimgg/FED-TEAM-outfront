@@ -120,8 +120,8 @@ const CartList = () => {
                   </button>
                 </div>
                 <div className="edu-list-container">
-                  {cartItem.map((edu, i) => (
-                    <div className="edu-list-wrap" key={i}>
+                  {cartItem.map((item, i) => (
+                    <div className="edu-list-wrap">
                       <div className="edu-list-left">
                         <input
                           type="checkbox"
@@ -130,26 +130,26 @@ const CartList = () => {
                           onChange={() => handleCheckboxChange(i)} // 개별 체크박스 변경 핸들러
                         />
                         <img
-                          src={`images/edu_thumb/${edu.idx}.png`} // 강의 이미지 경로
-                          alt={`강의 이미지 ${edu.idx}`}
+                          src={`images/edu_thumb/${item.idx}.png`} // 강의 이미지 경로
+                          alt={`강의 이미지 ${item.idx}`}
                           className="edu-img"
                         />
-                        <Link to={(`/detail/${edu.idx}`)} style={{cursor: "pointer"}}>
+                        <Link to={``} style={{cursor: "pointer"}}>
                           <div className="box">
                             <ul className="text-box">
-                              <li className="gname">{edu.gName}</li>
+                              <li className="gname">{item.gName}</li>
                               <ol className="cat-box">
-                                <li className="glavel">{edu.gLevel}</li>
-                                <li className="gcate">{edu.gCate}</li>
-                                <li className="gdate">{edu.gDate}</li>
+                                <li className="glavel">{item.gLevel}</li>
+                                <li className="gcate">{item.gCate}</li>
+                                <li className="gdate">{item.gDate}</li>
                               </ol>
                             </ul>
-                            <h4>{formatPrice(edu.gPrice)}</h4>
+                            <h4>{formatPrice(item.gPrice)}</h4>
                           </div>
                         </Link>
                       </div>
                       <div className="edu-list-right">
-                        <h4>{formatPrice(edu.gPrice)}</h4>
+                        <h4>{formatPrice(item.gPrice)}</h4>
                       </div>
                     </div>
                   ))}
