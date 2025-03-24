@@ -54,6 +54,10 @@ const CartList = () => {
       // 선택 상태 초기화
       setSelectedItems(new Array(cartItem.length).fill(false));
 
+      
+      // 카트정보 업데이트하기
+      myCon.setCartInfo(updatedCartItems.length===0?null:updatedCartItems);
+
       // 결제 완료 메시지
       alert("결제가 완료되었습니다."); // alert로 메시지 표시
 
@@ -123,6 +127,8 @@ const CartList = () => {
                       setCartItem(updatedCartItems);
                       localStorage.setItem("cart-info", JSON.stringify(updatedCartItems)); // 로컬 스토리지 업데이트
                       setSelectedItems(new Array(updatedCartItems.length).fill(false)); // 선택 상태 초기화
+                      // 카트정보 업데이트하기
+                      myCon.setCartInfo(updatedCartItems.length===0?null:updatedCartItems);
                     }}
                   >
                     삭제하기
