@@ -58,7 +58,7 @@ const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) =
             <h1 className="logo">
               <a href="./">
                 <img
-                  src="./images/common/brand_logo.png"
+                  src={`${process.env.PUBLIC_URL}/images/common/brand_logo.png`}
                   alt="아웃프런 브랜드 로고"
                   className="logo-img"
                 />
