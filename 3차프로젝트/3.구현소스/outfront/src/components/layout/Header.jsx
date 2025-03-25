@@ -163,7 +163,7 @@ const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) =
           <aside className="aside">
             {!loginSts && (
               <ul className="aside-list">
-                <div>
+                <div className="state-logout">
                   <li className="aside-item">
                     <Link to="/login" className="aside-button">
                       로그인
