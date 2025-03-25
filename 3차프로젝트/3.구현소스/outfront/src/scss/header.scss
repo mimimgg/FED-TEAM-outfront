@@ -447,6 +447,13 @@ button {
           column-gap: 1.2rem;
         }
       }
+      :first-child {
+        column-gap: .8rem;
+        
+        @include mobile {
+          column-gap: .4rem;
+        }
+      }
     }
   }
 }

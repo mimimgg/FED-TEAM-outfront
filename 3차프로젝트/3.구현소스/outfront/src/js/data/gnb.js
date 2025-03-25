@@ -21,10 +21,10 @@ const gnbMenu = [
       },
     ],
   },
-  {
-    txt: "탐쌤페이지",
-    link: "/tompage",
-  },
+  // {
+  //   txt: "탐쌤페이지",
+  //   link: "/tompage",
+  // },
 ];
 
 export default gnbMenu;
