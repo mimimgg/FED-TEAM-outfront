@@ -203,7 +203,7 @@ function List({
 
   // 리턴 코드구역 ////////////////////
   return (
-    <main className="cont">
+    <>
       <h1 className="tit">커뮤니티</h1>
       <div className="selbx">
         <select name="cta" id="cta" className="cta">
@@ -342,7 +342,7 @@ function List({
           </tr>
         </tbody>
       </table>
-    </main>
+    </>
   );
 }
 

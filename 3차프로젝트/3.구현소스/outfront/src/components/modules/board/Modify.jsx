@@ -120,33 +120,33 @@ function Modify({setMode, selRecord, totalCount, setPageNum, pgPgNum}) {
 
   // 리턴 코드구역 /////////////////////
   return (
-    <main className="cont">
-      <h1 className="tit">OPINION</h1>
+    <>
+      <h1 className="tit">커뮤니티</h1>
       <table className="dtblview readone">
-        <caption>OPINION : Modify</caption>
+        <caption>수정</caption>
         <tbody>
           <tr>
-            <td>Name</td>
+            <td>이름</td>
             <td>
               <input type="text" className="name" size="20" readOnly={true} defaultValue={selData.unm} />
             </td>
           </tr>
           <tr>
-            <td>Title</td>
+            <td>제목</td>
             <td>
               <input type="text" className="subject" size="60" defaultValue={selData.tit} />
             </td>
           </tr>
           <tr>
-            <td>Content</td>
+            <td>내용</td>
             <td>
               <textarea className="content" cols="60" rows="10" defaultValue={selData.cont}></textarea>
             </td>
           </tr>
-          <tr>
+          {/* <tr>
             <td>Attachment</td>
             <td></td>
-          </tr>
+          </tr> */}
         </tbody>
       </table>
       <br />
@@ -154,20 +154,20 @@ function Modify({setMode, selRecord, totalCount, setPageNum, pgPgNum}) {
         <tbody>
           <tr>
             <td>
-              <button onClick={submitFn}>Submit</button>
-              <button onClick={deleteFn}>Delete</button>
+              <button onClick={submitFn}>등록</button>
+              <button onClick={deleteFn}>삭제</button>
               <button
                 onClick={() => {
                   // 리스트 모드('L')로 변경하기
                   setMode("L");
                 }}>
-                List
+                목록
               </button>
             </td>
           </tr>
         </tbody>
       </table>
-    </main>
+    </>
   );
 }
 
