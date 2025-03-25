@@ -32,7 +32,7 @@ const CartList = () => {
         eduId: item.idx, // 강의 ID
         eduName: item.gName, // 강의 이름
         eduState: "수강중", // 강의 상태
-        eduRate: 100, // 강의 비율 (예시로 100으로 설정)
+        eduRate: 0, // 강의 비율 (예시로 0으로 설정)
         gPrice: item.gPrice, // 강의 가격
       }));
 
@@ -54,9 +54,8 @@ const CartList = () => {
       // 선택 상태 초기화
       setSelectedItems(new Array(cartItem.length).fill(false));
 
-      
       // 카트정보 업데이트하기
-      myCon.setCartInfo(updatedCartItems.length===0?null:updatedCartItems);
+      myCon.setCartInfo(updatedCartItems.length === 0 ? null : updatedCartItems);
 
       // 결제 완료 메시지
       alert("결제가 완료되었습니다."); // alert로 메시지 표시
@@ -128,7 +127,7 @@ const CartList = () => {
                       localStorage.setItem("cart-info", JSON.stringify(updatedCartItems)); // 로컬 스토리지 업데이트
                       setSelectedItems(new Array(updatedCartItems.length).fill(false)); // 선택 상태 초기화
                       // 카트정보 업데이트하기
-                      myCon.setCartInfo(updatedCartItems.length===0?null:updatedCartItems);
+                      myCon.setCartInfo(updatedCartItems.length === 0 ? null : updatedCartItems);
                     }}
                   >
                     삭제하기
