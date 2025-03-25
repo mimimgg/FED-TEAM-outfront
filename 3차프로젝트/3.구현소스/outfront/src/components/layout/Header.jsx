@@ -48,7 +48,6 @@ const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) =
       setOpenSnb(null); // 화면 크기 조정 시 서브 메뉴 닫기
     });
   }, []);
-  
 
   return (
     <header className="header">
@@ -64,31 +63,18 @@ const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) =
                 />
               </a>
             </h1>
-            <div
-              className={`gnb-container ${isOpenGnb ? "open" : "close"}`}
-              onClick={handleCloseGnb}
-            >
-              <button
-                type="button"
-                className="mobile-gnb-button"
-                onClick={handleOpenGnb}
-              >
+            <div className={`gnb-container ${isOpenGnb ? "open" : "close"}`} onClick={handleCloseGnb}>
+              <button type="button" className="mobile-gnb-button" onClick={handleOpenGnb}>
                 <i className="fa-solid fa-bars"></i>
               </button>
               <div className="gnb-content">
                 <nav className="gnb">
                   <ul className="gnb-list">
                     <li className="gnb-item">
-                      <button
-                        type="button"
-                        className="gnb-button"
-                        onClick={toggleMenu}
-                      >
+                      <button type="button" className="gnb-button" onClick={toggleMenu}>
                         강의
                       </button>
-                      <nav
-                        className={`snb ${openSnb === "강의" ? "open" : ""}`}
-                      >
+                      <nav className={`snb ${openSnb === "강의" ? "open" : ""}`}>
                         <ul className="snb-list">
                           <li className="sub-item">
                             <a className="snb-button" href={`${process.env.PUBLIC_URL}/#전체`}>
@@ -127,24 +113,13 @@ const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) =
                       <li key={`gnb-menu-${gnb.txt}`} className="gnb-item">
                         {gnb.sub ? (
                           <>
-                            <button
-                              type="button"
-                              className="gnb-button"
-                              onClick={() => handleClickGnb(gnb.txt)}
-                            >
+                            <button type="button" className="gnb-button" onClick={() => handleClickGnb(gnb.txt)}>
                               {gnb.txt}
                             </button>
-                            <nav
-                              className={`snb ${
-                                openSnb === gnb.txt ? "open" : ""
-                              }`}
-                            >
+                            <nav className={`snb ${openSnb === gnb.txt ? "open" : ""}`}>
                               <ul className="snb-list">
                                 {gnb.sub.map((snb) => (
-                                  <li
-                                    key={`snb-menu-${snb.txt}`}
-                                    className="sub-item"
-                                  >
+                                  <li key={`snb-menu-${snb.txt}`} className="sub-item">
                                     <Link to={snb.link} className="snb-button">
                                       {snb.txt}
                                     </Link>
@@ -178,11 +153,7 @@ const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) =
                       }
                     }}
                   />
-                  <button
-                    type="button"
-                    className="search-submit"
-                    onClick={handleSearch}
-                  >
+                  <button type="button" className="search-submit" onClick={handleSearch}>
                     <i className="fa-solid fa-magnifying-glass"></i>
                   </button>
                 </section>
@@ -192,16 +163,26 @@ const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) =
           <aside className="aside">
             {!loginSts && (
               <ul className="aside-list">
-                <li className="aside-item">
-                  <Link to="/login" className="aside-button">
-                    로그인
-                  </Link>
-                </li>
-                <li className="aside-item">
-                  <Link to="/join" className="aside-button">
-                    회원가입
-                  </Link>
-                </li>
+                <div>
+                  <li className="aside-item">
+                    <Link to="/login" className="aside-button">
+                      로그인
+                    </Link>
+                  </li>
+                  <li className="aside-item">
+                    <Link to="/join" className="aside-button">
+                      회원가입
+                    </Link>
+                  </li>
+                  <li className="aside-item">
+                    <Link to="/mypage" className="aside-button logo-icon">
+                      <img
+                        src="https://cdn.inflearn.com/public/main/profile/default_profile.png"
+                        alt="아웃프런마이페이지"
+                      />
+                    </Link>
+                  </li>
+                </div>
               </ul>
             )}
             {loginSts && (
@@ -216,9 +197,7 @@ const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) =
                         sessionStorage.removeItem("minfo");
 
                         let finalInfo = localStorage.getItem("cart-info")
-                          ? JSON.parse(
-                              localStorage.getItem("cart-info")
-                            ).filter((v) => {
+                          ? JSON.parse(localStorage.getItem("cart-info")).filter((v) => {
                               if (v.gOwner === 0) return true;
                             })
                           : null;
@@ -229,15 +208,12 @@ const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) =
                         goPage("/");
                       }}
                       className="logout"
-                    >
-                    </a>
+                    ></a>
                   </li>
                   <li className="aside-item">
                     <Link to="/cartlist" className="aside-button icon">
                       <i className="fa-solid fa-cart-shopping"></i>
-                      <span className={"cart-cnt" + (cartInfo ? " on" : "")}>
-                        {cartInfo ? cartInfo.length : 0}
-                      </span>
+                      <span className={"cart-cnt" + (cartInfo ? " on" : "")}>{cartInfo ? cartInfo.length : 0}</span>
                     </Link>
                   </li>
                   <li className="aside-item">

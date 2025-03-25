@@ -140,12 +140,19 @@ function Mypage() {
           style={{ display: "none" }}
           onChange={handleProfileChange}
         />
-        <div className="logstate">
-          <span>ID : {userInfo ? userInfo.uid : "로그인 필요!"}</span>
-          <button onClick={handleLogout} className="logout-button">
-            로그아웃
-          </button>
-        </div>
+        {userInfo && (
+          <div className="logstate">
+            <span>ID : {userInfo.uid}</span>
+            <button onClick={handleLogout} className="logout-button">
+              로그아웃
+            </button>
+          </div>
+        )}
+        {!userInfo && (
+          <div className="logstate">
+            <span>로그인이 필요합니다</span>
+          </div>
+        )}
         <p>
           <b>{userInfo ? userInfo.unm : "비회원"}</b>님 😎 <b>아웃프런</b>에 오신 것을 환영합니다! 😍 <br />
           <b>당장 공부하지 않으면 당신의 인생이 망할 수도 있습니다!!</b>
