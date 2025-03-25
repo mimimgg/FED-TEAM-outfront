@@ -207,29 +207,11 @@ function List({
       <h1 className="tit">커뮤니티</h1>
       <div className="selbx">
         <select name="cta" id="cta" className="cta">
-          <option value="tit">Title</option>
-          <option value="cont">Contents</option>
-          <option value="unm">Writer</option>
+          <option value="tit">제목검색</option>
+          <option value="cont">내용검색</option>
+          <option value="unm">글쓴이검색</option>
         </select>
-        <select
-          name="sel"
-          id="sel"
-          className="sel"
-          value={order}
-          onChange={(e) => {
-            // 정렬값 반대로 변경하기
-            setOrder(order * -1);
-            // 변경시 변경한 선택값 반영하기
-            e.target.value = order;
-            // 첫 페이지로 이동
-            setPageNum(1);
-            // 페이징의 페이징구역 초기화
-            pgPgNum.current = 1;
-          }}
-        >
-          <option value="1">Descending</option>
-          <option value="-1">Ascending</option>
-        </select>
+        
         <input
           id="stxt"
           type="text"
@@ -246,8 +228,8 @@ function List({
           }}
         />
         <button className="sbtn" onClick={searchFn}>
-          Search
-        </button>
+          검색
+        </button>       
 
         {/* 검색기준 선택박스 */}
         <select
@@ -266,18 +248,37 @@ function List({
             pgPgNum.current = 1;
           }}
         >
-          <option value="date">Recent</option>
-          <option value="tit">Title</option>
+          <option value="date">날짜</option>
+          <option value="tit">제목</option>
+        </select>
+        <select
+          name="sel"
+          id="sel"
+          className="sel"
+          value={order}
+          onChange={(e) => {
+            // 정렬값 반대로 변경하기
+            setOrder(order * -1);
+            // 변경시 변경한 선택값 반영하기
+            e.target.value = order;
+            // 첫 페이지로 이동
+            setPageNum(1);
+            // 페이징의 페이징구역 초기화
+            pgPgNum.current = 1;
+          }}
+        >
+          <option value="1">내림차순</option>
+          <option value="-1">오름차순</option>
         </select>
       </div>
       <table className="dtbl" id="board">
         <thead>
           <tr>
-            <th>Number</th>
-            <th>Title</th>
-            <th>Writer</th>
-            <th>Date</th>
-            <th>Hits</th>
+            <th>순번</th>
+            <th>제목</th>
+            <th>글쓴이</th>
+            <th>날짜</th>
+            <th>조회수</th>
           </tr>
         </thead>
         <tbody>

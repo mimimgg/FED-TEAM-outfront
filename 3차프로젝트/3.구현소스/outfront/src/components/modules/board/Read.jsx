@@ -333,7 +333,7 @@ function Read({setMode, selRecord}) {
                       verticalAlign: "35px",
                     }}
                     onClick={saveComment}>
-                    보내기
+                    등록
                   </button>
                 </td>
               </tr>
@@ -423,7 +423,7 @@ function Read({setMode, selRecord}) {
                           // 아웃라인으로 수정표시하기
                           outline: 
                           isEditing === v.idx
-                          ? "2px solid green" // 수정모드시 테두리
+                          ? "2px solid #00c471" // 수정모드시 테두리
                           : "none", // 보통은 안보임
                           overflow: "hidden",
                           resize: "none",

@@ -124,14 +124,14 @@
 
 .dtbl thead tr th {
   /*머리줄 th 윗줄*/
-  border-top: 2px solid #999;
+  border-top: 2px solid #ccc;
   /*두종색*/
-  border-bottom: 1px solid #999;
+  border-bottom: 1px solid #ccc;
 }
 
 .dtbl tbody tr:last-child td {
   /*테이블본문의 마지막 줄 tr 의 td 밑줄변경*/
-  border-bottom: 2px solid #999;
+  border-bottom: 2px solid #ccc;
 }
 .dtbl tbody tr td:nth-child(2) {
   text-align: left;
@@ -165,9 +165,9 @@
   border-collapse: collapse;
   width: 100%;
   margin: 20px auto;
-  border-top: 2px solid #999;
+  border-top: 1px solid #ccc;
   /*두종색*/
-  border-bottom: 2px solid #999;
+  border-bottom: 1px solid #ccc;
 }
 .dtblview td {
   width: auto;
@@ -225,22 +225,22 @@
 
 /* 버튼그룹 */
 .btngrp button {
-  border-radius: 25px;
+  border-radius: 10px;
   padding: 8px 40px;
   background-color: #fff;
   color: #000;
-  font-weight: bold;
-  font-size: 15px;
+  font-weight: 600;
+  font-size: 1.4rem;
   transition: 0.3s;
   margin-top: 20px;
   cursor: pointer;
   border: none;
-  border: 1px solid #000;
+  border: 1px solid #ddd;
   margin: 5px;
 
   // 버튼 오버시 ///
   &:hover {
-    background-color: #0074e8;
+    background-color: $color-primary;
     color: #fff;
   }
 }
