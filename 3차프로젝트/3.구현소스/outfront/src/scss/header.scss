@@ -25,7 +25,7 @@ button {
       padding-inline: 1.6rem;
     }
     @include mobile {
-      padding-inline: 0.8%;
+      padding-inline: 0.8rem;
     }
 
     .header-content {
@@ -65,7 +65,12 @@ button {
     .logo-img {
       width: 11rem;
       height: auto;
+
+      @include mobile {
+        width: 10rem;
+      }
     }
+    
   }
 
   .gnb-container {
@@ -400,7 +405,8 @@ button {
         @include mobile {
           background: none;
           color: $color-midgray;
-          padding-inline: 0.8rem;
+          padding-inline: 0.4rem;
+          transition: .3s;
         }
       }
 

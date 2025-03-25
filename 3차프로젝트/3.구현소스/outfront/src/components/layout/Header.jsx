@@ -230,16 +230,7 @@ const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) =
                       }}
                       className="logout"
                     >
-                      로그아웃
                     </a>
-                  </li>
-                  <li className="aside-item">
-                    <Link to="/mypage" className="aside-button logo-icon">
-                      <img
-                        src="https://cdn.inflearn.com/public/main/profile/default_profile.png"
-                        alt="아웃프런마이페이지"
-                      />
-                    </Link>
                   </li>
                   <li className="aside-item">
                     <Link to="/cartlist" className="aside-button icon">
@@ -247,6 +238,14 @@ const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) =
                       <span className={"cart-cnt" + (cartInfo ? " on" : "")}>
                         {cartInfo ? cartInfo.length : 0}
                       </span>
+                    </Link>
+                  </li>
+                  <li className="aside-item">
+                    <Link to="/mypage" className="aside-button logo-icon">
+                      <img
+                        src="https://cdn.inflearn.com/public/main/profile/default_profile.png"
+                        alt="아웃프런마이페이지"
+                      />
                     </Link>
                   </li>
                 </div>

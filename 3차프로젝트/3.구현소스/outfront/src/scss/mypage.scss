@@ -32,11 +32,32 @@
         object-fit: cover;
       }
     }
-    span {
-      font-weight: 600;
-      font-size: min(10vw, 1.8rem);
+    .logstate {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.6rem;
+      align-items: center;
       margin: 24px 0;
-      display: block;
+
+      span {
+        font-weight: 600;
+        font-size: min(10vw, 1.8rem);
+        display: block;
+      }
+
+      .logout-button {
+        border: .1rem solid $color-lightegray;
+        background-color: transparent;
+        color: $color-midgray;
+        height: 2.6rem;
+        width: max-content;
+        padding-inline: .8rem;
+        border-radius: 0.8rem;
+        font-size: 1.2rem;
+        font-weight: 500;
+        cursor: pointer;
+      }
     }
     p {
       font-size: min(5.6vw, 3.8rem);

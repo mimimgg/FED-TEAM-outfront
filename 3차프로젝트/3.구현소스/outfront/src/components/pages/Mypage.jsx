@@ -1,14 +1,16 @@
 // 마이페이지 컴포넌트 ./src/componets/page/Mypage.jsx
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../scss/mypage.scss";
 import { Link, useNavigate } from "react-router-dom";
 // 로그인한 사용자의 학습 정보 import 직접 불러오기
 import userData from "../../js/data/user_data.json";
 // 리뷰 데이터 import 직접 불러오기
 import reviewData from "../../js/data/review_data.json";
+import { dCon } from "../modules/dCon";
 
 function Mypage() {
   const navigate = useNavigate();
+  const { setLoginSts, setCartInfo } = useContext(dCon);
   const [userInfo, setUserInfo] = useState(null); // 로그인한 사용자 정보
   const [userEduList, setUserEduList] = useState([]); // 로그인한 사용자의 학습 목록
   const [reviewList, setReviewList] = useState(reviewData); // 리뷰 데이터
@@ -108,6 +110,20 @@ function Mypage() {
     }
   };
 
+  // 로그아웃 처리
+  const handleLogout = () => {
+    setLoginSts(null); // 로그인 상태 초기화
+    sessionStorage.removeItem("minfo"); // 세션 스토리지에서 사용자 정보 제거
+    let finalInfo = localStorage.getItem("cart-info")
+      ? JSON.parse(localStorage.getItem("cart-info")).filter((v) => {
+          return v.gOwner === 0; // 비회원 장바구니만 남기기
+        })
+      : null;
+
+    setCartInfo(finalInfo); // 장바구니 정보 업데이트
+    navigate("/"); // 메인 페이지로 리디렉션
+  };
+
   return (
     <div className="mypage-wrap">
       <div className="mypage-top">
@@ -124,7 +140,12 @@ function Mypage() {
           style={{ display: "none" }}
           onChange={handleProfileChange}
         />
-        <span>ID : {userInfo ? userInfo.uid : "로그인 필요!"}</span>
+        <div className="logstate">
+          <span>ID : {userInfo ? userInfo.uid : "로그인 필요!"}</span>
+          <button onClick={handleLogout} className="logout-button">
+            로그아웃
+          </button>
+        </div>
         <p>
           <b>{userInfo ? userInfo.unm : "비회원"}</b>님 😎 <b>아웃프런</b>에 오신 것을 환영합니다! 😍 <br />
           <b>당장 공부하지 않으면 당신의 인생이 망할 수도 있습니다!!</b>
