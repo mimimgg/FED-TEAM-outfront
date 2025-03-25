@@ -263,9 +263,9 @@ function Read({setMode, selRecord}) {
   // 리턴 코드구역 ///////////////////
   return (
     <main className="cont">
-      <h1 className="tit">OPINION</h1>
+      <h1 className="tit">커뮤니티</h1>
       <table className="dtblview readone">
-        <caption>OPINION : Read</caption>
+        <caption>Community : Read</caption>
         <tbody>
           <tr>
             <td>Name</td>
