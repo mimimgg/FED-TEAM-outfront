@@ -1,6 +1,14 @@
 /* 게시판 모듈용 CSS - board.css  */
+@import "../variables";
 
 /* CSS Document */
+
+.cont {
+  position: relative;
+  width: 96%;
+  max-width:1440px;
+  margin: 0 auto;
+}
 
  h1.tit {
   text-align: center;
@@ -16,6 +24,11 @@
   margin: 0 auto;
   padding: 20px 0px 10px;
   box-sizing: border-box;
+  display: flex;
+  @include tablet-medium {
+    display: block;
+  }
+
   select, input {
     padding: 8px 12px;
     border: 1px solid #777;
@@ -39,9 +52,8 @@
   font-family: "Ubuntu Condensed", sans-serif;
   font-size: 14px;
   border-collapse: collapse;
-  width: 96%;
-  max-width: 1440px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .dtbl caption,

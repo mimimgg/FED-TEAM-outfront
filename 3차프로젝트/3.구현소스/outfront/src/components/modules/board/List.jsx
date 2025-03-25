@@ -204,7 +204,7 @@ function List({
   // 리턴 코드구역 ////////////////////
   return (
     <main className="cont">
-      <h1 className="tit">OPINION</h1>
+      <h1 className="tit">커뮤니티</h1>
       <div className="selbx">
         <select name="cta" id="cta" className="cta">
           <option value="tit">Title</option>
@@ -254,10 +254,6 @@ function List({
           name="sort_cta"
           id="sort_cta"
           className="sort_cta"
-          style={{
-            float: "right",
-            translate: "0 5px",
-          }}
           value={sortCta}
           onChange={(e) => {
             // 정렬기준 변경하기
