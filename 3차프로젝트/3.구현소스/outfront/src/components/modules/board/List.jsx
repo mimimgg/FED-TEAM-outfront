@@ -91,7 +91,7 @@ function List({
               setPageNum(1);
             }}
           >
-            «{" "}
+           <i class="fa-solid fa-backward"></i>
           </a>
           {/* 이전 페이징으로 이동하기 */}
           <a
@@ -106,7 +106,7 @@ function List({
               // 이전 페이징 첫번호는 (시작값-(페페사이즈-1)) 이다!
             }}
           >
-            ◀{" "}
+            <i class="fa-solid fa-arrow-left"></i>
           </a>
         </Fragment>
       );
@@ -143,7 +143,7 @@ function List({
           {
             // 마지막 번호 뒤에 바(|)는 출력안되게함!
             // 동시에 페이징 마지막 번호가 아닐때만 출력!
-            i < limitNum - 1 && i + 1 !== pagingCount && " | "
+            i < limitNum - 1 && i + 1 !== pagingCount && ""
           }
         </Fragment>
       );
@@ -167,8 +167,8 @@ function List({
               // 다음 페이징 첫번호는 (한계값+1) 이다!
             }}
           >
-            {" "}
-            ▶
+           
+            <i class="fa-solid fa-arrow-right"></i>
           </a>
           {/* 맨끝 페이징 이동하기 */}
           <a
@@ -186,8 +186,8 @@ function List({
               // 더하기 1하면 다음 페이징의 첫번째 페이지번호임!
             }}
           >
-            {" "}
-            »
+            
+            <i class="fa-solid fa-forward"></i>
           </a>
         </Fragment>
       );
