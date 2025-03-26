@@ -215,7 +215,7 @@ const DetailView = () => {
                     ? "수강바구니로 이동"
                     : userInfo
                     ? "수강 신청하기"
-                    : "로그인 후 이용 가능합니다"}
+                    : "수강신청은 로그인 후 이용 가능합니다."}
                 </button>
               )}
               {userInfo && !userEduState && !isInCart && !isInMyEdu && (
