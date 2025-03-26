@@ -170,6 +170,12 @@ const DetailView = () => {
                       // 이미 장바구니에 담긴 경우 장바구니로 이동
                       navigate("/cartlist");
                     } else {
+                      // 비회원일 경우
+                      if (!userInfo) {
+                        alert("로그인 후 이용 가능합니다"); // 로그인 알림
+                        return; // 함수 종료
+                      }
+
                       let temp;
                       if (localStorage.getItem("cart-info")) temp = JSON.parse(localStorage.getItem("cart-info"));
                       else temp = [];
@@ -203,10 +209,16 @@ const DetailView = () => {
                     }
                   }}
                 >
-                  {isInMyEdu ? "학습하러 가기" : isInCart ? "수강바구니로 이동" : "수강 신청하기"}
+                  {isInMyEdu
+                    ? "학습하러 가기"
+                    : isInCart
+                    ? "수강바구니로 이동"
+                    : userInfo
+                    ? "수강 신청하기"
+                    : "로그인 후 이용 가능합니다"}
                 </button>
               )}
-              {!userEduState && !isInCart && !isInMyEdu && (
+              {userInfo && !userEduState && !isInCart && !isInMyEdu && (
                 <button className="add-cart-btn" onClick={handleAddToCart}>
                   바구니에 담기
                 </button>
