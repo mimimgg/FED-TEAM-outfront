@@ -1,7 +1,8 @@
 // MyEdu.jsx
 import React, { useEffect, useState } from "react";
 import "../../scss/myedu.scss";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+
 // 리뷰 데이터 import 직접 불러오기
 import reviewData from "../../js/data/review_data.json";
 // 로그인한 사용자의 학습 정보 import 직접 불러오기
@@ -58,6 +59,8 @@ function MyEdu(props) {
     setSelectedReview(null);
   };
 
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="my-edu-wrap">
@@ -73,7 +76,7 @@ function MyEdu(props) {
 
                 return (
                   <li key={edu.eduId}>
-                    <picture onClick={() => Navigate(`/detail/${edu.eduId}`)}>
+                    <picture onClick={() => navigate(`/detail/${edu.eduId}`)}>
                       <img src={`./images/edu_thumb/${edu.eduId}.png`} alt={`강의 이미지 ${edu.eduId}`} />
                     </picture>
                     <h4>{edu.eduName}</h4>

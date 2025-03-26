@@ -31,7 +31,7 @@ const CartList = () => {
       const coursesToSave = selectedItemsToCheckout.map((item) => ({
         eduId: item.idx, // 강의 ID
         eduName: item.gName, // 강의 이름
-        eduState: "수강중", // 강의 상태
+        eduState: "학습전", // 강의 상태
         eduRate: 0, // 강의 비율 (예시로 0으로 설정)
         gPrice: item.gPrice, // 강의 가격
       }));
