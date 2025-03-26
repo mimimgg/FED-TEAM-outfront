@@ -31,7 +31,11 @@
 
   select, input {
     padding: 8px 12px;
-    border: 1px solid #777;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    @include tablet-small {
+      margin: 4px;
+    }
   }
 }
 .selbx > * {
@@ -40,8 +44,12 @@
 .sbtn {
   cursor: pointer;
   padding: 8px 12px;
-  background: #000;
+  background: $color-primary;
   color: #fff;
+  border-radius: 4px;
+  @include tablet-small {
+    margin: 4px;
+  }
 }
 
 /*테이블 디자인*/
@@ -207,7 +215,7 @@
 .dtblview td b {
   font-size: 20px;
   text-decoration: none;
-  color: #000;
+  color: #2c2e33;
 }
 .dtblview td a:hover {
   text-decoration: underline;
@@ -228,7 +236,7 @@
   border-radius: 10px;
   padding: 8px 40px;
   background-color: #fff;
-  color: #000;
+  color: #2c2e33;
   font-weight: 600;
   font-size: 1.4rem;
   transition: 0.3s;
@@ -264,6 +272,8 @@
   width: auto;
   text-align: center;
   vertical-align: middle;
+  background-color: #fff !important;
+  border-right: 1px solid #ccc;
   textarea {
     width: 90%;
   }

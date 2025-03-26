@@ -418,7 +418,7 @@ function Read({setMode, selRecord}) {
                           // 변경된 값으로 반영된다!!!
                         }}
                         style={{
-                          width: "100%",
+                          width: "88%",
                           border: "none",
                           // 아웃라인으로 수정표시하기
                           outline: 
@@ -431,8 +431,9 @@ function Read({setMode, selRecord}) {
                     </td>
                     {/* (3) 코멘트 날짜 */}
                     <td style={{
-                      width: "10%",
-                      fontSize: "1.4rem",
+                      width: "200px",
+                      minWidth: "80px",                      
+                      fontSize: "1rem",
                     }}>
                       {v.date}
                     </td>
