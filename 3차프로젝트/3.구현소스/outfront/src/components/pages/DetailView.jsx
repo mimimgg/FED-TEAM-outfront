@@ -210,7 +210,9 @@ const DetailView = () => {
                   }}
                 >
                   {isInMyEdu
-                    ? "학습전(진행률: 0%)"
+                    ? userInfo
+                      ? "학습전(진행률: 0%)"
+                      : "수강신청은 로그인 후 이용 가능합니다."
                     : isInCart
                     ? "수강바구니로 이동"
                     : userInfo
