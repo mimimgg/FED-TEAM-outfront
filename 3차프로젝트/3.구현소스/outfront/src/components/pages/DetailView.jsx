@@ -210,7 +210,7 @@ const DetailView = () => {
                   }}
                 >
                   {isInMyEdu
-                    ? "학습하러 가기"
+                    ? "학습전(진행률: 0%)"
                     : isInCart
                     ? "수강바구니로 이동"
                     : userInfo
