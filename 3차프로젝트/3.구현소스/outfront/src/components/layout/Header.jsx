@@ -35,13 +35,19 @@ const Header = memo(({ goPage, loginSts, setLoginSts, cartInfo, setCartInfo }) =
   };
 
   const handleCloseGnb = (e) => {
-    if (e.currentTarget === e.target) closeGnb();
+    if (e.currentTarget === e.target) {
+      closeGnb(); // 클릭 이벤트가 바깥쪽에서 발생할 때 메뉴 닫기
+    }
   };
 
   const handleSearch = () => {
     closeGnb();
     goPage("search", { state: { keyword: searchKeyword } });
   };
+
+  useEffect(() => {
+    document.body.style.overflow = isOpenGnb ? "hidden" : "auto";
+  }, [isOpenGnb]);
 
   useEffect(() => {
     window.addEventListener("resize", () => {
