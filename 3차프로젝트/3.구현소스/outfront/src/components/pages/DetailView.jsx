@@ -165,7 +165,7 @@ const DetailView = () => {
                     e.preventDefault();
                     if (isInMyEdu) {
                       // 내 학습에 이미 담긴 경우 마이 페이지로 이동
-                      navigate("/mypage");
+                      navigate("/myedu");
                     } else if (isInCart) {
                       // 이미 장바구니에 담긴 경우 장바구니로 이동
                       navigate("/cartlist");
