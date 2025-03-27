@@ -1,0 +1,5 @@
+@import "./variables";
+
+main.cont {
+  min-height: calc(100vh - $top-area-height - $footer-area-height);
+}
