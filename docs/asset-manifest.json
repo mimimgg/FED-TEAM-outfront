@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/FED-TEAM-outfront/static/css/main.e287f973.css",
-    "main.js": "/FED-TEAM-outfront/static/js/main.b7968d0d.js",
+    "main.css": "/FED-TEAM-outfront/static/css/main.dfb4e17c.css",
+    "main.js": "/FED-TEAM-outfront/static/js/main.c60da55e.js",
     "index.html": "/FED-TEAM-outfront/index.html",
-    "main.e287f973.css.map": "/FED-TEAM-outfront/static/css/main.e287f973.css.map",
-    "main.b7968d0d.js.map": "/FED-TEAM-outfront/static/js/main.b7968d0d.js.map"
+    "main.dfb4e17c.css.map": "/FED-TEAM-outfront/static/css/main.dfb4e17c.css.map",
+    "main.c60da55e.js.map": "/FED-TEAM-outfront/static/js/main.c60da55e.js.map"
   },
   "entrypoints": [
-    "static/css/main.e287f973.css",
-    "static/js/main.b7968d0d.js"
+    "static/css/main.dfb4e17c.css",
+    "static/js/main.c60da55e.js"
   ]
 }
