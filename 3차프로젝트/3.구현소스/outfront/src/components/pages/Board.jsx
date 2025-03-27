@@ -12,8 +12,18 @@ import List from "../modules/board/List";
 import Read from "../modules/board/Read";
 import Write from "../modules/board/Write";
 import Modify from "../modules/board/Modify";
+import { useLocation } from "react-router-dom";
 
 function Board() {
+  // Mypage.jsx에서 전달된 state 값 반영
+  const location = useLocation();
+  useEffect(() => {
+    if (location.state) {
+      setMode(location.state.mode);
+      selRecord.current = location.state.selData;
+    }
+  }, [location.state]);
+
   // [ 로컬스토리지 게시판 데이터 정보확인 함수호출! ] ////
   initBoardData();
 
@@ -36,7 +46,7 @@ function Board() {
     cta: "tit",
     kw: "",
   });
-// console.log("{cta:기준값,kw:검색어}", keyword);
+  // console.log("{cta:기준값,kw:검색어}", keyword);
   // cta - creteria / kw -  keyword
 
   // [4] 정렬 기준값 상태변수 : 값(asc(-1) / desc(1))
@@ -57,7 +67,7 @@ function Board() {
   // [2] 전체 레코드 개수(배열데이터 개수)
   // -> 매번 계산하지 않도록 참조변수로 생성한다!
   const totalCount = useRef(baseData.length);
-// console.log("전체개수:", totalCount);
+  // console.log("전체개수:", totalCount);
 
   // [3] 페이징의 페이징 번호
   const pgPgNum = useRef(1);
@@ -115,20 +125,21 @@ function Board() {
       // 오름차순은 -1 * order변수값이 -1일 경우
       //
       .sort((a, b) =>
-        a[sortCta] > b[sortCta]
+        a[sortCta] > b[sortCta] || a.idx > b.idx
+          ? -1 * order
+          : a[sortCta] < b[sortCta] || a.idx < b.idx
+          ? 1 * order
+          : // 하위조건추가 : 두값이 같지않은가?
+          a[sortCta] !== b[sortCta]
+          ? // 같지 않으면 0
+            0
+          : // 그밖에 두 값이 같은경우는?
+          // idx항목으로 오름/내림차순정렬
+          a.idx > b.idx
           ? -1 * order
           : a[sortCta] < b[sortCta]
           ? 1 * order
-          // 하위조건추가 : 두값이 같지않은가?
-          : a[sortCta] !== b[sortCta]
-          // 같지 않으면 0
-          ? 0
-          // 그밖에 두 값이 같은경우는?
-          // idx항목으로 오름/내림차순정렬
-          : a.idx > b.idx
-          ? -1 * order
-          : a.idx < b.idx
-          ? 1 * order : 0
+          : 0
       )
       // 여기부터 검색어로 리스트 만들기
       .filter((v) => {
@@ -138,8 +149,6 @@ function Board() {
           return true;
       }); ////// filter ////////
   } ///// if : 검색어가 있는 경우 /////////
-  
-  // [2] 검색어가 없는 경우 ////////
   else {
     finalData = baseData
       // ((기준1))-> sortCta값에 따른 정렬
@@ -167,7 +176,7 @@ function Board() {
   // 전체 데이터 개수 업데이트 하기 /////
   totalCount.current = finalData.length;
 
-// console.log("slice를 위한 시작값/끝값", initNum, "/", limitNum);
+  // console.log("slice를 위한 시작값/끝값", initNum, "/", limitNum);
 
   // [ slice() 배열 메서드를 이용한 부분값 가져오기 ]
   const selData = finalData.slice(initNum, limitNum);
